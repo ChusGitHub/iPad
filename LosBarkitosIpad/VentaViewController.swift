@@ -106,11 +106,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("Indice : \(indexPath.row)")
-      //  var nombre : NSDictionary = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell")?.objectAtIndex(indexPath.row) as NSDictionary
-       // nombreVendedorUITableViewCell.text = "Hola"
-        //codigoVendedorUITableViewCell.text = "Adios"
+        var nombre : NSDictionary = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell")?.objectAtIndex(indexPath.row) as NSDictionary
+        nombreVendedorUITableViewCell.text = "Hola"
+        codigoVendedorUITableViewCell.text = "Adios"
         
-       // println("Nombre: \(nombre)")
+        println("Nombre: \(nombre)")
     }
     
 }
