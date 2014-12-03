@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1FB6701A232FA50078B97A /* UIKit.framework */; };
+		BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACE81A1615EE008E67ED /* AppDelegate.swift */; };
+		BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */; };
+		BB34ACED1A1615EE008E67ED /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACEC1A1615EE008E67ED /* ControlViewController.swift */; };
+		BB34ACF01A1615EE008E67ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB34ACEE1A1615EE008E67ED /* Main.storyboard */; };
+		BB34ACF21A1615EE008E67ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB34ACF11A1615EE008E67ED /* Images.xcassets */; };
+		BB34ACF51A1615EE008E67ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB34ACF31A1615EE008E67ED /* LaunchScreen.xib */; };
+		BB34AD011A1615EE008E67ED /* LosBarkitosIpadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */; };
+		BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5421A1F7426004AFC7C /* Conexion.swift */; };
+		BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5441A1F754A004AFC7C /* Conectividad.swift */; };
+		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
+		F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AFCE121A169FB5007FF3A9 /* PlistData.swift */; };
+		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BB34ACFB1A1615EE008E67ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB34ACDB1A1615EE008E67ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB34ACE21A1615EE008E67ED;
+			remoteInfo = LosBarkitosIpad;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		216AC3D9FFBD34278773084E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BB1FB6701A232FA50078B97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LosBarkitosIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB34ACE71A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB34ACE81A1615EE008E67ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VentaViewController.swift; sourceTree = "<group>"; };
+		BB34ACEC1A1615EE008E67ED /* ControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
+		BB34ACEF1A1615EE008E67ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BB34ACF11A1615EE008E67ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BB34ACF41A1615EE008E67ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		BB34ACFA1A1615EE008E67ED /* LosBarkitosIpadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LosBarkitosIpadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB34ACFF1A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosBarkitosIpadTests.swift; sourceTree = "<group>"; };
+		BB35F5421A1F7426004AFC7C /* Conexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
+		BB35F5441A1F754A004AFC7C /* Conectividad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conectividad.swift; sourceTree = "<group>"; };
+		BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuenteAFNetworking.h; sourceTree = "<group>"; };
+		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
+		F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendedorUITableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB34ACE01A1615EE008E67ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */,
+				F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB34ACF71A1615EE008E67ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BB1FB6721A232FFF0078B97A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB1FB6701A232FA50078B97A /* UIKit.framework */,
+				216AC3D9FFBD34278773084E /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB34ACDA1A1615EE008E67ED = {
+			isa = PBXGroup;
+			children = (
+				BB34ACE51A1615EE008E67ED /* LosBarkitosIpad */,
+				BB34ACFD1A1615EE008E67ED /* LosBarkitosIpadTests */,
+				BB34ACE41A1615EE008E67ED /* Products */,
+				BB1FB6721A232FFF0078B97A /* Frameworks */,
+				D1018F923A5D82FBBA599D8C /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		BB34ACE41A1615EE008E67ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */,
+				BB34ACFA1A1615EE008E67ED /* LosBarkitosIpadTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB34ACE51A1615EE008E67ED /* LosBarkitosIpad */ = {
+			isa = PBXGroup;
+			children = (
+				BB34ACE81A1615EE008E67ED /* AppDelegate.swift */,
+				F9AFCE121A169FB5007FF3A9 /* PlistData.swift */,
+				F9BCDB451A2D0DAE002C70D4 /* VentaViewController */,
+				BB35F5421A1F7426004AFC7C /* Conexion.swift */,
+				BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */,
+				BB35F5441A1F754A004AFC7C /* Conectividad.swift */,
+				BB34ACEC1A1615EE008E67ED /* ControlViewController.swift */,
+				BB34ACEE1A1615EE008E67ED /* Main.storyboard */,
+				BB34ACF11A1615EE008E67ED /* Images.xcassets */,
+				BB34ACF31A1615EE008E67ED /* LaunchScreen.xib */,
+				BB34ACE61A1615EE008E67ED /* Supporting Files */,
+			);
+			path = LosBarkitosIpad;
+			sourceTree = "<group>";
+		};
+		BB34ACE61A1615EE008E67ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB34ACE71A1615EE008E67ED /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB34ACFD1A1615EE008E67ED /* LosBarkitosIpadTests */ = {
+			isa = PBXGroup;
+			children = (
+				BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */,
+				BB34ACFE1A1615EE008E67ED /* Supporting Files */,
+			);
+			path = LosBarkitosIpadTests;
+			sourceTree = "<group>";
+		};
+		BB34ACFE1A1615EE008E67ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB34ACFF1A1615EE008E67ED /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D1018F923A5D82FBBA599D8C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */,
+				30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F9BCDB451A2D0DAE002C70D4 /* VentaViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */,
+				F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */,
+			);
+			name = VentaViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BB34ACE21A1615EE008E67ED /* LosBarkitosIpad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB34AD041A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpad" */;
+			buildPhases = (
+				E150CF20FAED63B813A57190 /* Check Pods Manifest.lock */,
+				BB34ACDF1A1615EE008E67ED /* Sources */,
+				BB34ACE01A1615EE008E67ED /* Frameworks */,
+				BB34ACE11A1615EE008E67ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LosBarkitosIpad;
+			productName = LosBarkitosIpad;
+			productReference = BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BB34ACF91A1615EE008E67ED /* LosBarkitosIpadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB34AD071A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpadTests" */;
+			buildPhases = (
+				BB34ACF61A1615EE008E67ED /* Sources */,
+				BB34ACF71A1615EE008E67ED /* Frameworks */,
+				BB34ACF81A1615EE008E67ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB34ACFC1A1615EE008E67ED /* PBXTargetDependency */,
+			);
+			name = LosBarkitosIpadTests;
+			productName = LosBarkitosIpadTests;
+			productReference = BB34ACFA1A1615EE008E67ED /* LosBarkitosIpadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB34ACDB1A1615EE008E67ED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Jesus Valladolid Rebollar";
+				TargetAttributes = {
+					BB34ACE21A1615EE008E67ED = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					BB34ACF91A1615EE008E67ED = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = BB34ACE21A1615EE008E67ED;
+					};
+				};
+			};
+			buildConfigurationList = BB34ACDE1A1615EE008E67ED /* Build configuration list for PBXProject "LosBarkitosIpad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BB34ACDA1A1615EE008E67ED;
+			productRefGroup = BB34ACE41A1615EE008E67ED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB34ACE21A1615EE008E67ED /* LosBarkitosIpad */,
+				BB34ACF91A1615EE008E67ED /* LosBarkitosIpadTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB34ACE11A1615EE008E67ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB34ACF01A1615EE008E67ED /* Main.storyboard in Resources */,
+				BB34ACF51A1615EE008E67ED /* LaunchScreen.xib in Resources */,
+				BB34ACF21A1615EE008E67ED /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB34ACF81A1615EE008E67ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E150CF20FAED63B813A57190 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB34ACDF1A1615EE008E67ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */,
+				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,
+				BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */,
+				BB34ACED1A1615EE008E67ED /* ControlViewController.swift in Sources */,
+				BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */,
+				BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */,
+				F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB34ACF61A1615EE008E67ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB34AD011A1615EE008E67ED /* LosBarkitosIpadTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BB34ACFC1A1615EE008E67ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BB34ACE21A1615EE008E67ED /* LosBarkitosIpad */;
+			targetProxy = BB34ACFB1A1615EE008E67ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BB34ACEE1A1615EE008E67ED /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB34ACEF1A1615EE008E67ED /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BB34ACF31A1615EE008E67ED /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB34ACF41A1615EE008E67ED /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BB34AD021A1615EE008E67ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		BB34AD031A1615EE008E67ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BB34AD051A1615EE008E67ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				DEFINES_MODULE = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${PODS_ROOT}/Headers/Pulblic/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Pulblic\"",
+				);
+				INFOPLIST_FILE = LosBarkitosIpad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
+				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = LosBarkitosIpad/PuenteAFNetworking.h;
+			};
+			name = Debug;
+		};
+		BB34AD061A1615EE008E67ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				DEFINES_MODULE = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${PODS_ROOT}/Headers/Pulblic/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Pulblic\"",
+				);
+				INFOPLIST_FILE = LosBarkitosIpad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
+				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = LosBarkitosIpad/PuenteAFNetworking.h;
+			};
+			name = Release;
+		};
+		BB34AD081A1615EE008E67ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LosBarkitosIpadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LosBarkitosIpad.app/LosBarkitosIpad";
+			};
+			name = Debug;
+		};
+		BB34AD091A1615EE008E67ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LosBarkitosIpadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LosBarkitosIpad.app/LosBarkitosIpad";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB34ACDE1A1615EE008E67ED /* Build configuration list for PBXProject "LosBarkitosIpad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB34AD021A1615EE008E67ED /* Debug */,
+				BB34AD031A1615EE008E67ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB34AD041A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB34AD051A1615EE008E67ED /* Debug */,
+				BB34AD061A1615EE008E67ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB34AD071A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB34AD081A1615EE008E67ED /* Debug */,
+				BB34AD091A1615EE008E67ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BB34ACDB1A1615EE008E67ED /* Project object */;
+}
