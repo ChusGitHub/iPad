@@ -42,7 +42,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cargarValoresCon_appstate(inFile: "appstate")
         
         // Registro el cell class vendedorViewController
-        self.vendedorUITableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        //self.vendedorUITableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.vendedorUITableView.hidden = true
                
        // self.vendedorUITableViewIBOutlet.hidden = true
@@ -77,10 +77,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 EXIT_FAILURE
             }
             println("valor de \(k as NSString): \(v as NSDictionary)")
-            let nombre = v["nombre"]
-            self.item.setValue(nombre as NSString, forKey: k as NSString)
-            self.items.addObject(item)
+            let cod : NSInteger = v["codigo"] as NSInteger
+            let nombre : NSString = v["nombre"] as NSString
+            self.item[cod] = nombre
+           // self.item.setValue(nombre, forKey: cod)
+            
         }
+        self.items.addObject(item)
         self.vendedorUITableView.reloadData()
     }
     
@@ -99,28 +102,25 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
-        cell.textLabel.textColor = UIColor.whiteColor()
+        
+        cell.nombreVendedorUILabelCell.textColor = UIColor.whiteColor()
+        cell.codigoVendedorUILabelCell.textColor = UIColor.whiteColor()
         if indexPath.row % 2 == 0 {
             cell.backgroundColor = UIColor.purpleColor()
         } else {
             cell.backgroundColor = UIColor.blueColor()
         }
         
-        //cell.textLabel.text = self.items[indexPath.row]
-        
-        //cell.codigoVendedorUILabelCell.text = self.items[indexPath.row]
-        let vendedor : NSDictionary = items[indexPath.row] as NSDictionary
+        let vendedor : NSDictionary = self.items[indexPath.row] as NSDictionary
         for (k,v) in vendedor {
-            println("k: \(k) con tipo:\(k.description)")
-            println("v: \(v) con tipo:\(v.description)")
+            println("Indexpath.row: \(indexPath.row)")
+            println("k: \(k)")
+            println("v: \(v)")
             cell.codigoVendedorUILabelCell.text = k as? String
-            cell.nombreVendedorUILabelCell.text = v as NSString
+            cell.nombreVendedorUILabelCell.text = v as? String
         }
         
         cell.tag = indexPath.row
-
-        
-        //cell.textLabel.text = self.items[indexPath.row]
         
         return cell
     }
