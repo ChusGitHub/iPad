@@ -25,7 +25,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     // Items de vendedorUITableView
-    var items: [String] = []
+    var item : NSMutableDictionary = [:]
+    var items : NSMutableArray = []
     var respuesta = [String : String]()
     
     
@@ -77,7 +78,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             println("valor de \(k as NSString): \(v as NSDictionary)")
             let nombre = v["nombre"]
-            self.items.append(nombre as NSString)
+            self.item.setValue(nombre as NSString, forKey: k as NSString)
+            self.items.addObject(item)
         }
         self.vendedorUITableView.reloadData()
     }
@@ -96,10 +98,29 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell: UITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
+        cell.textLabel.textColor = UIColor.whiteColor()
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor.purpleColor()
+        } else {
+            cell.backgroundColor = UIColor.blueColor()
+        }
         
-        cell.textLabel.text = self.items[indexPath.row]
+        //cell.textLabel.text = self.items[indexPath.row]
+        
+        //cell.codigoVendedorUILabelCell.text = self.items[indexPath.row]
+        let vendedor : NSDictionary = items[indexPath.row] as NSDictionary
+        for (k,v) in vendedor {
+            println("k: \(k) con tipo:\(k.description)")
+            println("v: \(v) con tipo:\(v.description)")
+            cell.codigoVendedorUILabelCell.text = k as? String
+            cell.nombreVendedorUILabelCell.text = v as NSString
+        }
+        
         cell.tag = indexPath.row
+
+        
+        //cell.textLabel.text = self.items[indexPath.row]
         
         return cell
     }
@@ -107,8 +128,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("Indice : \(indexPath.row)")
         var nombre : NSDictionary = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell")?.objectAtIndex(indexPath.row) as NSDictionary
-        nombreVendedorUITableViewCell.text = "Hola"
-        codigoVendedorUITableViewCell.text = "Adios"
+       // nombreVendedorUITableViewCell.text = "Hola"
+        //codigoVendedorUITableViewCell.text = "Adios"
         
         println("Nombre: \(nombre)")
     }
