@@ -25,8 +25,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     // Items de vendedorUITableView
-    var item : NSMutableDictionary = [:]
-    var items : NSMutableArray = []
+    // Diccionario que mantiene codigo y nombre de un vendedor
+    var item = [Int: String]()
+    // Array de los diccionarios de los vendedores
+    var items = [[Int : String]]()
+    
     var respuesta = [String : String]()
     
     
@@ -68,22 +71,25 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     
-    // Respuesta del webService
-    func didReceiveResponse(respuesta : NSDictionary) {
+    // Respuesta del webService de los vendedores del sistema
+    func didReceiveResponse(respuesta: Dictionary<String, AnyObject >) { // : Dictionary) {
         println("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
             }
-            println("valor de \(k as NSString): \(v as NSDictionary)")
-            let cod : NSInteger = v["codigo"] as NSInteger
-            let nombre : NSString = v["nombre"] as NSString
-            self.item[cod] = nombre
-           // self.item.setValue(nombre, forKey: cod)
-            
+            println("valor de \(k): \(v)")
+            // añado el vendedor al diccionario
+            self.item = [:]
+            self.item[v["codigo"] as Int] = v["nombre"] as? String
+            self.items.append(item)
+
         }
-        self.items.addObject(item)
+        println("Primer Elemento: \(items[0])")
+         println("Segundfo Elemento: \(items[1])")
+         println("Tercero Elemento: \(items[2])")
+        println("Cuarto Elemento: \(items[3])")
         self.vendedorUITableView.reloadData()
     }
     
@@ -111,16 +117,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.backgroundColor = UIColor.blueColor()
         }
         
-        let vendedor : NSDictionary = self.items[indexPath.row] as NSDictionary
-        for (k,v) in vendedor {
-            println("Indexpath.row: \(indexPath.row)")
-            println("k: \(k)")
-            println("v: \(v)")
-            cell.codigoVendedorUILabelCell.text = k as? String
-            cell.nombreVendedorUILabelCell.text = v as? String
-        }
-        
-        cell.tag = indexPath.row
+        let vendedor = self.items[indexPath.row]
+        let codigo = Array(vendedor.keys)
+        let nombre = Array(vendedor.values)
+        cell.codigoVendedorUILabelCell.text = String(codigo[0])
+        cell.nombreVendedorUILabelCell.text = nombre[0]
         
         return cell
     }
