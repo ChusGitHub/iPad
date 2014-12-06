@@ -13,11 +13,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var estadoVentaUITextField: UITextField!
     
     
-    // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
-    @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
-        webService.obtenerVendedores()
-        self.vendedorUITableView.hidden = false
-    }
     
     @IBOutlet weak var vendedorUITextField: UITextField!
     
@@ -35,20 +30,30 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var webService : webServiceCallAPI = webServiceCallAPI()
     var vendedores : NSArray = NSArray()
+    
+    // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
+    @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
+        if self.vendedorUITableView.hidden == true {
+            webService.obtenerVendedores()
+            self.vendedorUITableView.
+            self.vendedorUITableView.hidden = false
+        } else {
+            self.vendedorUITableView.hidden = true
+        }
+     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         // Compruebo si ya se ha abierto el dia
     
         cargarValoresCon_appstate(inFile: "appstate")
         
         // Registro el cell class vendedorViewController
-        //self.vendedorUITableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.vendedorUITableView.hidden = true
-               
-       // self.vendedorUITableViewIBOutlet.hidden = true
+        
+        // Si es posible pongo el nombre del vendedor
+        
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
@@ -79,24 +84,19 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
             }
-            println("valor de \(k): \(v)")
             // añado el vendedor al diccionario
             self.item = [:]
             self.item[v["codigo"] as Int] = v["nombre"] as? String
             self.items.append(item)
 
         }
-        println("Primer Elemento: \(items[0])")
-         println("Segundfo Elemento: \(items[1])")
-         println("Tercero Elemento: \(items[2])")
-        println("Cuarto Elemento: \(items[3])")
         self.vendedorUITableView.reloadData()
     }
     
     
     func cargarValoresCon_appstate(inFile file: String) {
         
-        self.vendedorUITextField.text = DataManager().getValueForKey("vendedor", inFile: file) as String?
+        self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: file) as String?
         
     }
 
@@ -127,12 +127,20 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("Indice : \(indexPath.row)")
-        var nombre : NSDictionary = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell")?.objectAtIndex(indexPath.row) as NSDictionary
-       // nombreVendedorUITableViewCell.text = "Hola"
-        //codigoVendedorUITableViewCell.text = "Adios"
+        // recupero los valores de la celda
+        let dictVendedor : [Int : String] = self.items[indexPath.row]
+        let codigo = Array(dictVendedor.keys)
+        let nombre = Array(dictVendedor.values)
         
-        println("Nombre: \(nombre)")
+        // Guardo el vendedor en el plist
+        DataManager().setValueForKey("codigo_vendedor", value: Int(codigo[0]), inFile: "appstate")
+        DataManager().setValueForKey("nombre_vendedor", value: String(nombre[0]), inFile: "appstate")
+        
+        // Pongo el nombre del vendedor en el uitextview
+        self.vendedorUITextField.text = nombre[0]
+        
+        // Quito el uitableview de los  vendedores
+        self.vendedorUITableView.hidden = true
     }
     
 }
