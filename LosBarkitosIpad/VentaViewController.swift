@@ -13,6 +13,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var estadoVentaUITextField: UITextField!
     
     
+    @IBOutlet weak var btnViewVendedoresUIButton: UIButton!
     
     @IBOutlet weak var vendedorUITextField: UITextField!
     
@@ -35,10 +36,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
         if self.vendedorUITableView.hidden == true {
             webService.obtenerVendedores()
-            self.vendedorUITableView.
             self.vendedorUITableView.hidden = false
+            self.btnViewVendedoresUIButton.enabled = false
         } else {
+            // Esto borrael UITableView
+            //self.items = []
+            //self.vendedorUITableView.reloadData()
             self.vendedorUITableView.hidden = true
+            self.btnViewVendedoresUIButton.enabled = false
         }
      }
 
@@ -57,7 +62,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
-       
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -109,12 +115,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
         
-        cell.nombreVendedorUILabelCell.textColor = UIColor.whiteColor()
-        cell.codigoVendedorUILabelCell.textColor = UIColor.whiteColor()
+        
+        cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
+        cell.codigoVendedorUILabelCell.textColor = UIColor.grayColor()
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor.purpleColor()
+            cell.backgroundColor = UIColor(red: 1, green: 0.74, blue: 1, alpha: 1)
         } else {
-            cell.backgroundColor = UIColor.blueColor()
+            cell.backgroundColor = UIColor(red: 0.53, green: 0.64, blue: 1, alpha: 1)
         }
         
         let vendedor = self.items[indexPath.row]
@@ -124,6 +131,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.nombreVendedorUILabelCell.text = nombre[0]
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let altura = tableView.frame.height
+        return altura/(CGFloat) (self.items.count)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -141,6 +153,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Quito el uitableview de los  vendedores
         self.vendedorUITableView.hidden = true
+        self.btnViewVendedoresUIButton.enabled = true
+        self.items = []
+        self.vendedorUITableView.reloadData()
     }
     
 }

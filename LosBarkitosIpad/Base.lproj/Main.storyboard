@@ -16,35 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yM-oJ-Tl7">
-                                <rect key="frame" x="16" y="28" width="200" height="50"/>
-                                <state key="normal" title="Rio">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbC-77-0Jy">
-                                <rect key="frame" x="478" y="28" width="200" height="50"/>
+                                <rect key="frame" x="478" y="38" width="200" height="50"/>
                                 <state key="normal" title="Whaly">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gld-el-PPV">
-                                <rect key="frame" x="758" y="28" width="200" height="50"/>
+                                <rect key="frame" x="758" y="38" width="200" height="50"/>
                                 <state key="normal" title="Gold">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNd-o4-UtV">
-                                <rect key="frame" x="220" y="28" width="200" height="50"/>
+                                <rect key="frame" x="220" y="38" width="200" height="50"/>
                                 <state key="normal" title="Eléctrica">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vendedor:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfx-oB-b5O">
-                                <rect key="frame" x="46" y="193" width="94" height="23"/>
+                                <rect key="frame" x="9" y="17" width="94" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,12 +66,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAv-fB-8sC">
-                                <rect key="frame" x="136" y="189" width="97" height="30"/>
+                                <rect key="frame" x="99" y="13" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIK-BE-iX8">
-                                <rect key="frame" x="241" y="193" width="19" height="23"/>
+                                <rect key="frame" x="204" y="17" width="19" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="&gt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,7 +81,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="center" fixedFrame="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rcn-3e-J5a">
-                                <rect key="frame" x="268" y="63" width="212" height="354"/>
+                                <rect key="frame" x="11" y="51" width="212" height="340"/>
                                 <color key="backgroundColor" red="0.59215686270000001" green="0.1764705882" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.99607843139999996" green="0.88235294119999996" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -126,12 +120,19 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="3YY-RT-jiF"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yM-oJ-Tl7">
+                                <rect key="frame" x="16" y="38" width="200" height="50"/>
+                                <state key="normal" title="Rio">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.88235294117647056" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Venta" image="first" id="acW-dT-cKf"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="btnViewVendedoresUIButton" destination="sIK-BE-iX8" id="dNN-yR-OBE"/>
                         <outlet property="estadoVentaUITextField" destination="w6K-66-xtk" id="YW1-cq-nxp"/>
                         <outlet property="vendedorUITableView" destination="Rcn-3e-J5a" id="aeV-Kq-blL"/>
                         <outlet property="vendedorUITextField" destination="DAv-fB-8sC" id="3ud-fB-gV3"/>
