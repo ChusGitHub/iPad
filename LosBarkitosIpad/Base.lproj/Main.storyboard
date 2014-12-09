@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Venta-->
@@ -16,12 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yM-oJ-Tl7">
+                                <rect key="frame" x="16" y="38" width="200" height="50"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="Rio">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnBarcasUIButtonTouch:" destination="9pv-A4-QxB" eventType="touchUpInside" id="oJp-tf-JNn"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbC-77-0Jy">
                                 <rect key="frame" x="478" y="38" width="200" height="50"/>
                                 <state key="normal" title="Whaly">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnBarcasUIButtonTouch:" destination="9pv-A4-QxB" eventType="touchUpInside" id="I2F-qc-954"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gld-el-PPV">
                                 <rect key="frame" x="758" y="38" width="200" height="50"/>
@@ -29,6 +42,9 @@
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnBarcasUIButtonTouch:" destination="9pv-A4-QxB" eventType="touchUpInside" id="CR0-cR-TkL"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNd-o4-UtV">
                                 <rect key="frame" x="220" y="38" width="200" height="50"/>
@@ -36,6 +52,9 @@
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnBarcasUIButtonTouch:" destination="9pv-A4-QxB" eventType="touchUpInside" id="rJx-ac-qGf"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vendedor:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfx-oB-b5O">
                                 <rect key="frame" x="9" y="17" width="94" height="23"/>
@@ -81,7 +100,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="center" fixedFrame="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rcn-3e-J5a">
-                                <rect key="frame" x="11" y="51" width="212" height="340"/>
+                                <rect key="frame" x="16" y="70" width="212" height="340"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.99607843139999996" green="0.88235294119999996" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -120,13 +139,6 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="3YY-RT-jiF"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yM-oJ-Tl7">
-                                <rect key="frame" x="16" y="38" width="200" height="50"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Rio">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.88235294117647056" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -138,9 +150,9 @@
                         <outlet property="vendedorUITableView" destination="Rcn-3e-J5a" id="aeV-Kq-blL"/>
                         <outlet property="vendedorUITextField" destination="DAv-fB-8sC" id="3ud-fB-gV3"/>
                         <outletCollection property="btnBarcasIUButtonCollection" destination="1yM-oJ-Tl7" collectionClass="NSMutableArray" id="MwM-hd-JiL"/>
-                        <outletCollection property="btnBarcasIUButtonCollection" destination="oNd-o4-UtV" id="GoS-Fy-KSe"/>
-                        <outletCollection property="btnBarcasIUButtonCollection" destination="YbC-77-0Jy" id="DI4-sA-HFS"/>
-                        <outletCollection property="btnBarcasIUButtonCollection" destination="Gld-el-PPV" id="xL8-3h-H9r"/>
+                        <outletCollection property="btnBarcasIUButtonCollection" destination="oNd-o4-UtV" collectionClass="NSMutableArray" id="GoS-Fy-KSe"/>
+                        <outletCollection property="btnBarcasIUButtonCollection" destination="YbC-77-0Jy" collectionClass="NSMutableArray" id="DI4-sA-HFS"/>
+                        <outletCollection property="btnBarcasIUButtonCollection" destination="Gld-el-PPV" collectionClass="NSMutableArray" id="xL8-3h-H9r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -186,7 +198,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960" y="614.40000000000009"/>
+            <point key="canvasLocation" x="1276" y="826"/>
+        </scene>
+        <!--Precios View Controller-->
+        <scene sceneID="YI7-4K-vpe">
+            <objects>
+                <viewController id="07f-0O-81W" customClass="PreciosViewController" customModule="LosBarkitosIpad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tkv-gQ-lRN"/>
+                        <viewControllerLayoutGuide type="bottom" id="1aj-vb-96A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pt5-Wf-EiI">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tLY-j2-kVQ">
+                                <rect key="frame" x="-305" y="-144" width="1024" height="768"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ycR-oZ-rBK"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="numeroUIView" destination="tLY-j2-kVQ" id="qXs-cO-Tmx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2102" y="-146"/>
         </scene>
         <!--Venta-->
         <scene sceneID="yl2-sM-qoP">

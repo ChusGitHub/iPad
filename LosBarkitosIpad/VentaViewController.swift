@@ -8,7 +8,12 @@
 //import "VendedorUITableViewCell"
 import UIKit
 
-class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo{
+class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
+
+    let RIO       = 0
+    let ELECTRICA = 1
+    let WHALY     = 2
+    let GOLD      = 3
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
     
@@ -50,6 +55,16 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.btnViewVendedoresUIButton.enabled = false
         }
      }
+    
+    
+    @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
+        if sender.tag == 0 {
+            println(RIO)
+        } else if sender.tag == 1 {
+            println(ELECTRICA)
+        }
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +81,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
-        
-        self.btnBarcasIUButtonCollection[0].backgroundColor = UIColor(red: 1.0, green: 2.0, blue: 30.0, alpha: 1.0)
-        
-        
         
     }
     
