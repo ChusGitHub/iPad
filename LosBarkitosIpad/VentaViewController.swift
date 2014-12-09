@@ -19,6 +19,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet  weak var vendedorUITableView: UITableView!
 
+    // Botones de las barcas
+
+    @IBOutlet var btnBarcasIUButtonCollection: [UIButton]!
+    
     
     // Items de vendedorUITableView
     // Diccionario que mantiene codigo y nombre de un vendedor
@@ -62,6 +66,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
+        
+        self.btnBarcasIUButtonCollection[0].backgroundColor = UIColor(red: 1.0, green: 2.0, blue: 30.0, alpha: 1.0)
+        
         
         
     }
