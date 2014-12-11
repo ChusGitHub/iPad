@@ -176,5 +176,12 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.vendedorUITableView.reloadData()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "seguePrecios" {
+            let siguenteVC : PreciosViewController = segue.destinationViewController as PreciosViewController
+            siguenteVC.toPass = sender?.tag
+        }
+    }
+    
 }
 

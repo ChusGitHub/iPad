@@ -19,14 +19,19 @@ class PreciosViewController: UIViewController {
     }
     
     var btnPrecio : BotonPrecio?
+    var toPass : Int?
 
+    @IBOutlet weak var labelPrueba: UILabel!
+    
     @IBOutlet weak var numeroUIView: UIView!
  
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        btnPrecio!.sizeThatFits(self.btnPrecio!.tamano)
-        numeroUIView.addSubview(btnPrecio!)
+     //   btnPrecio!.sizeThatFits(self.btnPrecio!.tamano)
+       // numeroUIView.addSubview(btnPrecio!)
+        self.labelPrueba.text = "\(self.toPass!)"
+        
     }
 
     override func didReceiveMemoryWarning() {
