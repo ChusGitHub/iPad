@@ -10,27 +10,23 @@ import UIKit
 
 
 class PreciosViewController: UIViewController {
+
     
-    class BotonPrecio : UIButton {
-        let ANCHURA_BOTON = 160.0
-        let ALTURA_BOTON  = 270.0
-        let tamano = CGSizeMake(300,300)
-        
-    }
-    
-    var btnPrecio : BotonPrecio?
+
     var toPass : Int?
 
-    @IBOutlet weak var labelPrueba: UILabel!
+    @IBOutlet weak var cancelarUIButton: UIButton!
+    @IBOutlet weak var precioUILabel: UILabel!
+    @IBOutlet var preciosUIButton : [UIButton] = []
+    @IBAction func btnPreciosUIButton(sender : UIButton) {
+        self.precioUILabel.text = ""
+        self.precioUILabel.text = "\(sender.tag)"
+    }
     
-    @IBOutlet weak var numeroUIView: UIView!
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-     //   btnPrecio!.sizeThatFits(self.btnPrecio!.tamano)
-       // numeroUIView.addSubview(btnPrecio!)
-        self.labelPrueba.text = "\(self.toPass!)"
+
         
     }
 
