@@ -16,8 +16,10 @@ class PreciosViewController: UIViewController {
     var toPass : Int?
 
     @IBOutlet weak var cancelarUIButton: UIButton!
+    @IBOutlet weak var aceptarUIButton: UIButton!
     @IBOutlet weak var precioUILabel: UILabel!
     @IBOutlet var preciosUIButton : [UIButton] = []
+    
     @IBAction func btnPreciosUIButton(sender : UIButton) {
         self.precioUILabel.text = ""
         self.precioUILabel.text = "\(sender.tag)"
@@ -33,6 +35,18 @@ class PreciosViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "seguePreciosVentaCancelar" {
+            let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
+            siguienteVC.toPreciosViewController = nil
+        } else if segue.identifier == "seguePreciosVentaAceptar" {
+            let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
+            siguienteVC.toPreciosViewController = "Ok - Precio = \(self.precioUILabel.text)"
+        }
+        
     }
     
 

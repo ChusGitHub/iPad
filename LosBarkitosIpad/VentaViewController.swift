@@ -41,6 +41,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var webService : webServiceCallAPI = webServiceCallAPI()
     var vendedores : NSArray = NSArray()
     
+    // Valor devuelto por el PreciosViewController
+    // Todo correcto : Ok
+    // algo falla : String con informacion de lo que falla
+    var toPreciosViewController : String? = nil
+    
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
         if self.vendedorUITableView.hidden == true {
@@ -81,6 +86,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
+        
+        // Miro si hay algo en toPrecioViewController
+        if (self.toPreciosViewController != nil) {
+            let alerta = UIAlertController(title: "ALERTA", message: "Precio : \(self.toPreciosViewController)", preferredStyle: .Alert)
+            self.toPreciosViewController = nil
+            
+        }
         
     }
     

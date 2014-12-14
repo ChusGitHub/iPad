@@ -408,13 +408,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrT-Vv-7yd">
-                                <rect key="frame" x="834" y="665" width="174" height="83"/>
+                                <rect key="frame" x="834" y="665" width="81" height="83"/>
                                 <color key="backgroundColor" red="1" green="0.1314935089" blue="0.95649754210000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Cancelar">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="seguePreciosVentaCancelar" id="Gc7-UL-tGg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="120" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G98-bm-Itm">
                                 <rect key="frame" x="628" y="578" width="174" height="170"/>
@@ -435,38 +438,51 @@
                                     <action selector="btnPreciosUIButton:" destination="07f-0O-81W" eventType="touchUpInside" id="4I4-x9-hxo"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsq-Tx-Vjr">
+                                <rect key="frame" x="927" y="665" width="81" height="83"/>
+                                <color key="backgroundColor" red="1" green="0.1314935089" blue="0.95649754210000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Aceptar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="seguePreciosVentaAceptar" id="Hms-bc-FQ9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ycR-oZ-rBK"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="aceptarUIButton" destination="tsq-Tx-Vjr" id="qeT-al-Ca5"/>
                         <outlet property="cancelarUIButton" destination="MrT-Vv-7yd" id="FsY-Lb-n6J"/>
                         <outlet property="precioUILabel" destination="rky-Pp-9F8" id="ZIx-We-daC"/>
-                        <outletCollection property="preciosUIButton" destination="Bxg-Ii-GdF" id="fns-ZD-bC2"/>
-                        <outletCollection property="preciosUIButton" destination="muv-fy-Jun" id="c86-S0-T6I"/>
-                        <outletCollection property="preciosUIButton" destination="nDJ-4V-fwK" id="91V-i1-Oy9"/>
-                        <outletCollection property="preciosUIButton" destination="wbA-io-tZX" id="6sO-hI-ieq"/>
-                        <outletCollection property="preciosUIButton" destination="fVE-x5-lAr" id="LMO-3e-O7R"/>
-                        <outletCollection property="preciosUIButton" destination="e1N-5q-6j0" id="OTT-Ri-yxz"/>
-                        <outletCollection property="preciosUIButton" destination="Guh-zY-KEa" id="Bdh-gx-Z3o"/>
-                        <outletCollection property="preciosUIButton" destination="2IE-dj-xu3" id="ak3-Tm-DYD"/>
-                        <outletCollection property="preciosUIButton" destination="z4v-7Q-lA0" id="gYG-mD-lnL"/>
-                        <outletCollection property="preciosUIButton" destination="jeH-1U-eyR" id="hHq-ZV-Xz2"/>
-                        <outletCollection property="preciosUIButton" destination="nm2-wg-Xof" id="e0C-uF-KES"/>
-                        <outletCollection property="preciosUIButton" destination="y8N-sV-xmc" id="x7f-XI-Jhx"/>
-                        <outletCollection property="preciosUIButton" destination="hr0-GA-bUf" id="82l-eM-fbN"/>
-                        <outletCollection property="preciosUIButton" destination="w5O-An-B6T" id="1wT-Xp-qdO"/>
-                        <outletCollection property="preciosUIButton" destination="QDO-Kt-OvS" id="42C-bQ-qLY"/>
-                        <outletCollection property="preciosUIButton" destination="bZa-IV-6s6" id="36U-Dh-A5p"/>
-                        <outletCollection property="preciosUIButton" destination="Ao7-QL-CKx" id="o31-7N-cNo"/>
-                        <outletCollection property="preciosUIButton" destination="ya7-UL-4sA" id="6Mg-7f-Jbe"/>
-                        <outletCollection property="preciosUIButton" destination="G98-bm-Itm" id="7fQ-1P-RDN"/>
+                        <outletCollection property="preciosUIButton" destination="Bxg-Ii-GdF" collectionClass="NSMutableArray" id="fns-ZD-bC2"/>
+                        <outletCollection property="preciosUIButton" destination="muv-fy-Jun" collectionClass="NSMutableArray" id="c86-S0-T6I"/>
+                        <outletCollection property="preciosUIButton" destination="nDJ-4V-fwK" collectionClass="NSMutableArray" id="91V-i1-Oy9"/>
+                        <outletCollection property="preciosUIButton" destination="wbA-io-tZX" collectionClass="NSMutableArray" id="6sO-hI-ieq"/>
+                        <outletCollection property="preciosUIButton" destination="fVE-x5-lAr" collectionClass="NSMutableArray" id="LMO-3e-O7R"/>
+                        <outletCollection property="preciosUIButton" destination="e1N-5q-6j0" collectionClass="NSMutableArray" id="OTT-Ri-yxz"/>
+                        <outletCollection property="preciosUIButton" destination="Guh-zY-KEa" collectionClass="NSMutableArray" id="Bdh-gx-Z3o"/>
+                        <outletCollection property="preciosUIButton" destination="2IE-dj-xu3" collectionClass="NSMutableArray" id="ak3-Tm-DYD"/>
+                        <outletCollection property="preciosUIButton" destination="z4v-7Q-lA0" collectionClass="NSMutableArray" id="gYG-mD-lnL"/>
+                        <outletCollection property="preciosUIButton" destination="jeH-1U-eyR" collectionClass="NSMutableArray" id="hHq-ZV-Xz2"/>
+                        <outletCollection property="preciosUIButton" destination="nm2-wg-Xof" collectionClass="NSMutableArray" id="e0C-uF-KES"/>
+                        <outletCollection property="preciosUIButton" destination="y8N-sV-xmc" collectionClass="NSMutableArray" id="x7f-XI-Jhx"/>
+                        <outletCollection property="preciosUIButton" destination="hr0-GA-bUf" collectionClass="NSMutableArray" id="82l-eM-fbN"/>
+                        <outletCollection property="preciosUIButton" destination="w5O-An-B6T" collectionClass="NSMutableArray" id="1wT-Xp-qdO"/>
+                        <outletCollection property="preciosUIButton" destination="QDO-Kt-OvS" collectionClass="NSMutableArray" id="42C-bQ-qLY"/>
+                        <outletCollection property="preciosUIButton" destination="bZa-IV-6s6" collectionClass="NSMutableArray" id="36U-Dh-A5p"/>
+                        <outletCollection property="preciosUIButton" destination="Ao7-QL-CKx" collectionClass="NSMutableArray" id="o31-7N-cNo"/>
+                        <outletCollection property="preciosUIButton" destination="ya7-UL-4sA" collectionClass="NSMutableArray" id="6Mg-7f-Jbe"/>
+                        <outletCollection property="preciosUIButton" destination="G98-bm-Itm" collectionClass="NSMutableArray" id="7fQ-1P-RDN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2105" y="-157"/>
+            <point key="canvasLocation" x="2261" y="-315"/>
         </scene>
         <!--Venta-->
         <scene sceneID="yl2-sM-qoP">
@@ -498,7 +514,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="HFo-gb-gaj"/>
+        <segue reference="Hms-bc-FQ9"/>
+        <segue reference="kEb-sE-XTx"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
 </document>
