@@ -20,6 +20,7 @@ class PreciosViewController: UIViewController {
     @IBOutlet weak var precioUILabel: UILabel!
     @IBOutlet var preciosUIButton : [UIButton] = []
     
+    @IBOutlet var coleccionBotonesPrecios: [UIButton]!
     @IBAction func btnPreciosUIButton(sender : UIButton) {
         self.precioUILabel.text = ""
         self.precioUILabel.text = "\(sender.tag)"
@@ -28,6 +29,10 @@ class PreciosViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       // AQUI HAY QUE RECORRER LOS BOTONES DE LOS PRECIOS PARA PONERLES EL LABEL ADECUADO.
+        
+        self.ponerPrecios()
 
         
     }
@@ -49,6 +54,15 @@ class PreciosViewController: UIViewController {
         
     }
     
+    func ponerPrecios() {
+
+        for boton : UIButton in self.coleccionBotonesPrecios {
+            
+            
+            
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

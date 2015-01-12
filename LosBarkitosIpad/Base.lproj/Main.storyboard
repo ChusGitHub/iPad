@@ -426,6 +426,9 @@
                                 <state key="normal" title="120">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnPreciosUIButton:" destination="07f-0O-81W" eventType="touchUpInside" id="YQU-LX-BaQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="95" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDO-Kt-OvS">
                                 <rect key="frame" x="628" y="392" width="174" height="170"/>
@@ -478,6 +481,7 @@
                         <outletCollection property="preciosUIButton" destination="Ao7-QL-CKx" collectionClass="NSMutableArray" id="o31-7N-cNo"/>
                         <outletCollection property="preciosUIButton" destination="ya7-UL-4sA" collectionClass="NSMutableArray" id="6Mg-7f-Jbe"/>
                         <outletCollection property="preciosUIButton" destination="G98-bm-Itm" collectionClass="NSMutableArray" id="7fQ-1P-RDN"/>
+                        <outletCollection property="coleccionBotonesPrecios" destination="ya7-UL-4sA" id="yGR-Jp-hEa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

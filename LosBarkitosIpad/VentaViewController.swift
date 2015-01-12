@@ -8,6 +8,9 @@
 //import "VendedorUITableViewCell"
 import UIKit
 
+var listaPrecio = DataManager().getValueForKey("ListaPrecio", inFile: "appstate") as Int
+
+
 class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
 
     let RIO       = 0
@@ -82,6 +85,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.vendedorUITableView.hidden = true
         
         // Si es posible pongo el nombre del vendedor
+        
+        
         
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
