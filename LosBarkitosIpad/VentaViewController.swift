@@ -8,9 +8,6 @@
 //import "VendedorUITableViewCell"
 import UIKit
 
-var listaPrecio = DataManager().getValueForKey("ListaPrecio", inFile: "appstate") as Int
-
-
 class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
 
     let RIO       = 0
@@ -94,9 +91,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Miro si hay algo en toPrecioViewController
         if (self.toPreciosViewController != nil) {
-            let alerta = UIAlertController(title: "ALERTA", message: "Precio : \(self.toPreciosViewController)", preferredStyle: .Alert)
-            self.toPreciosViewController = nil
+            let alertController = UIAlertController(title: "Hey AppCoda", message: "What do you want to do?", preferredStyle: .Alert)
             
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+            self.toPreciosViewController = nil
+        
         }
         
     }
