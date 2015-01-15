@@ -13,7 +13,8 @@ class PreciosViewController: UIViewController {
 
     
     let listaPrecio : String = DataManager().getValueForKey("lista_precio", inFile: "appstate") as String
-    var toPass : Int?
+    var toTipo : Int?
+    var toTipoString : String?
 
     @IBOutlet weak var cancelarUIButton: UIButton!
     @IBOutlet weak var aceptarUIButton: UIButton!
@@ -59,10 +60,12 @@ class PreciosViewController: UIViewController {
         
         if segue.identifier == "seguePreciosVentaCancelar" {
             let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
-            siguienteVC.toPreciosViewController = nil
+            siguienteVC.toPreciosViewController = 0
         } else if segue.identifier == "seguePreciosVentaAceptar" {
             let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
-            siguienteVC.toPreciosViewController = "Ok - Precio = \(self.precioUILabel.text)"
+            siguienteVC.toPreciosViewController = "\(self.precioUILabel.text!)".toInt()!
+            siguienteVC.barcaActual = self.toTipo!
+            siguienteVC.barcaActualString = self.toTipoString!
         }
         
     }

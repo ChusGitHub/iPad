@@ -14,6 +14,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let ELECTRICA = 1
     let WHALY     = 2
     let GOLD      = 3
+    
+    var barcaActual : Int = -1
+    var barcaActualString : String? = nil
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
     
@@ -44,7 +47,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // Valor devuelto por el PreciosViewController
     // Todo correcto : Ok
     // algo falla : String con informacion de lo que falla
-    var toPreciosViewController : String? = nil
+    var toPreciosViewController : Int = 0
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -63,10 +66,23 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
-        if sender.tag == 0 {
-            println(RIO)
-        } else if sender.tag == 1 {
-            println(ELECTRICA)
+
+        switch sender.tag {
+        case 1:
+            self.barcaActual = RIO
+            self.barcaActualString = "RIO"
+        case 2:
+            self.barcaActual = ELECTRICA
+            self.barcaActualString = "ELÉCTRICA"
+        case 3:
+            self.barcaActual = WHALY
+            self.barcaActualString = "WHALY"
+        case 4:
+            self.barcaActual = GOLD
+            self.barcaActualString = "GOLD"
+        default:
+            self.barcaActual = -1
+            self.barcaActualString = nil
         }
     }
     
@@ -84,22 +100,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Si es posible pongo el nombre del vendedor
         
         
-        
-        
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
-        // Miro si hay algo en toPrecioViewController
-        if (self.toPreciosViewController != nil) {
-            let alertController = UIAlertController(title: "Hey AppCoda", message: "What do you want to do?", preferredStyle: .Alert)
-            
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alertController.addAction(defaultAction)
-            
-            presentViewController(alertController, animated: true, completion: nil)
-            self.toPreciosViewController = nil
-        
-        }
         
     }
     
@@ -111,8 +114,27 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         estadoActual += 1
         // guardamos el valor actual del estado
         DataManager().setValueForKey("estado_venta", value: estadoActual, inFile: "appstate")
+        
+        
+        // Miro si hay algo en toPrecioViewController
+        if (self.toPreciosViewController != 0) {
+            var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.accion()})
+            let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(ticketAction)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+
+        
     }
 
+    func accion() {
+        println("Estoy dentro de accion")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -197,8 +219,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "seguePrecios" {
-            let siguenteVC : PreciosViewController = segue.destinationViewController as PreciosViewController
-            siguenteVC.toPass = sender?.tag
+            let siguienteVC : PreciosViewController = segue.destinationViewController as PreciosViewController
+            siguienteVC.toTipo = self.barcaActual
+            siguienteVC.toTipoString = self.barcaActualString
         }
     }
     
