@@ -49,6 +49,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // algo falla : String con informacion de lo que falla
     var toPreciosViewController : Int = 0
     
+    
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
         if self.vendedorUITableView.hidden == true {
@@ -68,16 +69,16 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
 
         switch sender.tag {
-        case 1:
+        case 0:
             self.barcaActual = RIO
             self.barcaActualString = "RIO"
-        case 2:
+        case 1:
             self.barcaActual = ELECTRICA
             self.barcaActualString = "ELÉCTRICA"
-        case 3:
+        case 2:
             self.barcaActual = WHALY
             self.barcaActualString = "WHALY"
-        case 4:
+        case 3:
             self.barcaActual = GOLD
             self.barcaActualString = "GOLD"
         default:
@@ -103,8 +104,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
+        // PREPARO LA IMPRESORA DE TICKETS
         
     }
+    
+    func accionPrinters() {
+        
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
 
@@ -120,7 +127,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if (self.toPreciosViewController != 0) {
             var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
             
-            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.accion()})
+            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
             let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
             alertController.addAction(ticketAction)
             alertController.addAction(cancelAction)
@@ -132,9 +139,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
 
-    func accion() {
-        println("Estoy dentro de accion")
+    func procesarTicket() {
+        // Introducir el ticket vendido en la BDD correspondiente
+        // Imprimir el ticket en la impresora de tickets
+        
     }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
