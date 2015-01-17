@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
         DataManager().setValueForKey("cargado", value: "si", inFile: "appstate")
+        DataManager().setValueForKey("lista_precio", value: "1", inFile: "appstate")
         
         return "si"
         

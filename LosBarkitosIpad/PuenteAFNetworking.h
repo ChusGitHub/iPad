@@ -10,6 +10,7 @@
 #define LosBarkitosIpad_PuenteAFNetworking_h
 
 #import "AFNetworking/AFNetworking.h"
+#import "StarPrinting/StarPrinting.h"
 
 
 #endif
