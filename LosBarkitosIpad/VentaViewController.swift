@@ -123,7 +123,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         DataManager().setValueForKey("estado_venta", value: estadoActual, inFile: "appstate")
         
         
-        // Miro si hay algo en toPrecioViewController
+        // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
         if (self.toPreciosViewController != 0) {
             var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
             
@@ -139,8 +139,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
 
+    // Se ha vendido un ticket de barkito y hay que procesarlo
     func procesarTicket() {
         // Introducir el ticket vendido en la BDD correspondiente
+        
+        
         // Imprimir el ticket en la impresora de tickets
         
     }
