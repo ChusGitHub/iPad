@@ -38,6 +38,7 @@ class PreciosViewController: UIViewController {
         default:
             self.precioUILabel.text = "\(sender.tag)"
         }
+        self.aceptarUIButton.enabled = true
     }
     
  
@@ -47,6 +48,7 @@ class PreciosViewController: UIViewController {
        // AQUI HAY QUE RECORRER LOS BOTONES DE LOS PRECIOS PARA PONERLES EL LABEL ADECUADO.
         
         self.ponerPrecios()
+        self.aceptarUIButton.enabled = false
 
         
     }

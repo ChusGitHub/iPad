@@ -10,10 +10,10 @@ import UIKit
 
 class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
 
-    let RIO       = 0
-    let ELECTRICA = 1
-    let WHALY     = 2
-    let GOLD      = 3
+    let RIO       = 1
+    let ELECTRICA = 2
+    let WHALY     = 3
+    let GOLD      = 4
     
     var barcaActual : Int = -1
     var barcaActualString : String? = nil
@@ -34,9 +34,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Items de vendedorUITableView
     // Diccionario que mantiene codigo y nombre de un vendedor
-    var vendedor = [Int: String]()
+    var vendedor = [String: String]()
     // Array de los diccionarios de los vendedores
-    var vendedores = [[Int : String]]()
+    var vendedores = [[String : String]]()
     
     var respuesta = [String : String]()
     
@@ -141,15 +141,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
+    // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
     func procesarTicket() {
         // Introducir el ticket vendido en la BDD correspondiente
-        // obtengo el key del vendedor
-        var keyVendedor = 0
-        for claves in self.vendedor.keys {
-           //keyVendedor = Int(claves[0])
-        }
-        webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: keyVendedor  )
-        
+        // obtengo el vendedor que ha hecho la venta
+        let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
+        println("codVend: \(codVend)")
+        webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
         
         // Imprimir el ticket en la impresora de tickets
         
@@ -172,7 +170,12 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             // añado el vendedor al diccionario
             self.vendedor = [:]
-            self.vendedor[v["codigo"] as Int] = v["nombre"] as? String
+            let cod = v["codigo"] as Int
+            let nom = v["nombre"] as String
+            self.vendedor[String(cod)] = nom
+            println("cod: \(cod)")
+            println("nom: \(nom)")
+
             self.vendedores.append(self.vendedor)
             
 
@@ -193,7 +196,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func cargarValoresCon_appstate(inFile file: String) {
      
         let nombre_v : String = DataManager().getValueForKey("nombre_vendedor", inFile: file) as String
-        let codigo_v : Int = DataManager().getValueForKey("vendedor", inFile: file) as Int
+        let codigo_v  = DataManager().getValueForKey("vendedor", inFile: file) as String
         
         self.vendedorUITextField.text = nombre_v
         self.vendedor[codigo_v] = nombre_v
@@ -206,7 +209,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return self.vendedores.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    func tableView(VendedorUITableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
         
         
@@ -230,19 +233,19 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let altura = tableView.frame.height
+    func tableView(VendedorUITableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let altura = VendedorUITableView.frame.height
         return altura/(CGFloat) (self.vendedores.count)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(VendedorUITableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // recupero los valores de la celda
-        let dictVendedor : [Int : String] = self.vendedores[indexPath.row]
+        let dictVendedor : [String : String] = self.vendedores[indexPath.row]
         let codigo = Array(dictVendedor.keys)
         let nombre = Array(dictVendedor.values)
         
         // Guardo el vendedor en el plist
-        DataManager().setValueForKey("codigo_vendedor", value: Int(codigo[0]), inFile: "appstate")
+        DataManager().setValueForKey("vendedor", value: codigo[0], inFile: "appstate")
         DataManager().setValueForKey("nombre_vendedor", value: String(nombre[0]), inFile: "appstate")
         
         // Pongo el nombre del vendedor en el uitextview
