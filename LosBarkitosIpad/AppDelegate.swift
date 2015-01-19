@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("estado_venta", value: 0, inFile: "appstate")
         
         DataManager().setValueForKey("vendedor", value: "", inFile: "appstate")
+        DataManager().setValueForKey("nombre_vendedor", value: "", inFile: "appstate")
         
         DataManager().setValueForKey("rios", value: 0, inFile: "appstate")
         DataManager().setValueForKey("electricas", value: 0, inFile: "appstate")

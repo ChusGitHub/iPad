@@ -13,6 +13,7 @@ import UIkit
 protocol WebServiceProtocolo {
     // funcion que implementará la clase delegada y que recibirá los datos de repuesta a la llamada
     func didReceiveResponse_listadoVendedores(respuesta : [String : AnyObject])
+    func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
     
 }
 
@@ -30,7 +31,9 @@ class webServiceCallAPI : NSObject {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
-        manager.GET("http://losbarkitos.herokuapp.com/vendedores/", parameters: nil,
+        manager.GET(
+            "http://losbarkitos.herokuapp.com/vendedores/",
+            parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 println("responseObject: \(responseObject.description)")
                 var indice : Int = 1
@@ -38,7 +41,7 @@ class webServiceCallAPI : NSObject {
                 for (k,v) in responseObject as [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as NSString == "si" {
+                    } else if v as NSString == "si" {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -49,13 +52,42 @@ class webServiceCallAPI : NSObject {
             },
             
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
-                println("Error: \(error.localizedDescription))")
+                println("Error: \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
                 self.delegate?.didReceiveResponse_listadoVendedores(diccionario as Dictionary)// as NSDictionary)
             }
         )
         
+    }
+    
+    func entradaBDD_ventaBarca(tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int) {
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        manager.GET(
+            "http://losbarkitos.herokuapp.com/registro_barca/\(tipo)/\(precio)/\(puntoVenta)/\(vendedor)/", parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                var diccionario = [String : AnyObject]()
+                for (k,v) in responseObject as [String : AnyObject] {
+                    if k != "error" {
+                        diccionario[k] = v
+                    } else if v as Int == 1 {// la respuesta es erronea
+                        println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        diccionario = [String : AnyObject]()
+                        diccionario["error"] = "si"
+                    }
+                }
+                println("diccionario : \(diccionario)")
+                self.delegate?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                println("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegate?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
+            }
+        )
     }
 }
 
