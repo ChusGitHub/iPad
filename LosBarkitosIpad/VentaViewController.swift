@@ -40,7 +40,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var respuesta = [String : String]()
     
-    
+    // Este es el enlace a la clase que hace la conexion al servidor
     var webService : webServiceCallAPI = webServiceCallAPI()
     var vendedores : NSArray = NSArray()
     
@@ -156,7 +156,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     // Respuesta del webService de los vendedores del sistema
-    func didReceiveResponse(respuesta: Dictionary<String, AnyObject >) { // : Dictionary) {
+    func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) { // : Dictionary) {
         println("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as NSString == "si" {

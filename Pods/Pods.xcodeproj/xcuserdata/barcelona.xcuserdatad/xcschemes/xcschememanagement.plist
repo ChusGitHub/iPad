@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-StarPrinting.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CCC0872822E566079F9A2828</key>
+		<key>89354569E38E9E968FF7EF6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA131262F60AA4EC1824B65A</key>
+		<key>95AF73D72431276D45C528D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>964947020BA3B3007A956B06</key>
 		<dict>
 			<key>primary</key>
 			<true/>

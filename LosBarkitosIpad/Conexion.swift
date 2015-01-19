@@ -12,7 +12,8 @@ import UIkit
 // Protocolo a implementar por la clase que delegue esta
 protocol WebServiceProtocolo {
     // funcion que implementará la clase delegada y que recibirá los datos de repuesta a la llamada
-    func didReceiveResponse(respuesta : [String : AnyObject])// NSDictionary)
+    func didReceiveResponse_listadoVendedores(respuesta : [String : AnyObject])
+    
 }
 
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
@@ -44,14 +45,14 @@ class webServiceCallAPI : NSObject {
                     }// hay un error y hay que paralo
                 }
                 println("diccionario: \(diccionario)")
-                self.delegate?.didReceiveResponse(diccionario)// as NSDictionary)
+                self.delegate?.didReceiveResponse_listadoVendedores(diccionario)// as NSDictionary)
             },
             
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
                 println("Error: \(error.localizedDescription))")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegate?.didReceiveResponse(diccionario as Dictionary)// as NSDictionary)
+                self.delegate?.didReceiveResponse_listadoVendedores(diccionario as Dictionary)// as NSDictionary)
             }
         )
         
