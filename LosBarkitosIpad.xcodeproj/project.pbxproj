@@ -17,6 +17,7 @@
 		BB34AD011A1615EE008E67ED /* LosBarkitosIpadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */; };
 		BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5421A1F7426004AFC7C /* Conexion.swift */; };
 		BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5441A1F754A004AFC7C /* Conectividad.swift */; };
+		BBEB82F51A7148BD00483FCA /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBEB82F41A7148BD00483FCA /* image2.jpg */; };
 		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
 		F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AFCE121A169FB5007FF3A9 /* PlistData.swift */; };
 		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
@@ -52,6 +53,7 @@
 		BB35F5421A1F7426004AFC7C /* Conexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
 		BB35F5441A1F754A004AFC7C /* Conectividad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conectividad.swift; sourceTree = "<group>"; };
 		BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuenteAFNetworking.h; sourceTree = "<group>"; };
+		BBEB82F41A7148BD00483FCA /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpg; sourceTree = "<group>"; };
 		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
 		F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendedorUITableViewCell.swift; sourceTree = "<group>"; };
 		F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreciosViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		BB34ACE61A1615EE008E67ED /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BBEB82F41A7148BD00483FCA /* image2.jpg */,
 				BB34ACE71A1615EE008E67ED /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -251,6 +254,7 @@
 			files = (
 				BB34ACF01A1615EE008E67ED /* Main.storyboard in Resources */,
 				BB34ACF51A1615EE008E67ED /* LaunchScreen.xib in Resources */,
+				BBEB82F51A7148BD00483FCA /* image2.jpg in Resources */,
 				BB34ACF21A1615EE008E67ED /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

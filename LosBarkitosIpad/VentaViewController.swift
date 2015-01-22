@@ -128,8 +128,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Datos a imprimir
         //var commands : NSMutableData = commands.appendBytes("\\x1b\\x1d\\x61\\x01", length: 16)
-       
+        var imagenToPrint : UIImage = UIImage(named: "image2.jpg")!
+        var printerrrr  = starPort
+        printerrrr.portName() = starPort.portName()
         
+        imagenToPrint.print(printerrrr)
     }
     
     
