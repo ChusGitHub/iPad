@@ -49,6 +49,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // algo falla : String con informacion de lo que falla
     var toPreciosViewController : Int = 0
     
+    // propiedades para la impresora
+    var foundPrinters : NSArray = []
+    
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -106,10 +109,26 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         webService.delegate = self
         
         // PREPARO LA IMPRESORA DE TICKETS
+        self.setupImpresora()
         
     }
     
-    func accionPrinters() {
+    func setupImpresora() {
+        // Pongo el puerto de la impresora y su informacion
+        // Busco las impresoras de bluethooth que estan conectadas
+        self.foundPrinters = SMPort.searchPrinter("BT:")
+        
+        var portInfo : PortInfo = self.foundPrinters[0] as PortInfo
+        
+        // chequeo el status de la impresora
+        var starPort : SMPort
+        starPort = SMPort.getPort(portName, portSettings, 10000)
+        
+        // status de la impresora ??????????
+        
+        // Datos a imprimir
+        //var commands : NSMutableData = commands.appendBytes("\\x1b\\x1d\\x61\\x01", length: 16)
+       
         
     }
     

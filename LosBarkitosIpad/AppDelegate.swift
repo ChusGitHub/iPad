@@ -8,10 +8,33 @@
 
 import UIKit
 
+// propiedades de control de la impresora
+
+var portName : NSString = ""
+var portSettings : NSString = ""
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    func getPortName()->NSString {
+        return portName as NSString
+    }
+    func setPortName(nombre : NSString) {
+        if portName != nombre {
+            portName = nombre
+        }
+    }
+    func getPortSettings()->NSString {
+        return portSettings as NSString
+    }
+    func setPortSettings(settings : NSString) {
+        if portSettings != settings {
+            portSettings = settings
+        }
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
