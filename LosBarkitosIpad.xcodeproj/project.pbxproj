@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB080E721A728A2100D4117F /* ticket.xml in Resources */ = {isa = PBXBuildFile; fileRef = BB080E711A728A2100D4117F /* ticket.xml */; };
 		BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1FB6701A232FA50078B97A /* UIKit.framework */; };
 		BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACE81A1615EE008E67ED /* AppDelegate.swift */; };
 		BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */; };
@@ -17,7 +18,6 @@
 		BB34AD011A1615EE008E67ED /* LosBarkitosIpadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */; };
 		BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5421A1F7426004AFC7C /* Conexion.swift */; };
 		BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5441A1F754A004AFC7C /* Conectividad.swift */; };
-		BBEB82F51A7148BD00483FCA /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBEB82F41A7148BD00483FCA /* image2.jpg */; };
 		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
 		F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AFCE121A169FB5007FF3A9 /* PlistData.swift */; };
 		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
@@ -38,6 +38,7 @@
 		216AC3D9FFBD34278773084E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BB080E711A728A2100D4117F /* ticket.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ticket.xml; sourceTree = "<group>"; };
 		BB1FB6701A232FA50078B97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LosBarkitosIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB34ACE71A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		BB35F5421A1F7426004AFC7C /* Conexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
 		BB35F5441A1F754A004AFC7C /* Conectividad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conectividad.swift; sourceTree = "<group>"; };
 		BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuenteAFNetworking.h; sourceTree = "<group>"; };
-		BBEB82F41A7148BD00483FCA /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpg; sourceTree = "<group>"; };
 		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
 		F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendedorUITableViewCell.swift; sourceTree = "<group>"; };
 		F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreciosViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		BB34ACE61A1615EE008E67ED /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BBEB82F41A7148BD00483FCA /* image2.jpg */,
+				BB080E711A728A2100D4117F /* ticket.xml */,
 				BB34ACE71A1615EE008E67ED /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -253,8 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB34ACF01A1615EE008E67ED /* Main.storyboard in Resources */,
+				BB080E721A728A2100D4117F /* ticket.xml in Resources */,
 				BB34ACF51A1615EE008E67ED /* LaunchScreen.xib in Resources */,
-				BBEB82F51A7148BD00483FCA /* image2.jpg in Resources */,
 				BB34ACF21A1615EE008E67ED /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,7 @@ import UIKit
 
 class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
 
+
     let RIO       = 1
     let ELECTRICA = 2
     let WHALY     = 3
@@ -50,8 +51,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var toPreciosViewController : Int = 0
     
     // propiedades para la impresora
-    var foundPrinters : NSArray = []
+    var printers : NSMutableArray = []
+    var connectedPrinter : Printer? = nil
     
+    var delegates : NSHashTable? = nil
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -90,6 +93,17 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        if (Printer.connectedPrinter() != nil) {
+            self.printers.addObject(Printer.connectedPrinter())
+        }
+        self.delegates = NSHashTable.weakObjectsHashTable()
+        
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,27 +128,22 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setupImpresora() {
-        // Pongo el puerto de la impresora y su informacion
-        // Busco las impresoras de bluethooth que estan conectadas
-        self.foundPrinters = SMPort.searchPrinter("BT:")
+        var printer : Printer = Printer.connectedPrinter()
+        if printer == true {
+            self.rellenarDatosImprimir()
+       
+        printer.printTest()
+        }
         
-        var portInfo : PortInfo = self.foundPrinters[0] as PortInfo
-        
-        // chequeo el status de la impresora
-        var starPort : SMPort
-        starPort = SMPort.getPort(portName, portSettings, 10000)
-        
-        // status de la impresora ??????????
-        
-        // Datos a imprimir
-        //var commands : NSMutableData = commands.appendBytes("\\x1b\\x1d\\x61\\x01", length: 16)
-        var imagenToPrint : UIImage = UIImage(named: "image2.jpg")!
-        var printerrrr  = starPort
-        printerrrr.portName() = starPort.portName()
-        
-        imagenToPrint.print(printerrrr)
     }
-    
+
+    func rellenarDatosImprimir() {
+        
+        var filePath : String = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+        var printData : PrintData!
+        printData.filePath = filePath
+        
+    }
     
     override func viewWillAppear(animated: Bool) {
 
@@ -286,6 +295,26 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             siguienteVC.toTipo = self.barcaActual
             siguienteVC.toTipoString = self.barcaActualString
         }
+    }
+    
+    func search() {
+        
+        Printer.search{(found : [AnyObject]!)->() in
+            self.printers.addObjectsFromArray(found)
+            
+            if self.connectedPrinter != nil {
+                let lastKnownPrinter : Printer = Printer.connectedPrinter()
+              
+                for p in found  {
+                    if p.macAddress == lastKnownPrinter.macAddress {
+                        self.connectedPrinter = p as? Printer
+                        break
+                    }
+                }
+            }
+        
+        }
+        
     }
     
 }
