@@ -129,19 +129,30 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func setupImpresora() {
         var printer : Printer = Printer.connectedPrinter()
-        if printer == true {
-            self.rellenarDatosImprimir()
-       
-        printer.printTest()
-        }
+        //if printer == true {
+            //self.rellenarDatosImprimir()
+        var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+        println("filePath: \(filePath)")
+        
+        var printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
+        // var printData : PrintData
+        //printData.filePath = filePath as NSString
+        Printer.connectedPrinter().print(printData)
+        
+       // printer.printTest()
+        //}
         
     }
 
     func rellenarDatosImprimir() {
         
-        var filePath : String = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
-        var printData : PrintData!
-        printData.filePath = filePath
+        var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+        println("filePath: \(filePath)")
+        
+        let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
+       // var printData : PrintData
+        //printData.filePath = filePath as NSStringç
+       
         
     }
     
