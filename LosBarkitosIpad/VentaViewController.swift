@@ -127,7 +127,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         webService.delegate = self
         
         // PREPARO LA IMPRESORA DE TICKETS
-        self.setupImpresora()
+      //  self.setupImpresora()
         
     }
     
