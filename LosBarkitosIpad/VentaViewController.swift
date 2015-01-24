@@ -53,6 +53,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // propiedades para la impresora
     var printers : NSMutableArray = []
     var connectedPrinter : Printer? = nil
+    var searching : Bool = false
+    var empty : Bool = true
+    
     
     var delegates : NSHashTable? = nil
     
@@ -94,14 +97,15 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     required init(coder aDecoder: NSCoder) {
+    
         super.init(coder: aDecoder)
-        
+        self.printers = NSMutableArray()
         if (Printer.connectedPrinter() != nil) {
             self.printers.addObject(Printer.connectedPrinter())
         }
         self.delegates = NSHashTable.weakObjectsHashTable()
         
-        
+        self.search()
     }
     
 
@@ -192,7 +196,18 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
         
         // Imprimir el ticket en la impresora de tickets
+        self.imprimirTicket()
         
+    }
+    
+    func imprimirTicket() {
+        if Printer.connectedPrinter() == nil {
+            return
+        }
+        var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+        println("filePath: \(filePath)")
+        let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
+        Printer.connectedPrinter().print(printData)
     }
     
     
@@ -310,23 +325,33 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func search() {
         
+        if self.searching {
+            return // Si está buscando sale porque aqui no hace nada
+        }
+        
+        self.printers.removeAllObjects()
+        self.searching = true
+        self.connectedPrinter = nil
+        
         Printer.search{(found : [AnyObject]!)->() in
-            self.printers.addObjectsFromArray(found)
+            if found.count > 0 {
+                self.printers.addObjectsFromArray(found)
             
-            if self.connectedPrinter != nil {
-                let lastKnownPrinter : Printer = Printer.connectedPrinter()
-              
-                for p in found  {
-                    if p.macAddress == lastKnownPrinter.macAddress {
-                        self.connectedPrinter = p as? Printer
-                        break
+                if self.connectedPrinter != nil {
+                    let lastKnownPrinter : Printer = Printer.connectedPrinter()
+                    var p : Printer
+                    for  p  in found {
+                        if p.macAddress == lastKnownPrinter.macAddress {
+                            self.connectedPrinter = p as? Printer
+                            break
+                        }
                     }
                 }
-            }
         
+            }
+            self.empty = found.count == 0
+            self.searching = false
         }
         
     }
-    
 }
-
