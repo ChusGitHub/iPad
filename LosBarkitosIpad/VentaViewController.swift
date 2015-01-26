@@ -127,7 +127,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         webService.delegate = self
         
         // PREPARO LA IMPRESORA DE TICKETS
-      //  self.setupImpresora()
+        self.setConnectedPrinter(self.connectedPrinter)
         
     }
     
@@ -201,9 +201,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func imprimirTicket() {
-        if Printer.connectedPrinter() == nil {
-            return
-        }
+       // if Printer.connectedPrinter() == nil {
+          //  return
+        //}
         var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
         println("filePath: \(filePath)")
         let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
@@ -353,5 +353,25 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.searching = false
         }
         
+    }
+    
+    func setConnectedPrinter(connectedPrinter : Printer?) {
+        if ((self.connectedPrinter) != nil) {
+            if ((self.connectedPrinter?.isReadyToPrint) != nil) {
+                self.connectedPrinter?.disconnect()
+            }
+            self.connectedPrinter = nil
+            
+        }// else if (connectedPrinter != nil) {
+            self.connectedPrinter = connectedPrinter
+        //}
+          /*  self.connectedPrinter?.connect{(success : Bool -> ()) { success in
+                if success == nil {
+                    self.connectedPrinter? = nil
+                }
+                self.notifyDelegates
+            }
+        }
+        */
     }
 }

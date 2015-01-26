@@ -15,7 +15,6 @@
 		BB34ACF01A1615EE008E67ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB34ACEE1A1615EE008E67ED /* Main.storyboard */; };
 		BB34ACF21A1615EE008E67ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB34ACF11A1615EE008E67ED /* Images.xcassets */; };
 		BB34ACF51A1615EE008E67ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB34ACF31A1615EE008E67ED /* LaunchScreen.xib */; };
-		BB34AD011A1615EE008E67ED /* LosBarkitosIpadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */; };
 		BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5421A1F7426004AFC7C /* Conexion.swift */; };
 		BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5441A1F754A004AFC7C /* Conectividad.swift */; };
 		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
@@ -23,16 +22,6 @@
 		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
 		F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BB34ACFB1A1615EE008E67ED /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BB34ACDB1A1615EE008E67ED /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BB34ACE21A1615EE008E67ED;
-			remoteInfo = LosBarkitosIpad;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		216AC3D9FFBD34278773084E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +37,6 @@
 		BB34ACEF1A1615EE008E67ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB34ACF11A1615EE008E67ED /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BB34ACF41A1615EE008E67ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		BB34ACFA1A1615EE008E67ED /* LosBarkitosIpadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LosBarkitosIpadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB34ACFF1A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosBarkitosIpadTests.swift; sourceTree = "<group>"; };
 		BB35F5421A1F7426004AFC7C /* Conexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
@@ -66,13 +54,6 @@
 			files = (
 				BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */,
 				F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BB34ACF71A1615EE008E67ED /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */,
-				BB34ACFA1A1615EE008E67ED /* LosBarkitosIpadTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,24 +172,6 @@
 			productReference = BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BB34ACF91A1615EE008E67ED /* LosBarkitosIpadTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BB34AD071A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpadTests" */;
-			buildPhases = (
-				BB34ACF61A1615EE008E67ED /* Sources */,
-				BB34ACF71A1615EE008E67ED /* Frameworks */,
-				BB34ACF81A1615EE008E67ED /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BB34ACFC1A1615EE008E67ED /* PBXTargetDependency */,
-			);
-			name = LosBarkitosIpadTests;
-			productName = LosBarkitosIpadTests;
-			productReference = BB34ACFA1A1615EE008E67ED /* LosBarkitosIpadTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,10 +184,6 @@
 					BB34ACE21A1615EE008E67ED = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = P374Y44WR4;
-					};
-					BB34ACF91A1615EE008E67ED = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = BB34ACE21A1615EE008E67ED;
 					};
 				};
 			};
@@ -243,7 +201,6 @@
 			projectRoot = "";
 			targets = (
 				BB34ACE21A1615EE008E67ED /* LosBarkitosIpad */,
-				BB34ACF91A1615EE008E67ED /* LosBarkitosIpadTests */,
 			);
 		};
 /* End PBXProject section */
@@ -257,13 +214,6 @@
 				BB080E721A728A2100D4117F /* ticket.xml in Resources */,
 				BB34ACF51A1615EE008E67ED /* LaunchScreen.xib in Resources */,
 				BB34ACF21A1615EE008E67ED /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BB34ACF81A1615EE008E67ED /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,23 +253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BB34ACF61A1615EE008E67ED /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BB34AD011A1615EE008E67ED /* LosBarkitosIpadTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BB34ACFC1A1615EE008E67ED /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BB34ACE21A1615EE008E67ED /* LosBarkitosIpad */;
-			targetProxy = BB34ACFB1A1615EE008E67ED /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BB34ACEE1A1615EE008E67ED /* Main.storyboard */ = {
@@ -477,40 +411,6 @@
 			};
 			name = Release;
 		};
-		BB34AD081A1615EE008E67ED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LosBarkitosIpadTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LosBarkitosIpad.app/LosBarkitosIpad";
-			};
-			name = Debug;
-		};
-		BB34AD091A1615EE008E67ED /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LosBarkitosIpadTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LosBarkitosIpad.app/LosBarkitosIpad";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -528,15 +428,6 @@
 			buildConfigurations = (
 				BB34AD051A1615EE008E67ED /* Debug */,
 				BB34AD061A1615EE008E67ED /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BB34AD071A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpadTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BB34AD081A1615EE008E67ED /* Debug */,
-				BB34AD091A1615EE008E67ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

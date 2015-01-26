@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/StarPrinting/StarPrinting/Printer.m"
-            timestampString = "443722893.689986"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "+connectedPrinter"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "LosBarkitosIpad/VentaViewController.swift"
-            timestampString = "443726407.327247"
+            timestampString = "443912098.487668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "setupImpresora()"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
+            landmarkName = "setConnectedPrinter(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "10BFE2AB37DBA722435563BF"
+               BlueprintIdentifier = "3C2D183C5489EB495DF1A0CA"
                BuildableName = "libPods-StarPrinting.a"
                BlueprintName = "Pods-StarPrinting"
                ReferencedContainer = "container:Pods.xcodeproj">
