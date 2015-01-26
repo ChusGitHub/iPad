@@ -8,7 +8,11 @@
 //import "VendedorUITableViewCell"
 import UIKit
 
-class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
+protocol PrinterConnectivityDelegate {
+    func connectedPrinterDidChangeTo(printer : Printer)
+}
+
+class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo, PrinterDelegate {
 
 
     let RIO       = 1
@@ -55,9 +59,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var connectedPrinter : Printer? = nil
     var searching : Bool = false
     var empty : Bool = true
+    var printerStatus : PrinterStatus = PrinterStatusDisconnected
     
     
-    var delegates : NSHashTable? = nil
+    var delegates : NSHashTable = NSHashTable.weakObjectsHashTable()
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -104,6 +109,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.printers.addObject(Printer.connectedPrinter())
         }
         self.delegates = NSHashTable.weakObjectsHashTable()
+        self.printerStatus = PrinterStatusDisconnected
         
         self.search()
     }
@@ -127,7 +133,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         webService.delegate = self
         
         // PREPARO LA IMPRESORA DE TICKETS
+        if self.searching {
+            self.searching = true
+        } else {
+            self.searching = false
+        }
+        
         self.setConnectedPrinter(self.connectedPrinter)
+        self.setSearching(self.searching)
         
     }
     
@@ -189,25 +202,28 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
     func procesarTicket() {
-        // Introducir el ticket vendido en la BDD correspondiente
-        // obtengo el vendedor que ha hecho la venta
-        let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
-        println("codVend: \(codVend)")
-        webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
-        
-        // Imprimir el ticket en la impresora de tickets
-        self.imprimirTicket()
+        // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
+        if let ticketImpreso = self.imprimirTicket() {
+
+            // Introducir el ticket vendido en la BDD correspondiente
+            // obtengo el vendedor que ha hecho la venta
+            let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
+            println("codVend: \(codVend)")
+                webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
+        } else {
+            println("No se puede imprimir y por tanto tampoco se inserta en la BDD")
+        }
         
     }
     
-    func imprimirTicket() {
-       // if Printer.connectedPrinter() == nil {
-          //  return
-        //}
+    func imprimirTicket() -> Bool? {
+        if (Printer.connectedPrinter() == nil) { return nil}
+        
         var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
         println("filePath: \(filePath)")
         let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
         Printer.connectedPrinter().print(printData)
+        return true
     }
     
     
@@ -331,17 +347,19 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.printers.removeAllObjects()
         self.searching = true
+        self.setConnectedPrinter(self.connectedPrinter)
         self.connectedPrinter = nil
         
         Printer.search{(found : [AnyObject]!)->() in
             if found.count > 0 {
                 self.printers.addObjectsFromArray(found)
             
-                if self.connectedPrinter != nil {
+                if self.connectedPrinter == nil {
                     let lastKnownPrinter : Printer = Printer.connectedPrinter()
-                    var p : Printer
+                    let p : Printer? = nil
                     for  p  in found {
                         if p.macAddress == lastKnownPrinter.macAddress {
+                            self.setConnectedPrinter(self.connectedPrinter)
                             self.connectedPrinter = p as? Printer
                             break
                         }
@@ -356,22 +374,60 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setConnectedPrinter(connectedPrinter : Printer?) {
-        if ((self.connectedPrinter) != nil) {
+        if ((self.connectedPrinter) != nil && connectedPrinter == nil) {
             if ((self.connectedPrinter?.isReadyToPrint) != nil) {
                 self.connectedPrinter?.disconnect()
             }
+            self.setConnectedPrinter(self.connectedPrinter)
             self.connectedPrinter = nil
             
-        }// else if (connectedPrinter != nil) {
+        } else if (connectedPrinter != nil) {
+            self.setConnectedPrinter(self.connectedPrinter)
             self.connectedPrinter = connectedPrinter
-        //}
-          /*  self.connectedPrinter?.connect{(success : Bool -> ()) { success in
-                if success == nil {
-                    self.connectedPrinter? = nil
+            self.connectedPrinter?.delegate = self
+            self.connectedPrinter?.connect({(success : Bool)->() in
+                if (success == false) {
+                    self.setConnectedPrinter(self.connectedPrinter)
+                    self.connectedPrinter = nil
                 }
-                self.notifyDelegates
-            }
+                
+            })
         }
-        */
+        
+    }
+    
+    func setSearching(searching : Bool) {
+        self.searching = searching
+        if searching {
+            self.empty = false
+        }
+    }
+    
+    func setEmpty(empty : Bool) {
+        self.empty = empty
+        // animacion de spinner
+    }
+   /* func notifyDelegates() {
+        var d : PrinterConnectivityDelegate = self.delegates
+        for d in self.delegates {
+            d.connectedPrinterDidChangeTo(self.connectedPrinter)
+        }
+    }*/
+
+    func addDelegate(delegate : AnyObject) {
+        self.delegates.addObject(delegate)
+    }
+    
+    func removeDelegates(delegate : AnyObject) {
+        self.delegates.removeObject(delegate)
+    }
+    
+    func printer(printer: Printer!, didChangeStatus status: PrinterStatus) {
+        if self.printers .containsObject(printer) {
+            let indexPath : NSIndexPath = NSIndexPath(forRow: self.printers.indexOfObject(printer), inSection: 0)
+        
+            
+        }
+        self.printerStatus = status
     }
 }
