@@ -355,10 +355,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.printers.addObjectsFromArray(found)
             
                 if self.connectedPrinter == nil {
-                    let lastKnownPrinter : Printer = Printer.connectedPrinter()
-                    let p : Printer? = nil
+                    var lastKnownPrinter : Printer? = Printer.connectedPrinter()
+                    var p : Printer?
                     for  p  in found {
-                        if p.macAddress == lastKnownPrinter.macAddress {
+                        if p.macAddress == lastKnownPrinter?.macAddress {
                             self.setConnectedPrinter(self.connectedPrinter)
                             self.connectedPrinter = p as? Printer
                             break
@@ -374,20 +374,17 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setConnectedPrinter(connectedPrinter : Printer?) {
-        if ((self.connectedPrinter) != nil && connectedPrinter == nil) {
+        if (connectedPrinter == nil) && (self.connectedPrinter != nil){
             if ((self.connectedPrinter?.isReadyToPrint) != nil) {
                 self.connectedPrinter?.disconnect()
             }
-            self.setConnectedPrinter(self.connectedPrinter)
             self.connectedPrinter = nil
             
         } else if (connectedPrinter != nil) {
-            self.setConnectedPrinter(self.connectedPrinter)
             self.connectedPrinter = connectedPrinter
             self.connectedPrinter?.delegate = self
             self.connectedPrinter?.connect({(success : Bool)->() in
                 if (success == false) {
-                    self.setConnectedPrinter(self.connectedPrinter)
                     self.connectedPrinter = nil
                 }
                 

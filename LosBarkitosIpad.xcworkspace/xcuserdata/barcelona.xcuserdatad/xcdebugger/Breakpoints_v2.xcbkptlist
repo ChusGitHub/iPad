@@ -10,12 +10,88 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LosBarkitosIpad/VentaViewController.swift"
-            timestampString = "443912098.487668"
+            timestampString = "444001724.726399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "setConnectedPrinter(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LosBarkitosIpad.VentaViewController.setConnectedPrinter (LosBarkitosIpad.VentaViewController)(Swift.Optional&lt;ObjectiveC.Printer&gt;) -&gt; ()"
+                  moduleName = "LosBarkitosIpad"
+                  urlString = "file:///Users/barcelona/proyectos/ipad/LosBarkitosIpad/VentaViewController.swift"
+                  timestampString = "444004054.063147"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386"
+                  offsetFromSymbolStart = "1572">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LosBarkitosIpad.VentaViewController.(setConnectedPrinter (LosBarkitosIpad.VentaViewController) -&gt; (Swift.Optional&lt;ObjectiveC.Printer&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "LosBarkitosIpad"
+                  urlString = "file:///Users/barcelona/proyectos/ipad/LosBarkitosIpad/VentaViewController.swift"
+                  timestampString = "444004054.063723"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "reabstraction thunk helper from @callee_owned (@unowned Swift.Bool) -&gt; (@unowned ()) to @callee_unowned @objc_block (@unowned ObjectiveC.ObjCBool) -&gt; (@unowned ())"
+                  moduleName = "LosBarkitosIpad"
+                  urlString = "file:///Users/barcelona/proyectos/ipad/LosBarkitosIpad/VentaViewController.swift"
+                  timestampString = "444004054.064183"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LosBarkitosIpad/VentaViewController.swift"
+            timestampString = "444002700.71293"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LosBarkitosIpad/VentaViewController.swift"
+            timestampString = "444002914.658142"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "init(coder:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
