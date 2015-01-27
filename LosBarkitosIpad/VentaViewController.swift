@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 Jesus Valladolid Rebollar. All rights reserved.
 //
 //import "VendedorUITableViewCell"
-import UIKit
 
+import UIKit
+/*
 protocol PrinterConnectivityDelegate {
     func connectedPrinterDidChangeTo(printer : Printer)
-}
+}*/
 
-class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo, PrinterDelegate {
+class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
 
 
     let RIO       = 1
@@ -54,6 +55,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // algo falla : String con informacion de lo que falla
     var toPreciosViewController : Int = 0
     
+  /*
+    
     // propiedades para la impresora
     var printers : NSMutableArray = []
     var connectedPrinter : Printer? = nil
@@ -62,7 +65,18 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var printerStatus : PrinterStatus = PrinterStatusDisconnected
     
     
-    var delegates : NSHashTable = NSHashTable.weakObjectsHashTable()
+    var delegates : NSHashTable = NSHashTable.weakObjectsHashTable()*/
+    
+    var arrayPort : NSArray = ["Standard"]
+    var arrayFunction : NSArray = ["Sample Receipt"]
+    var arraySensorActive : NSArray = ["Hight"]
+    var arraySensorActivePickerContents : NSArray = ["High When Drawer Open"]
+    
+    var selectedPort : NSInteger = 0
+    var selectedSensorActive : NSInteger = 0
+    
+    var foundPrinters : NSArray = []
+    var lastSelectedPortName : NSString = ""
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -104,14 +118,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     required init(coder aDecoder: NSCoder) {
     
         super.init(coder: aDecoder)
-        self.printers = NSMutableArray()
+       /* self.printers = NSMutableArray()
         if (Printer.connectedPrinter() != nil) {
             self.printers.addObject(Printer.connectedPrinter())
         }
         self.delegates = NSHashTable.weakObjectsHashTable()
         self.printerStatus = PrinterStatusDisconnected
         
-        self.search()
+        self.search()*/
     }
     
 
@@ -133,44 +147,52 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         webService.delegate = self
         
         // PREPARO LA IMPRESORA DE TICKETS
-        if self.searching {
+   /*     if self.searching {
             self.searching = true
         } else {
             self.searching = false
         }
         
         self.setConnectedPrinter(self.connectedPrinter)
-        self.setSearching(self.searching)
+        self.setSearching(self.searching)*/
+        
+        self.setupImpresora()
+        
         
     }
     
     func setupImpresora() {
-        var printer : Printer = Printer.connectedPrinter()
+    //    var printer : Printer = Printer.connectedPrinter()
         //if printer == true {
             //self.rellenarDatosImprimir()
         var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
         println("filePath: \(filePath)")
         
-        var printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
+    //    var printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
         // var printData : PrintData
         //printData.filePath = filePath as NSString
-        Printer.connectedPrinter().print(printData)
+     //   Printer.connectedPrinter().print(printData)
         
        // printer.printTest()
         //}
+        
+        self.foundPrinters = SMPort.searchPrinter("BT:")
+        
+        var portInfo : PortInfo = self.foundPrinters[0] as PortInfo
+        self.lastSelectedPortName = portInfo.portName
         
     }
 
     func rellenarDatosImprimir() {
         
-        var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+     /*   var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
         println("filePath: \(filePath)")
         
         let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
        // var printData : PrintData
         //printData.filePath = filePath as NSStringç
        
-        
+        */
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -217,12 +239,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func imprimirTicket() -> Bool? {
-        if (Printer.connectedPrinter() == nil) { return nil}
+      //  if (Printer.connectedPrinter() == nil) { return nil}
         
         var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
         println("filePath: \(filePath)")
-        let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
-        Printer.connectedPrinter().print(printData)
+      
+        //let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
+        //Printer.connectedPrinter().print(printData)
         return true
     }
     
@@ -339,7 +362,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func search() {
+  /*  func search() {
         
         if self.searching {
             return // Si está buscando sale porque aqui no hace nada
@@ -426,5 +449,5 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
         self.printerStatus = status
-    }
+    }*/
 }

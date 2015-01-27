@@ -12,6 +12,8 @@ import UIKit
 
 var portName : NSString = ""
 var portSettings : NSString = ""
+var drawerPortName : NSString = ""
+
 
 
 @UIApplicationMain
@@ -35,7 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             portSettings = settings
         }
     }
-    
+    func getDrawerPortName() -> NSString {
+        return drawerPortName
+    }
+    func setDrawerPortName(portName : NSString) {
+        if drawerPortName != portName {
+            drawerPortName = portName.copy() as NSString
+        }
+    }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // Cuando se abre la app miro si ya se ha cargado el dia
