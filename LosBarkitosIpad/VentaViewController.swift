@@ -177,10 +177,19 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //}
         
         self.foundPrinters = SMPort.searchPrinter("BT:")
+        println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
         
-        var portInfo : PortInfo = self.foundPrinters[0] as PortInfo
+        var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
         self.lastSelectedPortName = portInfo.portName
         
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.setPortName(portInfo.portName)
+        appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+        var p_portName : NSString = appDelegate.getPortName()
+        var p_portSettings : NSString = appDelegate.getPortSettings()
+        
+        // Mandamos los datos a imprimir
+        PrintSampleReceipt3Inch(p_portName, p_portSettings)
     }
 
     func rellenarDatosImprimir() {
