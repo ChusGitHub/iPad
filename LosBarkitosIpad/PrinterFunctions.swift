@@ -21,18 +21,17 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString) {
        
     var str = "Hola"
     var datos : NSData? = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-    
     commands.appendData(datos!)
     
     cmd = "\u{09}"
-    commands.appendBytes(cmd, length: 1)
+    commands.appendBytes(&cmd, length: 1)
     
     str = "Esto se acaba"
     datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
     cmd = "\u{1b}\u{64}\u{62}" // Corta el papel
-    commands.appendBytes(cmd, length: 3)
+    commands.appendBytes(&cmd, length: 3)
     
     cmd = "\u{07}" // Abre la caja
     commands.appendBytes(cmd, length: 1)
@@ -55,9 +54,9 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             return
         }
         
-        var endTime :timeval? = nil
-        gettimeofday(&endTime!, nil)
-        endTime?.tv_sec += 30
+        var endTime : timeval = timeval(tv_sec: 0, tv_usec: 0)
+        gettimeofday(&endTime, nil)
+        endTime.tv_sec += 30
         
         var totalAmountWritten : UInt32 = 0
         while (Int(totalAmountWritten) < commandSize) {
@@ -65,9 +64,9 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             let amountWritten  = starPort.writePort(dataToSentToPrinter, totalAmountWritten, remaining)
             totalAmountWritten += amountWritten
             
-            var now : timeval? = nil
-            gettimeofday(&now!, nil)
-            if (now?.tv_sec > endTime?.tv_sec) {
+            var now : timeval = timeval(tv_sec: 0, tv_usec: 0)
+            gettimeofday(&now, nil)
+            if (now.tv_sec > endTime.tv_sec) {
                 break
             }
         }
