@@ -12,7 +12,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString) {
     
     let commands = NSMutableData()
 
-    var cmd = "\u{1b}\u{1d}\u{61}\u{01}"
+    var cmd = "\0x1b\0x1d\0x61\0x01"
     cmd.withCString {
         commands.appendBytes($0, length: 4)
 
@@ -23,17 +23,17 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString) {
     var datos : NSData? = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
-    cmd = "\u{09}"
+    cmd = "\0x09}"
     commands.appendBytes(&cmd, length: 1)
     
     str = "Esto se acaba"
     datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
-    cmd = "\u{1b}\u{64}\u{62}" // Corta el papel
+    cmd = "\0x1b\0x64\0x62}" // Corta el papel
     commands.appendBytes(&cmd, length: 3)
     
-    cmd = "\u{07}" // Abre la caja
+    cmd = "\0x07}" // Abre la caja
     commands.appendBytes(cmd, length: 1)
     
     sendCommand(commands,portName, portSettings,10000)

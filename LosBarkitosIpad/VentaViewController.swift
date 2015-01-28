@@ -165,8 +165,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //    var printer : Printer = Printer.connectedPrinter()
         //if printer == true {
             //self.rellenarDatosImprimir()
-        var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
-        println("filePath: \(filePath)")
+        //var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+        //println("filePath: \(filePath)")
         
     //    var printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
         // var printData : PrintData
