@@ -8,6 +8,7 @@
 //import "VendedorUITableViewCell"
 
 import UIKit
+
 /*
 protocol PrinterConnectivityDelegate {
     func connectedPrinterDidChangeTo(printer : Printer)
@@ -77,6 +78,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var foundPrinters : NSArray = []
     var lastSelectedPortName : NSString = ""
+    var p_portName : NSString = ""
+    var p_portSettings : NSString = ""
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -118,14 +121,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     required init(coder aDecoder: NSCoder) {
     
         super.init(coder: aDecoder)
-       /* self.printers = NSMutableArray()
-        if (Printer.connectedPrinter() != nil) {
-            self.printers.addObject(Printer.connectedPrinter())
-        }
-        self.delegates = NSHashTable.weakObjectsHashTable()
-        self.printerStatus = PrinterStatusDisconnected
-        
-        self.search()*/
+
     }
     
 
@@ -141,20 +137,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.vendedorUITableView.hidden = true
         
         // Si es posible pongo el nombre del vendedor
+        self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as String
         
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
-        // PREPARO LA IMPRESORA DE TICKETS
-   /*     if self.searching {
-            self.searching = true
-        } else {
-            self.searching = false
-        }
-        
-        self.setConnectedPrinter(self.connectedPrinter)
-        self.setSearching(self.searching)*/
+
         
         self.setupImpresora()
         
@@ -189,7 +178,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         var p_portSettings : NSString = appDelegate.getPortSettings()
         
         // Mandamos los datos a imprimir
-        PrintSampleReceipt3Inch(p_portName, p_portSettings)
+        //PrintSampleReceipt3Inch(p_portName, p_portSettings)
     }
 
     func rellenarDatosImprimir() {
@@ -248,10 +237,24 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func imprimirTicket() -> Bool? {
-      //  if (Printer.connectedPrinter() == nil) { return nil}
         
-        var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
-        println("filePath: \(filePath)")
+        self.foundPrinters = SMPort.searchPrinter("BT:")
+        println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
+        
+        var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+        self.lastSelectedPortName = portInfo.portName
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.setPortName(portInfo.portName)
+        appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+        var p_portName : NSString = appDelegate.getPortName()
+        var p_portSettings : NSString = appDelegate.getPortSettings()
+
+        PrintSampleReceipt3Inch(p_portName, p_portSettings, self.barcaActualString!, self.toPreciosViewController, self.vendedorUITextField.text)
+        //  if (Printer.connectedPrinter() == nil) { return nil}
+        
+        //var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
+        //println("filePath: \(filePath)")
       
         //let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
         //Printer.connectedPrinter().print(printData)

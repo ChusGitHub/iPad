@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        cargarPlist_appstate(inFile: "appstate")
 
         // Cuando se abre la app miro si ya se ha cargado el dia
         // cargado = "si" "no"
@@ -88,8 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DataManager().setValueForKey("estado_venta", value: 0, inFile: "appstate")
         
-        DataManager().setValueForKey("vendedor", value: "", inFile: "appstate")
-        DataManager().setValueForKey("nombre_vendedor", value: "", inFile: "appstate")
+        DataManager().setValueForKey("vendedor", value: "4", inFile: "appstate")
+        DataManager().setValueForKey("nombre_vendedor", value: "Miguel", inFile: "appstate")
         
         DataManager().setValueForKey("rios", value: 0, inFile: "appstate")
         DataManager().setValueForKey("electricas", value: 0, inFile: "appstate")
@@ -97,8 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("golds", value: 0, inFile: "appstate")
         
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
-        DataManager().setValueForKey("cargado", value: "si", inFile: "appstate")
-        DataManager().setValueForKey("lista_precio", value: "1", inFile: "appstate")
+        DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
+        DataManager().setValueForKey("lista_precio", value: "3", inFile: "appstate")
         
         return "si"
         

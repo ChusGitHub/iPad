@@ -8,34 +8,52 @@
 
 import Foundation
 
-func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString) {
+func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca: String, precio: Int, nombreVendedor : String ) {
     
     let commands = NSMutableData()
 
-    var cmd = "\0x1b\0x1d\0x61\0x01"
-    cmd.withCString {
-        commands.appendBytes($0, length: 4)
+    var cmd : [UInt8] = [ 0x1b, 0x1d, 0x61, 0x01 ]
+    //var cmd = "\0x1b\0x1d\0x61\0x01"
+    //cmd.withCString {
+      //      commands.appendBytes($0, length: 4)
+    //}
+    commands.appendBytes(cmd, length: 4)
 
-    }
        
        
-    var str = "Hola"
+    var str = barca
     var datos : NSData? = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
-    cmd = "\0x09}"
-    commands.appendBytes(&cmd, length: 1)
+    cmd = [ 0x09 ]
+    //cmd = "\0x09"
+    //cmd.withCString {
+      //  commands.appendBytes($0, length: 1)
+    //}
+    commands.appendBytes(cmd, length: 1)
     
-    str = "Esto se acaba"
+    str = String(precio)
     datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
-    cmd = "\0x1b\0x64\0x62}" // Corta el papel
-    commands.appendBytes(&cmd, length: 3)
+    cmd = [ 0x1b, 0x64, 0x62 ] // Corta el papel
+    //cmd = "\0x1b\0x64\0x62"
+    //cmd.withCString {
+      //  commands.appendBytes($0, length: 3)
+    //}
+    commands.appendBytes(cmd, length: 3)
     
-    cmd = "\0x07}" // Abre la caja
+    str = nombreVendedor
+    datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    cmd = [ 0x07 ] // Abre la caja
+   // cmd = "\0x07"
+    //cmd.withCString {
+     //   commands.appendBytes($0, length: 1)
+    //}
     commands.appendBytes(cmd, length: 1)
-    
+    println("Commands: \(commands)")
     sendCommand(commands,portName, portSettings,10000)
 }
 
@@ -43,8 +61,15 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
     
     var starPort : SMPort
     let commandSize : Int = commandsToPrint.length as Int
-    let dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
+    println("Tamaño datos a imprimir: \(commandSize)" )
+    //let dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
+    var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
+    commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
     
+
+    println("commandstoPrint: \(commandsToPrint)")
+    
+    println("Datos : \(dataToSentToPrinter)")
     if let starPort = SMPort.getPort(portName, portSettings, timeoutMillis) {
         var status : StarPrinterStatus_2? = nil
         starPort.beginCheckedBlock(&status, 2)
@@ -58,6 +83,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         gettimeofday(&endTime, nil)
         endTime.tv_sec += 30
         
+        println("commandSize : \(commandSize). dataToSEntToPrinter: \(dataToSentToPrinter)")
         var totalAmountWritten : UInt32 = 0
         while (Int(totalAmountWritten) < commandSize) {
             let remaining : UInt32  = (UInt32(commandSize) - totalAmountWritten)
@@ -83,6 +109,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         
     } else {
         println("Error: Writte port timed out")
+        
     }
     
 }
