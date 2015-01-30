@@ -38,6 +38,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet var btnBarcasIUButtonCollection: [UIButton]!
     
+    @IBOutlet weak var infoImpresoraUILabel: UILabel!
     
     // Items de vendedorUITableView
     // Diccionario que mantiene codigo y nombre de un vendedor
@@ -143,58 +144,43 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
-
-        
-        self.setupImpresora()
-        
-        
     }
     
-    func setupImpresora() {
-    //    var printer : Printer = Printer.connectedPrinter()
-        //if printer == true {
-            //self.rellenarDatosImprimir()
-        //var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
-        //println("filePath: \(filePath)")
-        
-    //    var printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
-        // var printData : PrintData
-        //printData.filePath = filePath as NSString
-     //   Printer.connectedPrinter().print(printData)
-        
-       // printer.printTest()
-        //}
+    func setupImpresora() -> Bool {
         
         self.foundPrinters = SMPort.searchPrinter("BT:")
-        println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
         
-        var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
-        self.lastSelectedPortName = portInfo.portName
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.setPortName(portInfo.portName)
-        appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
-        var p_portName : NSString = appDelegate.getPortName()
-        var p_portSettings : NSString = appDelegate.getPortSettings()
-        
-        // Mandamos los datos a imprimir
-        //PrintSampleReceipt3Inch(p_portName, p_portSettings)
+        if self.foundPrinters.count > 0 {// Hay impresora conectada
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+           
+            self.lastSelectedPortName = portInfo.portName
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.setPortName(portInfo.portName)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            var p_portName : NSString = appDelegate.getPortName()
+            var p_portSettings : NSString = appDelegate.getPortSettings()
+            self.infoImpresoraUILabel.text = portInfo.portName
+            return true
+        }
+        else { // No hay ninguna impresora conectada
+            var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alertaNoImpresora.addAction(OkAction)
+            
+            self.presentViewController(alertaNoImpresora, animated: true, completion: nil)
+            return false
+            
+        }
+
     }
 
-    func rellenarDatosImprimir() {
-        
-     /*   var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
-        println("filePath: \(filePath)")
-        
-        let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
-       // var printData : PrintData
-        //printData.filePath = filePath as NSStringç
-       
-        */
-    }
     
     override func viewWillAppear(animated: Bool) {
-
+        
+        
         var estadoActual = DataManager().getValueForKey("estado_venta", inFile: "appstate") as Int
         
         estadoVentaUITextField.text = "\(estadoActual)"
@@ -205,25 +191,32 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
         if (self.toPreciosViewController != 0) {
-            var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
             
-            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
-            let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
-            alertController.addAction(ticketAction)
-            alertController.addAction(cancelAction)
+                var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+                let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
+                let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
+                alertController.addAction(ticketAction)
+                alertController.addAction(cancelAction)
             
+                self.presentViewController(alertController, animated: true, completion: nil)
+                        
         }
 
         
+    }
+    
+    override func  viewWillLayoutSubviews() {
+        
+        self.setupImpresora()
+
     }
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
-        if let ticketImpreso = self.imprimirTicket() {
+        if (self.imprimirTicket() == true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
@@ -231,34 +224,44 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             println("codVend: \(codVend)")
                 webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
         } else {
-            println("No se puede imprimir y por tanto tampoco se inserta en la BDD")
+            
+            self.dismissViewControllerAnimated(true, completion: {
+                var alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
+            
+                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+                alertaNOInsercionBDD.addAction(OkAction)
+            
+                self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
+
+            
+            })
+            
         }
         
     }
     
     func imprimirTicket() -> Bool? {
         
-        self.foundPrinters = SMPort.searchPrinter("BT:")
-        println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
+        if self.setupImpresora() {
         
-        var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
-        self.lastSelectedPortName = portInfo.portName
+            self.foundPrinters = SMPort.searchPrinter("BT:")
+            println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.setPortName(portInfo.portName)
-        appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
-        var p_portName : NSString = appDelegate.getPortName()
-        var p_portSettings : NSString = appDelegate.getPortSettings()
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            self.lastSelectedPortName = portInfo.portName
+        
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.setPortName(portInfo.portName)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            var p_portName : NSString = appDelegate.getPortName()
+            var p_portSettings : NSString = appDelegate.getPortSettings()
 
-        PrintSampleReceipt3Inch(p_portName, p_portSettings, self.barcaActualString!, self.toPreciosViewController, self.vendedorUITextField.text)
-        //  if (Printer.connectedPrinter() == nil) { return nil}
-        
-        //var filePath : NSString = NSBundle.mainBundle().pathForResource("ticket", ofType: "xml")!
-        //println("filePath: \(filePath)")
-      
-        //let printData : PrintData = PrintData(dictionary: nil, atFilePath: filePath)
-        //Printer.connectedPrinter().print(printData)
-        return true
+            PrintSampleReceipt3Inch(p_portName, p_portSettings, self.barcaActualString!, self.toPreciosViewController, self.vendedorUITextField.text)
+            return true
+        } else {
+            return false
+        }
     }
     
     

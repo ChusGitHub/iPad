@@ -60,7 +60,7 @@
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Estado Venta: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLo-mr-8YT">
                                 <rect key="frame" x="46" y="690" width="73" height="13"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -153,6 +153,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No hay impresora conectada" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="42" translatesAutoresizingMaskIntoConstraints="NO" id="AXN-Zg-TPu">
+                                <rect key="frame" x="46" y="652" width="182" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.88235294117647056" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -161,6 +167,7 @@
                     <connections>
                         <outlet property="btnViewVendedoresUIButton" destination="sIK-BE-iX8" id="dNN-yR-OBE"/>
                         <outlet property="estadoVentaUITextField" destination="w6K-66-xtk" id="YW1-cq-nxp"/>
+                        <outlet property="infoImpresoraUILabel" destination="AXN-Zg-TPu" id="MhS-xS-0yE"/>
                         <outlet property="vendedorUITableView" destination="Rcn-3e-J5a" id="aeV-Kq-blL"/>
                         <outlet property="vendedorUITextField" destination="DAv-fB-8sC" id="3ud-fB-gV3"/>
                         <outletCollection property="btnBarcasIUButtonCollection" destination="1yM-oJ-Tl7" collectionClass="NSMutableArray" id="MwM-hd-JiL"/>
