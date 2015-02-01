@@ -63,8 +63,9 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
     let commandSize : Int = commandsToPrint.length as Int
     println("Tamaño datos a imprimir: \(commandSize)" )
     //let dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
-    var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
-    commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
+    //var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
+    var dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
+    //commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
     
 
     println("commandstoPrint: \(commandsToPrint)")

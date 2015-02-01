@@ -151,6 +151,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.foundPrinters = SMPort.searchPrinter("BT:")
         
         if self.foundPrinters.count > 0 {// Hay impresora conectada
+            
+            println(self.foundPrinters.count)
             var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
            
             self.lastSelectedPortName = portInfo.portName
