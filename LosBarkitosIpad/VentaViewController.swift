@@ -50,24 +50,12 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Este es el enlace a la clase que hace la conexion al servidor
     var webService : webServiceCallAPI = webServiceCallAPI()
-  //  var vendedores : NSArray = NSArray()
     
     // Valor devuelto por el PreciosViewController
     // Todo correcto : Ok
     // algo falla : String con informacion de lo que falla
     var toPreciosViewController : Int = 0
     
-  /*
-    
-    // propiedades para la impresora
-    var printers : NSMutableArray = []
-    var connectedPrinter : Printer? = nil
-    var searching : Bool = false
-    var empty : Bool = true
-    var printerStatus : PrinterStatus = PrinterStatusDisconnected
-    
-    
-    var delegates : NSHashTable = NSHashTable.weakObjectsHashTable()*/
     
     var arrayPort : NSArray = ["Standard"]
     var arrayFunction : NSArray = ["Sample Receipt"]
@@ -81,6 +69,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var lastSelectedPortName : NSString = ""
     var p_portName : NSString = ""
     var p_portSettings : NSString = ""
+    
+    let conectado : Conectividad?
+
+
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -144,8 +136,18 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
+        // miro la conectividad del ipad
+        if conectado?.estaConectado() == true {
+            println("Esta conectado")
+        } else {
+            println("No está conectado")
+        }
     }
+
     
+    // Mira si está la impresora conectada:
+    // True -> conectada
+    // False -> no hay impresora
     func setupImpresora() -> Bool {
         
         self.foundPrinters = SMPort.searchPrinter("BT:")
@@ -163,7 +165,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             self.infoImpresoraUILabel.text = portInfo.portName
-            return true
+            
+            println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
+            return true 
         }
         else { // No hay ninguna impresora conectada
             var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
@@ -204,15 +208,17 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.presentViewController(alertController, animated: true, completion: nil)
                         
         }
-
+        
+        // Miro si hay impresora conectada
+        self.setupImpresora()
         
     }
     
-    override func  viewWillLayoutSubviews() {
+    /*override func  viewWillLayoutSubviews() {
         
         self.setupImpresora()
 
-    }
+    }*/
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
@@ -248,7 +254,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if self.setupImpresora() {
         
             self.foundPrinters = SMPort.searchPrinter("BT:")
-            println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
+            
         
             var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
             self.lastSelectedPortName = portInfo.portName
@@ -259,8 +265,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
 
-            PrintSampleReceipt3Inch(p_portName, p_portSettings, self.barcaActualString!, self.toPreciosViewController, self.vendedorUITextField.text)
-            return true
+            let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, self.barcaActualString!, self.toPreciosViewController, self.vendedorUITextField.text)
+            
+            // Trataré de desconectar el puerto
+    
+            return ticketImpreso
         } else {
             return false
         }
@@ -329,9 +338,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
         cell.codigoVendedorUILabelCell.textColor = UIColor.grayColor()
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(red: 1, green: 0.74, blue: 1, alpha: 1)
+            cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         } else {
-            cell.backgroundColor = UIColor(red: 0.53, green: 0.64, blue: 1, alpha: 1)
+            cell.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         }
         
         let vendedor = self.vendedores[indexPath.row]

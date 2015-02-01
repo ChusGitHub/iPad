@@ -8,7 +8,7 @@
 
 import Foundation
 
-func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca: String, precio: Int, nombreVendedor : String ) {
+func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca: String, precio: Int, nombreVendedor : String ) -> Bool {
     
     let commands = NSMutableData()
 
@@ -54,10 +54,10 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     //}
     commands.appendBytes(cmd, length: 1)
     println("Commands: \(commands)")
-    sendCommand(commands,portName, portSettings,10000)
+    return (sendCommand(commands,portName, portSettings,10000))
 }
 
-func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NSString, timeoutMillis : u_int) {
+func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NSString, timeoutMillis : u_int) -> Bool{
     
     var starPort : SMPort
     let commandSize : Int = commandsToPrint.length as Int
@@ -77,7 +77,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         
         if status?.offline == 1 {
             println("Error: La impresora no esta en linea")
-            return
+            return false
         }
         
         var endTime : timeval = timeval(tv_sec: 0, tv_usec: 0)
@@ -96,21 +96,24 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             if (now.tv_sec > endTime.tv_sec) {
                 break
             }
+            return true
         }
         
         if (totalAmountWritten < UInt32(commandSize)) {
             println("Error: Impresion fuera de tiempo")
+            return false
         }
         
         starPort.endCheckedBlockTimeoutMillis = 30000
         starPort.endCheckedBlock(&status!, 2)
         if (status!.offline == 1) {
             println("Error: Printer is offline")
+            return false
         }
         
     } else {
         println("Error: Writte port timed out")
-        
+        return false
     }
-    
+    return true
 }

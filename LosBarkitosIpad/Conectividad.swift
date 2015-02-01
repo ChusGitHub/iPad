@@ -8,8 +8,21 @@
 
 import Foundation
 
-class Conectividad{
-    func estaConectado () {
-    
+class Conectividad : NSObject {
+    func estaConectado () -> Bool {
+    println("ENTRA")
+        let reachability : Reachability = Reachability.reachabilityForInternetConnection()
+        
+        reachability.whenReachable = { reachability in
+           
+            if reachability.isReachableViaWiFi() {
+                println("Reachable via WIFI")
+            } else {
+                println("Reachable via Cellular")
+            }
+            
+        }
+        reachability.startNotifier()
+        return true
     }
 }
