@@ -121,6 +121,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       // NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryConected}, name: EAAccessoryDidConnectNotification, object: nil)
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryDisconnected}, name: EAAccessoryDidConnectNotification, object: nil)
+        
         // Compruebo si ya se ha abierto el dia
         println(DataManager().getValueForKey("vendedor", inFile: "appstate") as String)
     
@@ -475,5 +479,26 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
         self.printerStatus = status
+ }*/
+    
+   /* func accesoryConnected(notification : NSNotification) {
+        var connectedAccesory : EAAccessory = notification.userInfo().indexForKey(EAAccessoryKey)    }
+    
+    - (void)accessoryConnected:(NSNotification *)notification
+    {
+    NSLog(@"EAController::accessoryConnected");
+    
+    EAAccessory *connectedAccessory = [[notification userInfo] objectForKey:EAAccessoryKey];
+    [[self accessoryList] addObject:connectedAccessory];
+    if ([_accessoryList count])
+    {
+    _selectedAccessory = [_accessoryList objectAtIndex:0];
+    NSArray *protocolStrings = [_selectedAccessory protocolStrings];
+    if ([protocolStrings count]) {
+    self.protocolString = [protocolStrings objectAtIndex:0];
+    [self openSession];
+    }
+    }
     }*/
+
 }

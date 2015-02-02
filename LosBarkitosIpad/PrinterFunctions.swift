@@ -54,7 +54,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     //}
     commands.appendBytes(cmd, length: 1)
     println("Commands: \(commands)")
-    return (sendCommand(commands,portName, portSettings,10000))
+    return (sendCommand(commands,portName, portSettings,1000))
 }
 
 func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NSString, timeoutMillis : u_int) -> Bool{
@@ -67,12 +67,12 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
     var dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
     //commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
     
-
+    var status : StarPrinterStatus_2? = nil
     println("commandstoPrint: \(commandsToPrint)")
     
     println("Datos : \(dataToSentToPrinter)")
     if let starPort = SMPort.getPort(portName, portSettings, timeoutMillis) {
-        var status : StarPrinterStatus_2? = nil
+        
         starPort.beginCheckedBlock(&status, 2)
         
         if status?.offline == 1 {
@@ -96,9 +96,12 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             if (now.tv_sec > endTime.tv_sec) {
                 break
             }
+           // starPort.endCheckedBlockTimeoutMillis = 1000
+           // starPort.endCheckedBlock(&status!, 2)
+           //
             return true
         }
-        
+    
         if (totalAmountWritten < UInt32(commandSize)) {
             println("Error: Impresion fuera de tiempo")
             return false
@@ -106,14 +109,17 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         
         starPort.endCheckedBlockTimeoutMillis = 30000
         starPort.endCheckedBlock(&status!, 2)
+        SMPort.releasePort(starPort)
         if (status!.offline == 1) {
             println("Error: Printer is offline")
             return false
         }
-        
     } else {
+        println("status: \(status)")
+
         println("Error: Writte port timed out")
         return false
     }
+
     return true
 }
