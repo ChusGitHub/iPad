@@ -33,7 +33,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var vendedorUITextField: UITextField!
     
     @IBOutlet  weak var vendedorUITableView: UITableView!
-
+    
+    // Propiedades de la tabla de las ventas
+    
+    @IBOutlet weak var ventasUITableView: UITableView!
+    
     // Botones de las barcas
 
     @IBOutlet var btnBarcasIUButtonCollection: [UIButton]!
@@ -332,7 +336,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // IMPLEMENTO LOS METODOS DELEGADOS DE vendedorUITableView
     func tableView(vendedorUITableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.vendedores.count
+        if tableView == self.vendedorUITableView {
+            return self.vendedores.count
+        } else {
+            return self.ventas.count
+        }
     }
     
     func tableView(VendedorUITableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{

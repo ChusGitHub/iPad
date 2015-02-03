@@ -65,14 +65,17 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
     //let dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
     //var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
     var dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
+    
+    commandsToPrint.getBytes(&dataToSentToPrinter)
     //commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
     
-    var status : StarPrinterStatus_2? = nil
+    
     println("commandstoPrint: \(commandsToPrint)")
     
     println("Datos : \(dataToSentToPrinter)")
     if let starPort = SMPort.getPort(portName, portSettings, timeoutMillis) {
         
+        var status : StarPrinterStatus_2? = nil
         starPort.beginCheckedBlock(&status, 2)
         
         if status?.offline == 1 {
@@ -98,8 +101,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             }
            // starPort.endCheckedBlockTimeoutMillis = 1000
            // starPort.endCheckedBlock(&status!, 2)
-           //
-            return true
+           
         }
     
         if (totalAmountWritten < UInt32(commandSize)) {
@@ -109,17 +111,18 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         
         starPort.endCheckedBlockTimeoutMillis = 30000
         starPort.endCheckedBlock(&status!, 2)
-        SMPort.releasePort(starPort)
+        
         if (status!.offline == 1) {
             println("Error: Printer is offline")
             return false
         }
+        SMPort.releasePort(starPort)
     } else {
-        println("status: \(status)")
-
         println("Error: Writte port timed out")
         return false
     }
+    //free(dataToSentToPrinter)
+    
 
     return true
 }

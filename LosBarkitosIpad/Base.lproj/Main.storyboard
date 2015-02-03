@@ -83,12 +83,51 @@
                                 <rect key="frame" x="485" y="117" width="512" height="631"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UL0-jS-2a9">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UL0-jS-2a9" customClass="VentasTicketTableViewCell" customModule="LosBarkitosIpad" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="512" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UL0-jS-2a9" id="Glv-yK-3so">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vendedor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfI-0e-pvb">
+                                                    <rect key="frame" x="24" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.53105271464646464" green="0.53105271464646464" blue="0.53105271464646464" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hora" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OoX-zs-1wP">
+                                                    <rect key="frame" x="212" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.53105271464646464" green="0.53105271464646464" blue="0.53105271464646464" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Barca" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtW-8C-Weu">
+                                                    <rect key="frame" x="325" y="11" width="45" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.53105271464646464" green="0.53105271464646464" blue="0.53105271464646464" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Precio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zF-XT-hai">
+                                                    <rect key="frame" x="441" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.53105271464646464" green="0.53105271464646464" blue="0.53105271464646464" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Base" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZf-hk-HTx">
+                                                    <rect key="frame" x="105" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.53105271464646464" green="0.53105271464646464" blue="0.53105271464646464" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="barcaVentasTicketsUILabel" destination="dtW-8C-Weu" id="psg-BH-UWa"/>
+                                            <outlet property="baseVentasTicketsUILabel" destination="cZf-hk-HTx" id="kDf-rD-mdV"/>
+                                            <outlet property="horaVentasTicketsUILabel" destination="OoX-zs-1wP" id="eDB-6C-tEn"/>
+                                            <outlet property="precioVentasTicketsIULabel" destination="4zF-XT-hai" id="go1-ZY-v0S"/>
+                                            <outlet property="vendedorVentasTicketsUILabel" destination="tfI-0e-pvb" id="xDu-RR-gqV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -170,6 +209,7 @@
                         <outlet property="infoImpresoraUILabel" destination="AXN-Zg-TPu" id="MhS-xS-0yE"/>
                         <outlet property="vendedorUITableView" destination="Rcn-3e-J5a" id="aeV-Kq-blL"/>
                         <outlet property="vendedorUITextField" destination="DAv-fB-8sC" id="3ud-fB-gV3"/>
+                        <outlet property="ventasUITableView" destination="bBh-dC-iAA" id="Dvn-Nm-eZD"/>
                         <outletCollection property="btnBarcasIUButtonCollection" destination="1yM-oJ-Tl7" collectionClass="NSMutableArray" id="MwM-hd-JiL"/>
                         <outletCollection property="btnBarcasIUButtonCollection" destination="oNd-o4-UtV" collectionClass="NSMutableArray" id="GoS-Fy-KSe"/>
                         <outletCollection property="btnBarcasIUButtonCollection" destination="YbC-77-0Jy" collectionClass="NSMutableArray" id="DI4-sA-HFS"/>
