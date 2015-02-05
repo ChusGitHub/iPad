@@ -161,8 +161,8 @@
 		F9BCDB451A2D0DAE002C70D4 /* VentaViewController */ = {
 			isa = PBXGroup;
 			children = (
-				F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */,
 				BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */,
+				F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */,
 				F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */,
 			);
 			name = VentaViewController;

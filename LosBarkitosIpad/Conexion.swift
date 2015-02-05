@@ -61,6 +61,19 @@ class webServiceCallAPI : NSObject {
         
     }
     
+    func obtenerVentas() {
+        var jsonDict :  NSDictionary!
+        var jsonArray : NSArray!
+        var error :     NSError?
+        manager.GET("http://www.losbarkitos.herokuapp.com/listado_viaje/0/0/0",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                var indice : Int = 1
+                var diccinario = [String : AnyObject]()
+                
+        }, failure: <#((AFHTTPRequestOperation!, NSError!) -> Void)!##(AFHTTPRequestOperation!, NSError!) -> Void#>)
+    }
+    
     func entradaBDD_ventaBarca(tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int) {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!

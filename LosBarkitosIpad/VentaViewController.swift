@@ -77,6 +77,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let conectado : Conectividad?
 
 
+    let VENDEDOR =  1
+    let VENTAS =    2
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -93,6 +95,12 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
      }
     
+    @IBAction func btnRefrescarVentas(sender: UIButton) {
+        
+        webService.obtenerVentas()
+        self.ventasUITableView.reloadData()
+        
+    }
     
     @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
 
@@ -335,61 +343,74 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     // IMPLEMENTO LOS METODOS DELEGADOS DE vendedorUITableView
-    func tableView(vendedorUITableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.vendedorUITableView {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView.tag == VENDEDOR {
             return self.vendedores.count
         } else {
             return self.ventas.count
         }
     }
     
-    func tableView(VendedorUITableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        if tableView.tag == VENDEDOR {
+            var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
         
         
-        cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
-        cell.codigoVendedorUILabelCell.textColor = UIColor.grayColor()
-        if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+            cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
+            cell.codigoVendedorUILabelCell.textColor = UIColor.grayColor()
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+            } else {
+                cell.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            }
+        
+            let vendedor = self.vendedores[indexPath.row]
+            let codigo = Array(vendedor.keys)
+            let nombre = Array(vendedor.values)
+            cell.codigoVendedorUILabelCell.text = String(codigo[0])
+            cell.nombreVendedorUILabelCell.text = nombre[0]
+        
+            // añado el codigo del vendedor al plist
+        
+            return cell
+            
         } else {
-            cell.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            
         }
-        
-        let vendedor = self.vendedores[indexPath.row]
-        let codigo = Array(vendedor.keys)
-        let nombre = Array(vendedor.values)
-        cell.codigoVendedorUILabelCell.text = String(codigo[0])
-        cell.nombreVendedorUILabelCell.text = nombre[0]
-        
-        // añado el codigo del vendedor al plist
-        
-        
-        return cell
     }
     
-    func tableView(VendedorUITableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let altura = VendedorUITableView.frame.height
-        return altura/(CGFloat) (self.vendedores.count)
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView.tag == VENDEDOR {
+            let altura = VendedorUITableView.frame.height
+            return altura/(CGFloat) (self.vendedores.count)
+        } else {
+            
+        }
     }
     
-    func tableView(VendedorUITableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // recupero los valores de la celda
-        let dictVendedor : [String : String] = self.vendedores[indexPath.row]
-        let codigo = Array(dictVendedor.keys)
-        let nombre = Array(dictVendedor.values)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        // Guardo el vendedor en el plist
-        DataManager().setValueForKey("vendedor", value: codigo[0], inFile: "appstate")
-        DataManager().setValueForKey("nombre_vendedor", value: String(nombre[0]), inFile: "appstate")
+        if tableView.tag == VENDEDOR {
+            // recupero los valores de la celda
+            let dictVendedor : [String : String] = self.vendedores[indexPath.row]
+            let codigo = Array(dictVendedor.keys)
+            let nombre = Array(dictVendedor.values)
         
-        // Pongo el nombre del vendedor en el uitextview
-        self.vendedorUITextField.text = nombre[0]
+            // Guardo el vendedor en el plist
+            DataManager().setValueForKey("vendedor", value: codigo[0], inFile: "appstate")
+            DataManager().setValueForKey("nombre_vendedor", value: String(nombre[0]), inFile: "appstate")
         
-        // Quito el uitableview de los  vendedores
-        self.vendedorUITableView.hidden = true
-        self.btnViewVendedoresUIButton.enabled = true
-        self.vendedores = []
-        self.vendedorUITableView.reloadData()
+            // Pongo el nombre del vendedor en el uitextview
+            self.vendedorUITextField.text = nombre[0]
+        
+            // Quito el uitableview de los  vendedores
+            self.vendedorUITableView.hidden = true
+            self.btnViewVendedoresUIButton.enabled = true
+            self.vendedores = []
+            self.vendedorUITableView.reloadData()
+        } else {
+            
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
