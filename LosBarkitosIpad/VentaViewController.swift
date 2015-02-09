@@ -49,6 +49,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var vendedor = [String: String]()
     // Array de los diccionarios de los vendedores
     var vendedores = [[String : String]]()
+    var ventas  = [[String : String]]()
     
     var respuesta = [String : String]()
     
@@ -331,6 +332,21 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
+        println("respuesta del servidor : \(respuesta)")
+        for (k,v) in respuesta {
+            if k as NSString == "error" && v as NSString == "si" {
+                println("ERROR EN EL DICCIONARIO DEVUELTO")
+                EXIT_FAILURE
+            } else {
+                let dict = v as [String : String]
+                self.ventas.append(dict)
+            }
+        }
+        self.ventasUITableView.reloadData()
+    }
+    
+    
     func cargarValoresCon_appstate(inFile file: String) {
      
         let nombre_v : String = DataManager().getValueForKey("nombre_vendedor", inFile: file) as String
@@ -375,17 +391,23 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
             
         } else {
+            var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
+            cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre_vendedor"]
+            cell.precioVentasTicketsIULabel.text = self.ventas[indexPath.row]["precio"]
+            cell.baseVentasTicketsUILabel.text = self.ventas[indexPath.row]["punto_venta"]
+            cell.horaVentasTicketsUILabel.text = self.ventas[indexPath.row]["fecha"]
+            cell.barcaVentasTicketsUILabel.text = self.ventas[indexPath.row]["tipo"]
             
+            
+            return cell
         }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if tableView.tag == VENDEDOR {
-            let altura = VendedorUITableView.frame.height
-            return altura/(CGFloat) (self.vendedores.count)
-        } else {
-            
-        }
+
+        let altura = tableView.frame.height
+        return altura/(CGFloat) (self.vendedores.count)
+   
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
