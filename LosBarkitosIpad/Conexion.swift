@@ -81,7 +81,7 @@ class webServiceCallAPI : NSObject {
                     }
                 }
                 println("diccionario : \(diccionario)")
-                self.delegate?.didReceiveResponse_listadoVentas(diccionario)
+                self.delegate?.didReceiveResponse_listadoVentas(diccionario as Dictionary)
             },
             
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in

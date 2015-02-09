@@ -46,10 +46,13 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Items de vendedorUITableView
     // Diccionario que mantiene codigo y nombre de un vendedor
-    var vendedor = [String: String]()
+    var vendedor = [String : String]()
+    // Diccinario que mantiene los datos de una venta
+    var venta : [String : String] = [:]
     // Array de los diccionarios de los vendedores
     var vendedores = [[String : String]]()
-    var ventas  = [[String : String]]()
+    //var ventas  = [[String : String]]()
+    var ventas = [[String:String]]()
     
     var respuesta = [String : String]()
     
@@ -333,14 +336,18 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
-        println("respuesta del servidor : \(respuesta)")
+        println("respuesta del servidor(respuesta) : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
             } else {
-                let dict = v as [String : String]
-                self.ventas.append(dict)
+                println("k: \(k), v: \(v)")
+                self.venta["nombre"] = v["nombre_vendedor"] as? String
+                self.venta["precio"] = v["precio"] as? String
+                self.venta["base"]   = v["punto_venta"] as? String
+                self.venta["fecha"]  = v["fecha"] as? String
+                self.ventas.append(self.venta)
             }
         }
         self.ventasUITableView.reloadData()
