@@ -101,9 +101,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func btnRefrescarVentas(sender: UIButton) {
         
+        // limpiar uitableview
         webService.obtenerVentas()
-        self.ventasUITableView.reloadData()
-        
     }
     
     @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
@@ -162,6 +161,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             println("No está conectado")
         }
+
     }
 
     
@@ -244,13 +244,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
-        if (self.imprimirTicket() == true) {
+        if (self.imprimirTicket() == false) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
             println("codVend: \(codVend)")
-                webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
+            webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
+
         } else {
             
             self.dismissViewControllerAnimated(true, completion: {
@@ -333,6 +334,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 EXIT_FAILURE
             }
         }
+        // limpiar uitableview
+        webService.obtenerVentas()
     }
     
     func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
@@ -344,14 +347,21 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 println("k: \(k), v: \(v)")
                 self.venta["nombre"] = v["nombre_vendedor"] as? String
-                self.venta["precio"] = v["precio"] as? String
+                let p : Int = v["precio"] as Int
+                self.venta["precio"] = String(p)
                 self.venta["base"]   = v["punto_venta"] as? String
                 self.venta["fecha"]  = v["fecha"] as? String
                 self.venta["tipo"]   = v["tipo"] as? String
                 self.ventas.append(self.venta)
             }
         }
+        // limpiar uitableview
+        self.ventasUITableView.dataSource = nil
         self.ventasUITableView.reloadData()
+        self.ventasUITableView.dataSource = self
+        //webService.obtenerVentas()
+        self.ventasUITableView.reloadData()
+        
     }
     
     
