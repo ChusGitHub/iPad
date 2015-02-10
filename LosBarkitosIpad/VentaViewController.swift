@@ -347,6 +347,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.venta["precio"] = v["precio"] as? String
                 self.venta["base"]   = v["punto_venta"] as? String
                 self.venta["fecha"]  = v["fecha"] as? String
+                self.venta["tipo"]   = v["tipo"] as? String
                 self.ventas.append(self.venta)
             }
         }
@@ -399,11 +400,16 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         } else {
             var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
-            cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre_vendedor"]
+            cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre"]
+            println(self.ventas[indexPath.row]["nombre"])
             cell.precioVentasTicketsIULabel.text = self.ventas[indexPath.row]["precio"]
-            cell.baseVentasTicketsUILabel.text = self.ventas[indexPath.row]["punto_venta"]
+            println(self.ventas[indexPath.row]["precio"])
+            cell.baseVentasTicketsUILabel.text = self.ventas[indexPath.row]["base"]
+            println(self.ventas[indexPath.row]["base"])
             cell.horaVentasTicketsUILabel.text = self.ventas[indexPath.row]["fecha"]
+            println(self.ventas[indexPath.row]["fecha"])
             cell.barcaVentasTicketsUILabel.text = self.ventas[indexPath.row]["tipo"]
+            println(self.ventas[indexPath.row]["tipo"])
             
             
             return cell
@@ -411,10 +417,11 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-
         let altura = tableView.frame.height
-        return altura/(CGFloat) (self.vendedores.count)
-   
+        if tableView.tag == VENDEDOR {
+            return altura/(CGFloat) (self.vendedores.count)
+        } else {
+            return 50.0        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
