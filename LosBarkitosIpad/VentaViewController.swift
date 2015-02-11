@@ -53,6 +53,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var vendedores = [[String : String]]()
     //var ventas  = [[String : String]]()
     var ventas = [[String:String]]()
+    var ventasOrdenadas = [[String:String]]()
     
     var respuesta = [String : String]()
     
@@ -302,8 +303,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
     // Respuesta del webService de las llamadas al sistema
+    /////////////////////////////////////////////////////////////////////////////////////////////
     func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) {
         println("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
@@ -355,6 +357,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.ventas.append(self.venta)
             }
         }
+        self.ventasOrdenadas = ordenarListadoVentas(self.ventas)
         // limpiar uitableview
         self.ventasUITableView.dataSource = nil
         self.ventasUITableView.reloadData()
@@ -465,6 +468,16 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             siguienteVC.toTipo = self.barcaActual
             siguienteVC.toTipoString = self.barcaActualString
         }
+    }
+    
+    
+    func ordenarListadoVentas(ventas : [[String:String]]) -> [[String:String]] {
+        
+        var i : Int
+        for reg in ventas {
+            if reg["numero"]
+        }
+        
     }
     
   /*  func search() {
