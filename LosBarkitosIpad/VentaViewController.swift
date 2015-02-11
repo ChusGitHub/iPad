@@ -232,6 +232,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Miro si hay impresora conectada
         self.setupImpresora()
+        webService.obtenerVentas()
         
     }
     
@@ -348,6 +349,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 EXIT_FAILURE
             } else {
                 println("k: \(k), v: \(v)")
+                let n : Int = v["numero"] as Int
+                self.venta["numero"] = String(n)
                 self.venta["nombre"] = v["nombre_vendedor"] as? String
                 let p : Int = v["precio"] as Int
                 self.venta["precio"] = String(p)
@@ -357,7 +360,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.ventas.append(self.venta)
             }
         }
-        self.ventasOrdenadas = ordenarListadoVentas(self.ventas)
         // limpiar uitableview
         self.ventasUITableView.dataSource = nil
         self.ventasUITableView.reloadData()
@@ -413,6 +415,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         } else {
             var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
+            cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
             cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre"]
             println(self.ventas[indexPath.row]["nombre"])
             cell.precioVentasTicketsIULabel.text = self.ventas[indexPath.row]["precio"]
@@ -470,15 +473,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    
-    func ordenarListadoVentas(ventas : [[String:String]]) -> [[String:String]] {
-        
-        var i : Int
-        for reg in ventas {
-            if reg["numero"]
-        }
-        
-    }
     
   /*  func search() {
         
