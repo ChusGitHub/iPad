@@ -92,9 +92,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.vendedorUITableView.hidden = false
             self.btnViewVendedoresUIButton.enabled = false
         } else {
-            // Esto borrael UITableView
-            //self.items = []
-            //self.vendedorUITableView.reloadData()
             self.vendedorUITableView.hidden = true
             self.btnViewVendedoresUIButton.enabled = false
         }
@@ -103,6 +100,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func btnRefrescarVentas(sender: UIButton) {
         
         // limpiar uitableview
+        self.ventasUITableView.clearsContextBeforeDrawing = true
         webService.obtenerVentas()
     }
     
@@ -136,7 +134,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryConected}, name: EAAccessoryDidConnectNotification, object: nil)
         
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryDisconnected}, name: EAAccessoryDidConnectNotification, object: nil)
@@ -246,7 +243,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
-        if (self.imprimirTicket() == false) {
+        let ticketImpreso = self.imprimirTicket()
+        if (ticketImpreso == false) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
@@ -326,6 +324,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
 
         }
+        self.vendedorUITableView.clearsContextBeforeDrawing = true
         self.vendedorUITableView.reloadData()
     }
     
@@ -337,7 +336,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 EXIT_FAILURE
             }
         }
-        // limpiar uitableview
+        self.ventasUITableView.clearsContextBeforeDrawing = true
         webService.obtenerVentas()
     }
     
@@ -360,11 +359,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.ventas.append(self.venta)
             }
         }
-        // limpiar uitableview
-        self.ventasUITableView.dataSource = nil
-        self.ventasUITableView.reloadData()
-        self.ventasUITableView.dataSource = self
-        //webService.obtenerVentas()
+        ordenarVentas()
+        println("ventas ordenadas : \(self.ventas)")
+        self.ventasUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.ventasUITableView.reloadData()
         
     }
@@ -459,6 +456,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.vendedorUITableView.hidden = true
             self.btnViewVendedoresUIButton.enabled = true
             self.vendedores = []
+            self.vendedorUITableView.clearsContextBeforeDrawing = true
             self.vendedorUITableView.reloadData()
         } else {
             
@@ -473,6 +471,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    func ordenarVentas() {
+        println("SIN ORDENAR : \(self.ventas)")
+        self.ventas.sort({(primero : [String:String], segundo : [String:String]) -> Bool in
+            return primero["numero"]?.toInt() > segundo["numero"]?.toInt()
+        })
+        println(" ORDENADO : \(self.ventas)")
+
+    }
     
   /*  func search() {
         
