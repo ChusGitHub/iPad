@@ -14,7 +14,7 @@ protocol PrinterConnectivityDelegate {
     func connectedPrinterDidChangeTo(printer : Printer)
 }*/
 
-class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , WebServiceProtocolo {
+class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UIPickerViewDataSource, UIPickerViewDelegate,   WebServiceProtocolo {
 
 
     let RIO       = 1
@@ -43,6 +43,17 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet var btnBarcasIUButtonCollection: [UIButton]!
     
     @IBOutlet weak var infoImpresoraUILabel: UILabel!
+    
+    @IBOutlet weak var txtPasswordUITextField: UITextField!
+    
+    @IBOutlet weak var btnAceptarUIButton: UIButton!
+    
+    @IBOutlet weak var passwordUIView: UIView!
+    
+    @IBOutlet weak var infoAdministradoUILabel: UILabel!
+    @IBOutlet weak var vistaUIPickerView: UIView!
+    
+    
     
     // Items de vendedorUITableView
     // Diccionario que mantiene codigo y nombre de un vendedor
@@ -78,6 +89,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var lastSelectedPortName : NSString = ""
     var p_portName : NSString = ""
     var p_portSettings : NSString = ""
+    
+    var gestion : String = "usuario"
+    let datosUIPickerView = ["Lista Baja", "Lista Media", "Lista Alta"]
     
     let conectado : Conectividad?
 
@@ -125,15 +139,55 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    
+    @IBAction func btnGestionUIbutton(sender: UIButton) {
+        self.txtPasswordUITextField.text = ""
+        if self.passwordUIView.hidden == true {
+            self.passwordUIView.hidden = false
+        } else {
+            self.passwordUIView.hidden = true
+        }
+    }
+    
+    
+    @IBAction func btnAceptarGestionPushButton(sender: UIButton) {
+        
+        if self.txtPasswordUITextField.text == "Otisuhc0" {
+            self.gestion = "administrador"
+            self.seleccionListaPreciosUIPickerView.hidden = false
+            self.infoAdministradoUILabel.text = "Administrador"
+            self.vistaUIPickerView.hidden = false
+            self.passwordUIView.hidden = true
+        } else {
+            let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
+            alerta.addAction(aceptarAction)
+            self.presentViewController(alerta, animated: true, completion: nil)
+        }
+    }
+    
+    @IBOutlet weak var seleccionListaPreciosUIPickerView: UIPickerView!
+    
+    func noAdministrador () {
+        self.gestion = "usuario"
+        self.passwordUIView.hidden = true
+        self.infoAdministradoUILabel.text = "Usuario"
+    }
+    
     required init(coder aDecoder: NSCoder) {
     
         super.init(coder: aDecoder)
 
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.passwordUIView.hidden = true
+        self.seleccionListaPreciosUIPickerView.dataSource = self
+        self.seleccionListaPreciosUIPickerView.delegate = self
+        self.vistaUIPickerView.hidden = true
+        
+        
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryConected}, name: EAAccessoryDidConnectNotification, object: nil)
         
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryDisconnected}, name: EAAccessoryDidConnectNotification, object: nil)
@@ -201,7 +255,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     }
 
-    
     override func viewWillAppear(animated: Bool) {
         
         
@@ -229,15 +282,10 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Miro si hay impresora conectada
         self.setupImpresora()
-        webService.obtenerVentas()
+        // webService.obtenerVentas()
+        self.infoAdministradoUILabel.text = "Usuario"
         
     }
-    
-    /*override func  viewWillLayoutSubviews() {
-        
-        self.setupImpresora()
-
-    }*/
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
@@ -262,12 +310,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 alertaNOInsercionBDD.addAction(OkAction)
             
                 self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
-
             
             })
-            
         }
-        
     }
     
     func imprimirTicket() -> Bool? {
@@ -321,8 +366,6 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             println("nom: \(nom)")
 
             self.vendedores.append(self.vendedor)
-            
-
         }
         self.vendedorUITableView.clearsContextBeforeDrawing = true
         self.vendedorUITableView.reloadData()
@@ -341,6 +384,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
+        self.ventas = []
         println("respuesta del servidor(respuesta) : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as NSString == "si" {
@@ -407,7 +451,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.nombreVendedorUILabelCell.text = nombre[0]
         
             // añado el codigo del vendedor al plist
-        
+            DataManager().setValueForKey("vendedor", value: codigo, inFile: "appstate")
+            DataManager().setValueForKey("nombre_vendedor", value: nombre, inFile: "appstate")
+
             return cell
             
         } else {
@@ -477,9 +523,26 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return primero["numero"]?.toInt() > segundo["numero"]?.toInt()
         })
         println(" ORDENADO : \(self.ventas)")
-
     }
     
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // METODOS DEL UIPICKERVIEW
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.datosUIPickerView.count
+    }
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String!{
+        return self.datosUIPickerView[row]
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        DataManager().setValueForKey("lista_precio", value: String(row + 1), inFile: "appstate")
+        self.vistaUIPickerView.hidden = true
+    }
   /*  func search() {
         
         if self.searching {
