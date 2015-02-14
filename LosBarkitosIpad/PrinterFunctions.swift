@@ -10,7 +10,7 @@ import Foundation
 
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca: String, precio: Int, nombreVendedor : String ) -> Bool {
     
-    let commands = NSMutableData()
+    var commands = NSMutableData()
 
     var cmd : [UInt8] = [ 0x1b, 0x1d, 0x61, 0x01 ]
     //var cmd = "\0x1b\0x1d\0x61\0x01"
@@ -64,7 +64,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
     println("Tamaño datos a imprimir: \(commandSize)" )
     //let dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
     //var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
-    var dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
+    var dataToSentToPrinter = (commandsToPrint.bytes)
     
     commandsToPrint.getBytes(&dataToSentToPrinter)
     //commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
@@ -88,11 +88,11 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         endTime.tv_sec += 30
         
         println("commandSize : \(commandSize). dataToSEntToPrinter: \(dataToSentToPrinter)")
-        var totalAmountWritten : UInt32 = 0
+        var totalAmountWritten : Int = 0
         while (Int(totalAmountWritten) < commandSize) {
-            let remaining : UInt32  = (UInt32(commandSize) - totalAmountWritten)
-            let amountWritten  = starPort.writePort(dataToSentToPrinter, totalAmountWritten, remaining)
-            totalAmountWritten += amountWritten
+            let remaining : Int  = (UInt32(commandSize) - UInt32(totalAmountWritten))
+            let amountWritten : UInt32 = starPort.writePort(UInt8(dataToSentToPrinter), UInt32(totalAmountWritten), UInt32(remaining))
+            totalAmountWritten = Int(totalAmountWritten) + Int(amountWritten)
             
             var now : timeval = timeval(tv_sec: 0, tv_usec: 0)
             gettimeofday(&now, nil)
@@ -104,7 +104,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
            
         }
     
-        if (totalAmountWritten < UInt32(commandSize)) {
+        if (UInt32(totalAmountWritten) < UInt32(commandSize)) {
             println("Error: Impresion fuera de tiempo")
             return false
         }
