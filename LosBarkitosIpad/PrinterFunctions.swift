@@ -13,48 +13,59 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     var commands = NSMutableData()
 
     var cmd : [UInt8] = [ 0x1b, 0x1d, 0x61, 0x01 ]
-    //var cmd = "\0x1b\0x1d\0x61\0x01"
-    //cmd.withCString {
-      //      commands.appendBytes($0, length: 4)
-    //}
-    commands.appendBytes(cmd, length: 4)
 
+    commands.appendBytes(cmd, length: 4)
+    println(commands)
        
        
-    var str = barca
-    var datos : NSData? = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+    var str = barca + "\r\n\r\n"
+    //var datos : NSData? = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+    //commands.appendData(datos!)
+    //println(commands)
+    var datos : NSData? = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
+    println(commands)
     
-    cmd = [ 0x09 ]
+    //str = "123 Star Road\r\nCity, State 12345\r\n\r\n"
+    str = "Precio \(precio)\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    println(commands)
+    
+    cmd = [ 0x1b, 0x1d, 0x61, 0x00]
+    commands.appendBytes(UnsafePointer(cmd), length: 4)
+    println(commands)
+    //cmd = [ 0x09 ]
     //cmd = "\0x09"
     //cmd.withCString {
       //  commands.appendBytes($0, length: 1)
     //}
-    commands.appendBytes(cmd, length: 1)
+   // commands.appendBytes(cmd, length: 1)
+    //println(commands)
     
-    str = String(precio)
-    datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-    commands.appendData(datos!)
-    
-    cmd = [ 0x1b, 0x64, 0x62 ] // Corta el papel
+    //str = String(precio)
+    //datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+    //commands.appendData(datos!)
+     // println(commands)
+    cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
     //cmd = "\0x1b\0x64\0x62"
     //cmd.withCString {
       //  commands.appendBytes($0, length: 3)
     //}
     commands.appendBytes(cmd, length: 3)
-    
-    str = nombreVendedor
-    datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-    commands.appendData(datos!)
-    
-    cmd = [ 0x07 ] // Abre la caja
+      println(commands)
+    //str = nombreVendedor
+    //datos = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+    //commands.appendData(datos!)
+      //println(commands)
+    //cmd = [ 0x07 ] // Abre la caja
    // cmd = "\0x07"
     //cmd.withCString {
      //   commands.appendBytes($0, length: 1)
     //}
-    commands.appendBytes(cmd, length: 1)
+   // commands.appendBytes(cmd, length: 1)
     println("Commands: \(commands)")
-    return (sendCommand(commands,portName, portSettings,1000))
+    return (sendCommand(commands,portName, portSettings,10000))
 }
 
 func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NSString, timeoutMillis : u_int) -> Bool{
@@ -62,9 +73,9 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
     var starPort : SMPort
     let commandSize : Int = commandsToPrint.length as Int
     println("Tamaño datos a imprimir: \(commandSize)" )
-    //let dataToSentToPrinter = UnsafePointer<CUnsignedChar>(commandsToPrint.bytes)
-    //var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
-    var dataToSentToPrinter = (commandsToPrint.bytes)
+    //var dataToSentToPrinter = UnsafePointer<UInt8>(commandsToPrint.bytes)
+    var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
+    //var dataToSentToPrinter = (commandsToPrint.bytes)
     
     commandsToPrint.getBytes(&dataToSentToPrinter)
     //commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
@@ -91,7 +102,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         var totalAmountWritten : Int = 0
         while (Int(totalAmountWritten) < commandSize) {
             let remaining : Int  = (UInt32(commandSize) - UInt32(totalAmountWritten))
-            let amountWritten : UInt32 = starPort.writePort(UInt8(dataToSentToPrinter), UInt32(totalAmountWritten), UInt32(remaining))
+            let amountWritten : UInt32 = starPort.writePort(dataToSentToPrinter, UInt32(totalAmountWritten),UInt32(remaining))
             totalAmountWritten = Int(totalAmountWritten) + Int(amountWritten)
             
             var now : timeval = timeval(tv_sec: 0, tv_usec: 0)
