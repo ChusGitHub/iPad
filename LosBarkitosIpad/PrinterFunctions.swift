@@ -10,28 +10,86 @@ import Foundation
 
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca: String, precio: Int, nombreVendedor : String ) -> Bool {
     
-    var commands = NSMutableData()
-
-    var cmd : [UInt8] = [ 0x1b, 0x1d, 0x61, 0x01 ]
-
-    commands.appendBytes(cmd, length: 4)
-    println(commands)
-       
-       
-    var str = barca + "\r\n\r\n"
-    //var datos : NSData? = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-    //commands.appendData(datos!)
-    //println(commands)
-    var datos : NSData? = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
-    commands.appendData(datos!)
-    println(commands)
+    let horaActual : NSDate = NSDate()
     
-    //str = "123 Star Road\r\nCity, State 12345\r\n\r\n"
-    str = "Precio \(precio)\r\n\r\n"
+    var commands = NSMutableData()
+    var str : String
+    var datos : NSData?
+    
+    var cmd : [UInt8]
+    
+    // Juego de caracteres en español
+    //cmd = [ 0x1b, 0x52, 0x07]
+    //commands.appendBytes(cmd, length: 3)
+    
+    // Anchura de texto
+    cmd = [ 0x1b, 0x57, 0x03 ]
+    commands.appendBytes(cmd, length: 3)
+   
+
+    // Texto centrado
+    cmd = [ 0x1b, 0x1d, 0x61, 0x01 ]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Formato Texto : espacio entre caracteres
+    cmd = [0x1b, 0x1e, 0x46, 0x02]
+    commands.appendBytes(cmd, length: 4)
+    
+    str = "LosBarkitos\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
-    println(commands)
     
+    // Formato Texto : normal
+    cmd = [0x1b, 0x57, 0x2]
+    commands.appendBytes(cmd, length: 3)
+
+    str = "d'Empúriabrava\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // Formato pequeño para datos empresa
+    cmd = [0x1b, 0x57, 0x00]
+    commands.appendBytes(cmd, length: 3)
+   
+    str = "Canal Vahimar S.L.\r\n N.I.F. B17825156\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n"
+    str += "---------------------------------\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    
+    cmd = [0x1b, 0x57, 0x01]
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "Alquiler 1 hora\r\n "
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+   
+    cmd = [0x1b, 0x57, 0x02]
+    commands.appendBytes(cmd, length: 3)
+  
+    str = barca + "\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+
+    cmd = [0x1b, 0x57, 0x01]
+    commands.appendBytes(cmd, length: 3)
+
+    str = "Precio :  \(precio) .-\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    cmd = [0x1b, 0x57, 0x00]
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "I.V.A incluido en el precio\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    str = "---------------------------------\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
     cmd = [ 0x1b, 0x1d, 0x61, 0x00]
     commands.appendBytes(UnsafePointer(cmd), length: 4)
     println(commands)
@@ -48,7 +106,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     //commands.appendData(datos!)
      // println(commands)
     cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
-    //cmd = "\0x1b\0x64\0x62"
+    //cmd = "\0x1b\0x64\0x02"
     //cmd.withCString {
       //  commands.appendBytes($0, length: 3)
     //}
