@@ -8,7 +8,7 @@
 
 import Foundation
 
-func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca: String, precio: Int, nombreVendedor : String ) -> Bool {
+func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
     let horaActual : NSDate = NSDate()
     
@@ -18,9 +18,9 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     
     var cmd : [UInt8]
     
-    // Juego de caracteres en español
-    //cmd = [ 0x1b, 0x52, 0x07]
-    //commands.appendBytes(cmd, length: 3)
+     //Juego de caracteres en español
+    cmd = [ 0x1b, 0x1d, 0x74, 0x01]
+    commands.appendBytes(cmd, length: 4)
     
     // Anchura de texto
     cmd = [ 0x1b, 0x57, 0x03 ]
@@ -32,9 +32,12 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     commands.appendBytes(cmd, length: 4)
     
     // Formato Texto : espacio entre caracteres
-    cmd = [0x1b, 0x1e, 0x46, 0x02]
+    cmd = [ 0x1b, 0x1e, 0x46, 0x02 ]
     commands.appendBytes(cmd, length: 4)
     
+    // Inversion color
+    cmd = [ 0x1b, 0x34 ]
+    commands.appendBytes(cmd, length: 2)
     str = "LosBarkitos\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
@@ -47,6 +50,10 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
+    // Inversion = no
+    cmd = [ 0x1b, 0x35 ]
+    commands.appendBytes(cmd, length: 2)
+   
     // Formato pequeño para datos empresa
     cmd = [0x1b, 0x57, 0x00]
     commands.appendBytes(cmd, length: 3)
@@ -68,16 +75,22 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
    
     cmd = [0x1b, 0x57, 0x02]
     commands.appendBytes(cmd, length: 3)
-  
-    str = barca + "\r\n\r\n"
+    let b : String = parametro["barca"] as String
+    println("barca \(b)")
+    str = b + "\r\n\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
+    
     
 
     cmd = [0x1b, 0x57, 0x01]
     commands.appendBytes(cmd, length: 3)
-
-    str = "Precio :  \(precio) .-\r\n"
+    // A la derecha
+    cmd = [0x1b, 0x1d, 0x61, 0x02]
+    commands.appendBytes(cmd, length: 4)
+  
+    let p : String = String(parametro["precio"] as Int)
+    str = "Precio : \t \(p) eur.-\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     

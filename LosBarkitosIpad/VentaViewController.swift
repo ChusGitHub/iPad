@@ -56,6 +56,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     // Items de vendedorUITableView
+    // numero de ticket en BDD
+    var numeroTicket : Int = 0
     // Diccionario que mantiene codigo y nombre de un vendedor
     var vendedor = [String : String]()
     // Diccinario que mantiene los datos de una venta
@@ -330,8 +332,22 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
+            
+            let vend : String = DataManager().getValueForKey("vendedor", inFile: "appstate") as String
+            let punto : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+            let precio : Int = self.toPreciosViewController
+            webService.obtenerNumero()
+            let numero : Int = self.numeroTicket
+            let barca : String = self.barcaActualString!
+            let diccParam : [String : AnyObject] = [
+                "numero"      : numero,
+                "punto_venta" : punto,
+                "precio"      : precio,
+                "barca"       : barca,
+                "vendedor"    : vend
+            ]
 
-            let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, self.barcaActualString!, self.toPreciosViewController, self.vendedorUITextField.text)
+            let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, diccParam)
             
             // Trataré de desconectar el puerto
     
@@ -408,6 +424,20 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.ventasUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.ventasUITableView.reloadData()
         
+    }
+    
+    func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
+        println("respuesta del servidor(respuesta) : \(respuesta)")
+        for (k,v) in respuesta {
+            if k as NSString == "error" && v as NSString != "no" {
+                println("ERROR EN EL DICCIONARIO DEVUELTO : \(v)")
+                EXIT_FAILURE
+            } else {
+                if k as NSString == "numero" {
+                    self.numeroTicket = v as Int
+                }
+            }
+        }
     }
     
     
