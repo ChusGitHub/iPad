@@ -52,6 +52,8 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, barca
     commands.appendBytes(cmd, length: 3)
    
     str = "Canal Vahimar S.L.\r\n N.I.F. B17825156\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n"
+    str += "Tel: 972.45.25.79\r\n"
+    str += "www.marinaferry.es\r\n"
     str += "---------------------------------\r\n\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
