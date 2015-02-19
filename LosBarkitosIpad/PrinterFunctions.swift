@@ -66,6 +66,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     commands.appendData(datos!)
 
     
+    // tamaño mediano
     cmd = [0x1b, 0x57, 0x01]
     commands.appendBytes(cmd, length: 3)
     
@@ -82,15 +83,30 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     commands.appendData(datos!)
     
     
-
-    cmd = [0x1b, 0x57, 0x01]
+    // tamaño pequeño
+    cmd = [0x1b, 0x57, 0x00]
     commands.appendBytes(cmd, length: 3)
     // A la derecha
     cmd = [0x1b, 0x1d, 0x61, 0x02]
     commands.appendBytes(cmd, length: 4)
   
     let p : String = String(parametro["precio"] as Int)
-    str = "Precio : \t \(p) eur.-\r\n"
+    let iva : Double =  round(100*(parametro["precio"] as Double - (parametro["precio"] as Double / 1.21)))/100
+    let pdouble : Double =  round(100*(parametro["precio"] as Double / 1.21))/100
+    
+    
+    str = "Precio : \t \(pdouble) eur.-\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    str = "I.V.A : \t\(iva) eur.-\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // tamaño mediano
+    cmd = [0x1b, 0x57, 0x01]
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "Total : \(p) eur.-\r\n\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
