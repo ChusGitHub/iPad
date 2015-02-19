@@ -134,7 +134,7 @@ class webServiceCallAPI : NSObject {
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
                 for (k,v) in responseObject as [String : AnyObject] {
-                    if k != "error" {
+                    if k != "error" || (k == "error" && v as NSString == "no"){
                         diccionario[k] = v
                     } else if v as String != "error" {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR en ultimoNumero")

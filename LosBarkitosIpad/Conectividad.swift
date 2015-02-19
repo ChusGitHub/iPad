@@ -7,8 +7,11 @@
 //
 
 import Foundation
-
+protocol ConectividadProtocol {
+    func conectado()
+}
 class Conectividad : NSObject {
+    var delegate : ConectividadProtocol?
     func estaConectado () -> Bool {
     println("ENTRA")
         let reachability : Reachability = Reachability.reachabilityForInternetConnection()

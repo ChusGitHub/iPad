@@ -14,7 +14,8 @@ protocol PrinterConnectivityDelegate {
     func connectedPrinterDidChangeTo(printer : Printer)
 }*/
 
-class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UIPickerViewDataSource, UIPickerViewDelegate,   WebServiceProtocolo {
+
+class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WebServiceProtocolo {
 
 
     let RIO       = 1
@@ -51,10 +52,15 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var passwordUIView: UIView!
     
     @IBOutlet weak var infoAdministradoUILabel: UILabel!
-    @IBOutlet weak var vistaUIPickerView: UIView!
     
+    @IBOutlet weak var tipoListaUIView: UIView!
     
+
     
+    // Este es el enlace a la clase que hace la conexion al servidor
+    var webService : webServiceCallAPI = webServiceCallAPI()
+    var conec : Conectividad = Conectividad()
+
     // Items de vendedorUITableView
     // numero de ticket en BDD
     var numeroTicket : Int = 0
@@ -70,9 +76,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var respuesta = [String : String]()
     
-    // Este es el enlace a la clase que hace la conexion al servidor
-    var webService : webServiceCallAPI = webServiceCallAPI()
-    
+     
     // Valor devuelto por el PreciosViewController
     // Todo correcto : Ok
     // algo falla : String con informacion de lo que falla
@@ -95,7 +99,7 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var gestion : String = "usuario"
     let datosUIPickerView = ["Lista Baja", "Lista Media", "Lista Alta"]
     
-    let conectado : Conectividad?
+    //let conectado : Conectividad?
 
 
     let VENDEDOR =  1
@@ -156,9 +160,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if self.txtPasswordUITextField.text == "Otisuhc0" {
             self.gestion = "administrador"
-            self.seleccionListaPreciosUIPickerView.hidden = false
             self.infoAdministradoUILabel.text = "Administrador"
-            self.vistaUIPickerView.hidden = false
+            self.tipoListaUIView.hidden = false
             self.passwordUIView.hidden = true
         } else {
             let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
@@ -168,7 +171,21 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    @IBOutlet weak var seleccionListaPreciosUIPickerView: UIPickerView!
+    @IBAction func lista1ButtonListaUIView(sender: AnyObject) {
+        DataManager().setValueForKey("lista_precio", value: String("1"), inFile: "appstate")
+        self.tipoListaUIView.hidden = true
+    }
+    @IBAction func lista2ButtonListaUiView(sender: AnyObject) {
+        DataManager().setValueForKey("lista_precio", value: String("2"), inFile: "appstate")
+        self.tipoListaUIView.hidden = true
+    }
+    @IBAction func lista3ButtonListaUIView(sender: AnyObject) {
+        DataManager().setValueForKey("lista_precio", value: String("3"), inFile: "appstate")
+        self.tipoListaUIView.hidden = true
+    }
+
+    
+
     
     func noAdministrador () {
         self.gestion = "usuario"
@@ -179,15 +196,16 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     required init(coder aDecoder: NSCoder) {
     
         super.init(coder: aDecoder)
+        webService.delegate = self
+        webService.obtenerNumero()
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.passwordUIView.hidden = true
-        self.seleccionListaPreciosUIPickerView.dataSource = self
-        self.seleccionListaPreciosUIPickerView.delegate = self
-        self.vistaUIPickerView.hidden = true
+        self.tipoListaUIView.hidden = true
         
         
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryConected}, name: EAAccessoryDidConnectNotification, object: nil)
@@ -209,8 +227,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
+        
         // miro la conectividad del ipad
-        if conectado?.estaConectado() == true {
+        if conec.estaConectado() == true {
             println("Esta conectado")
         } else {
             println("No está conectado")
@@ -333,10 +352,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let vend : String = DataManager().getValueForKey("vendedor", inFile: "appstate") as String
+            let vend : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as String
             let punto : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
             let precio : Int = self.toPreciosViewController
-            webService.obtenerNumero()
             let numero : Int = self.numeroTicket
             let barca : String = self.barcaActualString!
             let diccParam : [String : AnyObject] = [
@@ -548,31 +566,14 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func ordenarVentas() {
-        println("SIN ORDENAR : \(self.ventas)")
+       // println("SIN ORDENAR : \(self.ventas)")
         self.ventas.sort({(primero : [String:String], segundo : [String:String]) -> Bool in
             return primero["numero"]?.toInt() > segundo["numero"]?.toInt()
         })
-        println(" ORDENADO : \(self.ventas)")
+        //(println(" ORDENADO : \(self.ventas)")
     }
     
     
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // METODOS DEL UIPICKERVIEW
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.datosUIPickerView.count
-    }
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String!{
-        return self.datosUIPickerView[row]
-    }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        DataManager().setValueForKey("lista_precio", value: String(row + 1), inFile: "appstate")
-        self.vistaUIPickerView.hidden = true
-    }
   /*  func search() {
         
         if self.searching {
