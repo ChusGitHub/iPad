@@ -15,7 +15,7 @@ protocol PrinterConnectivityDelegate {
 }*/
 
 
-class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WebServiceProtocolo {
+class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, WebServiceProtocolo {
 
 
     let RIO       = 1
@@ -163,7 +163,9 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.infoAdministradoUILabel.text = "Administrador"
             self.tipoListaUIView.hidden = false
             self.passwordUIView.hidden = true
+            self.resignFirstResponder()
         } else {
+            self.resignFirstResponder()
             let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
             let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
             alerta.addAction(aceptarAction)
@@ -226,6 +228,8 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
+        
+        txtPasswordUITextField.delegate = self
         
         
         // miro la conectividad del ipad
@@ -573,7 +577,16 @@ class VentaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //(println(" ORDENADO : \(self.ventas)")
     }
     
-    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.gestion = "administrador"
+        self.infoAdministradoUILabel.text = "Administrador"
+        self.tipoListaUIView.hidden = false
+        self.passwordUIView.hidden = true
+        self.resignFirstResponder()
+
+        return true
+    }
   /*  func search() {
         
         if self.searching {
