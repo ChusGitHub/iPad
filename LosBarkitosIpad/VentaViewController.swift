@@ -15,7 +15,7 @@ protocol PrinterConnectivityDelegate {
 }*/
 
 
-class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, WebServiceProtocolo {
+class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, WebServiceProtocoloVentas {
 
 
     let RIO       = 1
@@ -23,10 +23,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let WHALY     = 3
     let GOLD      = 4
     
-    var barcaActual : Int = -1
-    var barcaActualString : String? = nil
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
+    
+    @IBOutlet weak var horaLlegadaUITextField: UITextField!
+    
+    @IBOutlet weak var controlUITextField: UITextField!
     
     
     @IBOutlet weak var btnViewVendedoresUIButton: UIButton!
@@ -55,6 +57,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     @IBOutlet weak var tipoListaUIView: UIView!
     
+    var barcaActual : Int = -1
+    var barcaActualString : String? = nil
 
     
     // Este es el enlace a la clase que hace la conexion al servidor
@@ -206,6 +210,13 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // miro la conectividad del ipad
+        if conec.estaConectado() == true {
+            println("Esta conectado")
+        } else {
+            println("No está conectado")
+        }
+        
         self.passwordUIView.hidden = true
         self.tipoListaUIView.hidden = true
         
@@ -230,14 +241,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         webService.delegate = self
         
         txtPasswordUITextField.delegate = self
-        
-        
-        // miro la conectividad del ipad
-        if conec.estaConectado() == true {
-            println("Esta conectado")
-        } else {
-            println("No está conectado")
-        }
 
     }
 

@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // carga el appstate con los valores correspondientes
     func cargarPlist_appstate(inFile file: String) -> String {
         
-        DataManager().setValueForKey("estado_venta", value: 0, inFile: "appstate")
+        DataManager().setValueForKey("estado_venta", value: "INICIAL", inFile: "appstate")
         
         DataManager().setValueForKey("vendedor", value: "4", inFile: "appstate")
         DataManager().setValueForKey("nombre_vendedor", value: "Miguel", inFile: "appstate")

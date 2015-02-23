@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB080E721A728A2100D4117F /* ticket.xml in Resources */ = {isa = PBXBuildFile; fileRef = BB080E711A728A2100D4117F /* ticket.xml */; };
+		BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */; };
 		BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1FB6701A232FA50078B97A /* UIKit.framework */; };
 		BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACE81A1615EE008E67ED /* AppDelegate.swift */; };
 		BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */; };
@@ -33,6 +34,7 @@
 		30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BB080E711A728A2100D4117F /* ticket.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ticket.xml; sourceTree = "<group>"; };
+		BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = estadoClase.swift; sourceTree = "<group>"; };
 		BB1FB6701A232FA50078B97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LosBarkitosIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB34ACE71A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */,
 				BB34ACE81A1615EE008E67ED /* AppDelegate.swift */,
+				BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */,
 				F9AFCE121A169FB5007FF3A9 /* PlistData.swift */,
 				F9BCDB451A2D0DAE002C70D4 /* VentaViewController */,
 				BB35F5421A1F7426004AFC7C /* Conexion.swift */,
@@ -263,6 +266,7 @@
 				BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */,
 				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,
 				F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */,
+				BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */,
 				BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */,
 				BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */,
 				BB34ACED1A1615EE008E67ED /* ControlViewController.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 import UIkit
 
 // Protocolo a implementar por la clase que delegue esta
-protocol WebServiceProtocolo {
+ protocol WebServiceProtocoloVentas {
     // funcion que implementará la clase delegada y que recibirá los datos de repuesta a la llamada
     func didReceiveResponse_listadoVendedores(respuesta : [String : AnyObject])
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
@@ -19,10 +19,16 @@ protocol WebServiceProtocolo {
     
 }
 
+protocol WebServiceProtocoloControl {
+    func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
+    
+}
+
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
 class webServiceCallAPI : NSObject {
     
-    var delegate : WebServiceProtocolo?
+    var delegate : WebServiceProtocoloVentas?
+    var delegateControl : WebServiceProtocoloControl?
     
     let manager : AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 
@@ -144,6 +150,26 @@ class webServiceCallAPI : NSObject {
                 }
                 println("diccionario : \(diccionario)")
                 self.delegate?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                println("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegate?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+            }
+        )
+    }
+    
+    func obtenerPrimerLibre() {
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        manager.GET("http://losbarkitos.herokuapp.com/primera_libre",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                println("responseObject : \(responseObject)")
+                self.delegateControl?.didReceiveResponse_primeraLibre(responseObject as [String : [String : String]])
+ 
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
