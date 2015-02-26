@@ -286,12 +286,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     override func viewWillAppear(animated: Bool) {
         
         
-        var estadoActual = DataManager().getValueForKey("estado_venta", inFile: "appstate") as Int
+        var estadoActual = DataManager().getValueForKey("estado", inFile: "appstate") as String
         
         estadoVentaUITextField.text = "\(estadoActual)"
-        estadoActual += 1
-        // guardamos el valor actual del estado
-        DataManager().setValueForKey("estado_venta", value: estadoActual, inFile: "appstate")
         
         
         // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca

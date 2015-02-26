@@ -11,6 +11,7 @@ import UIKit
 class ControlViewController: UIViewController, WebServiceProtocoloControl {
     
     var webService : webServiceCallAPI = webServiceCallAPI()
+    var estado : String?
     
     var libre : [String : [String : String]]?
     
@@ -18,7 +19,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl {
     @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
     @IBOutlet weak var lblLlegadaElectricaUILabel: UILabel!
     @IBOutlet weak var lblLlegadaWhalyUILabel: UILabel!
- 
     @IBOutlet weak var lblLlegadaGoldUILabel: UILabel!
     
     
@@ -26,6 +26,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl {
         super.init(coder: aDecoder)
         self.libre = nil
         webService.obtenerPrimerLibre()
+        self.estado = DataManager().getValueForKey("estado", inFile: "appstate") as? String
     }
     
     
@@ -38,6 +39,9 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl {
     override func viewDidLoad() {
         super.viewDidLoad()
         webService.delegateControl = self
+        webService.obtenerPrimerLibre()
+        
+        self.lblEstadoUILabel.text = DataManager().getValueForKey("estado", inFile: "appstate") as? String
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,20 +51,33 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl {
     
     func didReceiveResponse_primeraLibre(respuesta: [String : [String : String]]) {
         
-        var libres : Dictionary<String, String>
-        for (k,v) in respuesta {
-            let barca : [String : String] = v
-           // libres[v.keys] = v.values
-        }
         self.libre = respuesta
-        
-        //let RIO : Dictionary<String,String> = self.libre["rio"] as [String : String]
-        //let libreRIO = self.libre?[""]
-        //self.lblLlegadaRioUILabel.text = RIO["Nombre"] + " - " + RIO["libre"]
-        
+        println("\(self.libre)")
+        colocarLibresEnPantalla()
     }
     
+    func colocarLibresEnPantalla() {
+        
+        let RIO : [String : String]? = self.libre?["rio"]
+        let ELECTRICA = self.libre?["electrica"]
+        let WHALY = self.libre?["whaly"]
+        let GOLD = self.libre?["gold"]
+        
+        let nombreRIO : String? = RIO?["nombre"]
+        let libreRIO : String? = RIO?["libre"]
+        let nombreELECTRICA : String? = ELECTRICA?["nombre"]
+        let libreELECTRICA : String? = ELECTRICA?["libre"]
+        let nombreWHALY : String? = WHALY?["nombre"]
+        let libreWHALY : String? = WHALY?["libre"]
+        let nombreGOLD : String? = GOLD?["nombre"]
+        let libreGOLD : String? = GOLD?["libre"]
 
+        self.lblLlegadaRioUILabel.text = nombreRIO! + " - " + libreRIO!
+        self.lblLlegadaElectricaUILabel.text = nombreELECTRICA! + " - " + libreELECTRICA!
+        self.lblLlegadaWhalyUILabel.text = nombreWHALY! + " - " + libreWHALY!
+        self.lblLlegadaGoldUILabel.text = nombreGOLD! + " - " + libreGOLD!
+
+    }
 
 }
 

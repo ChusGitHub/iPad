@@ -14,6 +14,9 @@ var portName : NSString = ""
 var portSettings : NSString = ""
 var drawerPortName : NSString = ""
 
+// propiedades para el control de la bd sqlite en local
+var DBLocal : String = ""
+
 
 
 @UIApplicationMain
@@ -45,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             drawerPortName = portName.copy() as NSString
         }
     }
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         cargarPlist_appstate(inFile: "appstate")
 
@@ -56,10 +61,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             cargarPlist_appstate(inFile: "appstate")
         }
         
+        
+        // Preparo la bd local sqlite
+        let ruta : NSArray = 
+        
         return true
         
 
     }
+    
+    
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -87,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // carga el appstate con los valores correspondientes
     func cargarPlist_appstate(inFile file: String) -> String {
         
-        DataManager().setValueForKey("estado_venta", value: "INICIAL", inFile: "appstate")
+        DataManager().setValueForKey("estado", value: "INICIAL", inFile: "appstate")
         
         DataManager().setValueForKey("vendedor", value: "4", inFile: "appstate")
         DataManager().setValueForKey("nombre_vendedor", value: "Miguel", inFile: "appstate")
