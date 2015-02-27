@@ -18,7 +18,6 @@ var drawerPortName : NSString = ""
 var DBLocal : String = ""
 
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -63,7 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Preparo la bd local sqlite
-        let ruta : NSArray = 
+        // se copia la BBDD al directorio de documentos de la aplicacion
+        UtilidadesBDDSQLITE.copyFile("LosBarkitosSQLITE.,sqlite")
         
         return true
         
@@ -112,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
         DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
         DataManager().setValueForKey("lista_precio", value: "3", inFile: "appstate")
+        DataManager().setValueForKey("punto_venta_codigo", value: 1, inFile: "appstate")
         DataManager().setValueForKey("punto_venta", value: "Oficina", inFile: "appstate")
         
         return "si"

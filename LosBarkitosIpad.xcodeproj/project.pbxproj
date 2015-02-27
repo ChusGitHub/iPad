@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB020C451AA0856000B5E976 /* viaje.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C441AA0856000B5E976 /* viaje.swift */; };
+		BB020C481AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C471AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift */; };
+		BB020C4A1AA089DF00B5E976 /* barca.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C491AA089DF00B5E976 /* barca.swift */; };
+		BB020C4C1AA08A5C00B5E976 /* puntoVenta.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C4B1AA08A5C00B5E976 /* puntoVenta.swift */; };
+		BB020C4E1AA08A9800B5E976 /* tipoBarca.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C4D1AA08A9800B5E976 /* tipoBarca.swift */; };
+		BB020C501AA08AF900B5E976 /* vendedor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C4F1AA08AF900B5E976 /* vendedor.swift */; };
+		BB020C521AA08C1900B5E976 /* ManejoSQLITE.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C511AA08C1900B5E976 /* ManejoSQLITE.swift */; };
 		BB080E721A728A2100D4117F /* ticket.xml in Resources */ = {isa = PBXBuildFile; fileRef = BB080E711A728A2100D4117F /* ticket.xml */; };
 		BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */; };
 		BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1FB6701A232FA50078B97A /* UIKit.framework */; };
@@ -33,6 +40,14 @@
 		216AC3D9FFBD34278773084E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BB020C441AA0856000B5E976 /* viaje.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viaje.swift; sourceTree = "<group>"; };
+		BB020C471AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilidadesBDDSQLITE.swift; sourceTree = "<group>"; };
+		BB020C491AA089DF00B5E976 /* barca.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = barca.swift; sourceTree = "<group>"; };
+		BB020C4B1AA08A5C00B5E976 /* puntoVenta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = puntoVenta.swift; sourceTree = "<group>"; };
+		BB020C4D1AA08A9800B5E976 /* tipoBarca.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tipoBarca.swift; sourceTree = "<group>"; };
+		BB020C4F1AA08AF900B5E976 /* vendedor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vendedor.swift; sourceTree = "<group>"; };
+		BB020C511AA08C1900B5E976 /* ManejoSQLITE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManejoSQLITE.swift; sourceTree = "<group>"; };
+		BB05EB0F1AA0827500C44674 /* LosBarkitosSQLITE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = LosBarkitosSQLITE.sqlite; sourceTree = "<group>"; };
 		BB080E711A728A2100D4117F /* ticket.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ticket.xml; sourceTree = "<group>"; };
 		BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = estadoClase.swift; sourceTree = "<group>"; };
 		BB1FB6701A232FA50078B97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -74,6 +89,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB020C461AA087F000B5E976 /* Modelo SQLITE */ = {
+			isa = PBXGroup;
+			children = (
+				BB05EB0F1AA0827500C44674 /* LosBarkitosSQLITE.sqlite */,
+				BB020C441AA0856000B5E976 /* viaje.swift */,
+				BB020C491AA089DF00B5E976 /* barca.swift */,
+				BB020C4B1AA08A5C00B5E976 /* puntoVenta.swift */,
+				BB020C4D1AA08A9800B5E976 /* tipoBarca.swift */,
+				BB020C4F1AA08AF900B5E976 /* vendedor.swift */,
+				BB020C471AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift */,
+				BB020C511AA08C1900B5E976 /* ManejoSQLITE.swift */,
+			);
+			name = "Modelo SQLITE";
+			sourceTree = "<group>";
+		};
 		BB1FB6721A232FFF0078B97A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +138,7 @@
 		BB34ACE51A1615EE008E67ED /* LosBarkitosIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BB020C461AA087F000B5E976 /* Modelo SQLITE */,
 				BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */,
 				BB34ACE81A1615EE008E67ED /* AppDelegate.swift */,
 				BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */,
@@ -262,18 +293,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB020C521AA08C1900B5E976 /* ManejoSQLITE.swift in Sources */,
 				F98ED7CE1A800D5E005ADBFC /* VentasTicketTableViewCell.swift in Sources */,
 				BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */,
 				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,
 				F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */,
 				BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */,
 				BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */,
+				BB020C501AA08AF900B5E976 /* vendedor.swift in Sources */,
 				BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */,
 				BB34ACED1A1615EE008E67ED /* ControlViewController.swift in Sources */,
 				BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */,
+				BB020C4A1AA089DF00B5E976 /* barca.swift in Sources */,
 				BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */,
+				BB020C481AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift in Sources */,
+				BB020C451AA0856000B5E976 /* viaje.swift in Sources */,
+				BB020C4E1AA08A9800B5E976 /* tipoBarca.swift in Sources */,
 				BBFC89D81A7E3996008402AF /* Reachability.swift in Sources */,
 				F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */,
+				BB020C4C1AA08A5C00B5E976 /* puntoVenta.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

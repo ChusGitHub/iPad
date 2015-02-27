@@ -12,6 +12,7 @@
 #import "AFNetworking/AFNetworking.h"
 //#import "StarPrinting/StarPrinting.h"
 #import "StarIO/SMPort.h"
+#import "FMDatabase.h"
 
 
 #endif

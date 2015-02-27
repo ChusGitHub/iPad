@@ -317,13 +317,16 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
+        if (ticketImpreso == false) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
             println("codVend: \(codVend)")
+            // Se inserta la venta de la barca en HEROKU
             webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
+            // Se inserta la venta de la barca en SQLITE
+            var insertado = insertaViajeSQLite()
 
         } else {
             
@@ -587,6 +590,28 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
         return true
     }
+    
+    
+    // TRABAJO CON LA BDD SQLITE
+    func insertaViajeSQLite() -> Bool {
+        
+        var viaje : Viaje = Viaje()
+        let formatoFecha = NSDateFormatter()
+        formatoFecha.dateFormat = "DD-mm-yyyy HH:mm:ss"
+        let fecha = formatoFecha.stringFromDate(NSDate())
+        
+        viaje.fecha = fecha
+        viaje.barca = self.barcaActual
+        viaje.blanco = false
+        viaje.vendedor =  (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
+        viaje.punto_venta = (DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int)
+        
+        var estaInsertadoSQLITE = ManejoSQLITE.instance.insertaViajeSQLITE(viaje)
+        return estaInsertadoSQLITE
+    }
+   
+
+    
   /*  func search() {
         
         if self.searching {
