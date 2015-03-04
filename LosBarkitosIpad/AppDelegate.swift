@@ -13,7 +13,6 @@ import UIKit
 var portName : NSString = ""
 var portSettings : NSString = ""
 var drawerPortName : NSString = ""
-
 // propiedades para el control de la bd sqlite en local
 var DBLocal : String = ""
 
@@ -63,16 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Preparo la bd local sqlite
         // se copia la BBDD al directorio de documentos de la aplicacion
-        UtilidadesBDDSQLITE.copyFile("LosBarkitosSQLITE.,sqlite")
+    
+        UtilidadesBDDSQLITE.copyFile("LosBarkitosSQLITE.sqlite")
         
         return true
         
 
     }
     
-    
-    
-
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

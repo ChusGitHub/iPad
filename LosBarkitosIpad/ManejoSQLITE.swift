@@ -11,21 +11,41 @@ let sharedInstance = ManejoSQLITE()
 
 class ManejoSQLITE : NSObject {
     var sqliteDatabase : FMDatabase? = nil
+    var sqliteDatabasePath : String? = nil
     
     class var instance: ManejoSQLITE {
         sharedInstance.sqliteDatabase = FMDatabase(path: UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite"))
-        var path = UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite")
-        println("path: \(path)")
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        sharedInstance.sqliteDatabasePath = documentsFolder.stringByAppendingPathComponent("LosBarkitosSQLITE.sqlite")
+
+        //let path = UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite")
+        println("path: \(sharedInstance.sqliteDatabasePath)")
         return sharedInstance
     }
     
     func insertaViajeSQLITE(viaje : Viaje) -> Bool {
-        let consulta : String? = "INSERT INTO viaje VALUES (?, ?, ?, ?, ?, ?, ?)"
-        sharedInstance.sqliteDatabase!.open()
-
-        let estaInsertado = sharedInstance.sqliteDatabase!.executeUpdate(consulta!, withArgumentsInArray: [ viaje.numero, viaje.precio, viaje.fecha,viaje.punto_venta,viaje.barca,viaje.vendedor, 0])
-        println("\(consulta)")
-        sharedInstance.sqliteDatabase!.close()
-        return estaInsertado
+        //let consulta : String? = "INSERT INTO viaje VALUES (?, ?, ?, ?, ?, ?, ?)"
+        
+        var filemgr = NSFileManager.defaultManager()
+        if filemgr.fileExistsAtPath(sharedInstance.sqliteDatabasePath!) {
+            if sharedInstance.sqliteDatabase!.open() {
+                let consulta : String? = "INSERT INTO viaje VALUES (?,?,?,?,?,?,?)"
+                if !sharedInstance.sqliteDatabase!.executeUpdate(consulta!, withArgumentsInArray: [viaje.numero, viaje.precio, viaje.fecha, viaje.punto_venta, viaje.barca, viaje.vendedor, viaje.blanco]) {
+                    println("\(sqliteDatabase!.lastError()) - \(sqliteDatabase!.lastErrorMessage())")
+                }
+                sharedInstance.sqliteDatabase!.close()
+            }
+        }
+        
+        
+        
+        //let estaInsertado = sharedInstance.sqliteDatabase!.executeUpdate(consulta!, withArgumentsInArray: [ viaje.numero, viaje.precio, viaje.fecha,viaje.punto_venta,viaje.barca,viaje.vendedor, viaje.blanco])
+//        let estaInsertado = sharedInstance.sqliteDatabase!.executeUpdate(consulta!, withArgumentsInArray: nil)
+        
+  //      println("\(consulta!)")
+       // sharedInstance.sqliteDatabase!.close()
+    //    return estaInsertado
+        return true
+        
     }
 }

@@ -597,7 +597,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
         var viaje : Viaje = Viaje()
         let formatoFecha = NSDateFormatter()
-        formatoFecha.dateFormat = "DD-mm-yyyy HH:mm:ss"
+        formatoFecha.dateFormat = "dd-MM-yyyy hh:mm:ss"
         let fecha = formatoFecha.stringFromDate(NSDate())
         
         viaje.fecha = fecha
