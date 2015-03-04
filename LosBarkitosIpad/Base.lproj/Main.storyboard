@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yM-oJ-Tl7">
-                                <rect key="frame" x="16" y="38" width="250" height="65"/>
+                                <rect key="frame" x="0.0" y="38" width="250" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.94313021205446923" blue="0.076898582220458089" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="47"/>
                                 <state key="normal" title="Rio">
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbC-77-0Jy">
-                                <rect key="frame" x="543" y="38" width="250" height="65"/>
+                                <rect key="frame" x="511" y="38" width="266" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.94313021205446923" blue="0.076898582220458089" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="47"/>
                                 <state key="normal" title="Whaly">
@@ -42,7 +42,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNd-o4-UtV">
-                                <rect key="frame" x="280" y="38" width="250" height="65"/>
+                                <rect key="frame" x="240" y="38" width="274" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.94313021205446923" blue="0.076898582220458089" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="47"/>
                                 <state key="normal" title="Eléctrica">
@@ -69,7 +69,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gld-el-PPV">
-                                <rect key="frame" x="808" y="38" width="250" height="65"/>
+                                <rect key="frame" x="764" y="38" width="260" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.94313021205446923" blue="0.076898582220458089" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="47"/>
                                 <state key="normal" title="Gold">
@@ -350,6 +350,7 @@
                         <color key="backgroundColor" red="0.99607843137254903" green="0.88235294117647056" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Venta" image="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="buc-T1-Amq"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="btnAceptarUIButton" destination="DDa-Jd-r8U" id="Ycy-eR-Rnn"/>
@@ -373,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959" y="-507"/>
+            <point key="canvasLocation" x="943" y="-659"/>
         </scene>
         <!--Control-->
         <scene sceneID="wg7-f3-ORb">
@@ -476,6 +477,7 @@
         <!--Precios View Controller-->
         <scene sceneID="YI7-4K-vpe">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="07f-0O-81W" customClass="PreciosViewController" customModule="LosBarkitosIpad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tkv-gQ-lRN"/>
@@ -722,7 +724,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="seguePreciosVentaAceptar" id="Hms-bc-FQ9"/>
+                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="seguePreciosVentaAceptar" id="E4P-Gv-3m4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -756,7 +758,6 @@
                         <outletCollection property="coleccionBotonesPrecios" destination="ya7-UL-4sA" collectionClass="NSMutableArray" id="yGR-Jp-hEa"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2261" y="-315"/>
         </scene>
@@ -764,6 +765,7 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController title="Venta" id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ynd-ax-qZv"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -790,8 +792,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="HFo-gb-gaj"/>
-        <segue reference="Hms-bc-FQ9"/>
+        <segue reference="Gc7-UL-tGg"/>
+        <segue reference="PRz-5W-xYw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
 </document>
