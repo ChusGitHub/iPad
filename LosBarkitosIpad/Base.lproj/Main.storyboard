@@ -9,8 +9,8 @@
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="VentaViewController" customModule="LosBarkitosIpad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
+                        <viewControllerLayoutGuide type="top" id="3lU-xf-RrB"/>
+                        <viewControllerLayoutGuide type="bottom" id="yMi-rt-oFb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -150,7 +150,7 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="IO0-jQ-iOJ"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No hay impresora conectada" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="42" translatesAutoresizingMaskIntoConstraints="NO" id="AXN-Zg-TPu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No hay impresora conectada" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXN-Zg-TPu">
                                 <rect key="frame" x="46" y="597" width="182" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -346,6 +346,17 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odh-TH-ugq">
+                                <rect key="frame" x="23" y="730" width="78" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                <state key="normal" title="Control">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="8rJ-Kc-sve" kind="modal" id="e9F-yZ-Wa3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843137254903" green="0.88235294117647056" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -381,8 +392,8 @@
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="ControlViewController" customModule="LosBarkitosIpad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
+                        <viewControllerLayoutGuide type="top" id="hNY-MZ-SPI"/>
+                        <viewControllerLayoutGuide type="bottom" id="bW4-rI-dFx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -457,6 +468,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2GL-fQ-5hp">
+                                <rect key="frame" x="23" y="730" width="78" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                <state key="normal" title="Venta">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9pv-A4-QxB" kind="modal" id="pSb-b9-IQJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -477,11 +499,10 @@
         <!--Precios View Controller-->
         <scene sceneID="YI7-4K-vpe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="07f-0O-81W" customClass="PreciosViewController" customModule="LosBarkitosIpad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Tkv-gQ-lRN"/>
-                        <viewControllerLayoutGuide type="bottom" id="1aj-vb-96A"/>
+                        <viewControllerLayoutGuide type="top" id="L15-pv-png"/>
+                        <viewControllerLayoutGuide type="bottom" id="o86-xf-TGF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pt5-Wf-EiI">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -758,6 +779,7 @@
                         <outletCollection property="coleccionBotonesPrecios" destination="ya7-UL-4sA" collectionClass="NSMutableArray" id="yGR-Jp-hEa"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2261" y="-315"/>
         </scene>
@@ -792,7 +814,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Gc7-UL-tGg"/>
+        <segue reference="e9F-yZ-Wa3"/>
+        <segue reference="pSb-b9-IQJ"/>
         <segue reference="PRz-5W-xYw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
