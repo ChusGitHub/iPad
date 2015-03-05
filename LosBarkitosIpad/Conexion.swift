@@ -21,7 +21,7 @@ import UIkit
 
 protocol WebServiceProtocoloControl {
     func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
-    
+    func didReceiveResponse_listaLlegadas(sender : AnyObject)
 }
 
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
@@ -169,7 +169,6 @@ class webServiceCallAPI : NSObject {
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 println("responseObject : \(responseObject)")
                 self.delegateControl?.didReceiveResponse_primeraLibre(responseObject as [String : [String : String]])
- 
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
@@ -178,6 +177,42 @@ class webServiceCallAPI : NSObject {
                 self.delegate?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             }
         )
+    }
+    
+    func listaLlegadas(tipo : Int) {
+        
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        var parametro : String =  String()
+        
+        switch tipo {
+        case 1:
+            parametro = "RIO"
+        case 2:
+            parametro = "ELECTRICA"
+        case 3:
+            parametro = "WHALY"
+        case 4:
+            parametro = "GOLD"
+        default:
+            parametro = "RIO"
+        }
+        
+        manager.GET("http://losbarkitos.herokuapp.com/llegada/\(parametro)",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                println("responseObject : \(responseObject)")
+                self.delegateControl?.didReceiveResponse_listaLlegadas(responseObject as [String : [String : String]])
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                println("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary)
+            }
+        )
+        
     }
 
 }
