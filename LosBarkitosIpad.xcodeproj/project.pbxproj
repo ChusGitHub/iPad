@@ -28,6 +28,7 @@
 		BB39033C1A77D5C0004572B2 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */; };
 		BB3903401A77DF6C004572B2 /* StarIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB39033F1A77DF6C004572B2 /* StarIO.framework */; };
 		BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */; };
+		BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */; };
 		BBFC89D81A7E3996008402AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC89D71A7E3996008402AF /* Reachability.swift */; };
 		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
 		F98ED7CE1A800D5E005ADBFC /* VentasTicketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */; };
@@ -67,6 +68,7 @@
 		BB39033F1A77DF6C004572B2 /* StarIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarIO.framework; sourceTree = "<group>"; };
 		BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuenteAFNetworking.h; sourceTree = "<group>"; };
 		BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrinterFunctions.swift; sourceTree = "<group>"; };
+		BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlUITableViewCell.swift; sourceTree = "<group>"; };
 		BBFC89D71A7E3996008402AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VentasTicketTableViewCell.swift; sourceTree = "<group>"; };
 		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 				BB35F5421A1F7426004AFC7C /* Conexion.swift */,
 				BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */,
 				BB35F5441A1F754A004AFC7C /* Conectividad.swift */,
-				BB34ACEC1A1615EE008E67ED /* ControlViewController.swift */,
+				BBF88ECD1AACA4DD009BC3AB /* ControlViewController */,
 				BB34ACEE1A1615EE008E67ED /* Main.storyboard */,
 				F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */,
 				BB34ACF11A1615EE008E67ED /* Images.xcassets */,
@@ -181,6 +183,15 @@
 				BB34ACFF1A1615EE008E67ED /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BBF88ECD1AACA4DD009BC3AB /* ControlViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BB34ACEC1A1615EE008E67ED /* ControlViewController.swift */,
+				BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */,
+			);
+			name = ControlViewController;
 			sourceTree = "<group>";
 		};
 		D1018F923A5D82FBBA599D8C /* Pods */ = {
@@ -294,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB020C521AA08C1900B5E976 /* ManejoSQLITE.swift in Sources */,
+				BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */,
 				F98ED7CE1A800D5E005ADBFC /* VentasTicketTableViewCell.swift in Sources */,
 				BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */,
 				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,

@@ -70,8 +70,14 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         colocarLibresEnPantalla()
     }
     
-    func didReceiveResponse_listaLlegadas(sender : AnyObject) {
+    func didReceiveResponse_listaLlegadas(respuesta: [String : [String : String] ]) {
         
+        self.libre = respuesta
+        
+        println("lista llegadas : \(respuesta)")
+        
+        self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
+        self.listaUITableView.reloadData()
     }
 
     
@@ -102,55 +108,21 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == VENDEDOR {
-            return self.vendedores.count
-        } else {
-            return self.ventas.count
-        }
+        
+        self.libre?.count
+    
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        if tableView.tag == VENDEDOR {
-            var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
-            
-            
-            cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
-            cell.codigoVendedorUILabelCell.textColor = UIColor.grayColor()
-            if indexPath.row % 2 == 0 {
-                cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-            } else {
-                cell.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-            }
-            
-            let vendedor = self.vendedores[indexPath.row]
-            let codigo = Array(vendedor.keys)
-            let nombre = Array(vendedor.values)
-            cell.codigoVendedorUILabelCell.text = String(codigo[0])
-            cell.nombreVendedorUILabelCell.text = nombre[0]
-            
-            // añado el codigo del vendedor al plist
-            DataManager().setValueForKey("vendedor", value: codigo, inFile: "appstate")
-            DataManager().setValueForKey("nombre_vendedor", value: nombre, inFile: "appstate")
-            
-            return cell
-            
-        } else {
-            var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
-            cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
-            cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre"]
-            println(self.ventas[indexPath.row]["nombre"])
-            cell.precioVentasTicketsIULabel.text = self.ventas[indexPath.row]["precio"]
-            println(self.ventas[indexPath.row]["precio"])
-            cell.baseVentasTicketsUILabel.text = self.ventas[indexPath.row]["base"]
-            println(self.ventas[indexPath.row]["base"])
-            cell.horaVentasTicketsUILabel.text = self.ventas[indexPath.row]["fecha"]
-            println(self.ventas[indexPath.row]["fecha"])
-            cell.barcaVentasTicketsUILabel.text = self.ventas[indexPath.row]["tipo"]
-            println(self.ventas[indexPath.row]["tipo"])
-            
-            
-            return cell
-        }
+        var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as ControlUITableViewCell
+ 
+        cell.numeroUILabelUITableViewCell.text = self.libre[indexPath.row]["numero"]? as String
+        cell.vendedorUILabelUITableViewCell.text = self.libre[indexPath.row]["nombre"]? as String
+        cell.barcaUILabelUITableViewCell.text = self.libre[indexPath.row]["barca"]? as String
+        cell.precioUILabelUITableViewCell.text = self.libre[indexPath.row]["precio"]? as String
+        cell.
+        return cell
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
