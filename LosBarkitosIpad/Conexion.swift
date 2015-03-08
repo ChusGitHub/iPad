@@ -188,21 +188,27 @@ class webServiceCallAPI : NSObject {
         
         switch tipo {
         case 1:
-            parametro = "RIO"
+            parametro = "Rio"
         case 2:
-            parametro = "ELECTRICA"
+            parametro = "ELéctrica"
         case 3:
-            parametro = "WHALY"
+            parametro = "Whaly"
         case 4:
-            parametro = "GOLD"
+            parametro = "Gold"
         default:
-            parametro = "RIO"
+            parametro = "Rio"
         }
         
         manager.GET("http://losbarkitos.herokuapp.com/llegada/\(parametro)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 println("responseObject : \(responseObject)")
+                var listaBuena : [String : [String : String]]
+                for dic in responseObject {
+                    if dic["Tipo"] == parametro {
+                        listaBuena.
+                    }
+                }
                 self.delegateControl?.didReceiveResponse_listaLlegadas(responseObject as [String : [String : String]])
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
