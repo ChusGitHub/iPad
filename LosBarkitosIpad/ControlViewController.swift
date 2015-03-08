@@ -70,6 +70,11 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         colocarLibresEnPantalla()
     }
     
+    func didReceiveResponse_listaLlegadas(sender : AnyObject) {
+        
+    }
+
+    
     func colocarLibresEnPantalla() {
         
         let RIO : [String : String]? = self.libre?["rio"]
