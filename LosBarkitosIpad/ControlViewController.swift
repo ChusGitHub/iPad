@@ -20,7 +20,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     var webService : webServiceCallAPI = webServiceCallAPI()
     var estado : String?
     
-    var libre : [String : [String : String]]?
+    var libre = [String : [String : String]]()
     
     @IBOutlet weak var lblEstadoUILabel: UILabel!
     @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
@@ -32,7 +32,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.libre = nil
+        //self.libre = nil
         webService.obtenerPrimerLibre()
         self.estado = DataManager().getValueForKey("estado", inFile: "appstate") as? String
     }
@@ -83,10 +83,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func colocarLibresEnPantalla() {
         
-        let RIO : [String : String]? = self.libre?["rio"]
-        let ELECTRICA = self.libre?["electrica"]
-        let WHALY = self.libre?["whaly"]
-        let GOLD = self.libre?["gold"]
+        let RIO : [String : String]? = self.libre["rio"]
+        let ELECTRICA = self.libre["electrica"]
+        let WHALY = self.libre["whaly"]
+        let GOLD = self.libre["gold"]
         
         let nombreRIO : String? = RIO?["nombre"]
         let libreRIO : String? = RIO?["libre"]
@@ -109,18 +109,19 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        self.libre?.count
+        return self.libre.count
     
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as ControlUITableViewCell
- 
-        cell.numeroUILabelUITableViewCell.text = self.libre[indexPath.row]["numero"]? as String
-        cell.vendedorUILabelUITableViewCell.text = self.libre[indexPath.row]["nombre"]? as String
-        cell.barcaUILabelUITableViewCell.text = self.libre[indexPath.row]["barca"]? as String
-        cell.precioUILabelUITableViewCell.text = self.libre[indexPath.row]["precio"]? as String
-        cell.baseUILabelUITableViewCell.text = self.libre[indexPath.row]["base"]? as String
+        let registro : [String : String] = self.libre[String(indexPath.row)]!
+        
+        cell.numeroUILabelUITableViewCell.text = registro["numero"]
+        cell.vendedorUILabelUITableViewCell.text = registro["nombre"]
+        cell.barcaUILabelUITableViewCell.text = registro["barca"]
+        cell.precioUILabelUITableViewCell.text = registro["precio"]
+        cell.baseUILabelUITableViewCell.text = registro["base"]
         
         return cell
         

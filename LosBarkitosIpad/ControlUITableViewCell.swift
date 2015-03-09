@@ -10,7 +10,7 @@ import UIKit
 
 class ControlUITableViewCell: UITableViewCell {
 
-    @IBOutlet weak var numeroUILabelUITableVieweCell: UILabel!
+    @IBOutlet weak var numeroUILabelUITableViewCell: UILabel!
     @IBOutlet weak var vendedorUILabelUITableViewCell: UILabel!
     @IBOutlet weak var barcaUILabelUITableViewCell: UILabel!
     @IBOutlet weak var baseUILabelUITableViewCell: UILabel!

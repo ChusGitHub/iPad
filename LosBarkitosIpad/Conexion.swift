@@ -21,7 +21,7 @@ import UIkit
 
 protocol WebServiceProtocoloControl {
     func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
-    func didReceiveResponse_listaLlegadas(sender : AnyObject)
+    func didReceiveResponse_listaLlegadas(respuesta : [String : [String : String]])
 }
 
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
@@ -199,27 +199,27 @@ class webServiceCallAPI : NSObject {
             parametro = "Rio"
         }
         
-        manager.GET("http://losbarkitos.herokuapp.com/llegada/\(parametro)",
+        manager.GET("http://losbarkitos.herokuapp.com/orden_llegada/\(parametro)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
-                var diccionario = [String : AnyObject]()
+                var diccionario = [String : [String : String]]()
                 for (k,v) in responseObject as [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
                     } else if v as Int == 1 {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
-                        diccionario = [String : AnyObject]()
+                        diccionario = [String : [String : String]]()
                         diccionario["error"] = "si"
                     }
                 }
                 println("diccionario : \(diccionario)")
-                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary)
+                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario)// as [String : [String : String]])
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary)
+                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as [String : [String : String]])
             }
         )
         

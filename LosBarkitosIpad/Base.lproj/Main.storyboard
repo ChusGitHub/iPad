@@ -522,8 +522,7 @@
                                         <connections>
                                             <outlet property="barcaUILabelUITableViewCell" destination="eNW-N7-w3M" id="CDf-4Z-c4h"/>
                                             <outlet property="baseUILabelUITableViewCell" destination="6Bk-EA-T8P" id="RiB-sH-HjB"/>
-                                            <outlet property="numeroUILabel" destination="EZD-0V-zxM" id="4hU-FO-6AP"/>
-                                            <outlet property="numeroUILabelUITableVieweCell" destination="EZD-0V-zxM" id="8aM-08-Df4"/>
+                                            <outlet property="numeroUILabelUITableViewCell" destination="EZD-0V-zxM" id="QYH-X2-z98"/>
                                             <outlet property="precioUILabelUITableViewCell" destination="kqG-X6-qbv" id="sgg-oc-fq7"/>
                                             <outlet property="vendedorUILabelUITableViewCell" destination="CYh-4R-9aB" id="Fb9-j5-Lh9"/>
                                         </connections>
