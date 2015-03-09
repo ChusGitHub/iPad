@@ -120,44 +120,16 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         cell.vendedorUILabelUITableViewCell.text = self.libre[indexPath.row]["nombre"]? as String
         cell.barcaUILabelUITableViewCell.text = self.libre[indexPath.row]["barca"]? as String
         cell.precioUILabelUITableViewCell.text = self.libre[indexPath.row]["precio"]? as String
-        cell.
+        cell.baseUILabelUITableViewCell.text = self.libre[indexPath.row]["base"]? as String
+        
         return cell
         
     }
+
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let altura = tableView.frame.height
-        if tableView.tag == VENDEDOR {
-            return altura/(CGFloat) (self.vendedores.count)
-        } else {
-            return 50.0        }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+   // func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if tableView.tag == VENDEDOR {
-            // recupero los valores de la celda
-            let dictVendedor : [String : String] = self.vendedores[indexPath.row]
-            let codigo = Array(dictVendedor.keys)
-            let nombre = Array(dictVendedor.values)
-            
-            // Guardo el vendedor en el plist
-            DataManager().setValueForKey("vendedor", value: codigo[0], inFile: "appstate")
-            DataManager().setValueForKey("nombre_vendedor", value: String(nombre[0]), inFile: "appstate")
-            
-            // Pongo el nombre del vendedor en el uitextview
-            self.vendedorUITextField.text = nombre[0]
-            
-            // Quito el uitableview de los  vendedores
-            self.vendedorUITableView.hidden = true
-            self.btnViewVendedoresUIButton.enabled = true
-            self.vendedores = []
-            self.vendedorUITableView.clearsContextBeforeDrawing = true
-            self.vendedorUITableView.reloadData()
-        } else {
-            
-        }
-    }
+    //}
 
 
 }

@@ -202,14 +202,18 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/llegada/\(parametro)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
-                println("responseObject : \(responseObject)")
-                var listaBuena : [String : [String : String]]
-                for dic in responseObject {
-                    if dic["Tipo"] == parametro {
-                        listaBuena.
+                var diccionario = [String : AnyObject]()
+                for (k,v) in responseObject as [String : AnyObject] {
+                    if k != "error" {
+                        diccionario[k] = v
+                    } else if v as Int == 1 {// la respuesta es erronea
+                        println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        diccionario = [String : AnyObject]()
+                        diccionario["error"] = "si"
                     }
                 }
-                self.delegateControl?.didReceiveResponse_listaLlegadas(responseObject as [String : [String : String]])
+                println("diccionario : \(diccionario)")
+                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary)
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
