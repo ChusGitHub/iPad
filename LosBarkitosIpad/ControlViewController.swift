@@ -21,6 +21,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     var estado : String?
     
     var libre = [String : [String : String]]()
+    var listaLlegadas = [String : [String : String]]()
     
     @IBOutlet weak var lblEstadoUILabel: UILabel!
     @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
@@ -72,9 +73,11 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func didReceiveResponse_listaLlegadas(respuesta: [String : [String : String] ]) {
         
-        self.libre = respuesta
-        
         println("lista llegadas : \(respuesta)")
+        
+       
+        self.listaLlegadas = respuesta as Dictionary<String,Dictionary<String,String>>
+        println("listaLlegadas : \(self.listaLlegadas)")
         
         self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.listaUITableView.reloadData()
@@ -109,13 +112,16 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.libre.count
+        return self.listaLlegadas.count
     
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as ControlUITableViewCell
-        let registro : [String : String] = self.libre[String(indexPath.row)]!
+        println("\(String(indexPath.row + 1 ))")
+        println("\(self.listaLlegadas[String(indexPath.row + 1)])")
+   
+        let registro : [String : String] = self.listaLlegadas[String(indexPath.row + 1)]!
         
         cell.numeroUILabelUITableViewCell.text = registro["numero"]
         cell.vendedorUILabelUITableViewCell.text = registro["nombre"]

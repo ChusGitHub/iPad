@@ -528,6 +528,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="Wml-7N-glB"/>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="bJd-J3-MhH"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kk8-9K-OsA">
                                 <rect key="frame" x="592" y="28" width="46" height="30"/>
