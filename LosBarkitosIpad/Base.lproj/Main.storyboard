@@ -1001,24 +1001,6 @@
             </objects>
             <point key="canvasLocation" x="-432" y="24"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Ffv-w3-yZA">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XTY-fL-X2g" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Q0v-O1-tcW"/>
-                        <viewControllerLayoutGuide type="bottom" id="7ta-Lk-L5E"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="JVq-DQ-qR6">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nc4-8U-N5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>

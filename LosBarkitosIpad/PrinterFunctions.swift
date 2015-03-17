@@ -146,6 +146,124 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     return (sendCommand(commands,portName, portSettings,10000))
 }
 
+func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam : [String : AnyObject]) -> Bool {
+    
+    let horaActual : NSDate = NSDate()
+    
+    var commands = NSMutableData()
+    var str : String
+    var datos : NSData?
+    
+    var cmd : [UInt8]
+
+    //Juego de caracteres en español
+    cmd = [ 0x1b, 0x1d, 0x74, 0x01]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Anchura de texto
+    cmd = [ 0x1b, 0x57, 0x03 ]
+    commands.appendBytes(cmd, length: 3)
+    
+    // Texto centrado
+    cmd = [ 0x1b, 0x1d, 0x61, 0x01 ]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Formato Texto : espacio entre caracteres
+    cmd = [ 0x1b, 0x1e, 0x46, 0x02 ]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Formato Texto : normal
+    cmd = [0x1b, 0x57, 0x2]
+    commands.appendBytes(cmd, length: 3)
+
+    str = diccParam["dia"] as String
+    str += "\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    
+    // Inversion color
+    cmd = [ 0x1b, 0x34 ]
+    commands.appendBytes(cmd, length: 2)
+    
+    str = "Total Barcas\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // Formato Texto : normal
+    cmd = [0x1b, 0x57, 0x2]
+    commands.appendBytes(cmd, length: 3)
+
+    // Texto izquierda
+    cmd = [ 0x1b, 0x1d, 0x61, 0x0 ]
+    commands.appendBytes(cmd, length: 4)
+    
+    let Rios = diccParam["rio"] as Int
+    str = "Rios : \t \(Rios)\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    let Electricas = diccParam["electrica"] as Int
+    str = "Electricas : \t \(Electricas)\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    let Whalys = diccParam["whaly"] as Int
+    str = "Whalys : \t \(Whalys)\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    let Golds = diccParam["gold"] as Int
+    str = "Golds : \t \(Golds)\r\n\n\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    // Texto centrado
+    cmd = [ 0x1b, 0x1d, 0x61, 0x01 ]
+    commands.appendBytes(cmd, length: 4)
+
+    // Inversion color
+    cmd = [ 0x1b, 0x34 ]
+    commands.appendBytes(cmd, length: 2)
+
+    // Texto centrado
+    cmd = [ 0x1b, 0x1d, 0x61, 0x01 ]
+    commands.appendBytes(cmd, length: 4)
+
+    str = "Total barcas : "
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // Formato Texto : normal
+    cmd = [0x1b, 0x57, 0x2]
+    commands.appendBytes(cmd, length: 3)
+
+    str = String(Rios + Electricas + Whalys + Golds)
+    str += " barcas\n\r"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    // Inversion color
+    cmd = [ 0x1b, 0x34 ]
+    commands.appendBytes(cmd, length: 2)
+    
+    str = "Total Euros : "
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // Formato Texto : normal
+    cmd = [0x1b, 0x57, 0x2]
+    commands.appendBytes(cmd, length: 3)
+
+    str = String(diccParam["euros"] as Int)
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    
+    
+    return (sendCommand(commands, portName, p_portSettings, 10000))
+}
+
 func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NSString, timeoutMillis : u_int) -> Bool{
     
     var starPort : SMPort

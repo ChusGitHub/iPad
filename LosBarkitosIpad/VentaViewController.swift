@@ -435,9 +435,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 "whaly"     : totalBarcas[2],
                 "gold"      : totalBarcas[3],
                 "dia"       : dia,
+                "euros"     : totalEuros
             ]
             
-            let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, diccParam)
+            let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings, diccParam)
             
             // Trataré de desconectar el puerto
             
@@ -534,6 +535,31 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
+    func didReceiveResponse_totalBarcas(respuesta : [String : Int]) {
+        
+        println("respuesta del servidor : Total Barcas :\(respuesta)")
+        for (k,v) in respuesta {
+            if k as NSString == "error" && v as Int == 1 {
+                println("Error en el diccionario devuelto : \(v)")
+                EXIT_FAILURE
+            } else {
+                totalBarcas = Array(respuesta.values)
+            }
+        }
+        
+    }
+    
+    func didReceiveResponse_totalEuros(respuesta : [String : Int]) {
+        
+        println("respuesta del servidor : Total Euros :\(respuesta)")
+        for (k,v) in respuesta {
+            if k == "total" {
+                totalEuros = v as Int
+            } else {
+                totalEuros = 0
+            }
+        }
+    }
     
     func cargarValoresCon_appstate(inFile file: String) {
      
@@ -679,11 +705,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         return estaInsertadoSQLITE
     }
    
-    
-    func imprimirTotal() {
-
-    }
-
     
   /*  func search() {
         

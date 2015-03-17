@@ -16,8 +16,8 @@ import UIkit
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
     func didReceiveResponse_listadoVentas(respuesta : [String : AnyObject])
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
-    func didReceiveResponse_totalBarcas(respuesta : [Int])
-    func didReceiveResponse_totalEuros(respuesta : Int)
+    func didReceiveResponse_totalBarcas(respuesta : [String : Int])
+    func didReceiveResponse_totalEuros(respuesta : [String : Int])
     
 }
 
@@ -162,19 +162,33 @@ class webServiceCallAPI : NSObject {
         )
     }
     
-    func totalBarcas() -> [Int] {
+    func totalBarcas() {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
         manager.GET("http://losbarkitos.herokuapp.com/total_barcas", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
-                var diccionario = 
+                var diccionario = [String : Int]()
+                for (k,v) in responseObject as [String : Int] {
+                    if k != "error" {
+                        diccionario[k] = v
+                    } else {
+                        println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        diccionario["error"] = 1
+                    }
+                }
+                println("diccionario : \(diccionario)")
+                self.delegate?.didReceiveResponse_totalBarcas(diccionario as Dictionary)
             },
-            failure: <#((AFHTTPRequestOperation!, NSError!) -> Void)!##(AFHTTPRequestOperation!, NSError!) -> Void#>)
-        
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                println("Error \(error.localizedDescription)")
+                var diccionario = [String : Int]()
+                diccionario["error"] = 1
+                self.delegate?.didReceiveResponse_totalBarcas(diccionario as Dictionary)
+        })
     }
     
-    func totalEuros() -> Int {
+    func totalEuros()  {
         
     }
     
