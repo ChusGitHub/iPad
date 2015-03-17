@@ -103,6 +103,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     var gestion : String = "usuario"
     let datosUIPickerView = ["Lista Baja", "Lista Media", "Lista Alta"]
     
+    var totalBarcas : [Int] = []
+    var totalEuros : Int = 0
+    
     //let conectado : Conectividad?
 
 
@@ -191,7 +194,21 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
 
     
+    @IBAction func imprimirTotalVentas(sender: UIButton) {
+        
+        let totalImpreso : Bool = imprimirTotal()
+        
+        if !totalImpreso {
+            var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alertaNoImpresora.addAction(OkAction)
 
+        }
+        
+    }
+    
     
     func noAdministrador () {
         self.gestion = "usuario"
@@ -383,6 +400,56 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     
+    func imprimirTotal() -> Bool {
+        
+        if self.setupImpresora() {
+            
+            self.foundPrinters = SMPort.searchPrinter("BT:")
+            
+            
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            self.lastSelectedPortName = portInfo.portName
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.setPortName(portInfo.portName)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            var p_portName : NSString = appDelegate.getPortName()
+            var p_portSettings : NSString = appDelegate.getPortSettings()
+            
+            // AQUI ESTAN LOS DATOS A IMPRIMIR
+            let puntoVenta : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+            
+            webService.totalBarcas()
+            webService.totalEuros()
+            
+            
+            let totalBarcas : [Int] = self.totalBarcas
+            let totalEuros  : Int = self.totalEuros
+            
+            let total : Int = totalBarcas[0] + totalBarcas[1] + totalBarcas[2] + totalBarcas[3]
+            let dia : NSDate = NSDate()
+            
+            let diccParam : [String : AnyObject] = [
+                "rio"       : totalBarcas[0],
+                "electrica" : totalBarcas[1],
+                "whaly"     : totalBarcas[2],
+                "gold"      : totalBarcas[3],
+                "dia"       : dia,
+            ]
+            
+            let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, diccParam)
+            
+            // Trataré de desconectar el puerto
+            
+            return ticketImpreso
+        } else {
+            return false
+        }
+
+    }
+
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -391,6 +458,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     //////////////////////////////////////////////////////////////////////////////////////////////
     // Respuesta del webService de las llamadas al sistema
     /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) {
         println("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
@@ -610,6 +679,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         return estaInsertadoSQLITE
     }
    
+    
+    func imprimirTotal() {
+
+    }
 
     
   /*  func search() {

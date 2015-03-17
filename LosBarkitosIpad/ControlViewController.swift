@@ -21,7 +21,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     var estado : String?
     
     var libre = [String : [String : String]]()
-    var listaLlegadas = [String : [String : String]]()
+    var listaLlegadas = [[String : String]]()
     
     @IBOutlet weak var lblEstadoUILabel: UILabel!
     @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
@@ -71,12 +71,25 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         colocarLibresEnPantalla()
     }
     
-    func didReceiveResponse_listaLlegadas(respuesta: [String : [String : String] ]) {
+    func didReceiveResponse_listaLlegadas(respuesta: [String : AnyObject ]) {
+        
+        self.listaLlegadas = []
+        var registro : [String : String] = [:]
         
         println("lista llegadas : \(respuesta)")
         
-       
-        self.listaLlegadas = respuesta as Dictionary<String,Dictionary<String,String>>
+        for (k,v) in respuesta {
+            println("k = \(k)")
+            println("v = \(v)")
+
+            registro["nombre"] = v["Nombre"] as? String
+            registro["libre"] = v["libre"] as? String
+            registro["tipo"] = v["Tipo"] as? String
+            let vueltas : Int = v["vueltas"] as Int
+            registro["vueltas"] = String(vueltas)
+            
+            self.listaLlegadas.append(registro)
+        }
         println("listaLlegadas : \(self.listaLlegadas)")
         
         self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
@@ -118,16 +131,13 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as ControlUITableViewCell
-        println("\(String(indexPath.row + 1 ))")
-        println("\(self.listaLlegadas[String(indexPath.row + 1)])")
+      
+       //cell.numeroUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["numero"]
+        cell.nombreUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["nombre"]
    
-        let registro : [String : String] = self.listaLlegadas[String(indexPath.row + 1)]!
-        
-        cell.numeroUILabelUITableViewCell.text = registro["numero"]
-        cell.vendedorUILabelUITableViewCell.text = registro["nombre"]
-        cell.barcaUILabelUITableViewCell.text = registro["barca"]
-        cell.precioUILabelUITableViewCell.text = registro["precio"]
-        cell.baseUILabelUITableViewCell.text = registro["base"]
+        cell.tipoUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["tipo"]
+        cell.libreUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["libre"]
+        cell.vueltasUILabelUITableViewCell.text = String(self.listaLlegadas[indexPath.row]["vueltas"]!)
         
         return cell
         

@@ -10,11 +10,10 @@ import UIKit
 
 class ControlUITableViewCell: UITableViewCell {
 
-    @IBOutlet weak var numeroUILabelUITableViewCell: UILabel!
-    @IBOutlet weak var vendedorUILabelUITableViewCell: UILabel!
-    @IBOutlet weak var barcaUILabelUITableViewCell: UILabel!
-    @IBOutlet weak var baseUILabelUITableViewCell: UILabel!
-    @IBOutlet weak var precioUILabelUITableViewCell: UILabel!
+    @IBOutlet weak var nombreUILabelUITableViewCell: UILabel!
+    @IBOutlet weak var tipoUILabelUITableViewCell: UILabel!
+    @IBOutlet weak var libreUILabelUITableViewCell: UILabel!
+    @IBOutlet weak var vueltasUILabelUITableViewCell: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

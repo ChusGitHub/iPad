@@ -16,12 +16,14 @@ import UIkit
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
     func didReceiveResponse_listadoVentas(respuesta : [String : AnyObject])
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
+    func didReceiveResponse_totalBarcas(respuesta : [Int])
+    func didReceiveResponse_totalEuros(respuesta : Int)
     
 }
 
 protocol WebServiceProtocoloControl {
     func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
-    func didReceiveResponse_listaLlegadas(respuesta : [String : [String : String]])
+    func didReceiveResponse_listaLlegadas(respuesta : [String : AnyObject])
 }
 
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
@@ -160,6 +162,22 @@ class webServiceCallAPI : NSObject {
         )
     }
     
+    func totalBarcas() -> [Int] {
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        manager.GET("http://losbarkitos.herokuapp.com/total_barcas", parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                var diccionario = 
+            },
+            failure: <#((AFHTTPRequestOperation!, NSError!) -> Void)!##(AFHTTPRequestOperation!, NSError!) -> Void#>)
+        
+    }
+    
+    func totalEuros() -> Int {
+        
+    }
+    
     func obtenerPrimerLibre() {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
@@ -190,7 +208,7 @@ class webServiceCallAPI : NSObject {
         case 1:
             parametro = "Rio"
         case 2:
-            parametro = "ELéctrica"
+            parametro = "Electrica"
         case 3:
             parametro = "Whaly"
         case 4:
@@ -202,18 +220,21 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/orden_llegada/\(parametro)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                var indice : Int = 1
                 var diccionario = [String : AnyObject]()
                 for (k,v) in responseObject as [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as NSString == "si" { // la respuesta es erronea
+                    } else if v as NSString == "si" { // la respuesta es errónea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
                     }
                 }
                 println("diccionario : \(diccionario)")
-                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary<String,String>)// as [String : [String : String]])
+                
+                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary)
+
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
