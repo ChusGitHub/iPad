@@ -175,34 +175,40 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     // Formato Texto : normal
     cmd = [0x1b, 0x57, 0x2]
     commands.appendBytes(cmd, length: 3)
+    
+    // Inversion = si
+    cmd = [ 0x1b, 0x34 ]
+    commands.appendBytes(cmd, length: 2)
 
+    str = diccParam["p_venta"] as String
+    str += "\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+   
     str = diccParam["dia"] as String
     str += "\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
     
-    // Inversion color
-    cmd = [ 0x1b, 0x34 ]
+    // Inversion color NO
+    cmd = [ 0x1b, 0x35 ]
     commands.appendBytes(cmd, length: 2)
-    
-    str = "Total Barcas\r\n"
-    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
-    commands.appendData(datos!)
     
     // Formato Texto : normal
     cmd = [0x1b, 0x57, 0x2]
     commands.appendBytes(cmd, length: 3)
-
-    // Texto izquierda
-    cmd = [ 0x1b, 0x1d, 0x61, 0x0 ]
+    
+    // A la derecha
+    cmd = [0x1b, 0x1d, 0x61, 0x02]
     commands.appendBytes(cmd, length: 4)
     
     let Rios = diccParam["rio"] as Int
-    str = "Rios : \t \(Rios)\r\n"
+    str = "Rios : \(Rios)\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
-
+    
+  
     let Electricas = diccParam["electrica"] as Int
     str = "Electricas : \t \(Electricas)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
@@ -239,7 +245,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     commands.appendBytes(cmd, length: 3)
 
     str = String(Rios + Electricas + Whalys + Golds)
-    str += " barcas\n\r"
+    str += "\n\r"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
@@ -259,7 +265,9 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
-    
+    cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
+    commands.appendBytes(cmd, length: 3)
+
     
     return (sendCommand(commands, portName, p_portSettings, 10000))
 }

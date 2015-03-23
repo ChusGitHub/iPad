@@ -23,6 +23,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let WHALY     = 3
     let GOLD      = 4
     
+    let PUNTO_VENTA : Int = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
+    
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
     
@@ -103,7 +105,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     var gestion : String = "usuario"
     let datosUIPickerView = ["Lista Baja", "Lista Media", "Lista Alta"]
     
-    var totalBarcas : [Int] = []
+    var totalBarcas : [Int] = [0,0,0,0]
     var totalEuros : Int = 0
     
     //let conectado : Conectividad?
@@ -341,7 +343,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
             println("codVend: \(codVend)")
             // Se inserta la venta de la barca en HEROKU
-            webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: 1, vendedor: codVend)
+            webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: PUNTO_VENTA , vendedor: codVend)
             // Se inserta la venta de la barca en SQLITE
             var insertado = insertaViajeSQLite()
 
@@ -427,9 +429,13 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             let totalEuros  : Int = self.totalEuros
             
             let total : Int = totalBarcas[0] + totalBarcas[1] + totalBarcas[2] + totalBarcas[3]
-            let dia : NSDate = NSDate()
+            
+            let formatoFecha = NSDateFormatter()
+            formatoFecha.dateFormat = "dd-MM-yyyy"
+            let dia = formatoFecha.stringFromDate(NSDate())
             
             let diccParam : [String : AnyObject] = [
+                "p_venta"   : puntoVenta,
                 "rio"       : totalBarcas[0],
                 "electrica" : totalBarcas[1],
                 "whaly"     : totalBarcas[2],
