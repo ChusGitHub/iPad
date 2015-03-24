@@ -109,8 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
         DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
         DataManager().setValueForKey("lista_precio", value: "3", inFile: "appstate")
-        DataManager().setValueForKey("punto_venta_codigo", value: 1, inFile: "appstate")
-        DataManager().setValueForKey("punto_venta", value: "Oficina", inFile: "appstate")
+        DataManager().setValueForKey("punto_venta_codigo", value: 3, inFile: "appstate")
+        DataManager().setValueForKey("punto_venta", value: "Otros", inFile: "appstate")
         
         return "si"
         
