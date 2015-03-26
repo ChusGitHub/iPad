@@ -162,11 +162,11 @@ class webServiceCallAPI : NSObject {
         )
     }
     
-    func totalBarcas() {
+    func totalBarcas(PV : Int) {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
-        manager.GET("http://losbarkitos.herokuapp.com/total_barcas", parameters: nil,
+        manager.GET("http://losbarkitos.herokuapp.com/total_barcas/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()
                 for (k,v) in responseObject as [String : Int] {

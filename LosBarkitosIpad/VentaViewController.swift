@@ -247,7 +247,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         // Compruebo si ya se ha abierto el dia
         println(DataManager().getValueForKey("vendedor", inFile: "appstate") as String)
     
-        cargarValoresCon_appstate(inFile: "appstate")
+        //cargarValoresCon_appstate(inFile: "appstate")
         
         // Registro el cell class vendedorViewController
         self.vendedorUITableView.hidden = true
@@ -262,6 +262,36 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         txtPasswordUITextField.delegate = self
 
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        
+        var estadoActual = DataManager().getValueForKey("estado", inFile: "appstate") as String
+        
+        estadoVentaUITextField.text = "\(estadoActual)"
+        
+        
+        // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
+        if (self.toPreciosViewController != 0) {
+            
+            var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
+            let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(ticketAction)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+        
+        // Miro si hay impresora conectada
+        self.setupImpresora()
+        // webService.obtenerVentas()
+        self.infoAdministradoUILabel.text = "Usuario"
+        
+    }
+    
 
     
     // Mira si está la impresora conectada:
@@ -302,34 +332,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     }
 
-    override func viewWillAppear(animated: Bool) {
-        
-        
-        var estadoActual = DataManager().getValueForKey("estado", inFile: "appstate") as String
-        
-        estadoVentaUITextField.text = "\(estadoActual)"
-        
-        
-        // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
-        if (self.toPreciosViewController != 0) {
-            
-                var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
-            
-                let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
-                let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
-                alertController.addAction(ticketAction)
-                alertController.addAction(cancelAction)
-            
-                self.presentViewController(alertController, animated: true, completion: nil)
-                        
-        }
-        
-        // Miro si hay impresora conectada
-        self.setupImpresora()
-        // webService.obtenerVentas()
-        self.infoAdministradoUILabel.text = "Usuario"
-        
-    }
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
@@ -419,29 +421,28 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
             // AQUI ESTAN LOS DATOS A IMPRIMIR
-            let puntoVenta : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+            //let puntoVenta : Int = DataManager().getValueForKey("punto_venta", inFile: "appstate") as Int
             
-            webService.totalBarcas()
+            webService.totalBarcas(PUNTO_VENTA)
             webService.totalEuros()
             
             
-            let totalBarcas : [Int] = self.totalBarcas
-            let totalEuros  : Int = self.totalEuros
             
-            let total : Int = totalBarcas[0] + totalBarcas[1] + totalBarcas[2] + totalBarcas[3]
+            let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
             
             let formatoFecha = NSDateFormatter()
             formatoFecha.dateFormat = "dd-MM-yyyy"
             let dia = formatoFecha.stringFromDate(NSDate())
             
             let diccParam : [String : AnyObject] = [
-                "p_venta"   : puntoVenta,
-                "rio"       : totalBarcas[0],
-                "electrica" : totalBarcas[1],
-                "whaly"     : totalBarcas[2],
-                "gold"      : totalBarcas[3],
+                "p_venta"   : PUNTO_VENTA,
+                "rio"       : self.totalBarcas[0],
+                "electrica" : self.totalBarcas[1],
+                "whaly"     : self.totalBarcas[2],
+                "gold"      : self.totalBarcas[3],
                 "dia"       : dia,
-                "euros"     : totalEuros
+                "euros"     : self.totalEuros,
+                "total"     : totalBarcas
             ]
             
             let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings, diccParam)
@@ -549,7 +550,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 println("Error en el diccionario devuelto : \(v)")
                 EXIT_FAILURE
             } else {
-                totalBarcas = Array(respuesta.values)
+                self.totalBarcas = Array(respuesta.values)
             }
         }
         

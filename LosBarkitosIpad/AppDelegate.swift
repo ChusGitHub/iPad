@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        cargarPlist_appstate(inFile: "appstate")
+        //cargarPlist_appstate(inFile: "appstate")
 
         // Cuando se abre la app miro si ya se ha cargado el dia
         // cargado = "si" "no"
@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (cargado == nil || cargado == "no") {
             cargarPlist_appstate(inFile: "appstate")
+            cargado = "si"
         }
         
         
