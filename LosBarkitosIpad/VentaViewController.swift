@@ -426,8 +426,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             webService.totalBarcas(PUNTO_VENTA)
             webService.totalEuros()
             
-            
-            
             let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
             
             let formatoFecha = NSDateFormatter()
