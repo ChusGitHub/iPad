@@ -103,12 +103,18 @@ class webServiceCallAPI : NSObject {
         )
     }
     
-    func entradaBDD_ventaBarca(tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int) {
+    func entradaBDD_ventaBarca(ticket :Int, tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int, negro : Bool) {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
+        var ticketBlanco : Int = 0
+        
+        if negro == false {
+            ticketBlanco = 1
+        }
+        
         manager.GET(
-            "http://losbarkitos.herokuapp.com/registro_barca/\(tipo)/\(precio)/\(puntoVenta)/\(vendedor)/", parameters: nil,
+            "http://losbarkitos.herokuapp.com/registro_barca/\(ticket)/\(tipo)/\(precio)/\(puntoVenta)/\(vendedor)/\(ticketBlanco)/", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
                 for (k,v) in responseObject as [String : AnyObject] {
@@ -132,12 +138,12 @@ class webServiceCallAPI : NSObject {
         )
     }
     
-    func obtenerNumero() {
+    func obtenerNumero(precio : Int) {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
         manager.GET(
-            "http://losbarkitos.herokuapp.com/ultimo_numero",
+            "http://losbarkitos.herokuapp.com/ultimo_numero/\(precio)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()

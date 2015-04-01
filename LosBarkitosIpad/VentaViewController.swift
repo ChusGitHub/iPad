@@ -71,6 +71,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     // Items de vendedorUITableView
     // numero de ticket en BDD
     var numeroTicket : Int = 0
+    // ticket si es negro o no
+    var negro : Bool = false
     // Diccionario que mantiene codigo y nombre de un vendedor
     var vendedor = [String : String]()
     // Diccinario que mantiene los datos de una venta
@@ -223,7 +225,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
         super.init(coder: aDecoder)
         webService.delegate = self
-        webService.obtenerNumero()
+      //  webService.obtenerNumero()
 
     }
     
@@ -261,6 +263,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         webService.delegate = self
         
         txtPasswordUITextField.delegate = self
+        
+        //webService.obtenerNumero()
 
     }
     
@@ -277,7 +281,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             
             var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
             
-            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
+            //let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
+            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumero(self.toPreciosViewController)})
             let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
             alertController.addAction(ticketAction)
             alertController.addAction(cancelAction)
@@ -339,17 +344,21 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
+        if (ticketImpreso != true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
             println("codVend: \(codVend)")
             // Se inserta la venta de la barca en HEROKU
-            webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: PUNTO_VENTA , vendedor: codVend)
+            webService.entradaBDD_ventaBarca(self.numeroTicket,
+                                             tipo: self.barcaActual,
+                                             precio: self.toPreciosViewController,
+                                             puntoVenta: PUNTO_VENTA ,
+                                             vendedor: codVend,
+                                             negro: self.negro)
             // Se inserta la venta de la barca en SQLITE
             var insertado = insertaViajeSQLite()
-            webService.obtenerNumero()
 
         } else {
             
@@ -516,8 +525,16 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 if k as NSString == "numero" {
                     self.numeroTicket = v as Int
                 }
+                if k as NSString == "negro" {
+                    if v  as String == "si" {
+                        self.negro = true
+                    } else {
+                        self.negro = false
+                    }
+                }
             }
         }
+        self.procesarTicket()
     }
     
     func prepararImpresion() {
