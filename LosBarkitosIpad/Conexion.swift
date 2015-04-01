@@ -188,11 +188,11 @@ class webServiceCallAPI : NSObject {
         })
     }
     
-    func totalEuros()  {
+    func totalEuros(PV : Int)  {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
-        manager.GET("http://losbarkitos.herokuapp.com/total_euros", parameters: nil,
+        manager.GET("http://losbarkitos.herokuapp.com/total_euros/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()
                 for (k,v) in responseObject as [String : Int] {
@@ -204,17 +204,14 @@ class webServiceCallAPI : NSObject {
                     }
                 }
                 println("diccionario : \(diccionario)")
-                self.delegate?.didReceiveResponse_totalBarcas(diccionario as Dictionary)
+                self.delegate?.didReceiveResponse_totalEuros(diccionario as Dictionary)
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : Int]()
                 diccionario["error"] = 1
-                self.delegate?.didReceiveResponse_totalBarcas(diccionario as Dictionary)
-        })
-  
-        
-        
+                self.delegate?.didReceiveResponse_totalEuros(diccionario as Dictionary)
+        })        
     }
     
     func obtenerPrimerLibre() {

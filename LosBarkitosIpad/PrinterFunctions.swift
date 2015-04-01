@@ -63,7 +63,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     str += "www.marinaferry.es\r\n"
     str += "---------------------------------\r\n\r\n"
     let n : String = String(parametro["numero"] as Int)
-    str += "Núm. \(n)\r\n"
+    str += "Num. \(n)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
@@ -146,6 +146,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     return (sendCommand(commands,portName, portSettings,10000))
 }
 
+// TICKET RESUMEN DEL DIA
 func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam : [String : AnyObject]) -> Bool {
     
     let horaActual : NSDate = NSDate()
@@ -179,9 +180,9 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     // Inversion = si
     cmd = [ 0x1b, 0x34 ]
     commands.appendBytes(cmd, length: 2)
-
-    str = diccParam["p_venta"] as String
-    str += "\r\n"
+    
+    let pv: AnyObject = diccParam["p_venta"]!
+    str = "\(pv)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
    
@@ -204,7 +205,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     commands.appendBytes(cmd, length: 4)
     
     let Rios = diccParam["rio"] as Int
-    str = "Rios : \(Rios)\n"
+    str = "Rios : \t \(Rios)\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
@@ -236,7 +237,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     cmd = [ 0x1b, 0x1d, 0x61, 0x01 ]
     commands.appendBytes(cmd, length: 4)
 
-    str = "Total barcas : "
+    str = "Total barcas:"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
@@ -253,7 +254,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     cmd = [ 0x1b, 0x34 ]
     commands.appendBytes(cmd, length: 2)
     
-    str = "Total Euros : "
+    str = "Total Euros:"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     

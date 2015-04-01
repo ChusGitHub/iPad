@@ -24,7 +24,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let GOLD      = 4
     
     let PUNTO_VENTA : Int = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
-    
+    let PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
     
@@ -348,6 +349,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             webService.entradaBDD_ventaBarca(self.barcaActual, precio: self.toPreciosViewController, puntoVenta: PUNTO_VENTA , vendedor: codVend)
             // Se inserta la venta de la barca en SQLITE
             var insertado = insertaViajeSQLite()
+            webService.obtenerNumero()
 
         } else {
             
@@ -421,40 +423,18 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
             // AQUI ESTAN LOS DATOS A IMPRIMIR
-            //let puntoVenta : Int = DataManager().getValueForKey("punto_venta", inFile: "appstate") as Int
             
-            webService.totalBarcas(PUNTO_VENTA)
-            webService.totalEuros()
-            
-            let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
-            
-            let formatoFecha = NSDateFormatter()
-            formatoFecha.dateFormat = "dd-MM-yyyy"
-            let dia = formatoFecha.stringFromDate(NSDate())
-            
-            let diccParam : [String : AnyObject] = [
-                "p_venta"   : PUNTO_VENTA,
-                "rio"       : self.totalBarcas[0],
-                "electrica" : self.totalBarcas[1],
-                "whaly"     : self.totalBarcas[2],
-                "gold"      : self.totalBarcas[3],
-                "dia"       : dia,
-                "euros"     : self.totalEuros,
-                "total"     : totalBarcas
-            ]
-            
-            let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings, diccParam)
+            prepararImpresion()
             
             // Trataré de desconectar el puerto
             
-            return ticketImpreso
+            return true
         } else {
             return false
         }
 
     }
 
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -540,6 +520,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
+    func prepararImpresion() {
+        webService.totalBarcas(self.PUNTO_VENTA)
+        
+        println(self.totalBarcas)
+        let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
+    }
     func didReceiveResponse_totalBarcas(respuesta : [String : Int]) {
         
         println("respuesta del servidor : Total Barcas :\(respuesta)")
@@ -551,7 +537,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 self.totalBarcas = Array(respuesta.values)
             }
         }
-        
+        webService.totalEuros(self.PUNTO_VENTA)
     }
     
     func didReceiveResponse_totalEuros(respuesta : [String : Int]) {
@@ -559,11 +545,28 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         println("respuesta del servidor : Total Euros :\(respuesta)")
         for (k,v) in respuesta {
             if k == "total" {
-                totalEuros = v as Int
+                self.totalEuros = v as Int
             } else {
-                totalEuros = 0
+                self.totalEuros = 0
             }
         }
+        
+        let formatoFecha = NSDateFormatter()
+        formatoFecha.dateFormat = "dd-MM-yyyy"
+        let dia = formatoFecha.stringFromDate(NSDate())
+        
+        let diccParam : [String : AnyObject] = [
+            "p_venta"   : self.PUNTO_VENTA_NOMBRE,
+            "rio"       : self.totalBarcas[0],
+            "electrica" : self.totalBarcas[1],
+            "whaly"     : self.totalBarcas[2],
+            "gold"      : self.totalBarcas[3],
+            "dia"       : dia,
+            "euros"     : self.totalEuros,
+            "total"     : totalBarcas
+        ]
+        
+        let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings, diccParam)
     }
     
     func cargarValoresCon_appstate(inFile file: String) {
