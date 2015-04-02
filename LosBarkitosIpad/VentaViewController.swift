@@ -23,8 +23,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let WHALY     = 3
     let GOLD      = 4
     
-    let PUNTO_VENTA : Int = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
-    let PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+ 
+    var PUNTO_VENTA  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
+
+    var PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
 
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
@@ -225,6 +227,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
         super.init(coder: aDecoder)
         webService.delegate = self
+     //   if self.PUNTO_VENTA == 0 {
+      //      self.PUNTO_VENTA  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
+        //}
+        //if self.PUNTO_VENTA_NOMBRE == "" {
+          //  self.PUNTO_VENTA_NOMBRE  = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+        //}
       //  webService.obtenerNumero()
 
     }
@@ -344,7 +352,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso != true) {
+        if (ticketImpreso == true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta

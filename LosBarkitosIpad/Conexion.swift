@@ -107,10 +107,10 @@ class webServiceCallAPI : NSObject {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?
-        var ticketBlanco : Int = 0
+        var ticketBlanco : String = "0"
         
         if negro == false {
-            ticketBlanco = 1
+            ticketBlanco = "1"
         }
         
         manager.GET(
