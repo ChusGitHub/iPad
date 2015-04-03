@@ -62,6 +62,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     @IBOutlet weak var tipoListaUIView: UIView!
     
+    
     var barcaActual : Int = -1
     var barcaActualString : String? = nil
 
@@ -112,6 +113,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     var totalBarcas : [Int] = [0,0,0,0]
     var totalEuros : Int = 0
+    
+    var reservas : [Int] = [0,0,0,0]
     
     //let conectado : Conectividad?
 
@@ -216,6 +219,24 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
     }
     
+    @IBAction func reservasUIButton(sender: UIButton) {
+        webService.delegate = self
+        
+        var alertController = UIAlertController(title: "RESERVA", message: "Clic en el tipo de barco para reservar", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let rioAction = UIAlertAction(title: "Rio", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.RIO, pv: 2)})
+        let electricaAction = UIAlertAction(title: "Eléctrica", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.ELECTRICA, pv: 2)})
+        let whalyAction = UIAlertAction(title: "Whaly", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.WHALY, pv: 2)})
+        let goldAction = UIAlertAction(title: "Gold", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.GOLD, pv: 2)})
+
+        alertController.addAction(rioAction)
+        alertController.addAction(electricaAction)
+        alertController.addAction(whalyAction)
+        alertController.addAction(goldAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+    }
     
     func noAdministrador () {
         self.gestion = "usuario"
@@ -422,6 +443,23 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
+    func imprimirReserva(PV : String) {
+        if setupImpresora() {
+            self.foundPrinters = SMPort.searchPrinter("BT:")
+            
+            
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            self.lastSelectedPortName = portInfo.portName
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.setPortName(portInfo.portName)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            var p_portName : NSString = appDelegate.getPortName()
+            var p_portSettings : NSString = appDelegate.getPortSettings()
+            
+            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas)
+        }
+    }
     
     func imprimirTotal() -> Bool {
         
@@ -594,6 +632,23 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings, diccParam)
     }
     
+    func didReceiveResponse_reserva(respuesta : [String : AnyObject]) {
+        println("respuesta del servidor : \(respuesta)")
+        var dicc : [String : AnyObject]
+        var PV : String = ""
+        self.reservas = [0,0,0,0]
+        for (k,v) in respuesta {
+            if k == "PV" {
+                PV = v as String
+            }
+            if k == "numero" {
+                self.reservas = v as [Int]
+            }
+        }
+        imprimirReserva(PV)
+    }
+
+    
     func cargarValoresCon_appstate(inFile file: String) {
      
         let nombre_v : String = DataManager().getValueForKey("nombre_vendedor", inFile: file) as String
@@ -737,115 +792,5 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         var estaInsertadoSQLITE = ManejoSQLITE.instance.insertaViajeSQLITE(viaje)
         return estaInsertadoSQLITE
     }
-   
-    
-  /*  func search() {
-        
-        if self.searching {
-            return // Si está buscando sale porque aqui no hace nada
-        }
-        
-        self.printers.removeAllObjects()
-        self.searching = true
-        self.setConnectedPrinter(self.connectedPrinter)
-        self.connectedPrinter = nil
-        
-        Printer.search{(found : [AnyObject]!)->() in
-            if found.count > 0 {
-                self.printers.addObjectsFromArray(found)
-            
-                if self.connectedPrinter == nil {
-                    var lastKnownPrinter : Printer? = Printer.connectedPrinter()
-                    var p : Printer?
-                    for  p  in found {
-                        if p.macAddress == lastKnownPrinter?.macAddress {
-                            self.setConnectedPrinter(self.connectedPrinter)
-                            self.connectedPrinter = p as? Printer
-                            break
-                        }
-                    }
-                }
-        
-            }
-            self.empty = found.count == 0
-            self.searching = false
-        }
-        
-    }
-    
-    func setConnectedPrinter(connectedPrinter : Printer?) {
-        if (connectedPrinter == nil) && (self.connectedPrinter != nil){
-            if ((self.connectedPrinter?.isReadyToPrint) != nil) {
-                self.connectedPrinter?.disconnect()
-            }
-            self.connectedPrinter = nil
-            
-        } else if (connectedPrinter != nil) {
-            self.connectedPrinter = connectedPrinter
-            self.connectedPrinter?.delegate = self
-            self.connectedPrinter?.connect({(success : Bool)->() in
-                if (success == false) {
-                    self.connectedPrinter = nil
-                }
-                
-            })
-        }
-        
-    }
-    
-    func setSearching(searching : Bool) {
-        self.searching = searching
-        if searching {
-            self.empty = false
-        }
-    }
-    
-    func setEmpty(empty : Bool) {
-        self.empty = empty
-        // animacion de spinner
-    }
-   /* func notifyDelegates() {
-        var d : PrinterConnectivityDelegate = self.delegates
-        for d in self.delegates {
-            d.connectedPrinterDidChangeTo(self.connectedPrinter)
-        }
-    }*/
-
-    func addDelegate(delegate : AnyObject) {
-        self.delegates.addObject(delegate)
-    }
-    
-    func removeDelegates(delegate : AnyObject) {
-        self.delegates.removeObject(delegate)
-    }
-    
-    func printer(printer: Printer!, didChangeStatus status: PrinterStatus) {
-        if self.printers .containsObject(printer) {
-            let indexPath : NSIndexPath = NSIndexPath(forRow: self.printers.indexOfObject(printer), inSection: 0)
-        
-            
-        }
-        self.printerStatus = status
- }*/
-    
-   /* func accesoryConnected(notification : NSNotification) {
-        var connectedAccesory : EAAccessory = notification.userInfo().indexForKey(EAAccessoryKey)    }
-    
-    - (void)accessoryConnected:(NSNotification *)notification
-    {
-    NSLog(@"EAController::accessoryConnected");
-    
-    EAAccessory *connectedAccessory = [[notification userInfo] objectForKey:EAAccessoryKey];
-    [[self accessoryList] addObject:connectedAccessory];
-    if ([_accessoryList count])
-    {
-    _selectedAccessory = [_accessoryList objectAtIndex:0];
-    NSArray *protocolStrings = [_selectedAccessory protocolStrings];
-    if ([protocolStrings count]) {
-    self.protocolString = [protocolStrings objectAtIndex:0];
-    [self openSession];
-    }
-    }
-    }*/
 
 }

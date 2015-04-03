@@ -8,6 +8,7 @@
 
 import Foundation
 
+// IMPRESION DE TICKET
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
     let horaActual : NSDate = NSDate()
@@ -145,6 +146,97 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     
     return (sendCommand(commands,portName, portSettings,10000))
 }
+
+// IMPRESION DE RESERVA
+func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : String,  parametro : [Int]) -> Bool {
+    
+    let horaActual : NSDate = NSDate()
+    
+    var commands = NSMutableData()
+    var str : String
+    var datos : NSData?
+    
+    var cmd : [UInt8]
+    var tipo : Int = 0
+    var numReserva : Int = 0
+    
+    // Miro de donde es la reserva
+    for num in parametro {
+        if num != 0 {
+            tipo++
+            numReserva = num
+            break
+        }
+    }
+    
+    //Juego de caracteres en español
+    cmd = [ 0x1b, 0x1d, 0x74, 0x01]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Anchura de texto
+    cmd = [ 0x1b, 0x57, 0x03 ]
+    commands.appendBytes(cmd, length: 3)
+    
+    
+    // Texto centrado
+    cmd = [ 0x1b, 0x1d, 0x61, 0x01 ]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Formato Texto : espacio entre caracteres
+    cmd = [ 0x1b, 0x1e, 0x46, 0x02 ]
+    commands.appendBytes(cmd, length: 4)
+    
+    // Inversion color
+    cmd = [ 0x1b, 0x34 ]
+    commands.appendBytes(cmd, length: 2)
+    str = "LosBarkitos\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // Formato Texto : normal
+    cmd = [0x1b, 0x57, 0x2]
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "d'Empúriabrava\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    // Inversion = no
+    cmd = [ 0x1b, 0x35 ]
+    commands.appendBytes(cmd, length: 2)
+    
+    // Formato pequeño para datos empresa
+    cmd = [0x1b, 0x57, 0x00]
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "Reserva\r\n"
+    str += PV + "\r\n\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    // tamaño grande
+    cmd = [0x1b, 0x57, 0x03]
+    commands.appendBytes(cmd, length: 3)
+    // Centrado
+    cmd = [0x1b, 0x1d, 0x61, 0x01]
+    commands.appendBytes(cmd, length: 4)
+
+    str = String(numReserva)
+    str += "\r\n\n---------------------------------\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "\n\r\n\r\n\r\n\r"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+    
+    
+    return (sendCommand(commands,portName, portSettings,10000))
+}
+
 
 // TICKET RESUMEN DEL DIA
 func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam : [String : AnyObject]) -> Bool {

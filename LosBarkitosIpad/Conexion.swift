@@ -18,12 +18,13 @@ import UIkit
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
-    
+    func didReceiveResponse_reserva(respuesta : [String : AnyObject])
 }
 
 protocol WebServiceProtocoloControl {
     func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
     func didReceiveResponse_listaLlegadas(respuesta : [String : AnyObject])
+    
 }
 
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
@@ -286,6 +287,39 @@ class webServiceCallAPI : NSObject {
             }
         )
         
+    }
+    
+    func obtenerNumeroReserva(tipo : Int, pv : Int) {
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/reserva/\(tipo)/\(pv)",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                println("responseObject : \(responseObject)")
+                var diccionario = [String : AnyObject]()
+                for (k,v) in responseObject as [String : AnyObject] {
+                    if k != "error" {
+                        diccionario[k] = v
+                    } else if v as NSString == "si" { // la respuesta es errónea
+                        println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        diccionario = [String : AnyObject]()
+                        diccionario["error"] = "si"
+                    }
+                }
+                println("diccionario : \(diccionario)")
+
+                self.delegate?.didReceiveResponse_reserva(responseObject as [String : AnyObject])
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                println("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegate?.didReceiveResponse_reserva(diccionario as [String : AnyObject])
+            }
+        )
+ 
     }
 
 }
