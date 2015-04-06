@@ -23,10 +23,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let WHALY     = 3
     let GOLD      = 4
     
- 
-    var PUNTO_VENTA  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
-
-    var PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+    let VENDEDOR =  1
+    let VENTAS =    2
 
 
     @IBOutlet weak var estadoVentaUITextField: UITextField!
@@ -62,7 +60,14 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     @IBOutlet weak var tipoListaUIView: UIView!
     
+    @IBOutlet weak var numeroBarcasUILabel: UILabel!
     
+    //var  PUNTO_VENTA : Int  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
+    
+    //var PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+    var PUNTO_VENTA : Int = 2
+    var PUNTO_VENTA_NOMBRE : String = "LosBarkitos"
+
     var barcaActual : Int = -1
     var barcaActualString : String? = nil
 
@@ -119,8 +124,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     //let conectado : Conectividad?
 
 
-    let VENDEDOR =  1
-    let VENTAS =    2
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
     @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
@@ -223,7 +226,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         webService.delegate = self
         
         var alertController = UIAlertController(title: "RESERVA", message: "Clic en el tipo de barco para reservar", preferredStyle: UIAlertControllerStyle.Alert)
-        
         let rioAction = UIAlertAction(title: "Rio", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.RIO, pv: 2)})
         let electricaAction = UIAlertAction(title: "Eléctrica", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.ELECTRICA, pv: 2)})
         let whalyAction = UIAlertAction(title: "Whaly", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.WHALY, pv: 2)})
@@ -308,15 +310,16 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
         if (self.toPreciosViewController != 0) {
             
-            var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
+            self.webService.obtenerNumero(self.toPreciosViewController)
             
-            //let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.procesarTicket()})
-            let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumero(self.toPreciosViewController)})
-            let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
-            alertController.addAction(ticketAction)
-            alertController.addAction(cancelAction)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+           // var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
+            //let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumero(self.toPreciosViewController)})
+ //           let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
+   //         alertController.addAction(ticketAction)
+     //       alertController.addAction(cancelAction)
+            
+       //     self.presentViewController(alertController, animated: true, completion: nil)
             
         }
         
@@ -373,7 +376,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
+        if (ticketImpreso != true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
@@ -387,8 +390,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                                              vendedor: codVend,
                                              negro: self.negro)
             // Se inserta la venta de la barca en SQLITE
-            var insertado = insertaViajeSQLite()
-
+           // var insertado = insertaViajeSQLite()
+            
         } else {
             
             self.dismissViewControllerAnimated(true, completion: {
@@ -529,7 +532,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
             }
-        }
+         }
         self.ventasUITableView.clearsContextBeforeDrawing = true
         webService.obtenerVentas()
     }
@@ -541,6 +544,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             if k as NSString == "error" && v as NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
+            
+            } else if k as NSString == "numero_viajes" {
+                    self.numeroBarcasUILabel.text = String(v as Int)
             } else {
                 println("k: \(k), v: \(v)")
                 let n : Int = v["numero"] as Int
@@ -558,7 +564,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         println("ventas ordenadas : \(self.ventas)")
         self.ventasUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.ventasUITableView.reloadData()
-        
     }
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
@@ -696,7 +701,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             
         } else {
             var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
-            cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
+            //cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
             cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre"]
             println(self.ventas[indexPath.row]["nombre"])
             cell.precioVentasTicketsIULabel.text = self.ventas[indexPath.row]["precio"]
@@ -707,7 +712,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             println(self.ventas[indexPath.row]["fecha"])
             cell.barcaVentasTicketsUILabel.text = self.ventas[indexPath.row]["tipo"]
             println(self.ventas[indexPath.row]["tipo"])
-            
             
             return cell
         }

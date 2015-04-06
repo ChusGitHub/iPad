@@ -53,6 +53,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webService.obtenerPrimerLibre()
+
         webService.delegateControl = self
         webService.obtenerPrimerLibre()
         

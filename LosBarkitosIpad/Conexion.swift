@@ -76,7 +76,8 @@ class webServiceCallAPI : NSObject {
         var jsonDict :  NSDictionary!
         var jsonArray : NSArray!
         var error :     NSError?
-        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/0/0/0",
+        
+        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/0/2/0",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                  var indice : Int = 1
@@ -112,6 +113,9 @@ class webServiceCallAPI : NSObject {
         
         if negro == false {
             ticketBlanco = "1"
+        }
+        if ticket == 0 {
+            ticketBlanco = "0"
         }
         
         manager.GET(
