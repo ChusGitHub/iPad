@@ -26,13 +26,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let VENDEDOR =  1
     let VENTAS =    2
 
-
-    @IBOutlet weak var estadoVentaUITextField: UITextField!
-    
-    @IBOutlet weak var horaLlegadaUITextField: UITextField!
-    
-    @IBOutlet weak var controlUITextField: UITextField!
-    
     
     @IBOutlet weak var btnViewVendedoresUIButton: UIButton!
     
@@ -102,6 +95,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     // Valor devuelto por el tipoReservaViewController
     var totipoReservaViewControllerTipo : Int = 0
     var totipoReservaViewControllerPV : Int = 0
+    var tovueltaReservaViewController : Bool = false
     
     var arrayPort : NSArray = ["Standard"]
     var arrayFunction : NSArray = ["Sample Receipt"]
@@ -304,31 +298,21 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     override func viewWillAppear(animated: Bool) {
         
-        
-        var estadoActual = DataManager().getValueForKey("estado", inFile: "appstate") as String
-        
-        estadoVentaUITextField.text = "\(estadoActual)"
-        
-        
         // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
         if (self.toPreciosViewController != 0) {
-            
             self.webService.obtenerNumero(self.toPreciosViewController)
-            
-            
-           // var alertController = UIAlertController(title: "TICKET", message: "Barca: \(self.barcaActualString!)\nPrecio: \(self.toPreciosViewController) €", preferredStyle: UIAlertControllerStyle.Alert)
-            //let ticketAction = UIAlertAction(title: "Ticket", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumero(self.toPreciosViewController)})
- //           let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil)
-   //         alertController.addAction(ticketAction)
-     //       alertController.addAction(cancelAction)
-            
-       //     self.presentViewController(alertController, animated: true, completion: nil)
-            
+            self.toPreciosViewController = 0
+        }
+       
+        // Miro si vuelve de la pantalla de reservas
+        if self.tovueltaReservaViewController {
+            self.webService.obtenerNumeroReserva(self.totipoReservaViewControllerTipo, pv: self.totipoReservaViewControllerPV)
+            self.tovueltaReservaViewController = false
         }
         
         // Miro si hay impresora conectada
         self.setupImpresora()
-        // webService.obtenerVentas()
+       
         self.infoAdministradoUILabel.text = "Usuario"
         
     }

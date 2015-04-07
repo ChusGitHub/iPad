@@ -31,23 +31,30 @@ class tipoReservaUIViewController: UIViewController {
             let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
             siguienteVC.totipoReservaViewControllerTipo = siguienteVC.RIO
             siguienteVC.totipoReservaViewControllerPV = siguienteVC.PUNTO_VENTA
+            siguienteVC.tovueltaReservaViewController = true
             
         } else if segue.identifier == "segueReservaElectrica" {
             let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
             siguienteVC.totipoReservaViewControllerTipo = siguienteVC.ELECTRICA
             siguienteVC.totipoReservaViewControllerPV = siguienteVC.PUNTO_VENTA
+            siguienteVC.tovueltaReservaViewController = true
+
             
         } else if segue.identifier == "segueReservaWhaly" {
             let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
             siguienteVC.totipoReservaViewControllerTipo = siguienteVC.WHALY
             siguienteVC.totipoReservaViewControllerPV = siguienteVC.PUNTO_VENTA
+            siguienteVC.tovueltaReservaViewController = true
+
 
         } else if segue.identifier == "segueReservaGold" {
             let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
             siguienteVC.totipoReservaViewControllerTipo = siguienteVC.GOLD
             siguienteVC.totipoReservaViewControllerPV = siguienteVC.PUNTO_VENTA
+            siguienteVC.tovueltaReservaViewController = true
 
         }
+        
     }
    
 
