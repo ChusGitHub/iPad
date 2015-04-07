@@ -99,6 +99,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     // algo falla : String con informacion de lo que falla
     var toPreciosViewController : Int = 0
     
+    // Valor devuelto por el tipoReservaViewController
+    var totipoReservaViewControllerTipo : Int = 0
+    var totipoReservaViewControllerPV : Int = 0
     
     var arrayPort : NSArray = ["Standard"]
     var arrayFunction : NSArray = ["Sample Receipt"]
@@ -225,7 +228,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     @IBAction func reservasUIButton(sender: UIButton) {
         webService.delegate = self
         
-        var alertController = UIAlertController(title: "RESERVA", message: "Clic en el tipo de barco para reservar", preferredStyle: UIAlertControllerStyle.Alert)
+        /*var alertController = UIAlertController(title: "RESERVA", message: "Clic en el tipo de barco para reservar", preferredStyle: UIAlertControllerStyle.Alert)
         let rioAction = UIAlertAction(title: "Rio", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.RIO, pv: 2)})
         let electricaAction = UIAlertAction(title: "Eléctrica", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.ELECTRICA, pv: 2)})
         let whalyAction = UIAlertAction(title: "Whaly", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.WHALY, pv: 2)})
@@ -236,7 +239,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         alertController.addAction(whalyAction)
         alertController.addAction(goldAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.presentViewController(alertController, animated: true, completion: nil)*/
 
     }
     
@@ -756,6 +759,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             let siguienteVC : PreciosViewController = segue.destinationViewController as PreciosViewController
             siguienteVC.toTipo = self.barcaActual
             siguienteVC.toTipoString = self.barcaActualString
+        }
+        if segue.identifier == "segueTipoReserva" {
+            let siguienteVC : tipoReservaUIViewController = segue.destinationViewController as tipoReservaUIViewController
+            
         }
     }
     
