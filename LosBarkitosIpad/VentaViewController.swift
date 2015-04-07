@@ -376,7 +376,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso != true) {
+        if (ticketImpreso == true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
@@ -701,7 +701,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             
         } else {
             var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
-            //cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
+            cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
             cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre"]
             println(self.ventas[indexPath.row]["nombre"])
             cell.precioVentasTicketsIULabel.text = self.ventas[indexPath.row]["precio"]

@@ -127,12 +127,19 @@
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvD-oZ-4Y6">
+                                                    <rect key="frame" x="8" y="23" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="5"/>
+                                                    <color key="textColor" red="1" green="0.96862745098039216" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="barcaVentasTicketsUILabel" destination="dtW-8C-Weu" id="psg-BH-UWa"/>
                                             <outlet property="baseVentasTicketsUILabel" destination="cZf-hk-HTx" id="kDf-rD-mdV"/>
                                             <outlet property="horaVentasTicketsUILabel" destination="OoX-zs-1wP" id="eDB-6C-tEn"/>
+                                            <outlet property="numeroVentasTicketsUILabel" destination="JvD-oZ-4Y6" id="tmo-4o-6NB"/>
                                             <outlet property="precioVentasTicketsIULabel" destination="4zF-XT-hai" id="go1-ZY-v0S"/>
                                             <outlet property="vendedorVentasTicketsUILabel" destination="tfI-0e-pvb" id="xDu-RR-gqV"/>
                                         </connections>

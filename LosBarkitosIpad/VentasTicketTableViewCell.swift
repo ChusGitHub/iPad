@@ -15,7 +15,7 @@ class VentasTicketTableViewCell: UITableViewCell {
     @IBOutlet weak var horaVentasTicketsUILabel: UILabel!
     @IBOutlet weak var barcaVentasTicketsUILabel: UILabel!
     @IBOutlet weak var precioVentasTicketsIULabel: UILabel!
-    //@IBOutlet weak var numeroVentasTicketsUILabel: UILabel!
+    @IBOutlet weak var numeroVentasTicketsUILabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
