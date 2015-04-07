@@ -301,7 +301,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
         if (self.toPreciosViewController != 0) {
             self.webService.obtenerNumero(self.toPreciosViewController)
-            self.toPreciosViewController = 0
         }
        
         // Miro si vuelve de la pantalla de reservas
@@ -363,7 +362,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
+        if (ticketImpreso != true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
