@@ -14,7 +14,7 @@ import UIkit
     // funcion que implementará la clase delegada y que recibirá los datos de repuesta a la llamada
     func didReceiveResponse_listadoVendedores(respuesta : [String : AnyObject])
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
-    func didReceiveResponse_listadoVentas(respuesta : [String : AnyObject])
+    //func didReceiveResponse_listadoVentas(respuesta : [String : AnyObject])
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
@@ -72,7 +72,7 @@ class webServiceCallAPI : NSObject {
         
     }
     
-    func obtenerVentas() {
+ /*   func obtenerVentas() {
         var jsonDict :  NSDictionary!
         var jsonArray : NSArray!
         var error :     NSError?
@@ -103,7 +103,7 @@ class webServiceCallAPI : NSObject {
                 self.delegate?.didReceiveResponse_listadoVentas(diccionario as Dictionary)
             }
         )
-    }
+    }*/
     
     func entradaBDD_ventaBarca(ticket :Int, tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int, negro : Bool) {
         var jsonDict : NSDictionary!

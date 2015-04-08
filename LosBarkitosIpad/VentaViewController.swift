@@ -35,7 +35,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     // Propiedades de la tabla de las ventas
     
-    @IBOutlet weak var ventasUITableView: UITableView!
+   // @IBOutlet weak var ventasUITableView: UITableView!
     
     // Botones de las barcas
 
@@ -134,12 +134,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
      }
     
-    @IBAction func btnRefrescarVentas(sender: UIButton) {
+  /*  @IBAction func btnRefrescarVentas(sender: UIButton) {
         
         // limpiar uitableview
         self.ventasUITableView.clearsContextBeforeDrawing = true
         webService.obtenerVentas()
-    }
+    }*/
     
     @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
 
@@ -362,7 +362,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso != true) {
+        if (ticketImpreso == true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
@@ -519,11 +519,11 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 EXIT_FAILURE
             }
          }
-        self.ventasUITableView.clearsContextBeforeDrawing = true
-        webService.obtenerVentas()
+        //self.ventasUITableView.clearsContextBeforeDrawing = true
+        //webService.obtenerVentas()
     }
     
-    func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
+    /*func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
         self.ventas = []
         println("respuesta del servidor(respuesta) : \(respuesta)")
         for (k,v) in respuesta {
@@ -550,7 +550,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         println("ventas ordenadas : \(self.ventas)")
         self.ventasUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.ventasUITableView.reloadData()
-    }
+    }*/
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
         println("respuesta del servidor(respuesta) : \(respuesta)")
@@ -661,7 +661,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        if tableView.tag == VENDEDOR {
+       // if tableView.tag == VENDEDOR {
             var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
         
         
@@ -685,7 +685,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
             return cell
             
-        } else {
+        }/* else {
             var cell: VentasTicketTableViewCell = self.ventasUITableView.dequeueReusableCellWithIdentifier("CellVentas") as  VentasTicketTableViewCell
             cell.numeroVentasTicketsUILabel.text = self.ventas[indexPath.row]["numero"]
             cell.vendedorVentasTicketsUILabel.text = self.ventas[indexPath.row]["nombre"]
@@ -701,7 +701,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             
             return cell
         }
-    }
+    }*/
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let altura = tableView.frame.height

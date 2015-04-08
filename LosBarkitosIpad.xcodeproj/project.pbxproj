@@ -32,7 +32,6 @@
 		BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */; };
 		BBFC89D81A7E3996008402AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC89D71A7E3996008402AF /* Reachability.swift */; };
 		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
-		F98ED7CE1A800D5E005ADBFC /* VentasTicketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */; };
 		F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AFCE121A169FB5007FF3A9 /* PlistData.swift */; };
 		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
 		F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */; };
@@ -72,7 +71,6 @@
 		BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrinterFunctions.swift; sourceTree = "<group>"; };
 		BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlUITableViewCell.swift; sourceTree = "<group>"; };
 		BBFC89D71A7E3996008402AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VentasTicketTableViewCell.swift; sourceTree = "<group>"; };
 		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
 		F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendedorUITableViewCell.swift; sourceTree = "<group>"; };
 		F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreciosViewController.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */,
-				F98ED7CD1A800D5E005ADBFC /* VentasTicketTableViewCell.swift */,
 				F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */,
 			);
 			name = VentaViewController;
@@ -309,7 +306,6 @@
 			files = (
 				BB020C521AA08C1900B5E976 /* ManejoSQLITE.swift in Sources */,
 				BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */,
-				F98ED7CE1A800D5E005ADBFC /* VentasTicketTableViewCell.swift in Sources */,
 				BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */,
 				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,
 				F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */,

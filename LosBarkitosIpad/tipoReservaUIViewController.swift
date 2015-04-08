@@ -14,6 +14,14 @@ class tipoReservaUIViewController: UIViewController {
     @IBOutlet weak var btnElectricaReservaUIButton: UIButton!
     @IBOutlet weak var btnWhalyReservaUIButton: UIButton!
     @IBOutlet weak var btnGoldWhalyUIButton: UIButton!
+   
+    @IBAction func cancelarReservaUIButton(sender: UIButton) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
