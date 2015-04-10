@@ -276,7 +276,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryDisconnected}, name: EAAccessoryDidConnectNotification, object: nil)
         
         // Compruebo si ya se ha abierto el dia
-        println(DataManager().getValueForKey("vendedor", inFile: "appstate") as String)
+        println(DataManager().getValueForKey("vendedor", inFile: "appstate") as! String)
     
         //cargarValoresCon_appstate(inFile: "appstate")
         
@@ -284,7 +284,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.vendedorUITableView.hidden = true
         
         // Si es posible pongo el nombre del vendedor
-        self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as String
+        self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
         
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
@@ -314,6 +314,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
        
         self.infoAdministradoUILabel.text = "Usuario"
         
+        let total : Int = DataManager().getValueForKey("total_barcas", inFile: "appstate") as! Int
+       
+        self.numeroBarcasUILabel.text = String(total)
+        
     }
     
 
@@ -328,13 +332,13 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         if self.foundPrinters.count > 0 {// Hay impresora conectada
             
             println(self.foundPrinters.count)
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
            
             self.lastSelectedPortName = portInfo.portName
             
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             self.infoImpresoraUILabel.text = portInfo.portName
@@ -366,7 +370,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
-            let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
+            let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
             println("codVend: \(codVend)")
             // Se inserta la venta de la barca en HEROKU
             webService.entradaBDD_ventaBarca(self.numeroTicket,
@@ -375,6 +379,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                                              puntoVenta: PUNTO_VENTA ,
                                              vendedor: codVend,
                                              negro: self.negro)
+            let total : Int = ((DataManager().getValueForKey("total_barcas", inFile: "appstate") as! String).toInt()!) + 1
+            DataManager().setValueForKey("total_barcas", value: total, inFile: "appstate")
+            self.numeroBarcasUILabel.text = String(total)
             // Se inserta la venta de la barca en SQLITE
            // var insertado = insertaViajeSQLite()
             
@@ -400,17 +407,17 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
         
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
             self.lastSelectedPortName = portInfo.portName
         
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let vend : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as String
-            let punto : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
+            let vend : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
+            let punto : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
             let precio : Int = self.toPreciosViewController
             let numero : Int = self.numeroTicket
             let barca : String = self.barcaActualString!
@@ -437,12 +444,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
             
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
             self.lastSelectedPortName = portInfo.portName
             
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
@@ -457,12 +464,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
             
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as PortInfo
+            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
             self.lastSelectedPortName = portInfo.portName
             
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as NSString)
+            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
@@ -493,14 +500,14 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) {
         println("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
-            if k as NSString == "error" && v as NSString == "si" {
+            if k as NSString == "error" && v as! NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
             }
             // añado el vendedor al diccionario
             self.vendedor = [:]
-            let cod = v["codigo"] as Int
-            let nom = v["nombre"] as String
+            let cod = v["codigo"] as! Int
+            let nom = v["nombre"] as! String
             self.vendedor[String(cod)] = nom
             println("cod: \(cod)")
             println("nom: \(nom)")
@@ -514,7 +521,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta: [String : AnyObject]) {
         println("respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
-            if k as NSString == "error" && v as NSString == "si" {
+            if k as NSString == "error" && v as! NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
             }
@@ -555,15 +562,15 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
         println("respuesta del servidor(respuesta) : \(respuesta)")
         for (k,v) in respuesta {
-            if k as NSString == "error" && v as NSString != "no" {
+            if k as NSString == "error" && v as! NSString != "no" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO : \(v)")
                 EXIT_FAILURE
             } else {
                 if k as NSString == "numero" {
-                    self.numeroTicket = v as Int
+                    self.numeroTicket = v as! Int
                 }
                 if k as NSString == "negro" {
-                    if v  as String == "si" {
+                    if v  as! String == "si" {
                         self.negro = true
                     } else {
                         self.negro = false
@@ -630,10 +637,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.reservas = [0,0,0,0]
         for (k,v) in respuesta {
             if k == "PV" {
-                PV = v as String
+                PV = v as! String
             }
             if k == "numero" {
-                self.reservas = v as [Int]
+                self.reservas = v as! [Int]
             }
         }
         imprimirReserva(PV)
@@ -642,8 +649,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     func cargarValoresCon_appstate(inFile file: String) {
      
-        let nombre_v : String = DataManager().getValueForKey("nombre_vendedor", inFile: file) as String
-        let codigo_v  = DataManager().getValueForKey("vendedor", inFile: file) as String
+        let nombre_v : String = DataManager().getValueForKey("nombre_vendedor", inFile: file) as! String
+        let codigo_v  = DataManager().getValueForKey("vendedor", inFile: file) as! String
         
         self.vendedorUITextField.text = nombre_v
         self.vendedor[codigo_v] = nombre_v
@@ -662,7 +669,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
        // if tableView.tag == VENDEDOR {
-            var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as VendedorUITableViewCell
+            var cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as! VendedorUITableViewCell
         
         
             cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
@@ -739,12 +746,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "seguePrecios" {
-            let siguienteVC : PreciosViewController = segue.destinationViewController as PreciosViewController
+            let siguienteVC : PreciosViewController = segue.destinationViewController as! PreciosViewController
             siguienteVC.toTipo = self.barcaActual
             siguienteVC.toTipoString = self.barcaActualString
         }
         if segue.identifier == "segueTipoReserva" {
-            let siguienteVC : tipoReservaUIViewController = segue.destinationViewController as tipoReservaUIViewController
+            let siguienteVC : tipoReservaUIViewController = segue.destinationViewController as! tipoReservaUIViewController
             
         }
     }
@@ -780,8 +787,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         viaje.fecha = fecha
         viaje.barca = self.barcaActual
         viaje.blanco = false
-        viaje.vendedor =  (DataManager().getValueForKey("vendedor", inFile: "appstate") as String).toInt()!
-        viaje.punto_venta = (DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int)
+        viaje.vendedor =  (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
+        viaje.punto_venta = (DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int)
         
         var estaInsertadoSQLITE = ManejoSQLITE.instance.insertaViajeSQLITE(viaje)
         return estaInsertadoSQLITE

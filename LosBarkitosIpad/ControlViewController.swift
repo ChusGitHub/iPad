@@ -87,7 +87,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             registro["nombre"] = v["Nombre"] as? String
             registro["libre"] = v["libre"] as? String
             registro["tipo"] = v["Tipo"] as? String
-            let vueltas : Int = v["vueltas"] as Int
+            let vueltas : Int = v["vueltas"] as! Int
             registro["vueltas"] = String(vueltas)
             
             self.listaLlegadas.append(registro)
@@ -132,7 +132,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as ControlUITableViewCell
+        var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as! ControlUITableViewCell
       
        //cell.numeroUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["numero"]
         cell.nombreUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["nombre"]

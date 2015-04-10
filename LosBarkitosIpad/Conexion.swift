@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIkit
+//import UIkit
 
 // Protocolo a implementar por la clase que delegue esta
  protocol WebServiceProtocoloVentas {
@@ -49,10 +49,10 @@ class webServiceCallAPI : NSObject {
                 println("responseObject: \(responseObject.description)")
                 var indice : Int = 1
                 var diccionario = [String : AnyObject]()
-                for (k,v) in responseObject as [String : AnyObject] {
+                for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as NSString == "si" {// la respuesta es erronea
+                    } else if v as! NSString == "si" {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -122,10 +122,10 @@ class webServiceCallAPI : NSObject {
             "http://losbarkitos.herokuapp.com/registro_barca/\(ticket)/\(tipo)/\(precio)/\(puntoVenta)/\(vendedor)/\(ticketBlanco)/", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
-                for (k,v) in responseObject as [String : AnyObject] {
+                for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as Int == 1 {// la respuesta es erronea
+                    } else if v as! Int == 1 {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -152,10 +152,10 @@ class webServiceCallAPI : NSObject {
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
-                for (k,v) in responseObject as [String : AnyObject] {
-                    if k != "error" || (k == "error" && v as NSString == "no"){
+                for (k,v) in responseObject as! [String : AnyObject] {
+                    if k != "error" || (k == "error" && v as! NSString == "no"){
                         diccionario[k] = v
-                    } else if v as String != "error" {// la respuesta es erronea
+                    } else if v as! String != "error" {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR en ultimoNumero")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -180,7 +180,7 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/total_barcas/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()
-                for (k,v) in responseObject as [String : Int] {
+                for (k,v) in responseObject as! [String : Int] {
                     if k != "error" {
                         diccionario[k] = v
                     } else {
@@ -206,7 +206,7 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/total_euros/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()
-                for (k,v) in responseObject as [String : Int] {
+                for (k,v) in responseObject as! [String : Int] {
                     if k != "error" {
                         diccionario[k] = v
                     } else {
@@ -233,7 +233,7 @@ class webServiceCallAPI : NSObject {
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 println("responseObject : \(responseObject)")
-                self.delegateControl?.didReceiveResponse_primeraLibre(responseObject as [String : [String : String]])
+                self.delegateControl?.didReceiveResponse_primeraLibre(responseObject as! [String : [String : String]])
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
@@ -269,10 +269,10 @@ class webServiceCallAPI : NSObject {
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var indice : Int = 1
                 var diccionario = [String : AnyObject]()
-                for (k,v) in responseObject as [String : AnyObject] {
+                for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as NSString == "si" { // la respuesta es errónea
+                    } else if v as! NSString == "si" { // la respuesta es errónea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -287,7 +287,7 @@ class webServiceCallAPI : NSObject {
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as [String : [String : String]])
+                self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as! [String : [String : String]])
             }
         )
         
@@ -303,10 +303,10 @@ class webServiceCallAPI : NSObject {
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 println("responseObject : \(responseObject)")
                 var diccionario = [String : AnyObject]()
-                for (k,v) in responseObject as [String : AnyObject] {
+                for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as NSString == "si" { // la respuesta es errónea
+                    } else if v as! NSString == "si" { // la respuesta es errónea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -314,7 +314,7 @@ class webServiceCallAPI : NSObject {
                 }
                 println("diccionario : \(diccionario)")
 
-                self.delegate?.didReceiveResponse_reserva(responseObject as [String : AnyObject])
+                self.delegate?.didReceiveResponse_reserva(responseObject as! [String : AnyObject])
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")

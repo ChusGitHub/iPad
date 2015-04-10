@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jesus Valladolid Rebollar. All rights reserved.
 //
 
-import UIkit
+//import UIkit
 let sharedInstance = ManejoSQLITE()
 
 class ManejoSQLITE : NSObject {
@@ -15,7 +15,7 @@ class ManejoSQLITE : NSObject {
     
     class var instance: ManejoSQLITE {
         sharedInstance.sqliteDatabase = FMDatabase(path: UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite"))
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         sharedInstance.sqliteDatabasePath = documentsFolder.stringByAppendingPathComponent("LosBarkitosSQLITE.sqlite")
 
         //let path = UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite")

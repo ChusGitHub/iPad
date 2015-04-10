@@ -20,7 +20,7 @@ class DataManager: NSObject {
     */
     func setValueForKey(key: String, value: AnyObject, inFile file:String) {
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         path = path.stringByAppendingPathComponent(file)
         let filename = path + ".plist"
         
@@ -45,13 +45,13 @@ class DataManager: NSObject {
     */
     func getValueForKey(key: String, inFile file:String) -> AnyObject? {
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         path = path.stringByAppendingPathComponent(file)
         let filename = path + ".plist"
         
-        var dict = NSMutableDictionary(contentsOfFile: filename)?
+        var dict = NSMutableDictionary(contentsOfFile: filename)
         
-        if dict? != nil {
+        if dict != nil {
             return dict?.valueForKey(key)
         }
         else {

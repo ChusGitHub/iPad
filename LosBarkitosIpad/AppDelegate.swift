@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func setDrawerPortName(portName : NSString) {
         if drawerPortName != portName {
-            drawerPortName = portName.copy() as NSString
+            drawerPortName = portName.copy() as! NSString
         }
     }
     
@@ -112,6 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("lista_precio", value: "1", inFile: "appstate")
         DataManager().setValueForKey("punto_venta_codigo", value: 2, inFile: "appstate")
         DataManager().setValueForKey("punto_venta", value: "LosBarkitos", inFile: "appstate")
+        
+        DataManager().setValueForKey("total_barcas", value: 0, inFile: "appstate")
         
         return "si"
         

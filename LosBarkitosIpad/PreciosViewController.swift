@@ -12,7 +12,7 @@ import UIKit
 class PreciosViewController: UIViewController {
 
     
-    let listaPrecio : String = DataManager().getValueForKey("lista_precio", inFile: "appstate") as String
+    let listaPrecio : String = DataManager().getValueForKey("lista_precio", inFile: "appstate") as! String
     var toTipo : Int?
     var toTipoString : String?
 
@@ -61,10 +61,10 @@ class PreciosViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "seguePreciosVentaCancelar" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             siguienteVC.toPreciosViewController = 0
         } else if segue.identifier == "seguePreciosVentaAceptar" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             siguienteVC.toPreciosViewController = "\(self.precioUILabel.text!)".toInt()!
             siguienteVC.barcaActual = self.toTipo!
             siguienteVC.barcaActualString = self.toTipoString!

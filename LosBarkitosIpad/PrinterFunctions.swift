@@ -63,7 +63,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     str += "Tel: 972.45.25.79\r\n"
     str += "www.marinaferry.es\r\n"
     str += "---------------------------------\r\n\r\n"
-    let n : String = String(parametro["numero"] as Int)
+    let n : String = String(parametro["numero"] as! Int)
     str += "Num. \(n)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
@@ -79,7 +79,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
    
     cmd = [0x1b, 0x57, 0x02]
     commands.appendBytes(cmd, length: 3)
-    let b : String = parametro["barca"] as String
+    let b : String = parametro["barca"] as! String
     println("barca \(b)")
     str = b + "\r\n\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
@@ -93,9 +93,9 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     cmd = [0x1b, 0x1d, 0x61, 0x02]
     commands.appendBytes(cmd, length: 4)
   
-    let p : String = String(parametro["precio"] as Int)
-    let iva : Double =  round(100*(parametro["precio"] as Double - (parametro["precio"] as Double / 1.21)))/100
-    let pdouble : Double =  round(100*(parametro["precio"] as Double / 1.21))/100
+    let p : String = String(parametro["precio"] as! Int)
+    let iva : Double =  round(100*(parametro["precio"] as! Double - (parametro["precio"] as! Double / 1.21)))/100
+    let pdouble : Double =  round(100*(parametro["precio"] as! Double / 1.21))/100
     
     
     str = "Precio : \t \(pdouble) eur.-\r\n"
@@ -131,7 +131,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     cmd = [ 0x1b, 0x64, 0x00 ] // Corta el papel
     commands.appendBytes(cmd, length: 3)
     
-    let v : String = parametro["vendedor"] as String
+    let v : String = parametro["vendedor"] as! String
     str = "\n\r\n\rVendedor : \(v)\n\r\n\r"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
@@ -278,7 +278,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
    
-    str = diccParam["dia"] as String
+    str = diccParam["dia"] as! String
     str += "\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
@@ -296,23 +296,23 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     cmd = [0x1b, 0x1d, 0x61, 0x02]
     commands.appendBytes(cmd, length: 4)
     
-    let Rios = diccParam["rio"] as Int
+    let Rios = diccParam["rio"] as! Int
     str = "Rios : \t \(Rios)\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
   
-    let Electricas = diccParam["electrica"] as Int
+    let Electricas = diccParam["electrica"] as! Int
     str = "Electricas : \t \(Electricas)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
-    let Whalys = diccParam["whaly"] as Int
+    let Whalys = diccParam["whaly"] as! Int
     str = "Whalys : \t \(Whalys)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
-    let Golds = diccParam["gold"] as Int
+    let Golds = diccParam["gold"] as! Int
     str = "Golds : \t \(Golds)\r\n\n\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
@@ -354,7 +354,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     cmd = [0x1b, 0x57, 0x2]
     commands.appendBytes(cmd, length: 3)
 
-    str = String(diccParam["euros"] as Int)
+    str = String(diccParam["euros"] as! Int)
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
@@ -381,7 +381,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
 //    println("commandstoPrint: \(commandsToPrint)")
     
   //  println("Datos : \(dataToSentToPrinter)")
-    if let starPort = SMPort.getPort(portName, portSettings, timeoutMillis) {
+    if let starPort = SMPort.getPort(portName as String, portSettings as String, timeoutMillis) {
         
         var status : StarPrinterStatus_2? = nil
         starPort.beginCheckedBlock(&status, 2)
@@ -398,7 +398,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
         //println("commandSize : \(commandSize). dataToSEntToPrinter: \(dataToSentToPrinter)")
         var totalAmountWritten : Int = 0
         while (Int(totalAmountWritten) < commandSize) {
-            let remaining : Int  = (UInt32(commandSize) - UInt32(totalAmountWritten))
+            let remaining : Int  = Int(UInt32(commandSize) - UInt32(totalAmountWritten))
             let amountWritten : UInt32 = starPort.writePort(dataToSentToPrinter, UInt32(totalAmountWritten),UInt32(remaining))
             totalAmountWritten = Int(totalAmountWritten) + Int(amountWritten)
             
