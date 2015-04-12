@@ -379,7 +379,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                                              puntoVenta: PUNTO_VENTA ,
                                              vendedor: codVend,
                                              negro: self.negro)
-            let total : Int = ((DataManager().getValueForKey("total_barcas", inFile: "appstate") as! String).toInt()!) + 1
+            var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
+            total += 1
             DataManager().setValueForKey("total_barcas", value: total, inFile: "appstate")
             self.numeroBarcasUILabel.text = String(total)
             // Se inserta la venta de la barca en SQLITE
