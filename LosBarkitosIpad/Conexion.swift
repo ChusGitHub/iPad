@@ -24,6 +24,7 @@ import Foundation
 protocol WebServiceProtocoloControl {
     func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
     func didReceiveResponse_listaLlegadas(respuesta : [String : AnyObject])
+    func didReceiveResponse_listaReservas(respuesta : [String : AnyObject])
     
 }
 
@@ -293,6 +294,55 @@ class webServiceCallAPI : NSObject {
         
     }
     
+    
+    func listaReservas(tipo : Int) {
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        var parametro : String =  String()
+        
+        switch tipo {
+        case 1:
+            parametro = "Rio"
+        case 2:
+            parametro = "Electrica"
+        case 3:
+            parametro = "Whaly"
+        case 4:
+            parametro = "Gold"
+        default:
+            parametro = "Rio"
+        }
+        
+        manager.GET("http://losbarkitos.herokuapp.com/lista_reservas/\(parametro)",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                var indice : Int = 1
+                var diccionario = [String : AnyObject]()
+                for (k,v) in responseObject as! [String : AnyObject] {
+                    if k != "error" {
+                        diccionario[k] = v
+                    } else if v as! NSString == "si" { // la respuesta es errónea
+                        println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        diccionario = [String : AnyObject]()
+                        diccionario["error"] = "si"
+                    }
+                }
+                println("diccionario : \(diccionario)")
+                
+                self.delegateControl?.didReceiveResponse_listaReservas(diccionario as Dictionary)
+                
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                println("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegateControl?.didReceiveResponse_listaReservas(diccionario as! [String : [String : String]])
+            }
+        )
+ 
+    }
+    
     func obtenerNumeroReserva(tipo : Int, pv : Int) {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
@@ -325,6 +375,6 @@ class webServiceCallAPI : NSObject {
         )
  
     }
-
+    
 }
 

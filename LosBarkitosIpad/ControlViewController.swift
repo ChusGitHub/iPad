@@ -21,7 +21,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     var estado : String?
     
     var libre = [String : [String : String]]()
-    var listaLlegadas = [[String : String]]()
+    var lista = [[String : String]]()
     
     @IBOutlet weak var lblEstadoUILabel: UILabel!
     @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
@@ -43,8 +43,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
 
     @IBAction func llegadaUIButton(sender: AnyObject) {
+        
     }
-    
     
     @IBAction func listaTipoBarcaUIButton(sender: AnyObject) {
         webService.listaLlegadas(sender.tag)
@@ -59,6 +59,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         webService.obtenerPrimerLibre()
         
         self.lblEstadoUILabel.text = DataManager().getValueForKey("estado", inFile: "appstate") as? String
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +77,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func didReceiveResponse_listaLlegadas(respuesta: [String : AnyObject ]) {
         
-        self.listaLlegadas = []
+        self.lista = []
         var registro : [String : String] = [:]
         
         println("lista llegadas : \(respuesta)")
@@ -90,14 +92,19 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             let vueltas : Int = v["vueltas"] as! Int
             registro["vueltas"] = String(vueltas)
             
-            self.listaLlegadas.append(registro)
+            self.lista.append(registro)
         }
-        println("listaLlegadas : \(self.listaLlegadas)")
+        println("listaLlegadas : \(self.lista)")
         
         self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.listaUITableView.reloadData()
     }
 
+    
+    func didReceiveResponse_listaReservas(respuesta: [String : AnyObject]) {
+        
+    }
+    
     
     func colocarLibresEnPantalla() {
         
@@ -127,7 +134,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.listaLlegadas.count
+        return self.lista.count
     
     }
     
@@ -135,11 +142,11 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as! ControlUITableViewCell
       
        //cell.numeroUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["numero"]
-        cell.nombreUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["nombre"]
+        cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"]
    
-        cell.tipoUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["tipo"]
-        cell.libreUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["libre"]
-        cell.vueltasUILabelUITableViewCell.text = String(self.listaLlegadas[indexPath.row]["vueltas"]!)
+        cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["tipo"]
+        cell.libreUILabelUITableViewCell.text = self.lista[indexPath.row]["libre"]
+        cell.vueltasUILabelUITableViewCell.text = String(self.lista[indexPath.row]["vueltas"]!)
         
         return cell
         
