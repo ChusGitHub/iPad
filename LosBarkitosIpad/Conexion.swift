@@ -156,7 +156,7 @@ class webServiceCallAPI : NSObject {
                 for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" || (k == "error" && v as! NSString == "no"){
                         diccionario[k] = v
-                    } else if v as! String != "error" {// la respuesta es erronea
+                    } else if k == "error" &&  v as! String == "si" {// la respuesta es erronea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR en ultimoNumero")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"

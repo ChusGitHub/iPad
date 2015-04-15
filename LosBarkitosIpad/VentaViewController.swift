@@ -563,7 +563,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
         println("respuesta del servidor(respuesta) : \(respuesta)")
         for (k,v) in respuesta {
-            if k as NSString == "error" && v as! NSString != "no" {
+            if k as NSString == "error" && v as! NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO : \(v)")
                 EXIT_FAILURE
             } else {
