@@ -425,7 +425,7 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             starPort.endCheckedBlock(&status!, 2)
         }
         
-         //free((UnsafeMutablePointer<Void>),dataToSentToPrinter)
+        //free((UnsafeMutablePointer<Void>),dataToSentToPrinter)
         SMPort.releasePort(starPort)
     } else {
         println("Error: Writte port timed out")
