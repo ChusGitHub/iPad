@@ -47,7 +47,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
     
     @IBAction func listaTipoBarcaUIButton(sender: AnyObject) {
-        webService.listaLlegadas(sender.tag)
+        webService.listaReservas(sender.tag)
     }
     
     
@@ -103,6 +103,16 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func didReceiveResponse_listaReservas(respuesta: [String : AnyObject]) {
         
+        self.lista = []
+        var registro : [String : AnyObject] = [:]
+        println("Lista reservas : \(respuesta)")
+        
+        for (k,v) in respuesta {
+            registro["numero"] = v["numero"] as! Int
+            registro["nombre"] = v["nombre"] as! String
+            registro["hora_prevista"] = v["hora_prevista"] as! String
+            registro["hora_reserva"]
+        }
     }
     
     
@@ -141,7 +151,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as! ControlUITableViewCell
       
-       //cell.numeroUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["numero"]
+        cell.numeroUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["numero"]
         cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"]
    
         cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["tipo"]

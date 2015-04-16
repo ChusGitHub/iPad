@@ -480,13 +480,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZD-0V-zxM">
-                                                    <rect key="frame" x="13" y="14" width="119" height="21"/>
+                                                    <rect key="frame" x="90" y="14" width="119" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.075923451079999996" green="0.40566096149999997" blue="0.97713462750000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYh-4R-9aB">
-                                                    <rect key="frame" x="140" y="14" width="131" height="21"/>
+                                                    <rect key="frame" x="211" y="14" width="60" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.075923451079999996" green="0.40566096149999997" blue="0.97713462750000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -503,11 +503,18 @@
                                                     <color key="textColor" red="0.075923451079999996" green="0.40566096149999997" blue="0.97713462750000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH6-ra-aow">
+                                                    <rect key="frame" x="15" y="14" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" red="0.15294117647058825" green="0.37254901960784315" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="libreUILabelUITableViewCell" destination="6Bk-EA-T8P" id="Sd1-FY-xTR"/>
                                             <outlet property="nombreUILabelUITableViewCell" destination="EZD-0V-zxM" id="RPh-A8-JgC"/>
+                                            <outlet property="numeroUILabelUITableViewCell" destination="LH6-ra-aow" id="lg7-3Z-LdK"/>
                                             <outlet property="tipoUILabelUITableViewCell" destination="CYh-4R-9aB" id="cle-i3-W7F"/>
                                             <outlet property="vueltasUILabelUITableViewCell" destination="kqG-X6-qbv" id="guX-lS-hce"/>
                                         </connections>
@@ -1011,7 +1018,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="PRz-5W-xYw"/>
-        <segue reference="zvr-Y3-xRY"/>
+        <segue reference="pSb-b9-IQJ"/>
         <segue reference="e9F-yZ-Wa3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>

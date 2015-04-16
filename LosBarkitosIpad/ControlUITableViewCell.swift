@@ -10,6 +10,7 @@ import UIKit
 
 class ControlUITableViewCell: UITableViewCell {
 
+    @IBOutlet weak var numeroUILabelUITableViewCell: UILabel!
     @IBOutlet weak var nombreUILabelUITableViewCell: UILabel!
     @IBOutlet weak var tipoUILabelUITableViewCell: UILabel!
     @IBOutlet weak var libreUILabelUITableViewCell: UILabel!
