@@ -115,7 +115,13 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             registro["fuera"] = v["fuera"] as! Bool
             self.lista.append(registro)
         }
-        println("lista reservas : \(self.lista)")
+        // ordenacion de las reservas por el numero
+    
+        self.lista.sort({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
+                return   segundo["numero"] as! Int > primero["numero"] as! Int
+            })
+        println(" ORDENADO : \(self.lista)")
+        
         self.listaUITableView.clearsContextBeforeDrawing = true
         self.listaUITableView.reloadData()
     }
@@ -155,12 +161,14 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as! ControlUITableViewCell
-      
-        cell.numeroUILabelUITableViewCell.text = (self.lista[indexPath.row]["numero"] as! String)
-        cell.nombreUILabelUITableViewCell.text = (self.lista[indexPath.row]["nombre"] as! String)
-   
-        cell.tipoUILabelUITableViewCell.text = (self.lista[indexPath.row]["hora_prevista"] as! String)
-        cell.libreUILabelUITableViewCell.text = (self.lista[indexPath.row]["fuera"] as! String)
+        let numero : Int = self.lista[indexPath.row]["numero"] as! Int
+        cell.numeroUILabelUITableViewCell.text = String(numero)
+        cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"] as? String
+       // hora  = self.lista[indexPath.row]["hora_prevista"]
+        cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["hora_prevista"] as? String
+        let fuera : Int = self.lista[indexPath.row]["fuera"] as! Int
+        cell.libreUILabelUITableViewCell.text = String(fuera)
+        
                 
         return cell
         
