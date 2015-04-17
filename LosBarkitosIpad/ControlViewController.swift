@@ -21,7 +21,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     var estado : String?
     
     var libre = [String : [String : String]]()
-    var lista = [[String : String]]()
+    var lista = [[String : AnyObject]]()
     
     @IBOutlet weak var lblEstadoUILabel: UILabel!
     @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
@@ -109,10 +109,15 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         
         for (k,v) in respuesta {
             registro["numero"] = v["numero"] as! Int
-            registro["nombre"] = v["nombre"] as! String
+            registro["nombre"] = v["base"] as! String
             registro["hora_prevista"] = v["hora_prevista"] as! String
-            registro["hora_reserva"]
+            registro["hora_reserva"] = v["hora_reserva"] as! String
+            registro["fuera"] = v["fuera"] as! Bool
+            self.lista.append(registro)
         }
+        println("lista reservas : \(self.lista)")
+        self.listaUITableView.clearsContextBeforeDrawing = true
+        self.listaUITableView.reloadData()
     }
     
     
@@ -151,13 +156,12 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as! ControlUITableViewCell
       
-        cell.numeroUILabelUITableViewCell.text = self.listaLlegadas[indexPath.row]["numero"]
-        cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"]
+        cell.numeroUILabelUITableViewCell.text = (self.lista[indexPath.row]["numero"] as! String)
+        cell.nombreUILabelUITableViewCell.text = (self.lista[indexPath.row]["nombre"] as! String)
    
-        cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["tipo"]
-        cell.libreUILabelUITableViewCell.text = self.lista[indexPath.row]["libre"]
-        cell.vueltasUILabelUITableViewCell.text = String(self.lista[indexPath.row]["vueltas"]!)
-        
+        cell.tipoUILabelUITableViewCell.text = (self.lista[indexPath.row]["hora_prevista"] as! String)
+        cell.libreUILabelUITableViewCell.text = (self.lista[indexPath.row]["fuera"] as! String)
+                
         return cell
         
     }

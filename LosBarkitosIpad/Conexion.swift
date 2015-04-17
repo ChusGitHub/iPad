@@ -314,7 +314,7 @@ class webServiceCallAPI : NSObject {
             parametro = "Rio"
         }
         
-        manager.GET("http://losbarkitos.herokuapp.com/lista_reservas/\(parametro)",
+        manager.GET("http://losbarkitos.herokuapp.com/listado_reservas/\(parametro)/",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var indice : Int = 1
