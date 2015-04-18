@@ -8,7 +8,7 @@
 
 import UIKit
 
-class tipoReservaUIViewController: UIViewController {
+class tipoReservaUIViewController: UIViewController, WebServiceReserva {
 
     @IBOutlet weak var btnRioReservaUIButton: UIButton!
     @IBOutlet weak var btnElectricaReservaUIButton: UIButton!
@@ -23,9 +23,19 @@ class tipoReservaUIViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
 
+        super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func didReceiveResponse_reservaPosible(respuesta : [Bool]) {
+        
+        self.btnRioReservaUIButton.enabled = respuesta[0]
+        self.btnElectricaReservaUIButton.enabled = respuesta[1]
+        self.btnWhalyReservaUIButton.enabled = respuesta[2]
+        self.btnGoldWhalyUIButton.enabled = respuesta[3]
+        
     }
 
     override func didReceiveMemoryWarning() {

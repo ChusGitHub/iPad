@@ -28,11 +28,16 @@ protocol WebServiceProtocoloControl {
     
 }
 
+protocol WebServiceReserva {
+    func didReceiveResponse_reservaPosible(respuesta : [Bool])
+}
+
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
 class webServiceCallAPI : NSObject {
     
     var delegate : WebServiceProtocoloVentas?
     var delegateControl : WebServiceProtocoloControl?
+    var delegateReserva : WebServiceReserva?
     
     let manager : AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 
@@ -374,6 +379,21 @@ class webServiceCallAPI : NSObject {
             }
         )
  
+    }
+    
+    // Devuelve una lista de bools que controla que barca se puede reservar
+    func mirarPosibleReserva(tipo : Int) {
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/posible_reserva/\(tipo)",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                
+                self.delegateReserva?.didReceiveResponse_reservaPosible(responseObject as! [Bool])
+            },
+            failure: nil
+        )
+        
     }
     
 }

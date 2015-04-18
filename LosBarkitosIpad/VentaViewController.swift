@@ -54,6 +54,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     @IBOutlet weak var tipoListaUIView: UIView!
     
     @IBOutlet weak var numeroBarcasUILabel: UILabel!
+   
     
     //var  PUNTO_VENTA : Int  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
     
@@ -216,6 +217,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             alertaNoImpresora.addAction(OkAction)
 
         }
+        
+    }
+    @IBAction func habilitarReservaUIButton(sender: UIButton) {
+        
         
     }
     
