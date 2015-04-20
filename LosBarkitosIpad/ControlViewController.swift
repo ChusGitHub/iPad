@@ -5,7 +5,6 @@
 //  Created by Jesus Valladolid Rebollar on 14/11/14.
 //  Copyright (c) 2014 Jesus Valladolid Rebollar. All rights reserved.
 //
-
 import UIKit
 
 class ControlViewController: UIViewController, WebServiceProtocoloControl, UITableViewDataSource, UITableViewDelegate {
@@ -39,6 +38,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
     
     @IBAction func salidaUIButton(sender: AnyObject) {
+        
+        webService.salidaBarca(sender.tag)
         
     }
 
@@ -125,6 +126,33 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.listaUITableView.clearsContextBeforeDrawing = true
         self.listaUITableView.reloadData()
     }
+    
+    func didReceiveResponse_salida(respuesta: [String : String]) {
+        
+        
+        if respuesta["error"] == "no es posible" {
+            var alerta = UIAlertController(title: "EEEEPPPPPP", message: "No puede salir una barca si no hay disponibles", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alerta.addAction(OkAction)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+ 
+        } else {
+            let nombre = respuesta["nombre"]!
+            var alerta = UIAlertController(title: "SALIDA", message: "Salida de una \(nombre)", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alerta.addAction(OkAction)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+
+        }
+        
+    }
+
     
     
     func colocarLibresEnPantalla() {

@@ -19,13 +19,14 @@ import Foundation
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
     func didReceiveResponse_reserva(respuesta : [String : AnyObject])
+    
 }
 
 protocol WebServiceProtocoloControl {
     func didReceiveResponse_primeraLibre(respuesta : [String : [String : String]])
     func didReceiveResponse_listaLlegadas(respuesta : [String : AnyObject])
     func didReceiveResponse_listaReservas(respuesta : [String : AnyObject])
-    
+    func didReceiveResponse_salida(respuesta : [String : String])
 }
 
 protocol WebServiceReserva {
@@ -378,7 +379,6 @@ class webServiceCallAPI : NSObject {
                 self.delegate?.didReceiveResponse_reserva(diccionario as [String : AnyObject])
             }
         )
- 
     }
     
     // Devuelve una lista de bools que controla que barca se puede reservar
@@ -393,8 +393,19 @@ class webServiceCallAPI : NSObject {
             },
             failure: nil
         )
-        
     }
     
+    func salidaBarca(tipo : Int) {
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/salida/\(tipo)",
+            parameters: nil,
+            success: {(operation : AFHTTPRequestOperation!, responseObject) in
+                
+                self.delegateControl?.didReceiveResponse_salida(responseObject as! [String : String])
+            },
+            failure: nil
+        )
+    }
 }
 

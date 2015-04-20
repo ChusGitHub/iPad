@@ -492,7 +492,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     }
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -651,7 +650,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
         imprimirReserva(PV)
     }
-
     
     func cargarValoresCon_appstate(inFile file: String) {
      

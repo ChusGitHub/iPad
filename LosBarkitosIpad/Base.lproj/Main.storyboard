@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
@@ -573,7 +573,7 @@
                                 <rect key="frame" x="43" y="28" width="400" height="280"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zP5-hd-voH">
-                                        <rect key="frame" x="199" y="0.0" width="200" height="140"/>
+                                        <rect key="frame" x="200" y="0.0" width="200" height="140"/>
                                         <color key="backgroundColor" red="0.26056730581263909" green="0.52104825831847879" blue="0.089462908455699666" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="ELÉCTRICA">
@@ -608,7 +608,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaU-Lg-JmL">
-                                        <rect key="frame" x="199" y="140" width="200" height="140"/>
+                                        <rect key="frame" x="200" y="140" width="200" height="140"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="GOLD">
                                             <color key="titleColor" red="0.15806950860826013" green="0.23165246212121215" blue="0.061053563493710113" alpha="1" colorSpace="calibratedRGB"/>
@@ -618,6 +618,12 @@
                                             <action selector="salidaUIButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="2Yx-D0-zwO"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Salidas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47v-TY-pL0">
+                                        <rect key="frame" x="146" y="129" width="108" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.044531659087553133" green="0.17696903946319939" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.13831956262005463" green="0.81954308712121215" blue="0.11001941528857959" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -625,7 +631,7 @@
                                 <rect key="frame" x="43" y="308" width="400" height="280"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tc9-3z-fr6">
-                                        <rect key="frame" x="4" y="0.0" width="200" height="140"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="140"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="RIO">
                                             <color key="titleColor" red="0.29610349821746873" green="0.0014636290417650258" blue="0.03128342506501252" alpha="1" colorSpace="calibratedRGB"/>
@@ -636,7 +642,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCN-34-Tah">
-                                        <rect key="frame" x="201" y="0.0" width="200" height="140"/>
+                                        <rect key="frame" x="200" y="0.0" width="200" height="140"/>
                                         <color key="backgroundColor" red="0.58526464089423635" green="0.0028929422674427801" blue="0.061833388145821483" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="ELÉCTRICA">
@@ -648,7 +654,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-cT-GMU">
-                                        <rect key="frame" x="-1" y="140" width="200" height="140"/>
+                                        <rect key="frame" x="0.0" y="140" width="200" height="140"/>
                                         <color key="backgroundColor" red="0.58526464089423635" green="0.0028929422674427801" blue="0.061833388145821483" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="WHALY">
@@ -660,7 +666,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWv-cF-3T3">
-                                        <rect key="frame" x="201" y="140" width="200" height="140"/>
+                                        <rect key="frame" x="200" y="140" width="200" height="140"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="GOLD">
                                             <color key="titleColor" red="0.29610349821746873" green="0.0014636290417650258" blue="0.03128342506501252" alpha="1" colorSpace="calibratedRGB"/>
@@ -670,6 +676,12 @@
                                             <action selector="llegadaUIButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="sDA-UW-nF3"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Llegadas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCh-Zt-1Fe">
+                                        <rect key="frame" x="157" y="128" width="87" height="23"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.044531659090000002" green="0.17696903950000001" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.10485478417142113" blue="0.11624202890569257" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
