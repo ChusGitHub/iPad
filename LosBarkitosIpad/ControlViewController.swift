@@ -33,7 +33,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //self.libre = nil
-        webService.obtenerPrimerLibre()
+        //webService.obtenerPrimerLibre()
         self.estado = DataManager().getValueForKey("estado", inFile: "appstate") as? String
     }
     
@@ -54,14 +54,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webService.obtenerPrimerLibre()
-
         webService.delegateControl = self
-        webService.obtenerPrimerLibre()
+     //   webService.obtenerPrimerLibre()
         
         self.lblEstadoUILabel.text = DataManager().getValueForKey("estado", inFile: "appstate") as? String
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -153,8 +149,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         
     }
 
-    
-    
     func colocarLibresEnPantalla() {
         
         let RIO : [String : String]? = self.libre["rio"]
