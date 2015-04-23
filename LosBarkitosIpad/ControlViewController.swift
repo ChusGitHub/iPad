@@ -45,6 +45,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
 
     @IBAction func llegadaUIButton(sender: AnyObject) {
         
+        webService.llegadaBarca(sender.tag)
+        
     }
     
     @IBAction func listaTipoBarcaUIButton(sender: AnyObject) {
@@ -149,6 +151,31 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         
     }
 
+    func didReceiveResponse_llegada(respuesta: [String : String]) {
+        
+        if respuesta["error"] == "1" {
+            var alerta = UIAlertController(title: "EEEEPPPPPP", message: "Error en la contabilización de la llegada de la barca", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alerta.addAction(OkAction)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+            
+        } else {
+            let nombre = respuesta["nombre"]!
+            var alerta = UIAlertController(title: "LLEGADA", message: "Llegada de una \(nombre)", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alerta.addAction(OkAction)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
     func colocarLibresEnPantalla() {
         
         let RIO : [String : String]? = self.libre["rio"]
