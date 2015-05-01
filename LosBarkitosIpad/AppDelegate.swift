@@ -107,6 +107,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("whalys", value: 0, inFile: "appstate")
         DataManager().setValueForKey("golds", value: 0, inFile: "appstate")
         
+        DataManager().setValueForKey("riosfuera", value: 0, inFile: "appstate")
+        DataManager().setValueForKey("electricasfuera", value: 0, inFile: "appstate")
+        DataManager().setValueForKey("whalysfuera", value: 0, inFile: "appstate")
+        DataManager().setValueForKey("goldsfuera", value: 0, inFile: "appstate")
+        
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
         DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
         DataManager().setValueForKey("lista_precio", value: "1", inFile: "appstate")

@@ -1,4 +1,4 @@
-//
+ //
 //  FirstViewController.swift CLARO
 //  LosBarkitosIpad
 //
@@ -445,7 +445,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
-    func imprimirReserva(PV : String) {
+    func imprimirReserva(PV : String, HR : String, HP : String) {
         if setupImpresora() {
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
@@ -459,7 +459,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas)
+            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas, HR, HP)
         }
     }
     
@@ -639,16 +639,24 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         println("respuesta del servidor : \(respuesta)")
         var dicc : [String : AnyObject]
         var PV : String = ""
+        var HR : String = ""
+        var HP : String = ""
         self.reservas = [0,0,0,0]
         for (k,v) in respuesta {
             if k == "PV" {
                 PV = v as! String
             }
-            if k == "numero" {
+            if k == "reservas" {
                 self.reservas = v as! [Int]
             }
+            if k == "hora reserva" {
+                HR = v as! String
+            }
+            if k == "hora prevista" {
+                HP = v as! String
+            }
         }
-        imprimirReserva(PV)
+        imprimirReserva(PV, HR: HR, HP: HP)
     }
     
     func cargarValoresCon_appstate(inFile file: String) {

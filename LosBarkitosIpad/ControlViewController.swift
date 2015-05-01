@@ -30,6 +30,12 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     @IBOutlet weak var listaUITableView: UITableView!
     
+    @IBOutlet weak var numeroRiosFueraUILAbel: UILabel!
+    
+    @IBOutlet weak var numeroElectricasFueraUILabel: UILabel!
+    @IBOutlet weak var numeroWhalysFueraUILabel: UILabel!
+    @IBOutlet weak var numeroGoldsFueraUILabel: UILabel!
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //self.libre = nil
@@ -60,6 +66,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
      //   webService.obtenerPrimerLibre()
         
         self.lblEstadoUILabel.text = DataManager().getValueForKey("estado", inFile: "appstate") as? String
+    }
+    
+    func actualizarContadorBarcasFuera() {
+        webService.barcasFuera()
     }
 
     override func didReceiveMemoryWarning() {
@@ -147,12 +157,13 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             
             self.presentViewController(alerta, animated: true, completion: nil)
 
+            self.actualizarContadorBarcasFuera()
         }
         
     }
 
     func didReceiveResponse_llegada(respuesta: [String : String]) {
-        
+        println(respuesta)
         if respuesta["error"] == "1" {
             var alerta = UIAlertController(title: "EEEEPPPPPP", message: "Error en la contabilización de la llegada de la barca", preferredStyle: UIAlertControllerStyle.Alert)
             
@@ -172,9 +183,20 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             
             self.presentViewController(alerta, animated: true, completion: nil)
             
+            self.actualizarContadorBarcasFuera()
         }
         
     }
+    
+    func didReceiveResponse_barcasFuera(responseObject : [String : [Int]]) {
+        
+        let fuera : [Int] = responseObject["fuera"]!
+        self.numeroRiosFueraUILAbel.text = String(fuera[0])
+        self.numeroElectricasFueraUILabel.text = String(fuera[1])
+        self.numeroWhalysFueraUILabel.text = String(fuera[2])
+        self.numeroGoldsFueraUILabel.text = String(fuera[3])
+    }
+    
     
     func colocarLibresEnPantalla() {
         

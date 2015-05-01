@@ -128,8 +128,8 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     commands.appendData(datos!)
 
     
-    cmd = [ 0x1b, 0x64, 0x00 ] // Corta el papel
-    commands.appendBytes(cmd, length: 3)
+    //cmd = [ 0x1b, 0x64, 0x00 ] // Corta el papel
+    //commands.appendBytes(cmd, length: 3)
     
     let v : String = parametro["vendedor"] as! String
     str = "\n\r\n\rVendedor : \(v)\n\r\n\r"
@@ -148,7 +148,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
 }
 
 // IMPRESION DE RESERVA
-func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : String,  parametro : [Int]) -> Bool {
+func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : String,  parametro : [Int], HR : String, HP : String) -> Bool {
     
     let horaActual : NSDate = NSDate()
     
@@ -226,14 +226,24 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : 
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
-    cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
+    // tamaño pequeño
+    cmd = [0x1b, 0x57, 0x00]
     commands.appendBytes(cmd, length: 3)
+
+    
+    str = "Hora de la Reserva : \(HR)\r\n"
+    str += "Hora Prevista : \(HP)\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
     
     str = "\n\r\n\r\n\r\n\r"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
     
-    
+    cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
+    commands.appendBytes(cmd, length: 3)
+
     return (sendCommand(commands,portName, portSettings,10000))
 }
 

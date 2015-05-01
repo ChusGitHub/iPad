@@ -28,6 +28,7 @@ protocol WebServiceProtocoloControl {
     func didReceiveResponse_listaReservas(respuesta : [String : AnyObject])
     func didReceiveResponse_salida(respuesta : [String : String])
     func didReceiveResponse_llegada(respuesta : [String : String])
+    func didReceiveResponse_barcasFuera(respuesta : [String : [Int]])
 }
 
 protocol WebServiceReserva {
@@ -416,10 +417,22 @@ class webServiceCallAPI : NSObject {
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 
-                self.delegateControl?.didReceiveResponse_salida(responseObject as! [String : String])
+                self.delegateControl?.didReceiveResponse_llegada(responseObject as! [String : String])
             },
             failure: nil
         )
+    }
+    
+    func barcasFuera() {
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/fuera",
+            parameters: nil,
+            success: {(operation : AFHTTPRequestOperation!, responseObject) in
+                println(responseObject)
+                self.delegateControl?.didReceiveResponse_barcasFuera(responseObject as! [String : [Int]])
+            },
+            failure: nil)
     }
 }
 
