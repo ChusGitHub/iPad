@@ -22,11 +22,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     var libre = [String : [String : String]]()
     var lista = [[String : AnyObject]]()
     
-    @IBOutlet weak var lblEstadoUILabel: UILabel!
-    @IBOutlet weak var lblLlegadaRioUILabel: UILabel!
-    @IBOutlet weak var lblLlegadaElectricaUILabel: UILabel!
-    @IBOutlet weak var lblLlegadaWhalyUILabel: UILabel!
-    @IBOutlet weak var lblLlegadaGoldUILabel: UILabel!
     
     @IBOutlet weak var listaUITableView: UITableView!
     
@@ -36,6 +31,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     @IBOutlet weak var numeroWhalysFueraUILabel: UILabel!
     @IBOutlet weak var numeroGoldsFueraUILabel: UILabel!
     
+    @IBOutlet weak var siguienteBarcaRioUiLabel: UILabel!
+    @IBOutlet weak var siguienteBarcaElectricaUILabel: UILabel!
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //self.libre = nil
@@ -65,7 +62,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         webService.delegateControl = self
      //   webService.obtenerPrimerLibre()
         
-        self.lblEstadoUILabel.text = DataManager().getValueForKey("estado", inFile: "appstate") as? String
     }
     
     func actualizarContadorBarcasFuera() {
@@ -213,12 +209,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         let libreWHALY : String? = WHALY?["libre"]
         let nombreGOLD : String? = GOLD?["nombre"]
         let libreGOLD : String? = GOLD?["libre"]
-
-        self.lblLlegadaRioUILabel.text = nombreRIO! + " - " + libreRIO!
-        self.lblLlegadaElectricaUILabel.text = nombreELECTRICA! + " - " + libreELECTRICA!
-        self.lblLlegadaWhalyUILabel.text = nombreWHALY! + " - " + libreWHALY!
-        self.lblLlegadaGoldUILabel.text = nombreGOLD! + " - " + libreGOLD!
-
     }
     
     
