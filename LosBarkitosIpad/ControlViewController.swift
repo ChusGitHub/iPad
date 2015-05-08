@@ -33,6 +33,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     @IBOutlet weak var siguienteBarcaRioUiLabel: UILabel!
     @IBOutlet weak var siguienteBarcaElectricaUILabel: UILabel!
+    @IBOutlet weak var siguienteBarcaWhalyUiLabel: UILabel!
+    @IBOutlet weak var siguienteBarcaGoldUILabel: UILabel!
+    
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //self.libre = nil
@@ -44,12 +48,13 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         
         webService.salidaBarca(sender.tag)
         
+        
     }
 
     @IBAction func llegadaUIButton(sender: AnyObject) {
         
         webService.llegadaBarca(sender.tag)
-        
+        webService.siguienteBarcaLlegar()
     }
     
     @IBAction func listaTipoBarcaUIButton(sender: AnyObject) {
@@ -61,6 +66,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         super.viewDidLoad()
         webService.delegateControl = self
      //   webService.obtenerPrimerLibre()
+        webService.siguienteBarcaLlegar()
         
     }
     
@@ -193,6 +199,12 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.numeroGoldsFueraUILabel.text = String(fuera[3])
     }
     
+    func didReceiveResponse_siguienteBarcaLlegar(respuesta: [String : String]) {
+        self.siguienteBarcaRioUiLabel.text = respuesta["rio"]
+        self.siguienteBarcaElectricaUILabel.text = respuesta["electrica"]
+        self.siguienteBarcaWhalyUiLabel.text = respuesta["whaly"]
+        self.siguienteBarcaGoldUILabel.text = respuesta["gold"]
+    }
     
     func colocarLibresEnPantalla() {
         

@@ -732,8 +732,10 @@
                         <outlet property="numeroGoldsFueraUILabel" destination="QeP-Pd-Lh1" id="m2h-3p-lY8"/>
                         <outlet property="numeroRiosFueraUILAbel" destination="cre-no-d66" id="dbf-9W-0HC"/>
                         <outlet property="numeroWhalysFueraUILabel" destination="Fce-L2-6hD" id="RRN-uH-XbI"/>
-                        <outlet property="siguienteBarcaElectricaUILabel" destination="xFL-bf-OY4" id="IuT-Ii-ibV"/>
-                        <outlet property="siguienteBarcaRioUiLabel" destination="c4C-xf-UVi" id="7C3-SZ-ZJJ"/>
+                        <outlet property="siguienteBarcaElectricaUILabel" destination="xFL-bf-OY4" id="ciG-3e-dH1"/>
+                        <outlet property="siguienteBarcaGoldUILabel" destination="X72-uT-zwo" id="yaW-sC-64v"/>
+                        <outlet property="siguienteBarcaRioUiLabel" destination="c4C-xf-UVi" id="Iei-Lr-tsX"/>
+                        <outlet property="siguienteBarcaWhalyUiLabel" destination="s3X-0o-u2l" id="7iB-mR-ZrZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
