@@ -19,6 +19,7 @@ import Foundation
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
     func didReceiveResponse_reserva(respuesta : [String : AnyObject])
+    func didReceiveResponse_cierreDia(respuesta : String)
     
 }
 
@@ -30,6 +31,7 @@ protocol WebServiceProtocoloControl {
     func didReceiveResponse_llegada(respuesta : [String : String])
     func didReceiveResponse_barcasFuera(respuesta : [String : [Int]])
     func didReceiveResponse_siguienteBarcaLlegar([String : String])
+    func didReceiveResponse_salidaReserva(String)
 }
 
 protocol WebServiceReserva {
@@ -339,7 +341,7 @@ class webServiceCallAPI : NSObject {
                 }
                 println("diccionario : \(diccionario)")
                 
-                self.delegateControl?.didReceiveResponse_listaReservas(diccionario as Dictionary)
+                self.delegateControl?.didReceiveResponse_listaReservas(diccionario as [String : AnyObject])
                 
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
@@ -447,6 +449,30 @@ class webServiceCallAPI : NSObject {
             failure: nil)
         
         
+    }
+    
+    func cierreDia() {
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/cierre_dia",
+            parameters: nil,
+            success: {(operation : AFHTTPRequestOperation!, responseObject) in
+                self.delegate?.didReceiveResponse_cierreDia(responseObject as! String)
+            },
+            failure: nil)
+    }
+    
+    func salidaReserva(tipo : Int) {
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/reserva_fuera/\(tipo)",
+            parameters: nil,
+            success: {(operation : AFHTTPRequestOperation!, responseObject) in
+                self.delegateControl?.didReceiveResponse_salidaReserva("OK")
+            },
+            failure: {(operation : AFHTTPRequestOperation!, responseObject) in
+                self.delegateControl?.didReceiveResponse_salidaReserva("KO")
+        })
     }
 }
 

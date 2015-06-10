@@ -115,8 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
         DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
         DataManager().setValueForKey("lista_precio", value: "1", inFile: "appstate")
-        DataManager().setValueForKey("punto_venta_codigo", value: 2, inFile: "appstate")
-        DataManager().setValueForKey("punto_venta", value: "LosBarkitos", inFile: "appstate")
+        DataManager().setValueForKey("punto_venta_codigo", value: 1, inFile: "appstate")
+        DataManager().setValueForKey("punto_venta", value: "MarinaFerry", inFile: "appstate")
         
         DataManager().setValueForKey("total_barcas", value: 0, inFile: "appstate")
         

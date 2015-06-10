@@ -56,11 +56,11 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     @IBOutlet weak var numeroBarcasUILabel: UILabel!
    
     
-    //var  PUNTO_VENTA : Int  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as Int
+    var  PUNTO_VENTA : Int  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int
     
-    //var PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as String
-    var PUNTO_VENTA : Int = 2
-    var PUNTO_VENTA_NOMBRE : String = "LosBarkitos"
+    var PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
+    //var PUNTO_VENTA : Int = 2
+    //var PUNTO_VENTA_NOMBRE : String = "LosBarkitos"
 
     var barcaActual : Int = -1
     var barcaActualString : String? = nil
@@ -204,6 +204,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.tipoListaUIView.hidden = true
     }
 
+    @IBAction func cerrarDia(sender: AnyObject) {
+        // Hay que poner los contadores de las reservas a 0
+        self.webService.cierreDia()
+        
+        
+    }
     
     @IBAction func imprimirTotalVentas(sender: UIButton) {
         
@@ -657,6 +663,25 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             }
         }
         imprimirReserva(PV, HR: HR, HP: HP)
+    }
+    
+    func didReceiveResponse_cierreDia(respuesta : String) {
+        println("respuesta del servidor : \(respuesta)")
+        
+        if respuesta == "ok" {
+            let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Las reservas se han restablecido todas a 0", preferredStyle: UIAlertControllerStyle.Alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil )
+            alerta.addAction(aceptarAction)
+            self.presentViewController(alerta, animated: true, completion: nil)
+        } else {
+            let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Error en el servidor", preferredStyle: UIAlertControllerStyle.Alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil )
+            alerta.addAction(aceptarAction)
+            self.presentViewController(alerta, animated: true, completion: nil)
+
+        }
+        
+        
     }
     
     func cargarValoresCon_appstate(inFile file: String) {

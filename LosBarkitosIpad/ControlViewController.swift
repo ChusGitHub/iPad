@@ -15,7 +15,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     let WHALY     = 3
     let GOLD      = 4
 
-    
+    var webServiceControl : webServiceCallAPI = webServiceCallAPI()
     var webService : webServiceCallAPI = webServiceCallAPI()
     var estado : String?
     
@@ -47,7 +47,26 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     @IBAction func salidaUIButton(sender: AnyObject) {
         
         webService.salidaBarca(sender.tag)
-        
+        switch sender.tag {
+        case 1:
+            if siguienteBarcaRioUiLabel.text == "---" || siguienteBarcaRioUiLabel.text == "" {
+                webService.siguienteBarcaLlegar()
+            }
+        case 2:
+            if siguienteBarcaElectricaUILabel.text == "---" || siguienteBarcaElectricaUILabel.text == "" {
+                webService.siguienteBarcaLlegar()
+            }
+        case 3:
+            if siguienteBarcaWhalyUiLabel.text == "---" || siguienteBarcaWhalyUiLabel.text == "" {
+                webService.siguienteBarcaLlegar()
+            }
+        case 4:
+            if siguienteBarcaGoldUILabel.text == "---" || siguienteBarcaGoldUILabel.text == "" {
+                webService.siguienteBarcaLlegar()
+            }
+        default:
+            println("Esta opcion no se puede dar")
+        }
         
     }
 
@@ -64,7 +83,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       // webServiceControl.delegateControl = self
         webService.delegateControl = self
+        //WebServiceProtocoloControl.delegate = self
+       // webService.delegateControl = self
      //   webService.obtenerPrimerLibre()
         webService.siguienteBarcaLlegar()
         
@@ -200,10 +222,33 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
     
     func didReceiveResponse_siguienteBarcaLlegar(respuesta: [String : String]) {
+        println("respuesta: \(respuesta)")
         self.siguienteBarcaRioUiLabel.text = respuesta["rio"]
         self.siguienteBarcaElectricaUILabel.text = respuesta["electrica"]
         self.siguienteBarcaWhalyUiLabel.text = respuesta["whaly"]
         self.siguienteBarcaGoldUILabel.text = respuesta["gold"]
+    }
+    
+    func didReceiveResponse_salidaReserva(mensaje: String) {
+        if mensaje == "OK" {
+            var alerta = UIAlertController(title: "FUERAAAA", message: "La reserva se ha eliminado de la lista", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alerta.addAction(OkAction)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+            
+        } else if mensaje == "KO" {
+            var alerta = UIAlertController(title: "PROBLEMMMM", message: "No puede salir ls reserva de la lista", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            
+            alerta.addAction(OkAction)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+            
+        }
     }
     
     func colocarLibresEnPantalla() {
@@ -228,30 +273,51 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.lista.count
-    
+        var contador = 0
+        for var i = 0; i < self.lista.count; i++ {
+            if self.lista[i]["fuera"] as! Int == 0 {
+              
+                contador += 1
+            }
+        }
+        return contador
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell : ControlUITableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("Cell") as! ControlUITableViewCell
-        let numero : Int = self.lista[indexPath.row]["numero"] as! Int
-        cell.numeroUILabelUITableViewCell.text = String(numero)
-        cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"] as? String
-       // hora  = self.lista[indexPath.row]["hora_prevista"]
-        cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["hora_prevista"] as? String
-        let fuera : Int = self.lista[indexPath.row]["fuera"] as! Int
-        cell.libreUILabelUITableViewCell.text = String(fuera)
         
-                
+        if self.lista[indexPath.row]["fuera"] as! Int == 0 {
+            let numero : Int = self.lista[indexPath.row]["numero"] as! Int
+            cell.numeroUILabelUITableViewCell.text = String(numero)
+            cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"] as? String
+            // hora  = self.lista[indexPath.row]["hora_prevista"]
+            cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["hora_prevista"] as? String
+            let fuera : Int = self.lista[indexPath.row]["fuera"] as! Int
+            cell.libreUILabelUITableViewCell.text = String(fuera)
+            println("numero: \(numero)")
+            
+        }
+        webServiceControl.salidaReserva(indexPath.row as Int)
+        
         return cell
         
     }
 
-    
-   // func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    //}
 
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        println("fila \(indexPath.row) seleccionada")
+        
+        println(self.lista[indexPath.row])
+        self.lista[indexPath.row]["fuera"] = 1
+        
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        
+        self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
+        self.listaUITableView.reloadData()
+
+    }
 
 }
 
