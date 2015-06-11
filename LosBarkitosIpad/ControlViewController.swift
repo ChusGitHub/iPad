@@ -83,7 +83,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // webServiceControl.delegateControl = self
+        webServiceControl.delegateControl = self
         webService.delegateControl = self
         //WebServiceProtocoloControl.delegate = self
        // webService.delegateControl = self
@@ -297,7 +297,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             println("numero: \(numero)")
             
         }
-        webServiceControl.salidaReserva(indexPath.row as Int)
         
         return cell
         
@@ -313,9 +312,9 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.lista[indexPath.row]["fuera"] = 1
         
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        
-        self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
-        self.listaUITableView.reloadData()
+        let tipo = self.lista[indexPath.row]["tipo"] as! Int
+        println("tipo: \(tipo)")
+        webServiceControl.salidaReserva(self.lista[indexPath.row]["tipo"] as! Int, numero: self.lista[indexPath.row]["numero"] as! Int)
 
     }
 

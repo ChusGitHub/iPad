@@ -462,10 +462,10 @@ class webServiceCallAPI : NSObject {
             failure: nil)
     }
     
-    func salidaReserva(tipo : Int) {
+    func salidaReserva(tipo : Int, numero : Int) {
         var error : NSError?
         
-        manager.GET("http://losbarkitos.herokuapp.com/reserva_fuera/\(tipo)",
+        manager.GET("http://losbarkitos.herokuapp.com/reserva_fuera/\(tipo)/\(numero)",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_salidaReserva("OK")
