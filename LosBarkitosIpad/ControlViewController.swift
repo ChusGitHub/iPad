@@ -146,6 +146,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             registro["hora_prevista"] = v["hora_prevista"] as! String
             registro["hora_reserva"] = v["hora_reserva"] as! String
             registro["fuera"] = v["fuera"] as! Bool
+            registro["tipo"] = v["tipo"]
             self.lista.append(registro)
         }
         // ordenacion de las reservas por el numero
@@ -301,7 +302,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         return cell
         
     }
-
 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
