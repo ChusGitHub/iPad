@@ -736,6 +736,39 @@
                                 <color key="textColor" red="0.075923451079999996" green="0.40566096149999997" blue="0.97713462750000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Num. Reservas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCQ-zT-PcI">
+                                <rect key="frame" x="854" y="664" width="121" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.075923451079999996" green="0.40566096149999997" blue="0.97713462750000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qD2-Wv-dbP">
+                                <rect key="frame" x="864" y="688" width="50" height="24"/>
+                                <color key="backgroundColor" red="1" green="0.94313021210000003" blue="0.076898582219999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4Z-qy-oao">
+                                <rect key="frame" x="916" y="688" width="50" height="24"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.078431372550000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hvp-ZE-rvs">
+                                <rect key="frame" x="967" y="688" width="50" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQn-ms-nOE">
+                                <rect key="frame" x="813" y="688" width="50" height="24"/>
+                                <color key="backgroundColor" red="0.075923451079999996" green="0.40566096149999997" blue="0.97713462750000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -745,6 +778,10 @@
                         <outlet property="listaUITableView" destination="GU1-Z8-3eK" id="iY3-Ri-Bhz"/>
                         <outlet property="numeroElectricasFueraUILabel" destination="YFQ-iY-3ak" id="6dl-o1-D1V"/>
                         <outlet property="numeroGoldsFueraUILabel" destination="QeP-Pd-Lh1" id="m2h-3p-lY8"/>
+                        <outlet property="numeroReservasElectricaUILabel" destination="qD2-Wv-dbP" id="hAd-6S-8YJ"/>
+                        <outlet property="numeroReservasGoldUILabel" destination="Hvp-ZE-rvs" id="eMI-QX-aOG"/>
+                        <outlet property="numeroReservasRioUILabel" destination="mQn-ms-nOE" id="Awz-Wo-Ees"/>
+                        <outlet property="numeroReservasWhalyUILabel" destination="A4Z-qy-oao" id="akI-lo-Nt9"/>
                         <outlet property="numeroRiosFueraUILAbel" destination="cre-no-d66" id="dbf-9W-0HC"/>
                         <outlet property="numeroWhalysFueraUILabel" destination="Fce-L2-6hD" id="RRN-uH-XbI"/>
                         <outlet property="siguienteBarcaElectricaUILabel" destination="xFL-bf-OY4" id="ciG-3e-dH1"/>
@@ -1093,7 +1130,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="zvr-Y3-xRY"/>
+        <segue reference="pSb-b9-IQJ"/>
         <segue reference="e9F-yZ-Wa3"/>
         <segue reference="PRz-5W-xYw"/>
     </inferredMetricsTieBreakers>

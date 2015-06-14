@@ -32,6 +32,7 @@ protocol WebServiceProtocoloControl {
     func didReceiveResponse_barcasFuera(respuesta : [String : [Int]])
     func didReceiveResponse_siguienteBarcaLlegar([String : String])
     func didReceiveResponse_salidaReserva(String)
+    func didReceiveResponse_reservasPorDar([String : AnyObject])
 }
 
 protocol WebServiceReserva {
@@ -414,7 +415,6 @@ class webServiceCallAPI : NSObject {
     }
     
     func llegadaBarca(tipo : Int) {
-        var error : NSError?
         
         manager.GET("http://losbarkitos.herokuapp.com/llegada/\(tipo)",
             parameters: nil,
@@ -427,8 +427,6 @@ class webServiceCallAPI : NSObject {
     }
     
     func barcasFuera() {
-        var error : NSError?
-        
         manager.GET("http://losbarkitos.herokuapp.com/fuera",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
@@ -473,6 +471,20 @@ class webServiceCallAPI : NSObject {
             failure: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_salidaReserva("KO")
         })
+    }
+    
+    func numeroReservasPorDar() {
+        var error : NSError?
+        
+        manager.GET("http://losbarkitos.herokuapp.com/total_reservas",
+            parameters: nil,
+            success: {(operation : AFHTTPRequestOperation!, responseObject) in
+                self.delegateControl?.didReceiveResponse_reservasPorDar(responseObject as! [String : AnyObject])
+            },
+            failure: {(operation : AFHTTPRequestOperation!, error) in
+                self.delegateControl?.didReceiveResponse_reservasPorDar(responseObject as! [String : AnyObject])
+            }
+        )
     }
 }
 

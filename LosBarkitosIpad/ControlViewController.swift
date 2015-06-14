@@ -36,6 +36,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     @IBOutlet weak var siguienteBarcaWhalyUiLabel: UILabel!
     @IBOutlet weak var siguienteBarcaGoldUILabel: UILabel!
     
+    @IBOutlet weak var numeroReservasRioUILabel: UILabel!
+    @IBOutlet weak var numeroReservasElectricaUILabel: UILabel!
+    @IBOutlet weak var numeroReservasWhalyUILabel: UILabel!
+    @IBOutlet weak var numeroReservasGoldUILabel: UILabel!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -89,6 +93,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
        // webService.delegateControl = self
      //   webService.obtenerPrimerLibre()
         webService.siguienteBarcaLlegar()
+        webServiceControl.numeroReservasPorDar()
         
     }
     
@@ -249,6 +254,19 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             
             self.presentViewController(alerta, animated: true, completion: nil)
             
+        }
+    }
+    
+    func didReceiveResponse_reservasPorDar(respuesta : [String : AnyObject]) {
+        
+        var contenido : Dictionary<String,String>
+        if respuesta["mensaje"] as! String == "OK" {
+            contenido = respuesta["contenido"] as! Dictionary<String,String>
+            self.numeroReservasRioUILabel.text = contenido["rio"]
+            self.numeroReservasElectricaUILabel.text = contenido["electrica"]
+            self.numeroReservasWhalyUILabel.text = contenido["whaly"]
+            self.numeroReservasGoldUILabel.text = contenido["gold"]
+    
         }
     }
     
