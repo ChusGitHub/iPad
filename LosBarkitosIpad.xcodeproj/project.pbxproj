@@ -62,7 +62,7 @@
 		BB34ACF41A1615EE008E67ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BB34ACFF1A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB34AD001A1615EE008E67ED /* LosBarkitosIpadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosBarkitosIpadTests.swift; sourceTree = "<group>"; };
-		BB35F5421A1F7426004AFC7C /* Conexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
+		BB35F5421A1F7426004AFC7C /* Conexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BB35F5441A1F754A004AFC7C /* Conectividad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conectividad.swift; sourceTree = "<group>"; };
 		BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		BB39033F1A77DF6C004572B2 /* StarIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarIO.framework; sourceTree = "<group>"; };

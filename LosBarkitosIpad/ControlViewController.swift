@@ -235,15 +235,32 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.siguienteBarcaGoldUILabel.text = respuesta["gold"]
     }
     
-    func didReceiveResponse_salidaReserva(mensaje: String) {
+    func didReceiveResponse_salidaReserva(mensaje: String, tipo: Int) {
         if mensaje == "OK" {
-            var alerta = UIAlertController(title: "FUERAAAA", message: "La reserva se ha eliminado de la lista", preferredStyle: UIAlertControllerStyle.Alert)
+            //var alerta = UIAlertController(title: "FUERAAAA", message: "La reserva se ha eliminado de la lista", preferredStyle: UIAlertControllerStyle.Alert)
             
-            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            //let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
             
-            alerta.addAction(OkAction)
+            //alerta.addAction(OkAction)
             
-            self.presentViewController(alerta, animated: true, completion: nil)
+            //self.presentViewController(alerta, animated: true, completion: nil)
+            
+            // Actualizamos los contadores de las reservas que faltan
+            switch tipo{
+            case 1:
+                let num : Int? = self.numeroReservasRioUILabel.text?.toInt()
+                self.numeroReservasRioUILabel.text = String(num! - 1)
+            case 2:
+                let num : Int? = self.numeroReservasElectricaUILabel.text?.toInt()
+                self.numeroReservasElectricaUILabel.text = String(num! - 1)
+            case 3:
+                let num : Int? = self.numeroReservasWhalyUILabel.text?.toInt()
+                self.numeroReservasWhalyUILabel.text = String(num! - 1)
+            default:
+                let num : Int? = self.numeroReservasGoldUILabel.text?.toInt()
+                self.numeroReservasGoldUILabel.text = String(num! - 1)
+            }
+            
             
         } else if mensaje == "KO" {
             var alerta = UIAlertController(title: "PROBLEMMMM", message: "No puede salir ls reserva de la lista", preferredStyle: UIAlertControllerStyle.Alert)

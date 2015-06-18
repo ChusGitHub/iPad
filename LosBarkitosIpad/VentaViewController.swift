@@ -451,7 +451,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
-    func imprimirReserva(PV : String, HR : String, HP : String) {
+    func imprimirReserva(PV : String, HR : String, HP : String, tipo: String) {
         if setupImpresora() {
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
@@ -465,7 +465,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas, HR, HP)
+            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas, HR, HP, tipo)
         }
     }
     
@@ -647,6 +647,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         var PV : String = ""
         var HR : String = ""
         var HP : String = ""
+        var tipo : String = ""
         self.reservas = [0,0,0,0]
         for (k,v) in respuesta {
             if k == "PV" {
@@ -661,8 +662,11 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             if k == "hora prevista" {
                 HP = v as! String
             }
+            if k == "exito" {
+                tipo = v as! String
+            }
         }
-        imprimirReserva(PV, HR: HR, HP: HP)
+        imprimirReserva(PV, HR: HR, HP: HP, tipo: tipo)
     }
     
     func didReceiveResponse_cierreDia(respuesta : String) {

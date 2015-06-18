@@ -148,7 +148,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
 }
 
 // IMPRESION DE RESERVA
-func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : String,  parametro : [Int], HR : String, HP : String) -> Bool {
+func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : String,  parametro : [Int], HR : String, HP : String, tipoBarca: String) -> Bool {
     
     let horaActual : NSDate = NSDate()
     
@@ -206,7 +206,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : 
     commands.appendBytes(cmd, length: 2)
     
     // Formato pequeño para datos empresa
-    cmd = [0x1b, 0x57, 0x00]
+    cmd = [0x1b, 0x57, 0x01]
     commands.appendBytes(cmd, length: 3)
     
     str = "Reserva\r\n"
@@ -222,6 +222,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : 
     commands.appendBytes(cmd, length: 4)
 
     str = String(numReserva)
+    str += "\n" + tipoBarca
     str += "\r\n\n---------------------------------\r\n\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)

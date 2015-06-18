@@ -31,7 +31,7 @@ protocol WebServiceProtocoloControl {
     func didReceiveResponse_llegada(respuesta : [String : String])
     func didReceiveResponse_barcasFuera(respuesta : [String : [Int]])
     func didReceiveResponse_siguienteBarcaLlegar([String : String])
-    func didReceiveResponse_salidaReserva(String)
+    func didReceiveResponse_salidaReserva(String, tipo: Int)
     func didReceiveResponse_reservasPorDar([String : AnyObject])
 }
 
@@ -466,10 +466,10 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/reserva_fuera/\(tipo)/\(numero)",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
-                self.delegateControl?.didReceiveResponse_salidaReserva("OK")
+                self.delegateControl?.didReceiveResponse_salidaReserva("OK", tipo: tipo)
             },
             failure: {(operation : AFHTTPRequestOperation!, responseObject) in
-                self.delegateControl?.didReceiveResponse_salidaReserva("KO")
+                self.delegateControl?.didReceiveResponse_salidaReserva("KO", tipo: tipo)
         })
     }
     
