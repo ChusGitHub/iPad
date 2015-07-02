@@ -48,4 +48,22 @@ class ManejoSQLITE : NSObject {
         return true
         
     }
+    
+    func numeroBarcas() -> Int32 {
+        var numBarcas : Int32 = 0
+        var filemgr = NSFileManager.defaultManager()
+        if filemgr.fileExistsAtPath(sharedInstance.sqliteDatabasePath!) {
+            if sharedInstance.sqliteDatabase!.open() {
+                let consulta : String? = "SELECT count(*) from viaje"
+                let resultado : FMResultSet? = sharedInstance.sqliteDatabase!.executeQuery(consulta!, withArgumentsInArray: nil)
+                if let resultado = resultado where resultado.next() {
+                     numBarcas = resultado.intForColumnIndex(0) as Int32
+                } else {
+                    numBarcas = 0
+                }
+                sharedInstance.sqliteDatabase!.close()
+            }
+        }
+        return numBarcas
+    }
 }

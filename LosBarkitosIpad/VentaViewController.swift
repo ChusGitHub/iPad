@@ -25,6 +25,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     let VENDEDOR =  1
     let VENTAS =    2
+    
+    // Acceso a la base de datos SQLITE
+    let db = SQLiteDB.sharedInstance()
 
     
     @IBOutlet weak var btnViewVendedoresUIButton: UIButton!
@@ -206,6 +209,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     @IBAction func cerrarDia(sender: AnyObject) {
         // Hay que poner los contadores de las reservas a 0
+        DataManager().setValueForKey("total_barcas", value: 0, inFile: "appstate")
+        DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
         self.webService.cierreDia()
         
         
@@ -325,8 +330,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
        
         self.infoAdministradoUILabel.text = "Usuario"
         
-        let total : Int = DataManager().getValueForKey("total_barcas", inFile: "appstate") as! Int
-       
+        let total : Int32 = numeroBarcasSQLite()
         self.numeroBarcasUILabel.text = String(total)
         
     }
@@ -382,7 +386,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
-            println("codVend: \(codVend)")
             // Se inserta la venta de la barca en HEROKU
             webService.entradaBDD_ventaBarca(self.numeroTicket,
                                              tipo: self.barcaActual,
@@ -390,12 +393,15 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                                              puntoVenta: PUNTO_VENTA ,
                                              vendedor: codVend,
                                              negro: self.negro)
+        
             var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
             total += 1
             DataManager().setValueForKey("total_barcas", value: total, inFile: "appstate")
-            self.numeroBarcasUILabel.text = String(total)
             // Se inserta la venta de la barca en SQLITE
-           // var insertado = insertaViajeSQLite()
+            let insertado = insertaViajeSQLite()
+            if insertado {
+                self.numeroBarcasUILabel.text = String(numeroBarcasSQLite())
+            }
             
         } else {
             
@@ -571,21 +577,18 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }*/
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
-        println("respuesta del servidor(respuesta) : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
-                println("ERROR EN EL DICCIONARIO DEVUELTO : \(v)")
                 EXIT_FAILURE
-            } else {
-                if k as NSString == "numero" {
-                    self.numeroTicket = v as! Int
-                }
-                if k as NSString == "negro" {
-                    if v  as! String == "si" {
-                        self.negro = true
-                    } else {
-                        self.negro = false
-                    }
+            }
+            if k as NSString == "numero" {
+                self.numeroTicket = v as! Int
+            }
+            if k as NSString == "negro" {
+                if v  as! String == "si" {
+                    self.negro = true
+                } else {
+                    self.negro = false
                 }
             }
         }
@@ -806,33 +809,53 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.gestion = "administrador"
-        self.infoAdministradoUILabel.text = "Administrador"
-        self.tipoListaUIView.hidden = false
-        self.passwordUIView.hidden = true
-        self.resignFirstResponder()
-
+        if self.txtPasswordUITextField.text == "Otisuhc0" {
+            self.gestion = "administrador"
+            self.infoAdministradoUILabel.text = "Administrador"
+            self.tipoListaUIView.hidden = false
+            self.passwordUIView.hidden = true
+            self.resignFirstResponder()
+        } else {
+            self.resignFirstResponder()
+            let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
+            alerta.addAction(aceptarAction)
+            self.presentViewController(alerta, animated: true, completion: nil)
+        }
         return true
-    }
+    } 
     
     
     // TRABAJO CON LA BDD SQLITE
     func insertaViajeSQLite() -> Bool {
+        
+        //let formatoFecha = NSDateFormatter()
+        //formatoFecha.dateFormat = "dd-MM-YYYY hh:mm:ss"
+        //let fecha = formatoFecha.stringFromDate(NSDate())
+        //let result = db.execute("INSERT i", parameters: <#[AnyObject]?#>)
         
         var viaje : Viaje = Viaje()
         let formatoFecha = NSDateFormatter()
         formatoFecha.dateFormat = "dd-MM-yyyy hh:mm:ss"
         let fecha = formatoFecha.stringFromDate(NSDate())
         
+        viaje.numero = self.numeroTicket
         viaje.fecha = fecha
+        viaje.precio = self.toPreciosViewController
         viaje.barca = self.barcaActual
-        viaje.blanco = false
+        viaje.blanco = self.negro
         viaje.vendedor =  (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
         viaje.punto_venta = (DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int)
         
         var estaInsertadoSQLITE = ManejoSQLITE.instance.insertaViajeSQLITE(viaje)
         return estaInsertadoSQLITE
+        
+        
+    }
+    
+    func numeroBarcasSQLite() -> Int32 {
+        
+        return ManejoSQLITE.instance.numeroBarcas() as Int32
     }
 
 }

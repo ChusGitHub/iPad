@@ -17,12 +17,10 @@ class UtilidadesBDDSQLITE : NSObject {
         println(path)
         
         return path
-        //return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentationDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0].stringByAppendingPathComponent(fileName)
     }
     
     class func copyFile(fileName : NSString) {
         var dbPath : String = getPath(fileName as String)
-        println(dbPath)
 
         var fileManager = NSFileManager.defaultManager()
         if !fileManager.fileExistsAtPath(dbPath) {

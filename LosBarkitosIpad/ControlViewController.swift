@@ -312,7 +312,6 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         var contador = 0
         for var i = 0; i < self.lista.count; i++ {
             if self.lista[i]["fuera"] as! Int == 0 {
-              
                 contador += 1
             }
         }
