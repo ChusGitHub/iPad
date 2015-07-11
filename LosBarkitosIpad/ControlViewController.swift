@@ -346,6 +346,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.lista[indexPath.row]["fuera"] = 1
         
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        
         let tipo = self.lista[indexPath.row]["tipo"] as! Int
         println("tipo: \(tipo)")
         webServiceControl.salidaReserva(self.lista[indexPath.row]["tipo"] as! Int, numero: self.lista[indexPath.row]["numero"] as! Int)

@@ -12,7 +12,7 @@ import UIKit
 class UtilidadesBDDSQLITE : NSObject {
     
     class func getPath(fileName : String) -> String {
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)[0] as! String
         let path = documentsFolder.stringByAppendingPathComponent(fileName)
         println(path)
         

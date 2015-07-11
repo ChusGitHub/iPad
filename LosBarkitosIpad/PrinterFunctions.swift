@@ -11,7 +11,10 @@ import Foundation
 // IMPRESION DE TICKET
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
-    let horaActual : NSDate = NSDate()
+    var formatoFecha = NSDateFormatter()
+    formatoFecha.dateFormat = "dd-MM-yyyy"
+    let fecha : NSDate = NSDate()
+    let fechaConFormato = formatoFecha.stringFromDate(fecha)
     
     var commands = NSMutableData()
     var str : String
@@ -62,11 +65,15 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     str = "Canal Vahimar S.L.\r\n N.I.F. B17825134\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n"
     str += "Tel: 972.45.25.79\r\n"
     str += "www.marinaferry.es\r\n"
+    str += "\(fechaConFormato)\r\n"
     str += "---------------------------------\r\n\r\n"
     let n : String = String(parametro["numero"] as! Int)
     str += "Num. \(n)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
+    
+    // Fecha
+    
 
 
     // tamaño mediano

@@ -58,12 +58,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     @IBOutlet weak var numeroBarcasUILabel: UILabel!
    
-    
-    var  PUNTO_VENTA : Int  = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int
-    
-    var PUNTO_VENTA_NOMBRE : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
-    //var PUNTO_VENTA : Int = 2
-    //var PUNTO_VENTA_NOMBRE : String = "LosBarkitos"
+
+    /// SE TIENE QUE CAMBIAR CADA VEZ QUE SE ACTUALIZA UN IPAD
+    var PUNTO_VENTA : Int = 5
+    var PUNTO_VENTA_NOMBRE : String = "MarinaFerry 2"
 
     var barcaActual : Int = -1
     var barcaActualString : String? = nil
@@ -301,6 +299,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
         // Si es posible pongo el nombre del vendedor
         self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
+        if self.PUNTO_VENTA == 0 {
+            self.PUNTO_VENTA = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int
+        }
+        if self.PUNTO_VENTA_NOMBRE == "" {
+            self.PUNTO_VENTA_NOMBRE = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
+        }
         
         
         // creo enlace a webService y digo que el protocolo soy yo mismo
@@ -381,18 +385,18 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
+        if (ticketImpreso != true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
             // Se inserta la venta de la barca en HEROKU
-            webService.entradaBDD_ventaBarca(self.numeroTicket,
-                                             tipo: self.barcaActual,
-                                             precio: self.toPreciosViewController,
-                                             puntoVenta: PUNTO_VENTA ,
-                                             vendedor: codVend,
-                                             negro: self.negro)
+           // webService.entradaBDD_ventaBarca(self.numeroTicket,
+            //                                 tipo: self.barcaActual,
+              //                               precio: self.toPreciosViewController,
+                 //                            puntoVenta: PUNTO_VENTA ,
+                     //                        vendedor: codVend,
+                         //                    negro: self.negro)
         
             var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
             total += 1
@@ -536,7 +540,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta: [String : AnyObject]) {
-        println("respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
                 println("ERROR EN EL DICCIONARIO DEVUELTO")
@@ -577,6 +580,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }*/
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
+        println("\respuesta")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
                 EXIT_FAILURE

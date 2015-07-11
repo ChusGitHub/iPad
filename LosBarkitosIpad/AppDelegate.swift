@@ -15,6 +15,7 @@ var portSettings : NSString = ""
 var drawerPortName : NSString = ""
 // propiedades para el control de la bd sqlite en local
 var DBLocal : String = ""
+var DBPath : String = ""
 
 
 @UIApplicationMain
