@@ -39,12 +39,17 @@ protocol WebServiceReserva {
     func didReceiveResponse_reservaPosible(respuesta : [Bool])
 }
 
+protocol WebServiceListado {
+    func didReceiveResponse_listadoVentas([String : AnyObject])
+}
+
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
 class webServiceCallAPI : NSObject {
     
     var delegate : WebServiceProtocoloVentas?
     var delegateControl : WebServiceProtocoloControl?
     var delegateReserva : WebServiceReserva?
+    var delegateListado : WebServiceListado?
     
     let manager : AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 

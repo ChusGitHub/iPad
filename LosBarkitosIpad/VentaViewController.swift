@@ -233,6 +233,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
     }
     
+    @IBAction func listadoVentasUIButton(sender: UIButton) {
+        webService.delegate = self
+    }
     @IBAction func reservasUIButton(sender: UIButton) {
         webService.delegate = self
         
