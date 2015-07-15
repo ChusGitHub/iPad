@@ -11,9 +11,10 @@ import UIKit
 class listadoVentasViewController: UIViewController, WebServiceListado, UITableViewDataSource, UITableViewDelegate {
     
     var webService : webServiceCallAPI = webServiceCallAPI()
-    var listadoBarcas = 
+    var listadoBarcas = [[String : AnyObject]]()
+    var numeroBarcas : Int = 0
     
-    @IBOutlet weak var listadoVentas: UITableView!
+    @IBOutlet weak var listadoVentasTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
     func didReceiveResponse_listadoVentas(diccionario : [String : AnyObject]) {
         
         // println("diccionario : \(diccionario)")
-        self.listaBarcas = []
+        self.listadoBarcas = []
         var registro : [String : AnyObject] = [:]
         print("diccionario : \(diccionario)")
         for (k,v) in diccionario {
@@ -45,63 +46,42 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
             } else {
                 registro["numero"] = v["numero"] as! Int
                 registro["punto_venta"] = v["punto_venta"] as! String
-                registro["fecha"] = v["hora_prevista"] as! String
+                //registro["hora"] = v["hora_prevista"] as! String
                 registro["precio"] = v["precio"] as! Int
                 registro["tipo"] = v["tipo"]
-                self.listaBarcas.append(registro)
+                self.listadoBarcas.append(registro)
             }
         }
         // ordenacion de las reservas por el numero
         
-        self.listaBarcas.sort({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
+        self.listadoBarcas.sort({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
             return   segundo["numero"] as! Int > primero["numero"] as! Int
         })
         
-        self.listaUITableView.clearsContextBeforeDrawing = true
-        self.listaUITableView.reloadData()
+        self.listadoVentasTableView.clearsContextBeforeDrawing = true
+        self.listadoVentasTableView.reloadData()
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
+    // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return self.numeroBarcas
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : listadoTableViewCell = self.listaUITableView.dequeueReusableCellWithIdentifier("CellListadoBarcas") as! listadoTableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        var cell : listadoVentasTableViewCell = self.listadoVentasTableView.dequeueReusableCellWithIdentifier("CellListadoVentas") as! listadoVentasTableViewCell
         
-        let numero : Int = self.listaBarcas[indexPath.row]["numero"] as! Int
+        let numero : Int = self.listadoBarcas[indexPath.row]["numero"] as! Int
         cell.numeroUILabel.text = String(numero)
-        cell.puntoVentaUILabel.text = self.listaBarcas[indexPath.row]["punto_venta"] as? String
-        cell.horaSalidaUILabel.text = self.listaBarcas[indexPath.row]["fecha"] as? String
-        cell.tipoBarcaUILabel.text = self.listaBarcas[indexPath.row]["tipo_barca"] as? String
-        let p : Int = self.listaBarcas[indexPath.row]["precio"] as! Int
-        cell.precioUILabel.text = String(p)
+        cell.puntoVentaUILabel.text = self.listadoBarcas[indexPath.row]["punto_venta"] as? String
+        cell.horaUILabel.text = self.listadoBarcas[indexPath.row]["hora"] as? String
+        cell.tipoBarcaUILabel.text = self.listadoBarcas[indexPath.row]["tipo"] as? String
+        cell.precioUILabel.text = String(self.listadoBarcas[indexPath.row]["precio"] as! Int)
         
-        return cell    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        return cell
+        
     }
-    */
 
 }

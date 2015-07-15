@@ -11,6 +11,11 @@ import UIKit
 class listadoVentasTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numeroUILabel: UILabel!
+    @IBOutlet weak var puntoVentaUILabel: UILabel!
+    @IBOutlet weak var tipoBarcaUILabel: UILabel!
+    @IBOutlet weak var horaUILabel: UILabel!
+    @IBOutlet weak var precioUILabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

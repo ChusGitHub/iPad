@@ -95,7 +95,7 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error :     NSError?
         
-        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/1/1",
+        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/1/2",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                  var indice : Int = 1
