@@ -90,20 +90,20 @@ class webServiceCallAPI : NSObject {
         
     }
     
- /*   func obtenerVentas() {
+    func obtenerVentas() {
         var jsonDict :  NSDictionary!
         var jsonArray : NSArray!
         var error :     NSError?
         
-        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/0/2/0",
+        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/1/1",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                  var indice : Int = 1
                 var diccionario = [String : AnyObject]()
-                for (k,v) in responseObject as [String : AnyObject] {
+                for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
-                    } else if v as NSString == "si" { // la respuesta es errónea
+                    } else if v as! NSString == "si" { // la respuesta es errónea
                         println("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
@@ -111,17 +111,17 @@ class webServiceCallAPI : NSObject {
                 }
                 println("diccionario : \(diccionario)")
 
-                self.delegate?.didReceiveResponse_listadoVentas(diccionario as Dictionary)
+                self.delegateListado?.didReceiveResponse_listadoVentas(diccionario as Dictionary)
             },
             
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegate?.didReceiveResponse_listadoVentas(diccionario as Dictionary)
+                self.delegateListado?.didReceiveResponse_listadoVentas(diccionario as Dictionary)
             }
         )
-    }*/
+    }
     
     func entradaBDD_ventaBarca(ticket :Int, tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int, negro : Bool) {
         var jsonDict : NSDictionary!
