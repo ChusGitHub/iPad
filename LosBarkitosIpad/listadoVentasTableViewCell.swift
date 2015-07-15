@@ -1,20 +1,16 @@
 //
-//  listadoTableViewCell.swift
+//  listadoBarcasTableViewCell.swift
 //  LosBarkitosIpad
 //
-//  Created by chus on 14/7/15.
+//  Created by Jesus Valladolid Rebollar on 15/7/15.
 //  Copyright (c) 2015 Jesus Valladolid Rebollar. All rights reserved.
 //
 
 import UIKit
 
-class listadoTableViewCell: UITableViewCell {
+class listadoVentasTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numeroUILabel: UILabel!
-    @IBOutlet weak var puntoVentaUILabel: UILabel!
-    @IBOutlet weak var tipoBarcaUILabel: UILabel!
-    @IBOutlet weak var horaSalidaUILabel: UILabel!
-    @IBOutlet weak var precioUILabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

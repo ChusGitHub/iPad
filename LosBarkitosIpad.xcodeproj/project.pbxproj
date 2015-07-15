@@ -31,13 +31,13 @@
 		BB6FB2E61B417F3200EDD903 /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6FB2E41B417F3200EDD903 /* String-Extras.swift */; };
 		BB6FB2E81B41807100EDD903 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6FB2E71B41807100EDD903 /* libsqlite3.0.dylib */; };
 		BB6FB2EA1B429F3D00EDD903 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6FB2E91B429F3D00EDD903 /* libsqlite3.dylib */; };
+		BB93BCDF1B56B3B100A99954 /* listadoVentasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93BCDE1B56B3B100A99954 /* listadoVentasViewController.swift */; };
+		BB93BCE11B56B6BA00A99954 /* listadoVentasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93BCE01B56B6BA00A99954 /* listadoVentasTableViewCell.swift */; };
 		BBC33D7C1AD3E6C0009C1392 /* tipoReservaUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */; };
 		BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */; };
 		BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */; };
 		BBFC89D81A7E3996008402AF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC89D71A7E3996008402AF /* Reachability.swift */; };
 		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
-		F96F20281B557E610046C3DD /* listadoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96F20271B557E610046C3DD /* listadoTableViewController.swift */; };
-		F96F202A1B557EAA0046C3DD /* listadoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96F20291B557EAA0046C3DD /* listadoTableViewCell.swift */; };
 		F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AFCE121A169FB5007FF3A9 /* PlistData.swift */; };
 		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
 		F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */; };
@@ -78,12 +78,12 @@
 		BB6FB2E41B417F3200EDD903 /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String-Extras.swift"; path = "../String-Extras.swift"; sourceTree = "<group>"; };
 		BB6FB2E71B41807100EDD903 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		BB6FB2E91B429F3D00EDD903 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BB93BCDE1B56B3B100A99954 /* listadoVentasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listadoVentasViewController.swift; sourceTree = "<group>"; };
+		BB93BCE01B56B6BA00A99954 /* listadoVentasTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listadoVentasTableViewCell.swift; sourceTree = "<group>"; };
 		BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tipoReservaUIViewController.swift; sourceTree = "<group>"; };
 		BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrinterFunctions.swift; sourceTree = "<group>"; };
 		BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlUITableViewCell.swift; sourceTree = "<group>"; };
 		BBFC89D71A7E3996008402AF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		F96F20271B557E610046C3DD /* listadoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listadoTableViewController.swift; sourceTree = "<group>"; };
-		F96F20291B557EAA0046C3DD /* listadoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listadoTableViewCell.swift; sourceTree = "<group>"; };
 		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
 		F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendedorUITableViewCell.swift; sourceTree = "<group>"; };
 		F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreciosViewController.swift; sourceTree = "<group>"; };
@@ -170,13 +170,13 @@
 				BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */,
 				BB35F5441A1F754A004AFC7C /* Conectividad.swift */,
 				BBF88ECD1AACA4DD009BC3AB /* ControlViewController */,
-				F96F202B1B557F140046C3DD /* listadoTableView */,
 				BB34ACEE1A1615EE008E67ED /* Main.storyboard */,
 				BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */,
 				F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */,
 				BB34ACF11A1615EE008E67ED /* Images.xcassets */,
 				BB34ACF31A1615EE008E67ED /* LaunchScreen.xib */,
 				BB34ACE61A1615EE008E67ED /* Supporting Files */,
+				BB93BCE21B56B6C100A99954 /* ListadoVentas */,
 			);
 			path = LosBarkitosIpad;
 			sourceTree = "<group>";
@@ -207,6 +207,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BB93BCE21B56B6C100A99954 /* ListadoVentas */ = {
+			isa = PBXGroup;
+			children = (
+				BB93BCDE1B56B3B100A99954 /* listadoVentasViewController.swift */,
+				BB93BCE01B56B6BA00A99954 /* listadoVentasTableViewCell.swift */,
+			);
+			name = ListadoVentas;
+			sourceTree = "<group>";
+		};
 		BBF88ECD1AACA4DD009BC3AB /* ControlViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,15 +232,6 @@
 				30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		F96F202B1B557F140046C3DD /* listadoTableView */ = {
-			isa = PBXGroup;
-			children = (
-				F96F20271B557E610046C3DD /* listadoTableViewController.swift */,
-				F96F20291B557EAA0046C3DD /* listadoTableViewCell.swift */,
-			);
-			name = listadoTableView;
 			sourceTree = "<group>";
 		};
 		F9BCDB451A2D0DAE002C70D4 /* VentaViewController */ = {
@@ -342,15 +342,15 @@
 				BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */,
 				BB6FB2E51B417F3200EDD903 /* SQLiteDB.swift in Sources */,
 				BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */,
-				F96F20281B557E610046C3DD /* listadoTableViewController.swift in Sources */,
+				BB93BCDF1B56B3B100A99954 /* listadoVentasViewController.swift in Sources */,
 				BB020C501AA08AF900B5E976 /* vendedor.swift in Sources */,
 				BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */,
 				BB34ACED1A1615EE008E67ED /* ControlViewController.swift in Sources */,
+				BB93BCE11B56B6BA00A99954 /* listadoVentasTableViewCell.swift in Sources */,
 				BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */,
 				BB020C4A1AA089DF00B5E976 /* barca.swift in Sources */,
 				BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */,
 				BB020C481AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift in Sources */,
-				F96F202A1B557EAA0046C3DD /* listadoTableViewCell.swift in Sources */,
 				BB020C451AA0856000B5E976 /* viaje.swift in Sources */,
 				BB020C4E1AA08A9800B5E976 /* tipoBarca.swift in Sources */,
 				BBFC89D81A7E3996008402AF /* Reachability.swift in Sources */,
