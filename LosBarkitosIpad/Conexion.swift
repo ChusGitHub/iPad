@@ -94,8 +94,9 @@ class webServiceCallAPI : NSObject {
         var jsonDict :  NSDictionary!
         var jsonArray : NSArray!
         var error :     NSError?
-        
-        manager.GET("http://losbarkitos.herokuapp.com/listado_viaje/1/2",
+        let puntoVenta : String = String(DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int)
+        let url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"// + String(puntoVenta)
+        manager.GET(url,
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                  var indice : Int = 1

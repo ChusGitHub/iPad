@@ -388,18 +388,18 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso != true) {
+        if (ticketImpreso == true) {
 
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
             // Se inserta la venta de la barca en HEROKU
-           // webService.entradaBDD_ventaBarca(self.numeroTicket,
-            //                                 tipo: self.barcaActual,
-              //                               precio: self.toPreciosViewController,
-                 //                            puntoVenta: PUNTO_VENTA ,
-                     //                        vendedor: codVend,
-                         //                    negro: self.negro)
+            webService.entradaBDD_ventaBarca(self.numeroTicket,
+                                             tipo: self.barcaActual,
+                                             precio: self.toPreciosViewController,
+                                             puntoVenta: PUNTO_VENTA ,
+                                             vendedor: codVend,
+                                             negro: self.negro)
         
             var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
             total += 1

@@ -15,6 +15,14 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
     var numeroBarcas : Int = 0
     
     @IBOutlet weak var listadoVentasTableView: UITableView!
+    @IBOutlet weak var anteriorUIButton: UIButton!
+    
+    @IBOutlet weak var totalBarcasUILabel: UILabel!
+    
+    @IBAction func anteriorPushButton(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +54,7 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
             } else {
                 registro["numero"] = v["numero"] as! Int
                 registro["punto_venta"] = v["punto_venta"] as! String
-                //registro["hora"] = v["hora_prevista"] as! String
+                registro["hora"] = v["fecha"] as! String
                 registro["precio"] = v["precio"] as! Int
                 registro["tipo"] = v["tipo"]
                 self.listadoBarcas.append(registro)
@@ -55,11 +63,12 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
         // ordenacion de las reservas por el numero
         
         self.listadoBarcas.sort({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
-            return   segundo["numero"] as! Int > primero["numero"] as! Int
+            return   segundo["hora"] as! String > primero["hora"] as! String
         })
         
         self.listadoVentasTableView.clearsContextBeforeDrawing = true
         self.listadoVentasTableView.reloadData()
+        self.totalBarcasUILabel.text =  String(self.numeroBarcas)
         
     }
     
