@@ -97,6 +97,7 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
         if segue.identifier == "segueListadoVentas" {
             let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             siguienteVC.tovueltaListadoVentas = true
+            siguienteVC.toPreciosViewController = 0
         }
     }
 
