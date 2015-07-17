@@ -92,5 +92,12 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
         return cell
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueListadoVentas" {
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            siguienteVC.tovueltaListadoVentas = true
+        }
+    }
 
 }

@@ -98,6 +98,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     var totipoReservaViewControllerTipo : Int = 0
     var totipoReservaViewControllerPV : Int = 0
     var tovueltaReservaViewController : Bool = false
+    var tovueltaListadoVentas : Bool = false
     
     var arrayPort : NSArray = ["Standard"]
     var arrayFunction : NSArray = ["Sample Receipt"]
@@ -321,16 +322,17 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     override func viewWillAppear(animated: Bool) {
         
-        // Miro si hay algo en toPrecioViewController - Esto quiere decir que se ha vendido una barca
-        if (self.toPreciosViewController != 0) {
+        // Miro si hay algo en toPrecioViewController y no vuelve del LISTADO DE VENTAS- Esto quiere decir que se ha vendido una barca
+        if (self.toPreciosViewController != 0 && self.tovueltaListadoVentas == false) {
             self.webService.obtenerNumero(self.toPreciosViewController)
         }
-       
+        
         // Miro si vuelve de la pantalla de reservas
         if self.tovueltaReservaViewController {
             self.webService.obtenerNumeroReserva(self.totipoReservaViewControllerTipo, pv: self.totipoReservaViewControllerPV)
             self.tovueltaReservaViewController = false
         }
+        
         
         // Miro si hay impresora conectada
         self.setupImpresora()
@@ -340,6 +342,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         let total : Int32 = numeroBarcasSQLite()
         self.numeroBarcasUILabel.text = String(total)
         
+        self.tovueltaListadoVentas = false
     }
     
 
