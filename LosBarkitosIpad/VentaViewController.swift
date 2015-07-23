@@ -60,8 +60,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
    
 
     /// SE TIENE QUE CAMBIAR CADA VEZ QUE SE ACTUALIZA UN IPAD
-    var PUNTO_VENTA : Int = 5
-    var PUNTO_VENTA_NOMBRE : String = "MarinaFerry 2"
+    var PUNTO_VENTA : Int = 0
+    var PUNTO_VENTA_NOMBRE : String = ""
 
     var barcaActual : Int = -1
     var barcaActualString : String? = nil
@@ -280,6 +280,14 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if IPAD == "MARINAFERRY" {
+            self.PUNTO_VENTA = 5
+            self.PUNTO_VENTA_NOMBRE = "MarinaFerry 2"
+        } else {
+            self.PUNTO_VENTA_NOMBRE = "LosBarkitos"
+            self.PUNTO_VENTA = 2
+        }
+        
         // miro la conectividad del ipad
         if conec.estaConectado() == true {
             println("Esta conectado")
@@ -341,92 +349,19 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
        
         self.infoAdministradoUILabel.text = "Usuario"
         
-        let total : Int32 = numeroBarcasSQLite()
-        self.numeroBarcasUILabel.text = String(total)
+       // let total : Int32 = numeroBarcasSQLite()
+       // self.numeroBarcasUILabel.text = String(total)
         
         self.tovueltaListadoVentas = false
-    }
-    
-
-    // Se ha vendido un ticket de barkito y hay que procesarlo
-    // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
-    func procesarTicket() {
-        // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
-        let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
-
-            // Introducir el ticket vendido en la BDD correspondiente
-            // obtengo el vendedor que ha hecho la venta
-            let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
-            // Se inserta la venta de la barca en HEROKU
-            webService.entradaBDD_ventaBarca(self.numeroTicket,
-                                             tipo: self.barcaActual,
-                                             precio: self.toPreciosViewController,
-                                             puntoVenta: PUNTO_VENTA ,
-                                             vendedor: codVend,
-                                             negro: self.negro)
         
-            var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
-            total += 1
-            DataManager().setValueForKey("total_barcas", value: total, inFile: "appstate")
-            // Se inserta la venta de la barca en SQLITE
-            let insertado = insertaViajeSQLite()
-            if insertado {
-                self.numeroBarcasUILabel.text = String(numeroBarcasSQLite())
-            }
-            
+        if IPAD == "MARINAFERRY" {
+            self.PUNTO_VENTA = 5
+            self.PUNTO_VENTA_NOMBRE = "MarinaFerry 2"
         } else {
-            
-            self.dismissViewControllerAnimated(true, completion: {
-                var alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
-            
-                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-            
-                alertaNOInsercionBDD.addAction(OkAction)
-            
-                self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
-            
-            })
+            self.PUNTO_VENTA_NOMBRE = "LosBarkitos"
+            self.PUNTO_VENTA = 2
         }
-    }
-    
-    func imprimirTicket() -> Bool? {
-        
-        if setupImpresora() {
-        
-            self.foundPrinters = SMPort.searchPrinter("BT:")
-            
-        
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
-            self.lastSelectedPortName = portInfo.portName
-        
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
-            
-            let vend : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
-            let punto : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
-            let precio : Int = self.toPreciosViewController
-            let numero : Int = self.numeroTicket
-            let barca : String = self.barcaActualString!
-            let diccParam : [String : AnyObject] = [
-                "numero"      : numero,
-                "punto_venta" : punto,
-                "precio"      : precio,
-                "barca"       : barca,
-                "vendedor"    : vend
-            ]
 
-            let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, diccParam)
-            
-            // Trataré de desconectar el puerto
-    
-            return ticketImpreso
-        } else {
-            return false
-        }
     }
     
     
@@ -530,25 +465,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.ventasUITableView.reloadData()
     }*/
     
-    func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
-        println("\respuesta")
-        for (k,v) in respuesta {
-            if k as NSString == "error" && v as! NSString == "si" {
-                EXIT_FAILURE
-            }
-            if k as NSString == "numero" {
-                self.numeroTicket = v as! Int
-            }
-            if k as NSString == "negro" {
-                if v  as! String == "si" {
-                    self.negro = true
-                } else {
-                    self.negro = false
-                }
-            }
-        }
-        self.procesarTicket()
-    }
     
     func prepararImpresion() {
         webService.totalBarcas(self.PUNTO_VENTA)
@@ -755,36 +671,5 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     } 
     
     
-    // TRABAJO CON LA BDD SQLITE
-    func insertaViajeSQLite() -> Bool {
-        
-        //let formatoFecha = NSDateFormatter()
-        //formatoFecha.dateFormat = "dd-MM-YYYY hh:mm:ss"
-        //let fecha = formatoFecha.stringFromDate(NSDate())
-        //let result = db.execute("INSERT i", parameters: <#[AnyObject]?#>)
-        
-        var viaje : Viaje = Viaje()
-        let formatoFecha = NSDateFormatter()
-        formatoFecha.dateFormat = "dd-MM-yyyy hh:mm:ss"
-        let fecha = formatoFecha.stringFromDate(NSDate())
-        
-        viaje.numero = self.numeroTicket
-        viaje.fecha = fecha
-        viaje.precio = self.toPreciosViewController
-        viaje.barca = self.barcaActual
-        viaje.blanco = self.negro
-        viaje.vendedor =  (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
-        viaje.punto_venta = (DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int)
-        
-        var estaInsertadoSQLITE = ManejoSQLITE.instance.insertaViajeSQLITE(viaje)
-        return estaInsertadoSQLITE
-        
-        
-    }
-    
-    func numeroBarcasSQLite() -> Int32 {
-        
-        return ManejoSQLITE.instance.numeroBarcas() as Int32
-    }
 
 }

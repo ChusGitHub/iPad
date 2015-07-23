@@ -15,12 +15,15 @@ import Foundation
     func didReceiveResponse_listadoVendedores(respuesta : [String : AnyObject])
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
     //func didReceiveResponse_listadoVentas(respuesta : [String : AnyObject])
-    func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
     //func didReceiveResponse_reserva(respuesta : [String : AnyObject])
     func didReceiveResponse_cierreDia(respuesta : String)
     
+}
+
+protocol WebServiceProtocoloPrecio {
+    func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
 }
 
 protocol WebServiceProtocoloControl {
@@ -51,6 +54,7 @@ class webServiceCallAPI : NSObject {
     var delegateControl : WebServiceProtocoloControl?
     var delegateReserva : WebServiceReserva?
     var delegateListado : WebServiceListado?
+    var delegatePrecio : WebServiceProtocoloPrecio?
     
     let manager : AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 
@@ -95,8 +99,13 @@ class webServiceCallAPI : NSObject {
         var jsonDict :  NSDictionary!
         var jsonArray : NSArray!
         var error :     NSError?
-        let puntoVenta : String = String(DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int)
-        let url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"// + String(puntoVenta)
+        var puntoVenta : Int = 0
+        var url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/2"
+        if IPAD == "MARINAFERRY" {
+            let url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
+        }
+
+        
         manager.GET(url,
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
@@ -182,13 +191,13 @@ class webServiceCallAPI : NSObject {
                     }
                 }
                 println("diccionario : \(diccionario)")
-                self.delegate?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+                self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegate?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+                self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             }
         )
     }
@@ -259,7 +268,7 @@ class webServiceCallAPI : NSObject {
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegate?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+                self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             }
         )
     }

@@ -17,6 +17,8 @@ var drawerPortName : NSString = ""
 var DBLocal : String = ""
 var DBPath : String = ""
 
+let IPAD : String = "LOSBARKITOS"
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -116,8 +118,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataManager().setValueForKey("lista", value: 1, inFile: "appstate")
         DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
         DataManager().setValueForKey("lista_precio", value: "1", inFile: "appstate")
-        DataManager().setValueForKey("punto_venta_codigo", value: 5, inFile: "appstate")
-        DataManager().setValueForKey("punto_venta", value: "MarinaFerry 2", inFile: "appstate")
+        if IPAD == "MARINAFERRY" {
+            DataManager().setValueForKey("punto_venta_codigo", value: 5, inFile: "appstate")
+            DataManager().setValueForKey("punto_venta", value: "MarinaFerry 2", inFile: "appstate")
+        } else {
+            DataManager().setValueForKey("punto_venta_codigo", value: 2, inFile: "appstate")
+            DataManager().setValueForKey("punto_venta", value: "LosBarkitos", inFile: "appstate")
+        }
         
         DataManager().setValueForKey("total_barcas", value: 0, inFile: "appstate")
         
