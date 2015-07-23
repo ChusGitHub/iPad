@@ -18,7 +18,7 @@ import Foundation
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
-    func didReceiveResponse_reserva(respuesta : [String : AnyObject])
+    //func didReceiveResponse_reserva(respuesta : [String : AnyObject])
     func didReceiveResponse_cierreDia(respuesta : String)
     
 }
@@ -37,6 +37,7 @@ protocol WebServiceProtocoloControl {
 
 protocol WebServiceReserva {
     func didReceiveResponse_reservaPosible(respuesta : [Bool])
+    func didReceiveResponse_reserva(respuesta : [String : AnyObject])
 }
 
 protocol WebServiceListado {
@@ -382,13 +383,13 @@ class webServiceCallAPI : NSObject {
                 }
                 println("diccionario : \(diccionario)")
 
-                self.delegate?.didReceiveResponse_reserva(responseObject as! [String : AnyObject])
+                self.delegateReserva?.didReceiveResponse_reserva(responseObject as! [String : AnyObject])
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegate?.didReceiveResponse_reserva(diccionario as [String : AnyObject])
+                self.delegateReserva?.didReceiveResponse_reserva(diccionario as [String : AnyObject])
             }
         )
     }

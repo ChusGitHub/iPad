@@ -136,6 +136,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="btnRioReservaPushButton:" destination="95X-0j-xqp" eventType="touchUpInside" id="3YJ-pn-tKV"/>
                                     <segue destination="9pv-A4-QxB" kind="modal" identifier="segueReservaRio" id="zvr-Y3-xRY"/>
                                 </connections>
                             </button>
@@ -148,6 +149,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="btnElectricaReservaPushButton:" destination="95X-0j-xqp" eventType="touchUpInside" id="ahW-iE-snQ"/>
                                     <segue destination="9pv-A4-QxB" kind="modal" identifier="segueReservaElectrica" id="YAB-iU-DUP"/>
                                 </connections>
                             </button>
@@ -160,6 +162,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="btnGoldReservaPushButton:" destination="95X-0j-xqp" eventType="touchUpInside" id="kzx-KQ-TBa"/>
                                     <segue destination="9pv-A4-QxB" kind="modal" identifier="segueReservaGold" modalTransitionStyle="partialCurl" id="5z3-aO-RkX"/>
                                 </connections>
                             </button>
@@ -172,6 +175,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="btnWhalyReservaPushButton:" destination="95X-0j-xqp" eventType="touchUpInside" id="C82-cF-KLq"/>
                                     <segue destination="9pv-A4-QxB" kind="modal" identifier="segueReservaWhaly" id="E52-G8-Gru"/>
                                 </connections>
                             </button>
@@ -184,6 +188,7 @@
                                 </state>
                                 <connections>
                                     <action selector="cancelarReservaUIButton:" destination="95X-0j-xqp" eventType="touchUpInside" id="iXR-Yv-aiS"/>
+                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="segueReservaCancelar" id="1D8-Nw-5U7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1235,8 +1240,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="zvr-Y3-xRY"/>
         <segue reference="e9F-yZ-Wa3"/>
+        <segue reference="1D8-Nw-5U7"/>
         <segue reference="PRz-5W-xYw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>

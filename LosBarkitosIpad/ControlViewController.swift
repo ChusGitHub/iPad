@@ -350,6 +350,9 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         let tipo = self.lista[indexPath.row]["tipo"] as! Int
         println("tipo: \(tipo)")
         webServiceControl.salidaReserva(self.lista[indexPath.row]["tipo"] as! Int, numero: self.lista[indexPath.row]["numero"] as! Int)
+        
+        // Elimino la reserva de la lista
+        self.lista.removeAtIndex(indexPath.row)
 
     }
 

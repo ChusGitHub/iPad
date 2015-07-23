@@ -95,8 +95,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     var toPreciosViewController : Int = 0
     
     // Valor devuelto por el tipoReservaViewController
-    var totipoReservaViewControllerTipo : Int = 0
-    var totipoReservaViewControllerPV : Int = 0
+  //  var totipoReservaViewControllerTipo : Int = 0
+   // var totipoReservaViewControllerPV : Int = 0
     var tovueltaReservaViewController : Bool = false
     var tovueltaListadoVentas : Bool = false
     
@@ -240,6 +240,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     @IBAction func reservasUIButton(sender: UIButton) {
         webService.delegate = self
+        self.tovueltaReservaViewController = false
         
         /*var alertController = UIAlertController(title: "RESERVA", message: "Clic en el tipo de barco para reservar", preferredStyle: UIAlertControllerStyle.Alert)
         let rioAction = UIAlertAction(title: "Rio", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.RIO, pv: 2)})
@@ -324,19 +325,19 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     override func viewWillAppear(animated: Bool) {
         
         // Miro si hay algo en toPrecioViewController y no vuelve del LISTADO DE VENTAS- Esto quiere decir que se ha vendido una barca
-        if (self.toPreciosViewController != 0 && self.tovueltaListadoVentas == false) {
+        if (self.toPreciosViewController != 0 && self.tovueltaListadoVentas == false && self.tovueltaReservaViewController == false) {
             self.webService.obtenerNumero(self.toPreciosViewController)
         }
         
         // Miro si vuelve de la pantalla de reservas
-        if self.tovueltaReservaViewController {
-            self.webService.obtenerNumeroReserva(self.totipoReservaViewControllerTipo, pv: self.totipoReservaViewControllerPV)
-            self.tovueltaReservaViewController = false
-        }
+      //  if self.tovueltaReservaViewController {
+       //     self.webService.obtenerNumeroReserva(self.totipoReservaViewControllerTipo, pv: self.totipoReservaViewControllerPV)
+      //      self.tovueltaReservaViewController = false
+       // }
         
         
         // Miro si hay impresora conectada
-        self.setupImpresora()
+        let impr : Bool =  setupImpresora()
        
         self.infoAdministradoUILabel.text = "Usuario"
         
@@ -346,46 +347,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.tovueltaListadoVentas = false
     }
     
-
-    
-    // Mira si está la impresora conectada:
-    // True -> conectada
-    // False -> no hay impresora
-    func setupImpresora() -> Bool {
-        
-        self.foundPrinters = SMPort.searchPrinter("BT:")
-        
-        if self.foundPrinters.count > 0 {// Hay impresora conectada
-            
-            println(self.foundPrinters.count)
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
-           
-            self.lastSelectedPortName = portInfo.portName
-            
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
-            self.infoImpresoraUILabel.text = portInfo.portName
-            
-            println("Impresoras: \(self.foundPrinters.objectAtIndex(0))" )
-            return true 
-        }
-        else { // No hay ninguna impresora conectada
-            var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-            
-            alertaNoImpresora.addAction(OkAction)
-            
-            self.presentViewController(alertaNoImpresora, animated: true, completion: nil)
-            return false
-            
-        }
-
-    }
-
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
@@ -431,7 +392,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     func imprimirTicket() -> Bool? {
         
-        if self.setupImpresora() {
+        if setupImpresora() {
         
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
@@ -468,27 +429,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
-    func imprimirReserva(PV : String, HR : String, HP : String, tipo: String) {
-        if setupImpresora() {
-            self.foundPrinters = SMPort.searchPrinter("BT:")
-            
-            
-            var portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
-            self.lastSelectedPortName = portInfo.portName
-            
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
-            
-            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas, HR, HP, tipo)
-        }
-    }
     
     func imprimirTotal() -> Bool {
         
-        if self.setupImpresora() {
+        if setupImpresora() {
             
             self.foundPrinters = SMPort.searchPrinter("BT:")
             
@@ -655,33 +599,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings, diccParam)
     }
     
-    func didReceiveResponse_reserva(respuesta : [String : AnyObject]) {
-        println("respuesta del servidor : \(respuesta)")
-        var dicc : [String : AnyObject]
-        var PV : String = ""
-        var HR : String = ""
-        var HP : String = ""
-        var tipo : String = ""
-        self.reservas = [0,0,0,0]
-        for (k,v) in respuesta {
-            if k == "PV" {
-                PV = v as! String
-            }
-            if k == "reservas" {
-                self.reservas = v as! [Int]
-            }
-            if k == "hora reserva" {
-                HR = v as! String
-            }
-            if k == "hora prevista" {
-                HP = v as! String
-            }
-            if k == "exito" {
-                tipo = v as! String
-            }
-        }
-        imprimirReserva(PV, HR: HR, HP: HP, tipo: tipo)
-    }
     
     func didReceiveResponse_cierreDia(respuesta : String) {
         println("respuesta del servidor : \(respuesta)")
@@ -807,6 +724,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
         if segue.identifier == "segueTipoReserva" {
             let siguienteVC : tipoReservaUIViewController = segue.destinationViewController as! tipoReservaUIViewController
+            siguienteVC.totipoReservaViewControllerPV = self.PUNTO_VENTA
             
         }
     }

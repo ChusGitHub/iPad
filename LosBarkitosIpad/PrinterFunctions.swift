@@ -8,6 +8,53 @@
 
 import Foundation
 
+
+var arrayPort : NSArray = ["Standard"]
+var arrayFunction : NSArray = ["Sample Receipt"]
+var arraySensorActive : NSArray = ["Hight"]
+var arraySensorActivePickerContents : NSArray = ["High When Drawer Open"]
+
+var selectedPort : NSInteger = 0
+var selectedSensorActive : NSInteger = 0
+
+var foundPrinters : NSArray = []
+var lastSelectedPortName : NSString = ""
+var p_portName : NSString = ""
+var p_portSettings : NSString = ""
+
+
+
+// Mira si está la impresora conectada:
+// True -> conectada
+// False -> no hay impresora
+func setupImpresora() -> Bool {
+    
+    foundPrinters = SMPort.searchPrinter("BT:")
+    
+    if foundPrinters.count > 0 {// Hay impresora conectada
+        
+        println(foundPrinters.count)
+        var portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
+        
+        lastSelectedPortName = portInfo.portName
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.setPortName(portInfo.portName)
+        appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
+        var p_portName : NSString = appDelegate.getPortName()
+        var p_portSettings : NSString = appDelegate.getPortSettings()
+        //infoImpresoraUILabel.text = portInfo.portName
+        
+        println("Impresoras: \(foundPrinters.objectAtIndex(0))" )
+        return true
+    }
+    else { // No hay ninguna impresora conectada
+        return false        
+    }
+    
+}
+
+
 // IMPRESION DE TICKET
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
