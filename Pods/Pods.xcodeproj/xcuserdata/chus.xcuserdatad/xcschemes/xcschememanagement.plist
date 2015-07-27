@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Reachability.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3EF34F83AAD41A721E9F47D6</key>
+		<key>01C25052070C1A6EB3347CAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>659F45AE1A7CE3AD9FC10E91</key>
+		<key>0F0A7C8DE25C6D02D14863D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D74E74FF0C8A41D68549F55D</key>
+		<key>91D7979773131CB17F830844</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A301D7F1DDAF3A36B0B73828</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -8,7 +8,6 @@
 //import "VendedorUITableViewCell"
 
 import UIKit
-
 /*
 protocol PrinterConnectivityDelegate {
     func connectedPrinterDidChangeTo(printer : Printer)
@@ -331,18 +330,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     override func viewWillAppear(animated: Bool) {
-        
-        // Miro si hay algo en toPrecioViewController y no vuelve del LISTADO DE VENTAS- Esto quiere decir que se ha vendido una barca
-        if (self.toPreciosViewController != 0 && self.tovueltaListadoVentas == false && self.tovueltaReservaViewController == false) {
-            self.webService.obtenerNumero(self.toPreciosViewController)
-        }
-        
-        // Miro si vuelve de la pantalla de reservas
-      //  if self.tovueltaReservaViewController {
-       //     self.webService.obtenerNumeroReserva(self.totipoReservaViewControllerTipo, pv: self.totipoReservaViewControllerPV)
-      //      self.tovueltaReservaViewController = false
-       // }
-        
         
         // Miro si hay impresora conectada
         let impr : Bool =  setupImpresora()

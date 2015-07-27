@@ -111,11 +111,15 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso == true) {
+        if (ticketImpreso != true) {
             
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
             let codVend : Int = (DataManager().getValueForKey("vendedor", inFile: "appstate") as! String).toInt()!
+            
+            let wifi = Reachability.reachabilityForInternetConnection()
+            wifi.startNotifier()
+            
             // Se inserta la venta de la barca en HEROKU
             webService.entradaBDD_ventaBarca(self.numeroTicket,
                 tipo: self.toTipo!,
