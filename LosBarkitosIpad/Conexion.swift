@@ -13,7 +13,6 @@ import Foundation
  protocol WebServiceProtocoloVentas {
     // funcion que implementará la clase delegada y que recibirá los datos de repuesta a la llamada
     func didReceiveResponse_listadoVendedores(respuesta : [String : AnyObject])
-    func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
     //func didReceiveResponse_listadoVentas(respuesta : [String : AnyObject])
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
@@ -24,6 +23,8 @@ import Foundation
 
 protocol WebServiceProtocoloPrecio {
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
+    func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
+
 }
 
 protocol WebServiceProtocoloControl {
@@ -102,7 +103,7 @@ class webServiceCallAPI : NSObject {
         var puntoVenta : Int = 0
         var url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/2"
         if IPAD == "MARINAFERRY" {
-            let url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
+            url = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
         }
 
         
@@ -161,13 +162,13 @@ class webServiceCallAPI : NSObject {
                     }
                 }
                 println("diccionario : \(diccionario)")
-                self.delegate?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
+                self.delegatePrecio?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 println("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
-                self.delegate?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
+                self.delegatePrecio?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
             }
         )
     }

@@ -412,16 +412,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.vendedorUITableView.reloadData()
     }
     
-    func didReceiveResponse_entradaBDD_ventaBarca(respuesta: [String : AnyObject]) {
-        for (k,v) in respuesta {
-            if k as NSString == "error" && v as! NSString == "si" {
-                println("ERROR EN EL DICCIONARIO DEVUELTO")
-                EXIT_FAILURE
-            }
-         }
-        //self.ventasUITableView.clearsContextBeforeDrawing = true
-        //webService.obtenerVentas()
-    }
     
     /*func didReceiveResponse_listadoVentas(respuesta: [String : AnyObject]) {
         self.ventas = []
@@ -623,7 +613,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         if segue.identifier == "seguePrecios" {
             let siguienteVC : PreciosViewController = segue.destinationViewController as! PreciosViewController
             siguienteVC.toTipo = self.barcaActual
-            siguienteVC.toTipoString = self.barcaActualString
+            siguienteVC.barcaActualString = self.barcaActualString
+            
         }
         if segue.identifier == "segueTipoReserva" {
             let siguienteVC : tipoReservaUIViewController = segue.destinationViewController as! tipoReservaUIViewController

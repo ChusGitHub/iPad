@@ -1,4 +1,4 @@
-//
+ //
 //  PreciosViewController.swift
 //  LosBarkitosIpad
 //
@@ -61,6 +61,11 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         self.aceptarUIButton.enabled = true
     }
     
+    
+    @IBAction func bntAceptarPushButton(sender: UIButton) {
+        
+        webService.obtenerNumero(self.precioUILabel.text!.toInt()!)
+    }
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,13 +110,25 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         }
         self.procesarTicket()
     }
+    
+    func didReceiveResponse_entradaBDD_ventaBarca(respuesta: [String : AnyObject]) {
+        for (k,v) in respuesta {
+            if k as NSString == "error" && v as! NSString == "si" {
+                println("ERROR EN EL DICCIONARIO DEVUELTO")
+                EXIT_FAILURE
+            }
+        }
+        //self.ventasUITableView.clearsContextBeforeDrawing = true
+        //webService.obtenerVentas()
+    }
+
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO
     func procesarTicket() {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
-        if (ticketImpreso != true) {
+        if (ticketImpreso == true) {
             
             // Introducir el ticket vendido en la BDD correspondiente
             // obtengo el vendedor que ha hecho la venta
@@ -197,12 +214,12 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         if segue.identifier == "seguePreciosVentaCancelar" {
             let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             siguienteVC.toPreciosViewController = 0
-        } else if segue.identifier == "seguePreciosVentaAceptar" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
-            siguienteVC.toPreciosViewController = "\(self.precioUILabel.text!)".toInt()!
-            siguienteVC.barcaActual = self.toTipo!
-            siguienteVC.barcaActualString = self.toTipoString!
-        }
+        }// else if segue.identifier == "seguePreciosVentaAceptar" {
+          //  let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+           // siguienteVC.toPreciosViewController = "\(self.precioUILabel.text!)".toInt()!
+           // siguienteVC.barcaActual = self.toTipo!
+           // siguienteVC.barcaActualString = self.toTipoString!
+       // }
         
     }
     
