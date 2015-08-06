@@ -35,6 +35,9 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     var PUNTO_VENTA : Int = 0
     var PUNTO_VENTA_NOMBRE : String = ""
 
+    var internetReachability : Reachability?
+    var estado : Reachability.NetworkStatus?
+
 
     @IBOutlet weak var cancelarUIButton: UIButton!
     @IBOutlet weak var aceptarUIButton: UIButton!
@@ -83,6 +86,13 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             self.PUNTO_VENTA_NOMBRE = "LosBarkitos"
             self.PUNTO_VENTA = 2
         }
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.internetReachability = Reachability.reachabilityForInternetConnection()
+        self.internetReachability?.startNotifier()
+        self.verificarEstado(self.internetReachability!)
 
     }
 
@@ -210,7 +220,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+       
         if segue.identifier == "seguePreciosVentaCancelar" {
             let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             siguienteVC.toPreciosViewController = 0
@@ -280,6 +290,32 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         
         return ManejoSQLITE.instance.numeroBarcas() as Int32
     }
+    
+    
+    func verificarEstado(reachability : Reachability) {
+        
+        var connectionRequired : Bool = false
+        self.estado = reachability.currentReachabilityStatus
+        
+        if reachability.isReachable() {
+            println("conectado")
+        } else {
+         
+            self.dismissViewControllerAnimated(true, completion: {
+                var alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                
+                alertaNOInsercionBDD.addAction(OkAction)
+                
+                self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
+                
+            })
+            
+         
+        }
+    }
+
 
     /*
     // MARK: - Navigation

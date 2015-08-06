@@ -121,7 +121,11 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     var reservas : [Int] = [0,0,0,0]
     
     //let conectado : Conectividad?
-
+    // Variables para conectividad
+ //   var hostReachability : Reachability?
+    var internetReachability : Reachability?
+  //  var wifiReachability : Reachability?
+    var estado : Reachability.NetworkStatus?
 
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
@@ -348,9 +352,24 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.PUNTO_VENTA_NOMBRE = "LosBarkitos"
             self.PUNTO_VENTA = 2
         }
+        
+        self.internetReachability = Reachability.reachabilityForInternetConnection()
+        self.internetReachability?.startNotifier()
+        self.verificarEstado(self.internetReachability!)
 
     }
     
+    func verificarEstado(reachability : Reachability?) {
+       
+        var connectionRequired : Bool = false
+        self.estado = reachability!.currentReachabilityStatus
+        
+        if reachability!.isReachable() {
+            println("conectado")
+        } else {
+            
+        }
+    }
     
     func imprimirTotal() -> Bool {
         

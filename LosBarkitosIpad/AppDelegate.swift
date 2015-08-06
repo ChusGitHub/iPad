@@ -19,7 +19,6 @@ var DBPath : String = ""
 
 let IPAD : String = "MARINAFERRY"
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

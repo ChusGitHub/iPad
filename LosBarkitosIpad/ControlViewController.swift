@@ -40,6 +40,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     @IBOutlet weak var numeroReservasElectricaUILabel: UILabel!
     @IBOutlet weak var numeroReservasWhalyUILabel: UILabel!
     @IBOutlet weak var numeroReservasGoldUILabel: UILabel!
+    @IBOutlet weak var tiempoEsperaUILabel: UILabel!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -109,7 +110,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     func didReceiveResponse_primeraLibre(respuesta: [String : [String : String]]) {
         
         self.libre = respuesta
-        println("\(self.libre)")
+        //println("\(self.libre)")
         colocarLibresEnPantalla()
     }
     
@@ -118,11 +119,11 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.lista = []
         var registro : [String : String] = [:]
         
-        println("lista llegadas : \(respuesta)")
+        //println("lista llegadas : \(respuesta)")
         
         for (k,v) in respuesta {
-            println("k = \(k)")
-            println("v = \(v)")
+            //println("k = \(k)")
+            //println("v = \(v)")
 
             registro["nombre"] = v["Nombre"] as? String
             registro["libre"] = v["libre"] as? String
@@ -132,7 +133,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             
             self.lista.append(registro)
         }
-        println("listaLlegadas : \(self.lista)")
+        //println("listaLlegadas : \(self.lista)")
         
         self.listaUITableView.clearsContextBeforeDrawing = true        // limpiar uitableview
         self.listaUITableView.reloadData()
@@ -143,7 +144,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         
         self.lista = []
         var registro : [String : AnyObject] = [:]
-        println("Lista reservas : \(respuesta)")
+        //println("Lista reservas : \(respuesta)")
         
         for (k,v) in respuesta {
             registro["numero"] = v["numero"] as! Int
@@ -159,7 +160,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         self.lista.sort({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
                 return   segundo["numero"] as! Int > primero["numero"] as! Int
             })
-        println(" ORDENADO : \(self.lista)")
+        //println(" ORDENADO : \(self.lista)")
         
         self.listaUITableView.clearsContextBeforeDrawing = true
         self.listaUITableView.reloadData()
@@ -193,7 +194,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
 
     func didReceiveResponse_llegada(respuesta: [String : String]) {
-        println(respuesta)
+        //println(respuesta)
         if respuesta["error"] == "1" {
             var alerta = UIAlertController(title: "EEEEPPPPPP", message: "Error en la contabilización de la llegada de la barca", preferredStyle: UIAlertControllerStyle.Alert)
             
@@ -228,7 +229,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     }
     
     func didReceiveResponse_siguienteBarcaLlegar(respuesta: [String : String]) {
-        println("respuesta: \(respuesta)")
+        //println("respuesta: \(respuesta)")
         self.siguienteBarcaRioUiLabel.text = respuesta["rio"]
         self.siguienteBarcaElectricaUILabel.text = respuesta["electrica"]
         self.siguienteBarcaWhalyUiLabel.text = respuesta["whaly"]
@@ -250,6 +251,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             case 1:
                 let num : Int? = self.numeroReservasRioUILabel.text?.toInt()
                 self.numeroReservasRioUILabel.text = String(num! - 1)
+                self.tiempoEsperaUILabel.text =  String(self.numeroReservasRioUILabel.text!.toInt()! * 5)
             case 2:
                 let num : Int? = self.numeroReservasElectricaUILabel.text?.toInt()
                 self.numeroReservasElectricaUILabel.text = String(num! - 1)
@@ -280,6 +282,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         if respuesta["mensaje"] as! String == "OK" {
             contenido = respuesta["contenido"] as! Dictionary<String,String>
             self.numeroReservasRioUILabel.text = contenido["rio"]
+            self.tiempoEsperaUILabel.text = String(self.numeroReservasRioUILabel.text!.toInt()! * 5)
             self.numeroReservasElectricaUILabel.text = contenido["electrica"]
             self.numeroReservasWhalyUILabel.text = contenido["whaly"]
             self.numeroReservasGoldUILabel.text = contenido["gold"]
@@ -326,10 +329,10 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             cell.numeroUILabelUITableViewCell.text = String(numero)
             cell.nombreUILabelUITableViewCell.text = self.lista[indexPath.row]["nombre"] as? String
             // hora  = self.lista[indexPath.row]["hora_prevista"]
-            cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["hora_prevista"] as? String
+            cell.tipoUILabelUITableViewCell.text = self.lista[indexPath.row]["hora_reserva"] as? String
             let fuera : Int = self.lista[indexPath.row]["fuera"] as! Int
             cell.libreUILabelUITableViewCell.text = String(fuera)
-            println("numero: \(numero)")
+            //println("numero: \(numero)")
             
         }
         
@@ -340,15 +343,15 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        println("fila \(indexPath.row) seleccionada")
+        //println("fila \(indexPath.row) seleccionada")
         
-        println(self.lista[indexPath.row])
+        //println(self.lista[indexPath.row])
         self.lista[indexPath.row]["fuera"] = 1
         
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         
         let tipo = self.lista[indexPath.row]["tipo"] as! Int
-        println("tipo: \(tipo)")
+        //println("tipo: \(tipo)")
         webServiceControl.salidaReserva(self.lista[indexPath.row]["tipo"] as! Int, numero: self.lista[indexPath.row]["numero"] as! Int)
         
         // Elimino la reserva de la lista
