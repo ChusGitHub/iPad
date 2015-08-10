@@ -300,17 +300,20 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         if reachability.isReachable() {
             println("conectado")
         } else {
-         
-            self.dismissViewControllerAnimated(true, completion: {
-                var alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
+           
+            var alertaNOInsercionBDD = UIAlertController(title: "SIN CONEXIÓN", message: " Intenta entrar en los ajustes del sistema y ver si está disponible la red WIFI", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let OkActionHandler = {(accion : UIAlertAction!) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
                 
-                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: OkActionHandler)
                 
-                alertaNOInsercionBDD.addAction(OkAction)
+            alertaNOInsercionBDD.addAction(OkAction)
                 
-                self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
+            self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
                 
-            })
+           
             
          
         }

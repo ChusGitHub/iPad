@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LosBarkitosIpad/PreciosViewController.swift"
-            timestampString = "460568217.419381"
+            filePath = "LosBarkitosIpad/ControlViewController.swift"
+            timestampString = "460892025.962629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "verificarEstado(_:)"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "didReceiveResponse_reservasPorDar(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
