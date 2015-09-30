@@ -81,7 +81,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     }
     
     func didReceiveResponse_reserva(respuesta : [String : AnyObject]) {
-        println("respuesta del servidor : \(respuesta)")
+        print("respuesta del servidor : \(respuesta)")
         var dicc : [String : AnyObject]
         var PV : String = ""
         var HR : String = ""
@@ -117,8 +117,8 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         
         if foundPrinters.count > 0 {// Hay impresora conectada
             
-            println(foundPrinters.count)
-            var portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
+            print(foundPrinters.count)
+            let portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
             
             lastSelectedPortName = portInfo.portName
             
@@ -129,11 +129,11 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
             var p_portSettings : NSString = appDelegate.getPortSettings()
             //infoImpresoraUILabel.text = portInfo.portName
             
-            println("Impresoras: \(foundPrinters.objectAtIndex(0))" )
+            print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
             return true
         }
         else { // No hay ninguna impresora conectada
-            var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
             
             let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
             
@@ -160,7 +160,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, p_portSettings, PV, self.reservas, HR, HP, tipo)
+            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, PV: PV, parametro: self.reservas, HR: HR, HP: HP, tipoBarca: tipo)
         } else {
             var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
             
