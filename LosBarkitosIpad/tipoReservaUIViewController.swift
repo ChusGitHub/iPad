@@ -13,7 +13,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     
     let RESERVA_RIO       = 1
     let RESERVA_ELECTRICA = 2
-    let RESERVA_WHALY     = 3
+    let RESERVA_BARCA     = 3
     let RESERVA_GOLD      = 4
 
     var reservas : [Int] = [0,0,0,0]
@@ -50,7 +50,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     }
     
     @IBAction func btnWhalyReservaPushButton(sender: UIButton) {
-        self.webService.obtenerNumeroReserva(self.RESERVA_WHALY, pv: self.totipoReservaViewControllerPV)
+        self.webService.obtenerNumeroReserva(self.RESERVA_BARCA, pv: self.totipoReservaViewControllerPV)
         self.tovueltaReservaViewController = false
 
     }
@@ -81,7 +81,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     }
     
     func didReceiveResponse_reserva(respuesta : [String : AnyObject]) {
-        print("respuesta del servidor : \(respuesta)")
+        //print("respuesta del servidor : \(respuesta)")
         var dicc : [String : AnyObject]
         var PV : String = ""
         var HR : String = ""

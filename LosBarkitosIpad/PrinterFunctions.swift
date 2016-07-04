@@ -377,7 +377,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     commands.appendData(datos!)
 
     let Whalys = diccParam["whaly"] as! Int
-    str = "Whalys : \t \(Whalys)\r\n"
+    str = "Barca : \t \(Whalys)\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 

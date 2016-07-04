@@ -499,7 +499,7 @@ class webServiceCallAPI : NSObject {
                 self.delegateControl?.didReceiveResponse_reservasPorDar(responseObject as! [String : AnyObject])
             },
             failure: {(operation : AFHTTPRequestOperation!, error) in
-                self.delegateControl?.didReceiveResponse_reservasPorDar(responseObject as! [String : AnyObject])
+                self.delegateControl?.didReceiveResponse_reservasPorDar(self.responseObject as! [String : AnyObject])
             }
         )
     }
