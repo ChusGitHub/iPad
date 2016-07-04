@@ -274,9 +274,14 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : 
     // Centrado
     cmd = [0x1b, 0x1d, 0x61, 0x01]
     commands.appendBytes(cmd, length: 4)
-
+    
     str = String(numReserva)
-    str += "\n" + tipoBarca
+    if tipoBarca == "whaly" {
+        str += "\nBarca"
+    } else {
+        str += "\n" + tipoBarca
+    }
+    
     str += "\r\n\n---------------------------------\r\n\r\n"
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
