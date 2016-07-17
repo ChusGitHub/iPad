@@ -15,6 +15,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     let ELECTRICA = 2
     let WHALY     = 3
     let GOLD      = 4
+    let BARCA     = 5
 
     let listaPrecio : String = DataManager().getValueForKey("lista_precio", inFile: "appstate") as! String
     var toTipo : Int?

@@ -21,6 +21,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let ELECTRICA = 2
     let WHALY     = 3
     let GOLD      = 4
+    let BARCA     = 5
     
     let VENDEDOR =  1
     let VENTAS =    2
@@ -158,7 +159,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.barcaActualString = "ELÉCTRICA"
         case 2:
             self.barcaActual = WHALY
-            self.barcaActualString = "WHALY"
+            self.barcaActualString = "BARCA"
         case 3:
             self.barcaActual = GOLD
             self.barcaActualString = "GOLD"
@@ -315,7 +316,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.vendedorUITableView.hidden = true
         
         // Si es posible pongo el nombre del vendedor
-        self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
+        self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as? String
         if self.PUNTO_VENTA == 0 {
             self.PUNTO_VENTA = DataManager().getValueForKey("punto_venta_codigo", inFile: "appstate") as! Int
         }
@@ -501,7 +502,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             "p_venta"   : self.PUNTO_VENTA_NOMBRE,
             "rio"       : self.totalBarcas[0],
             "electrica" : self.totalBarcas[1],
-            "whaly"     : self.totalBarcas[2],
+            "barca"     : self.totalBarcas[2],
             "gold"      : self.totalBarcas[3],
             "dia"       : dia,
             "euros"     : self.totalEuros,
