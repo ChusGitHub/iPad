@@ -103,15 +103,25 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     }
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
-        print("\respuesta")
+        print("RESPUESTA : \(respuesta)")
         for (k,v) in respuesta {
+            print("k - \(k)")
+            print("v - \(v)")
             if k as NSString == "error" && v as! NSString == "si" {
-                EXIT_FAILURE
-            }
-            if k as NSString == "numero" {
+                self.dismissViewControllerAnimated(true, completion: {
+                
+                    let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                    let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                
+                    alertaNOInternet.addAction(OkAction)
+                    
+                    self.presentViewController(alertaNOInternet, animated: true, completion: nil)
+                
+                })
+            } else if k as NSString == "numero" {
                 self.numeroTicket = v as! Int
-            }
-            if k as NSString == "negro" {
+            } else if k as NSString == "negro" {
                 if v  as! String == "si" {
                     self.negro = true
                 } else {
