@@ -150,6 +150,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     let p : String = String(parametro["precio"] as! Int)
     let iva : Double =  round(100*(parametro["precio"] as! Double - (parametro["precio"] as! Double / 1.21)))/100
     let pdouble : Double =  round(100*(parametro["precio"] as! Double / 1.21))/100
+    let r : String! = String(parametro["reserva"] as! Int)
     
     
     str = "Precio : \t \(pdouble) eur.-\r\n"
@@ -181,6 +182,18 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
     datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
     commands.appendData(datos!)
 
+    // Esta es la reserva del ticket
+    // tamaño pequeño
+    cmd = [0x1b, 0x57, 0x01]
+    commands.appendBytes(cmd, length: 3)
+    
+    str = "Reserva : \(r)\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
+
+    str = "----------------------------------------\r\n\r\n\r\n"
+    datos = str.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+    commands.appendData(datos!)
     
     //cmd = [ 0x1b, 0x64, 0x00 ] // Corta el papel
     //commands.appendBytes(cmd, length: 3)

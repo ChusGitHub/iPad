@@ -82,7 +82,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     
     func didReceiveResponse_reserva(respuesta : [String : AnyObject]) {
         //print("respuesta del servidor : \(respuesta)")
-        var dicc : [String : AnyObject]
+        //var dicc : [String : AnyObject]
         var PV : String = ""
         var HR : String = ""
         var HP : String = ""
@@ -108,6 +108,12 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         imprimirReserva(PV, HR: HR, HP: HP, tipo: tipo)
     }
 
+    
+    func didReceiveResponse_incrementada(respuesta : [String : AnyObject]) {
+        
+    }
+    
+    
     // Mira si está la impresora conectada:
     // True -> conectada
     // False -> no hay impresora

@@ -11,11 +11,11 @@ import UIKit
 
 class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
 
-    let RIO       = 1
-    let ELECTRICA = 2
-    let WHALY     = 3
-    let GOLD      = 4
-    let BARCA     = 5
+    let RIO         = 1
+    //let ELECTRICA = 2
+    //let WHALY     = 3
+    let BARCA       = 3
+    let GOLD        = 4
 
     let listaPrecio : String = DataManager().getValueForKey("lista_precio", inFile: "appstate") as! String
     var toTipo : Int?
@@ -29,6 +29,8 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     var webService : webServiceCallAPI = webServiceCallAPI()
     // numero de ticket en BDD
     var numeroTicket : Int = 0
+    // numero de reserva
+    var numeroReserva : Int = 0
     // ticket si es negro o no
     var negro : Bool = false
     
@@ -104,10 +106,12 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
         print("RESPUESTA : \(respuesta)")
+        var error : Bool = false
         for (k,v) in respuesta {
-            print("k - \(k)")
-            print("v - \(v)")
+            //print("k - \(k)")
+            //print("v - \(v)")
             if k as NSString == "error" && v as! NSString == "si" {
+                error = true
                 self.dismissViewControllerAnimated(true, completion: {
                 
                     let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
@@ -119,15 +123,32 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                     self.presentViewController(alertaNOInternet, animated: true, completion: nil)
                 
                 })
-            } else if k as NSString == "numero" {
-                self.numeroTicket = v as! Int
-            } else if k as NSString == "negro" {
-                if v  as! String == "si" {
-                    self.negro = true
-                } else {
-                    self.negro = false
+            } else {
+                if k as NSString == "numero" {
+                    self.numeroTicket = v as! Int
+                } else if k as NSString == "negro" {
+                    if v  as! String == "si" {
+                        self.negro = true
+                    } else {
+                        self.negro = false
+                    }
+                } else if k == "reservas" {
+                    let tmp : [Int] = v as! [Int]
+                    if self.toTipo! == 1 { // barkito
+                        webService.incrementarNumeroReserva(RIO)
+                        self.numeroReserva = tmp[0]
+                    } else if self.toTipo! == 3 { // barca
+                        webService.incrementarNumeroReserva(BARCA)
+                        self.numeroReserva = tmp[1]                    }
+                    else if self.toTipo! == 4 { // gold
+                        webService.incrementarNumeroReserva(GOLD)
+                        self.numeroReserva = tmp[2]
+                    }
                 }
             }
+        }
+        if error {
+            self.numeroTicket = -1
         }
         self.procesarTicket()
     }
@@ -135,10 +156,16 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta: [String : AnyObject]) {
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
-                print("ERROR EN EL DICCIONARIO DEVUELTO")
+                //print("ERROR EN EL DICCIONARIO DEVUELTO")
                 EXIT_FAILURE
+                if k as NSString == "Tipo Barca" {
+                    if v as! NSString == "Barkito" {
+                        
+                    }
+                }
             }
         }
+        
         //self.ventasUITableView.clearsContextBeforeDrawing = true
         //webService.obtenerVentas()
     }
@@ -206,13 +233,15 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             var p_portName : NSString = appDelegate.getPortName()
             var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let vend : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
-            let punto : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
-            let precio : Int = Int(self.precioUILabel.text!)!
-            let numero : Int = self.numeroTicket
-            let barca : String = self.barcaActualString!
+            let vend    : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
+            let punto   : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
+            let precio  : Int = Int(self.precioUILabel.text!)!
+            let numero  : Int = self.numeroTicket
+            let reserva : Int = self.numeroReserva
+            let barca   : String = self.barcaActualString!
             let diccParam : [String : AnyObject] = [
                 "numero"      : numero,
+                "reserva"     : reserva,
                 "punto_venta" : punto,
                 "precio"      : precio,
                 "barca"       : barca,

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LosBarkitosIpad/tipoReservaUIViewController.swift"
-            timestampString = "490265770.177371"
+            timestampString = "500572321.698361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "didReceiveResponse_reserva(respuesta:)"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "imprimirReserva(PV:HR:HP:tipo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,14 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LosBarkitosIpad/tipoReservaUIViewController.swift"
-            timestampString = "490438041.466366"
+            filePath = "LosBarkitosIpad/PrinterFunctions.swift"
+            timestampString = "501162236.907999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "imprimirReserva(PV:HR:HP:tipo:)"
-            landmarkType = "7">
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "PrintSampleReceipt3Inch(portName:portSettings:parametro:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

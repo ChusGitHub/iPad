@@ -8,6 +8,22 @@
 
 import UIKit
 
+
+/// ESTRUCTURA QUE GUARDA EN NUMERO DE BARCAS VENDIDAS EN TOTAL Y QUE
+/// TAMBIÉN SIRVE PARA MANTENER EL ORDEN DE RESERVAS
+struct numBarcas {
+    var rio       : Int
+    var barca : Int
+    var gold     : Int
+    
+    func total() -> Int {
+        return rio + gold + barca
+    }
+}
+
+var numeroBarcasDia = numBarcas(rio : 0, barca : 0, gold : 0)
+
+
 // propiedades de control de la impresora
 
 var portName : NSString = ""

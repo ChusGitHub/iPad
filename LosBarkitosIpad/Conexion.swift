@@ -17,6 +17,7 @@ import Foundation
     func didReceiveResponse_totalBarcas(respuesta : [String : Int])
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
     //func didReceiveResponse_reserva(respuesta : [String : AnyObject])
+    func didReceiveResponse_barcasDia(respuesta : [String : AnyObject])
     func didReceiveResponse_cierreDia(respuesta : String)
     
 }
@@ -42,6 +43,7 @@ protocol WebServiceProtocoloControl {
 protocol WebServiceReserva {
     func didReceiveResponse_reservaPosible(respuesta : [Bool])
     func didReceiveResponse_reserva(respuesta : [String : AnyObject])
+    func didReceiveResponse_incrementada(respuesta : [String : AnyObject])
 }
 
 protocol WebServiceListado {
@@ -136,9 +138,9 @@ class webServiceCallAPI : NSObject {
     }
     
     func entradaBDD_ventaBarca(ticket :Int, tipo : Int, precio : Int, puntoVenta : Int, vendedor : Int, negro : Bool) {
-        var jsonDict : NSDictionary!
-        var jsonArray : NSArray!
-        var error : NSError?
+        //var jsonDict : NSDictionary!
+        //var jsonArray : NSArray!
+        //var error : NSError?
         var ticketBlanco : String = "0"
         
         if negro == false {
@@ -156,12 +158,12 @@ class webServiceCallAPI : NSObject {
                     if k != "error" {
                         diccionario[k] = v
                     } else if v as! Int == 1 {// la respuesta es erronea
-                        print("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        //print("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
                     }
                 }
-                print("diccionario : \(diccionario)")
+                //print("diccionario : \(diccionario)")
                 self.delegatePrecio?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
@@ -196,6 +198,36 @@ class webServiceCallAPI : NSObject {
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
                 print("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+            }
+        )
+    }
+    func obtenerNumero2(precio : Int) {
+        var jsonDict : NSDictionary!
+        var jsonArray : NSArray!
+        var error : NSError?
+        manager.GET(
+            " http://losbarkitos.herokuapp.com/ultimo_numero/\(precio)",
+            parameters: nil,
+            success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                var diccionario = [String : AnyObject]()
+                for (k,v) in responseObject as! [String : AnyObject] {
+                    if k != "error" || (k == "error" && v as! NSString == "no"){
+                        diccionario[k] = v
+                    } else if k == "error" &&  v as! String == "si" {// la respuesta es erronea
+                        print("HAY UN ERROR QUE VIENE DEL SERVIDOR en ultimoNumero")
+                        diccionario = [String : AnyObject]()
+                        diccionario["error"] = "si"
+                    }
+                }
+                //print("diccionario : \(diccionario)")
+                                    
+                self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
@@ -262,11 +294,11 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/primera_libre",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
-                print("responseObject : \(responseObject)")
+                //print("responseObject : \(responseObject)")
                 self.delegateControl?.didReceiveResponse_primeraLibre(responseObject as! [String : [String : String]])
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
-                print("Error \(error.localizedDescription)")
+                //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si"
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
@@ -373,6 +405,31 @@ class webServiceCallAPI : NSObject {
  
     }
     
+    func incrementarNumeroReserva(tipo : Int) {
+        manager.GET("http://losbarkitos.herokuapp.com/incrementar_reserva/\(tipo)",
+                    parameters: nil,
+                    success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                        var diccionario = [String : AnyObject]()
+                        for (k,v) in responseObject as! [String : AnyObject] {
+                            if k == "mensaje" && v as! String == "ok" {
+                                diccionario["error"] = "no"
+                            } else if k == "contenido" {
+                                diccionario["datos"] = v
+                            }
+                        }
+                        self.delegateReserva?.didReceiveResponse_incrementada(diccionario)
+                    
+                    
+            }, failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                print("Error \(error.localizedDescription)")
+                var diccionario = [String : AnyObject]()
+                diccionario["error"] = "si"
+                self.delegateControl?.didReceiveResponse_listaReservas(diccionario as! [String : [String : String]])
+            }
+)
+    
+    }
+    
     func obtenerNumeroReserva(tipo : Int, pv : Int) {
         var jsonDict : NSDictionary!
         var jsonArray : NSArray!
@@ -468,7 +525,6 @@ class webServiceCallAPI : NSObject {
     }
     
     func cierreDia() {
-        var error : NSError?
         
         manager.GET("http://losbarkitos.herokuapp.com/cierre_dia",
             parameters: nil,
@@ -478,9 +534,16 @@ class webServiceCallAPI : NSObject {
             failure: nil)
     }
     
+    func barcasDia() {
+        manager.GET("http://losbarkitos.herokuapp.com/barcas_dia", parameters: nil, success: {(operation : AFHTTPRequestOperation!, responseObject) in
+            self.delegate?.didReceiveResponse_barcasDia(responseObject as! [String : AnyObject])
+
+            },
+            failure: nil)
+    }
+    
     func salidaReserva(tipo : Int, numero : Int) {
-        var error : NSError?
-        
+         
         manager.GET("http://losbarkitos.herokuapp.com/reserva_fuera/\(tipo)/\(numero)",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in

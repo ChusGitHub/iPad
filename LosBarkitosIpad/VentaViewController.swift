@@ -58,7 +58,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     @IBOutlet weak var numeroBarcasUILabel: UILabel!
    
-
     /// SE TIENE QUE CAMBIAR CADA VEZ QUE SE ACTUALIZA UN IPAD
     var PUNTO_VENTA : Int = 0
     var PUNTO_VENTA_NOMBRE : String = ""
@@ -308,7 +307,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryDisconnected}, name: EAAccessoryDidConnectNotification, object: nil)
         
         // Compruebo si ya se ha abierto el dia
-        print(DataManager().getValueForKey("vendedor", inFile: "appstate") as! String)
+        // print(DataManager().getValueForKey("vendedor", inFile: "appstate") as! String)
     
         //cargarValoresCon_appstate(inFile: "appstate")
         
@@ -330,6 +329,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
         txtPasswordUITextField.delegate = self
         
+        webService.barcasDia()
         //webService.obtenerNumero()
 
     }
@@ -337,7 +337,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     override func viewWillAppear(animated: Bool) {
         
         // Miro si hay impresora conectada
-        let impr : Bool =  setupImpresora()
+        let _ : Bool =  setupImpresora()
        
         self.infoAdministradoUILabel.text = "Usuario"
         
@@ -353,7 +353,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.PUNTO_VENTA_NOMBRE = "LosBarkitos"
             self.PUNTO_VENTA = 2
         }
-        
+    
         //self.internetReachability = Reachability.reachabilityForInternetConnection()
         //self.internetReachability?.startNotifier()
         //self.verificarEstado(self.internetReachability!)
@@ -412,7 +412,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     
     func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) {
-        print("Respuesta del servidor : \(respuesta)")
+       // print("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
                 print("ERROR EN EL DICCIONARIO DEVUELTO")
@@ -423,8 +423,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             let cod = v["codigo"] as! Int
             let nom = v["nombre"] as! String
             self.vendedor[String(cod)] = nom
-            print("cod: \(cod)")
-            print("nom: \(nom)")
+            // print("cod: \(cod)")
+            // print("nom: \(nom)")
 
             self.vendedores.append(self.vendedor)
         }
@@ -466,12 +466,11 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     func prepararImpresion() {
         webService.totalBarcas(self.PUNTO_VENTA)
         
-        print(self.totalBarcas)
-        let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
+       // let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
     }
     func didReceiveResponse_totalBarcas(respuesta : [String : Int]) {
         
-        print("respuesta del servidor : Total Barcas :\(respuesta)")
+        //print("respuesta del servidor : Total Barcas :\(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as Int == 1 {
                 print("Error en el diccionario devuelto : \(v)")
@@ -509,7 +508,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             "total"     : totalBarcas
         ]
         
-        let ticketImpreso : Bool = PrintTotal3Inch(p_portName, p_portSettings: p_portSettings, diccParam: diccParam)
+        _  = PrintTotal3Inch(p_portName, p_portSettings: p_portSettings, diccParam: diccParam)
     }
     
     
@@ -529,6 +528,25 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
         }
         
+        
+    }
+    
+    func didReceiveResponse_barcasDia(respuesta: [String : AnyObject]) {
+        
+        var salidas = [Int]()
+        for (k,v) in respuesta {
+            
+            if k == "mensaje" && v as! String == "ko" {
+                print ("ERROR")
+            }
+            if k == "contenido" {
+                salidas = v as! [Int]
+            }
+        }
+        numeroBarcasDia.rio = salidas[0]
+        numeroBarcasDia.barca = salidas[1]
+        numeroBarcasDia.gold = salidas[2]
+        self.numeroBarcasUILabel.text = String(numeroBarcasDia.total())
         
     }
     
