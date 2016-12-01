@@ -18,7 +18,7 @@ import Foundation
     func didReceiveResponse_totalEuros(respuesta : [String : Int])
     //func didReceiveResponse_reserva(respuesta : [String : AnyObject])
     func didReceiveResponse_barcasDia(respuesta : [String : AnyObject])
-    func didReceiveResponse_cierreDia(respuesta : String)
+    func didReceiveResponse_cierreDia(respuesta : [String : String])
     
 }
 
@@ -99,10 +99,10 @@ class webServiceCallAPI : NSObject {
     }
     
     func obtenerVentas() {
-        var jsonDict :  NSDictionary!
+        /*var jsonDict :  NSDictionary!
         var jsonArray : NSArray!
         var error :     NSError?
-        var puntoVenta : Int = 0
+        var puntoVenta : Int = 0*/
         var url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/2"
         if IPAD == "MARINAFERRY" {
             url = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
@@ -112,13 +112,13 @@ class webServiceCallAPI : NSObject {
         manager.GET(url,
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
-                 var indice : Int = 1
+                 //var indice : Int = 1
                 var diccionario = [String : AnyObject]()
                 for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
                         diccionario[k] = v
                     } else if v as! NSString == "si" { // la respuesta es errónea
-                        print("HAY UN ERROR QUE VIENE DEL SERVIDOR")
+                        //print("HAY UN ERROR QUE VIENE DEL SERVIDOR")
                         diccionario = [String : AnyObject]()
                         diccionario["error"] = "si"
                     }
@@ -529,9 +529,12 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/cierre_dia",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
-                self.delegate?.didReceiveResponse_cierreDia(responseObject as! String)
+                        //print(responseObject)
+                self.delegate?.didReceiveResponse_cierreDia(responseObject as! [String : String])
             },
             failure: nil)
+        
+        
     }
     
     func barcasDia() {

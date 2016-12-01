@@ -17,7 +17,7 @@ struct numBarcas {
     var gold     : Int
     
     func total() -> Int {
-        return rio + gold + barca
+        return rio + gold + barca - 3 
     }
 }
 

@@ -18,10 +18,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
 
     let RIO       = 1
-    let ELECTRICA = 2
-    let WHALY     = 3
-    let GOLD      = 4
-    let BARCA     = 5
+    let BARCA     = 2
+    let GOLD      = 3
     
     let VENDEDOR =  1
     let VENTAS =    2
@@ -154,12 +152,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.barcaActual = RIO
             self.barcaActualString = "RIO"
         case 1:
-            self.barcaActual = ELECTRICA
-            self.barcaActualString = "ELÉCTRICA"
-        case 2:
-            self.barcaActual = WHALY
+            self.barcaActual = BARCA
             self.barcaActualString = "BARCA"
-        case 3:
+        case 2:
             self.barcaActual = GOLD
             self.barcaActualString = "GOLD"
         default:
@@ -186,7 +181,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.infoAdministradoUILabel.text = "Administrador"
             self.tipoListaUIView.hidden = false
             self.passwordUIView.hidden = true
-            self.resignFirstResponder()
+            txtPasswordUITextField.resignFirstResponder()
         } else {
             self.resignFirstResponder()
             let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
@@ -512,10 +507,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     
-    func didReceiveResponse_cierreDia(respuesta : String) {
-        print("respuesta del servidor : \(respuesta)")
-        
-        if respuesta == "ok" {
+    func didReceiveResponse_cierreDia(respuesta : [String : String]) {
+        if respuesta["mensaje"] == "ok" {
             let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Las reservas se han restablecido todas a 0", preferredStyle: UIAlertControllerStyle.Alert)
             let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil )
             alerta.addAction(aceptarAction)
@@ -528,6 +521,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
         }
         
+        self.tipoListaUIView.hidden = true
         
     }
     
@@ -675,9 +669,9 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.infoAdministradoUILabel.text = "Administrador"
             self.tipoListaUIView.hidden = false
             self.passwordUIView.hidden = true
-            self.resignFirstResponder()
+            txtPasswordUITextField.resignFirstResponder()
         } else {
-            self.resignFirstResponder()
+            txtPasswordUITextField.resignFirstResponder()
             let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
             let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
             alerta.addAction(aceptarAction)

@@ -14,8 +14,8 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     let RIO         = 1
     //let ELECTRICA = 2
     //let WHALY     = 3
-    let BARCA       = 3
-    let GOLD        = 4
+    let BARCA       = 2
+    let GOLD        = 3
 
     let listaPrecio : String = DataManager().getValueForKey("lista_precio", inFile: "appstate") as! String
     var toTipo : Int?
@@ -134,13 +134,13 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                     }
                 } else if k == "reservas" {
                     let tmp : [Int] = v as! [Int]
-                    if self.toTipo! == 1 { // barkito
+                    if self.toTipo! == self.RIO { // barkito
                         webService.incrementarNumeroReserva(RIO)
                         self.numeroReserva = tmp[0]
-                    } else if self.toTipo! == 3 { // barca
+                    } else if self.toTipo! == self.BARCA { // barca
                         webService.incrementarNumeroReserva(BARCA)
                         self.numeroReserva = tmp[1]                    }
-                    else if self.toTipo! == 4 { // gold
+                    else if self.toTipo! == self.GOLD { // gold
                         webService.incrementarNumeroReserva(GOLD)
                         self.numeroReserva = tmp[2]
                     }
@@ -187,11 +187,11 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             
             // Se inserta la venta de la barca en HEROKU
             webService.entradaBDD_ventaBarca(self.numeroTicket,
-                tipo: self.toTipo!,
-                precio: Int(self.precioUILabel.text!)!,
-                puntoVenta: PUNTO_VENTA ,
-                vendedor: codVend,
-                negro: self.negro)
+                                            tipo: self.toTipo!,
+                                            precio: Int(self.precioUILabel.text!)!,
+                                            puntoVenta: PUNTO_VENTA ,
+                                            vendedor: codVend,
+                                            negro: self.negro)
             
             var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
             total += 1

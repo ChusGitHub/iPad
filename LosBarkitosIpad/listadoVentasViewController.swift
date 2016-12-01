@@ -50,7 +50,7 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
             if k == "numero_viajes" {
                 self.numeroBarcas = v as! Int
             } else if (k == "error" && v as! String == "si") {
-                print("FALLO", terminator: "")
+                //print("FALLO", terminator: "")
             } else {
                 registro["numero"] = v["numero"] as! Int
                 registro["punto_venta"] = v["punto_venta"] as! String
