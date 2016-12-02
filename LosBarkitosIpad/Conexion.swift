@@ -25,6 +25,7 @@ import Foundation
 protocol WebServiceProtocoloPrecio {
     func didReveiveResponse_numeroTicket(respuesta : [String : AnyObject])
     func didReceiveResponse_entradaBDD_ventaBarca(respuesta : [String : AnyObject])
+    func didReceiveResponse_ajustar_numero_ticket_si_falla_impresion(respuesta : [String : AnyObject])
 
 }
 
@@ -235,10 +236,22 @@ class webServiceCallAPI : NSObject {
         )
     }
     
+    func ajustarNumeroFalloImpresion(tipo : Int) {
+        manager.GET("http://losbarkitos.herokuapp.com/ajustar_numero_fallo_impresion/\(tipo)", parameters: nil,
+                    success: {(operation: AFHTTPRequestOperation!, responseObject) in
+                        var diccionario = [String : String]()
+                        for (k,v) in responseObject as! [String : String] {
+                            diccionario[k] = v
+                        }
+                        self.delegatePrecio?.didReceiveResponse_ajustar_numero_ticket_si_falla_impresion(diccionario)
+            },
+            failure: nil)
+    }
+    
     func totalBarcas(PV : Int) {
-        var jsonDict : NSDictionary!
+       /* var jsonDict : NSDictionary!
         var jsonArray : NSArray!
-        var error : NSError?
+        var error : NSError?*/
         manager.GET("http://losbarkitos.herokuapp.com/total_barcas/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()

@@ -69,7 +69,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     
     
     @IBAction func bntAceptarPushButton(sender: UIButton) {
-        
+        // Se tiene que mirar antes si la impresora esta conectada
         webService.obtenerNumero(Int(self.precioUILabel.text!)!)
     }
  
@@ -105,7 +105,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     }
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
-        print("RESPUESTA : \(respuesta)")
+        //print("RESPUESTA : \(respuesta)")
         var error : Bool = false
         for (k,v) in respuesta {
             //print("k - \(k)")
@@ -134,16 +134,8 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                     }
                 } else if k == "reservas" {
                     let tmp : [Int] = v as! [Int]
-                    if self.toTipo! == self.RIO { // barkito
-                        webService.incrementarNumeroReserva(RIO)
-                        self.numeroReserva = tmp[0]
-                    } else if self.toTipo! == self.BARCA { // barca
-                        webService.incrementarNumeroReserva(BARCA)
-                        self.numeroReserva = tmp[1]                    }
-                    else if self.toTipo! == self.GOLD { // gold
-                        webService.incrementarNumeroReserva(GOLD)
-                        self.numeroReserva = tmp[2]
-                    }
+                    webService.incrementarNumeroReserva(self.toTipo!)
+                    self.numeroReserva = tmp[self.toTipo! - 1]
                 }
             }
         }
@@ -165,9 +157,6 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                 }
             }
         }
-        
-        //self.ventasUITableView.clearsContextBeforeDrawing = true
-        //webService.obtenerVentas()
     }
 
 
@@ -197,13 +186,12 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             total += 1
             DataManager().setValueForKey("total_barcas", value: total, inFile: "appstate")
             // Se inserta la venta de la barca en SQLITE
-            let insertado = insertaViajeSQLite()
+            _ = insertaViajeSQLite() // let insertado =
             //if insertado {
               //  self.numeroBarcasUILabel.text = String(numeroBarcasSQLite())
             //}
             
         } else {
-            
             self.dismissViewControllerAnimated(true, completion: {
                 let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -214,7 +202,21 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                 self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
                 
             })
+            
         }
+    }
+    
+    func didReceiveResponse_ajustar_numero_ticket_si_falla_impresion(respuesta: [String : AnyObject]) {
+        self.dismissViewControllerAnimated(true, completion: {
+
+            let alertaAjustado = UIAlertController(title: "AJUSTADO EL NUMERO DE TIOKET",
+                                                   message: "Se ha corregido el numero de ticket",
+                                                   preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil)
+            alertaAjustado.addAction(okAction)
+            
+            self.presentViewController(alertaAjustado, animated: true, completion: nil)
+        })
     }
 
     func imprimirTicket() -> Bool? {
@@ -224,14 +226,14 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             foundPrinters = SMPort.searchPrinter("BT:")
             
             
-            var portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
+            let portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
             lastSelectedPortName = portInfo.portName
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
             appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
+            let p_portName : NSString = appDelegate.getPortName()
+            let p_portSettings : NSString = appDelegate.getPortSettings()
             
             let vend    : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
             let punto   : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
@@ -254,6 +256,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             
             return ticketImpreso
         } else {
+            webService.ajustarNumeroFalloImpresion(self.toTipo!)
             return false
         }
     }
@@ -276,9 +279,9 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     func ponerPrecios() {
         
         
-        print("listaPrecio : \(listaPrecio)")
+        //print("listaPrecio : \(listaPrecio)")
 
-        var boton : UIButton
+        //var boton : UIButton
         for boton in self.preciosUIButton {
             switch listaPrecio {
             case "1":
