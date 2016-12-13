@@ -12,11 +12,10 @@ var reservas : [Int] = [0,0,0,0]
 class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     
     let RESERVA_RIO       = 1
-    let RESERVA_ELECTRICA = 2
-    let RESERVA_BARCA     = 3
-    let RESERVA_GOLD      = 4
+    let RESERVA_BARCA     = 2
+    let RESERVA_GOLD      = 3
 
-    var reservas : [Int] = [0,0,0,0]
+    var reservas : [Int] = [0,0,0]
     var webService : webServiceCallAPI = webServiceCallAPI()
 
     // Valor devuelto por el tipoReservaViewController
@@ -28,33 +27,14 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     
     @IBOutlet weak var btnRioReservaUIButton: UIButton!
     @IBOutlet weak var btnElectricaReservaUIButton: UIButton!
-    @IBOutlet weak var btnWhalyReservaUIButton: UIButton!
-    @IBOutlet weak var btnGoldWhalyUIButton: UIButton!
-   
-    @IBAction func btnRioReservaPushButton(sender: UIButton) {
-        self.webService.obtenerNumeroReserva(self.RESERVA_RIO, pv: self.totipoReservaViewControllerPV)
-        self.tovueltaReservaViewController = false
-
-    }
- 
-    @IBAction func btnElectricaReservaPushButton(sender: UIButton) {
-        self.webService.obtenerNumeroReserva(self.RESERVA_ELECTRICA, pv: self.totipoReservaViewControllerPV)
-        self.tovueltaReservaViewController = false
-        
-    }
+    @IBOutlet weak var btnBarcaReservaUIButton: UIButton!
+    @IBOutlet weak var btnGoldReservaUIButton: UIButton!
     
-    @IBAction func btnGoldReservaPushButton(sender: UIButton) {
-        self.webService.obtenerNumeroReserva(self.RESERVA_GOLD, pv: self.totipoReservaViewControllerPV)
-        self.tovueltaReservaViewController = false
-
-    }
     
-    @IBAction func btnWhalyReservaPushButton(sender: UIButton) {
-        self.webService.obtenerNumeroReserva(self.RESERVA_BARCA, pv: self.totipoReservaViewControllerPV)
+    @IBAction func btnReservaPushButton(sender : UIButton) {
+        self.webService.obtenerNumeroReserva(sender.tag, pv: self.totipoReservaViewControllerPV)
         self.tovueltaReservaViewController = false
-
     }
-    
     
     @IBAction func cancelarReservaUIButton(sender: UIButton) {
         
@@ -74,9 +54,9 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     func didReceiveResponse_reservaPosible(respuesta : [Bool]) {
         
         self.btnRioReservaUIButton.enabled = respuesta[0]
-        self.btnElectricaReservaUIButton.enabled = respuesta[1]
-        self.btnWhalyReservaUIButton.enabled = respuesta[2]
-        self.btnGoldWhalyUIButton.enabled = respuesta[3]
+        //self.btnElectricaReservaUIButton.enabled = respuesta[1]
+        self.btnBarcaReservaUIButton.enabled = respuesta[1]
+        self.btnGoldReservaUIButton.enabled = respuesta[2]
         
     }
     
@@ -87,7 +67,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         var HR : String = ""
         var HP : String = ""
         var tipo : String = ""
-        self.reservas = [0,0,0,0]
+        self.reservas = [0,0,0]
         for (k,v) in respuesta {
             if k == "PV" {
                 PV = v as! String
@@ -123,7 +103,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         
         if foundPrinters.count > 0 {// Hay impresora conectada
             
-            print(foundPrinters.count)
+            //print(foundPrinters.count)
             let portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
             
             lastSelectedPortName = portInfo.portName
@@ -135,7 +115,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
             var p_portSettings : NSString = appDelegate.getPortSettings()
             //infoImpresoraUILabel.text = portInfo.portName
             
-            print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
+           // print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
             return true
         }
         else { // No hay ninguna impresora conectada
@@ -195,7 +175,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
             let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
 
             
-        } else if segue.identifier == "segueReservaWhaly" {
+        } else if segue.identifier == "segueReservaBarca" {
             let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
  
 

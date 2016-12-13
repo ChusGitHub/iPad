@@ -134,7 +134,8 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                     }
                 } else if k == "reservas" {
                     let tmp : [Int] = v as! [Int]
-                    webService.incrementarNumeroReserva(self.toTipo!)
+                    //webService.incrementarNumeroReserva(self.toTipo!)
+                    webService.obtenerNumeroReserva(self.toTipo!, pv:  self.PUNTO_VENTA)
                     self.numeroReserva = tmp[self.toTipo! - 1]
                 }
             }
@@ -159,6 +160,9 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         }
     }
 
+    func didReceiveResponse_reserva(responseObject : [String : AnyObject]) {
+        
+    }
 
     // Se ha vendido un ticket de barkito y hay que procesarlo
     // FALTA PONER EL PUNTOVENTA CUANDO SEA IMPLANTADO

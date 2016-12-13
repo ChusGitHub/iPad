@@ -11,9 +11,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     
     let RIO       = 1
-    let ELECTRICA = 2
-    let WHALY     = 3
-    let GOLD      = 4
+    let BARCA     = 2
+    let GOLD      = 3
 
     var webServiceControl : webServiceCallAPI = webServiceCallAPI()
     var webService : webServiceCallAPI = webServiceCallAPI()

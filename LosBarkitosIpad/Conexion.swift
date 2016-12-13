@@ -194,7 +194,7 @@ class webServiceCallAPI : NSObject {
                         diccionario["error"] = "si"
                     }
                 }
-                print("diccionario : \(diccionario)")
+                // print("diccionario : \(diccionario)")
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             },
             failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
@@ -451,7 +451,7 @@ class webServiceCallAPI : NSObject {
         manager.GET("http://losbarkitos.herokuapp.com/reserva/\(tipo)/\(pv)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
-                print("responseObject : \(responseObject)")
+                //print("responseObject : \(responseObject)")
                 var diccionario = [String : AnyObject]()
                 for (k,v) in responseObject as! [String : AnyObject] {
                     if k != "error" {
@@ -462,7 +462,7 @@ class webServiceCallAPI : NSObject {
                         diccionario["error"] = "si"
                     }
                 }
-                print("diccionario : \(diccionario)")
+                //print("diccionario : \(diccionario)")
 
                 self.delegateReserva?.didReceiveResponse_reserva(responseObject as! [String : AnyObject])
             },
