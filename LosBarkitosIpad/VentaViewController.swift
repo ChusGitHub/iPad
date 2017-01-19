@@ -295,6 +295,13 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }*/
         // MIRA LA CONECTIVIDAD 
         self.hayConexion = conec.estaConectado()
+        if !self.hayConexion {
+            let alerta = UIAlertController(title: "SIN CONEXIÓN !!!", message: "No tenemos conexión. Intenta conectarlo y vuelve a intentarlo", preferredStyle: UIAlertControllerStyle.Alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
+            alerta.addAction(aceptarAction)
+            self.presentViewController(alerta, animated: true, completion: nil)
+
+        }
 
         self.passwordUIView.hidden = true
         self.tipoListaUIView.hidden = true

@@ -38,9 +38,8 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     var PUNTO_VENTA : Int = 0
     var PUNTO_VENTA_NOMBRE : String = ""
 
-  //  var internetReachability : Reachability?
-   // var estado : Reachability.NetworkStatus?
-
+    var conec : Conectividad = Conectividad()
+    var hayConexion : Bool = false
 
     @IBOutlet weak var cancelarUIButton: UIButton!
     @IBOutlet weak var aceptarUIButton: UIButton!
@@ -76,6 +75,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         webService.delegatePrecio = self
         
        // AQUI HAY QUE RECORRER LOS BOTONES DE LOS PRECIOS PARA PONERLES EL LABEL ADECUADO.
@@ -93,10 +93,20 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     }
     
     override func viewWillAppear(animated: Bool) {
-    //    self.internetReachability = Reachability.reachabilityForInternetConnection()
-     //   self.internetReachability?.startNotifier()
-      //  self.verificarEstado(self.internetReachability!)
-
+        self.hayConexion = conec.estaConectado()
+        if !self.hayConexion {
+                
+            let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
+                
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                
+            alertaNOInternet.addAction(OkAction)
+                
+            self.presentViewController(alertaNOInternet, animated: true, completion: {self.dismissViewControllerAnimated(true, completion: nil)})
+                
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
