@@ -157,6 +157,7 @@
 		BB34ACE51A1615EE008E67ED /* LosBarkitosIpad */ = {
 			isa = PBXGroup;
 			children = (
+				BB35F5441A1F754A004AFC7C /* Conectividad.swift */,
 				BB35F5421A1F7426004AFC7C /* Conexion.swift */,
 				BB020C461AA087F000B5E976 /* Modelo SQLITE */,
 				BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */,
@@ -165,7 +166,6 @@
 				F9AFCE121A169FB5007FF3A9 /* PlistData.swift */,
 				F9BCDB451A2D0DAE002C70D4 /* VentaViewController */,
 				BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */,
-				BB35F5441A1F754A004AFC7C /* Conectividad.swift */,
 				BBF88ECD1AACA4DD009BC3AB /* ControlViewController */,
 				BB34ACEE1A1615EE008E67ED /* Main.storyboard */,
 				BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */,
