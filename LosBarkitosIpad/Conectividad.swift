@@ -13,23 +13,20 @@ protocol ConectividadProtocol {
 class Conectividad : NSObject {
     var delegate : ConectividadProtocol?
     var hay : Bool = false
+    
     func estaConectado () -> Bool {
-    print("ENTRA")
-    //    let reachability : Reachability = Reachability.reachabilityForInternetConnection()
-        
-      //  reachability.whenReachable = { reachability in
-           
-        //    if reachability.isReachableViaWiFi() {
-          //      print("Reachable via WIFI")
-            //    self.hay = true
-          //  } else {
-            //    print("Reachable via Cellular")
-           // }
-            
-        //}
-        //reachability.startNotifier()
-        //print (reachability.startNotifier())
-        
-        return true
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
     }
 }

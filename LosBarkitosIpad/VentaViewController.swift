@@ -67,6 +67,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     // Este es el enlace a la clase que hace la conexion al servidor
     var webService : webServiceCallAPI = webServiceCallAPI()
     var conec : Conectividad = Conectividad()
+    var hayConexion : Bool = false
 
     // Items de vendedorUITableView
     // numero de ticket en BDD
@@ -287,12 +288,14 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
         
         // miro la conectividad del ipad
-        if conec.estaConectado() == true {
+        /*if conec.estaConectado() == true {
             print("Esta conectado")
         } else {
             print("No está conectado")
-        }
-        
+        }*/
+        // MIRA LA CONECTIVIDAD 
+        self.hayConexion = conec.estaConectado()
+
         self.passwordUIView.hidden = true
         self.tipoListaUIView.hidden = true
         

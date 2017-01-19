@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D12A90925319DD11E326CCC55E0EADE04488644E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C80773592846C2F5EAE8C1C2256D477870EF507C" : 9223372036854775807,
+    "D12A90925319DD11E326CCC55E0EADE04488644E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "32AC0456-794F-417C-8537-BABE8F5F2915",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C80773592846C2F5EAE8C1C2256D477870EF507C" : "ipad\/LosBarkitosIpad\/",
+    "D12A90925319DD11E326CCC55E0EADE04488644E" : "ipad\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LosBarkitosIpad",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LosBarkitosIpad.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Chus\/GitHub\/ipad.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C80773592846C2F5EAE8C1C2256D477870EF507C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Chus1972\/ipad.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D12A90925319DD11E326CCC55E0EADE04488644E"
+    }
+  ]
+}

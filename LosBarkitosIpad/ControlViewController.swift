@@ -24,6 +24,11 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     @IBOutlet weak var listaUITableView: UITableView!
     
+    @IBOutlet weak var btnRio: UIButton!
+    @IBOutlet weak var btnBarca: UIButton!
+    @IBOutlet weak var btnGold: UIButton!
+    
+    
     @IBOutlet weak var numeroRiosFueraUILAbel: UILabel!
     
     @IBOutlet weak var numeroElectricasFueraUILabel: UILabel!
@@ -80,7 +85,22 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         webService.siguienteBarcaLlegar()
     }
     
-    @IBAction func listaTipoBarcaUIButton(sender: AnyObject) {
+    @IBAction func listaTipoBarcaUIButton(sender: UIButton) {
+        // Pongo los colores del fondo de los botones
+        if sender.tag == 1 { // btnRio
+            btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
+            btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+            btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+        } else if sender.tag == 2 { // btnBarca
+            btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+            btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+            btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
+        } else if sender.tag == 3 { // btnGold
+            btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+            btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
+            btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+        }
+
         webService.listaReservas(sender.tag)
     }
     
@@ -154,6 +174,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             registro["tipo"] = v["tipo"]
             self.lista.append(registro)
         }
+    
         // ordenacion de las reservas por el numero
     
         self.lista.sortInPlace({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in

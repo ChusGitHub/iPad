@@ -105,11 +105,11 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     }
     
     func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
-        //print("RESPUESTA : \(respuesta)")
+        print("RESPUESTA : \(respuesta)")
         var error : Bool = false
         for (k,v) in respuesta {
-            //print("k - \(k)")
-            //print("v - \(v)")
+            print("k - \(k)")
+            print("v - \(v)")
             if k as NSString == "error" && v as! NSString == "si" {
                 error = true
                 self.dismissViewControllerAnimated(true, completion: {

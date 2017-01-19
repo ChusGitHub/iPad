@@ -41,11 +41,11 @@ func setupImpresora() -> Bool {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.setPortName(portInfo.portName)
         appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-        var p_portName : NSString = appDelegate.getPortName()
-        var p_portSettings : NSString = appDelegate.getPortSettings()
+        //var p_portName : NSString = appDelegate.getPortName()
+        //var p_portSettings : NSString = appDelegate.getPortSettings()
         //infoImpresoraUILabel.text = portInfo.portName
         
-        print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
+        //print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
         return true
     }
     else { // No hay ninguna impresora conectada
@@ -58,12 +58,12 @@ func setupImpresora() -> Bool {
 // IMPRESION DE TICKET
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
-    var formatoFecha = NSDateFormatter()
+    let formatoFecha = NSDateFormatter()
     formatoFecha.dateFormat = "dd-MM-yyyy"
     let fecha : NSDate = NSDate()
     let fechaConFormato = formatoFecha.stringFromDate(fecha)
     
-    var commands = NSMutableData()
+    let commands = NSMutableData()
     var str : String
     var datos : NSData?
     
@@ -217,9 +217,9 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, param
 // IMPRESION DE RESERVA
 func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : String,  parametro : [Int], HR : String, HP : String, tipoBarca: String) -> Bool {
     
-    let horaActual : NSDate = NSDate()
+    //let horaActual : NSDate = NSDate()
     
-    var commands = NSMutableData()
+    let commands = NSMutableData()
     var str : String
     var datos : NSData?
     
@@ -230,7 +230,7 @@ func PrintSampleReceipt3Inch(portName : NSString, portSettings : NSString, PV : 
     // Miro de donde es la reserva
     for num in parametro {
         if num != 0 {
-            tipo++
+            tipo += 1
             numReserva = num
             break
         }
@@ -328,7 +328,7 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
     dateFormatter.dateFormat = "HH:mm"
     let horaActual = dateFormatter.stringFromDate(NSDate())
     
-    var commands = NSMutableData()
+    let commands = NSMutableData()
     var str : String
     var datos : NSData?
     
@@ -454,14 +454,15 @@ func PrintTotal3Inch(p_portName : NSString, p_portSettings : NSString, diccParam
 
 func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NSString, timeoutMillis : u_int) -> Bool{
     
-    var starPort : SMPort
+    //var starPort : SMPort
     let commandSize : Int = commandsToPrint.length as Int
  //   println("Tamaño datos a imprimir: \(commandSize)" )
     //var dataToSentToPrinter = UnsafePointer<UInt8>(commandsToPrint.bytes)
     var dataToSentToPrinter = [CUnsignedChar](count: commandsToPrint.length, repeatedValue: 0)
     //var dataToSentToPrinter = (commandsToPrint.bytes)
     
-    commandsToPrint.getBytes(&dataToSentToPrinter)
+    //commandsToPrint.getBytes(&dataToSentToPrinter)
+    commandsToPrint.getBytes(&dataToSentToPrinter, length: commandSize)
     //commandsToPrint.getBytes(&dataToSentToPrinter)//, length: sizeofValue(dataToSentToPrinter))
     
     
@@ -494,8 +495,8 @@ func sendCommand(commandsToPrint : NSData, portName : NSString, portSettings: NS
             if (now.tv_sec > endTime.tv_sec) {
                 break
             }
-           // starPort.endCheckedBlockTimeoutMillis = 1000
-           // starPort.endCheckedBlock(&status!, 2)
+            //starPort.endCheckedBlockTimeoutMillis = 1000
+            //starPort.endCheckedBlock(&status!, 2)
            
         }
     
