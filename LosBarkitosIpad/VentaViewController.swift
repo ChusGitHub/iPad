@@ -238,22 +238,10 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         webService.delegate = self
     }
     @IBAction func reservasUIButton(sender: UIButton) {
+
         webService.delegate = self
         self.tovueltaReservaViewController = false
         
-        /*var alertController = UIAlertController(title: "RESERVA", message: "Clic en el tipo de barco para reservar", preferredStyle: UIAlertControllerStyle.Alert)
-        let rioAction = UIAlertAction(title: "Rio", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.RIO, pv: 2)})
-        let electricaAction = UIAlertAction(title: "Eléctrica", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.ELECTRICA, pv: 2)})
-        let whalyAction = UIAlertAction(title: "Whaly", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.WHALY, pv: 2)})
-        let goldAction = UIAlertAction(title: "Gold", style: UIAlertActionStyle.Default, handler: {action in self.webService.obtenerNumeroReserva(self.GOLD, pv: 2)})
-
-        alertController.addAction(rioAction)
-        alertController.addAction(electricaAction)
-        alertController.addAction(whalyAction)
-        alertController.addAction(goldAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)*/
-
     }
     
     func noAdministrador () {
@@ -287,12 +275,6 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.PUNTO_VENTA = 2
         }
         
-        // miro la conectividad del ipad
-        /*if conec.estaConectado() == true {
-            print("Esta conectado")
-        } else {
-            print("No está conectado")
-        }*/
         // MIRA LA CONECTIVIDAD 
         self.hayConexion = conec.estaConectado()
         if !self.hayConexion {
@@ -359,23 +341,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             self.PUNTO_VENTA = 2
         }
     
-        //self.internetReachability = Reachability.reachabilityForInternetConnection()
-        //self.internetReachability?.startNotifier()
-        //self.verificarEstado(self.internetReachability!)
-
     }
     
-    //func verificarEstado(reachability : Reachability?) {
-       
-      //  var connectionRequired : Bool = false
-       // self.estado = reachability!.currentReachabilityStatus
-        
-//        if reachability!.isReachable() {
-    //        print("conectado")
-      //  } else {
-            
-       // }
-    //}
     
     func imprimirTotal() -> Bool {
         
@@ -390,8 +357,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
             appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
+            var _ : NSString = appDelegate.getPortName()
+            var _ : NSString = appDelegate.getPortSettings()
             
             // AQUI ESTAN LOS DATOS A IMPRIMIR
             

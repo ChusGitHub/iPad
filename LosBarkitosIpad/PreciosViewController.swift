@@ -355,44 +355,5 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         
         return ManejoSQLITE.instance.numeroBarcas() as Int32
     }
-    
-    
- //   func verificarEstado(reachability : Reachability) {
-        
-   //     var connectionRequired : Bool = false
-     //   self.estado = reachability.currentReachabilityStatus
-        
-      //  if reachability.isReachable() {
-       //     print("conectado")
-       // } else {
-           
-        //    let alertaNOInsercionBDD = UIAlertController(title: "SIN CONEXIÓN", message: " Intenta entrar en los ajustes del sistema y ver si está disponible la red WIFI", preferredStyle: UIAlertControllerStyle.Alert)
-            
-           // let OkActionHandler = {(accion : UIAlertAction!) -> Void in
-             //   self.dismissViewControllerAnimated(true, completion: nil)
-            //}
-                
-            //let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: OkActionHandler)
-                
-     //       alertaNOInsercionBDD.addAction(OkAction)
-                
-      //      self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
-                
-           
-            
-         
-        //}
-    //}
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
