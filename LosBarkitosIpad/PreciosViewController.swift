@@ -92,7 +92,12 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidDisappear(animated: Bool) {
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
         self.hayConexion = conec.estaConectado()
         if !self.hayConexion {
                 
@@ -102,11 +107,14 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                 
             alertaNOInternet.addAction(OkAction)
                 
-            self.presentViewController(alertaNOInternet, animated: true, completion: {self.dismissViewControllerAnimated(true, completion: nil)})
+            self.presentViewController(alertaNOInternet, animated: true, completion:nil)
                 
-            
         }
-        
+   
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,7 +130,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             print("v - \(v)")
             if k as NSString == "error" && v as! NSString == "si" {
                 error = true
-                self.dismissViewControllerAnimated(true, completion: {
+                //self.dismissViewControllerAnimated(true, completion: {
                 
                     let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -132,7 +140,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                     
                     self.presentViewController(alertaNOInternet, animated: true, completion: nil)
                 
-                })
+               // })
             } else {
                 if k as NSString == "numero" {
                     self.numeroTicket = v as! Int
@@ -206,7 +214,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             //}
             
         } else {
-            self.dismissViewControllerAnimated(true, completion: {
+          //  self.dismissViewControllerAnimated(true, completion: {
                 let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
@@ -215,7 +223,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                 
                 self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
                 
-            })
+         //   })
             
         }
     }
