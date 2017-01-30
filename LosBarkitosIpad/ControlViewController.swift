@@ -140,7 +140,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
         
         //println("lista llegadas : \(respuesta)")
         
-        for (_,v) in respuesta {
+        for (k,v) in respuesta {
             //println("k = \(k)")
             //println("v = \(v)")
 

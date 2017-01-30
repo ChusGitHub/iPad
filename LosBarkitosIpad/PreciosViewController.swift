@@ -38,8 +38,9 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     var PUNTO_VENTA : Int = 0
     var PUNTO_VENTA_NOMBRE : String = ""
 
-    var conec : Conectividad = Conectividad()
-    var hayConexion : Bool = false
+  //  var internetReachability : Reachability?
+   // var estado : Reachability.NetworkStatus?
+
 
     @IBOutlet weak var cancelarUIButton: UIButton!
     @IBOutlet weak var aceptarUIButton: UIButton!
@@ -75,7 +76,6 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         webService.delegatePrecio = self
         
        // AQUI HAY QUE RECORRER LOS BOTONES DE LOS PRECIOS PARA PONERLES EL LABEL ADECUADO.
@@ -92,29 +92,11 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
 
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        self.hayConexion = conec.estaConectado()
-        if !self.hayConexion {
-                
-            let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
-                
-            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-            alertaNOInternet.addAction(OkAction)
-                
-            self.presentViewController(alertaNOInternet, animated: true, completion:nil)
-                
-        }
-   
-    }
-    
     override func viewWillAppear(animated: Bool) {
-       
+    //    self.internetReachability = Reachability.reachabilityForInternetConnection()
+     //   self.internetReachability?.startNotifier()
+      //  self.verificarEstado(self.internetReachability!)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,7 +112,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             print("v - \(v)")
             if k as NSString == "error" && v as! NSString == "si" {
                 error = true
-                //self.dismissViewControllerAnimated(true, completion: {
+                self.dismissViewControllerAnimated(true, completion: {
                 
                     let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -140,7 +122,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                     
                     self.presentViewController(alertaNOInternet, animated: true, completion: nil)
                 
-               // })
+                })
             } else {
                 if k as NSString == "numero" {
                     self.numeroTicket = v as! Int
@@ -214,7 +196,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             //}
             
         } else {
-          //  self.dismissViewControllerAnimated(true, completion: {
+            self.dismissViewControllerAnimated(true, completion: {
                 let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
@@ -223,7 +205,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                 
                 self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
                 
-         //   })
+            })
             
         }
     }
@@ -355,5 +337,44 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         
         return ManejoSQLITE.instance.numeroBarcas() as Int32
     }
+    
+    
+ //   func verificarEstado(reachability : Reachability) {
+        
+   //     var connectionRequired : Bool = false
+     //   self.estado = reachability.currentReachabilityStatus
+        
+      //  if reachability.isReachable() {
+       //     print("conectado")
+       // } else {
+           
+        //    let alertaNOInsercionBDD = UIAlertController(title: "SIN CONEXIÓN", message: " Intenta entrar en los ajustes del sistema y ver si está disponible la red WIFI", preferredStyle: UIAlertControllerStyle.Alert)
+            
+           // let OkActionHandler = {(accion : UIAlertAction!) -> Void in
+             //   self.dismissViewControllerAnimated(true, completion: nil)
+            //}
+                
+            //let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: OkActionHandler)
+                
+     //       alertaNOInsercionBDD.addAction(OkAction)
+                
+      //      self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
+                
+           
+            
+         
+        //}
+    //}
+
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

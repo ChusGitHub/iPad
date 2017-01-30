@@ -14,9 +14,6 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     let RESERVA_RIO       = 1
     let RESERVA_BARCA     = 2
     let RESERVA_GOLD      = 3
-    
-    var conec : Conectividad = Conectividad()
-    var hayConexion : Bool = false
 
     var reservas : [Int] = [0,0,0]
     var webService : webServiceCallAPI = webServiceCallAPI()
@@ -45,29 +42,13 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.hayConexion = conec.estaConectado()
-        if !self.hayConexion {
-            
-            let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No puedes sacar reservas. Intenta conectarte a internet o  llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let OkAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { _ in
-                self.dismissViewControllerAnimated(true, completion: nil)}
-            
-            alertaNOInternet.addAction(OkAction)
-            
-            self.presentViewController(alertaNOInternet, animated: true, completion:nil)
-            
-        }
-
-    }
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        
         webService.delegateReserva = self
         
+        // Do any additional setup after loading the view.
     }
     
     func didReceiveResponse_reservaPosible(respuesta : [Bool]) {
@@ -130,8 +111,8 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
             appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var _ : NSString = appDelegate.getPortName()
-            var _ : NSString = appDelegate.getPortSettings()
+            var p_portName : NSString = appDelegate.getPortName()
+            var p_portSettings : NSString = appDelegate.getPortSettings()
             //infoImpresoraUILabel.text = portInfo.portName
             
            // print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
@@ -156,18 +137,18 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
             foundPrinters = SMPort.searchPrinter("BT:")
             
             
-            let portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
+            var portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
             lastSelectedPortName = portInfo.portName
             
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.setPortName(portInfo.portName)
             appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            let p_portName : NSString = appDelegate.getPortName()
-            let p_portSettings : NSString = appDelegate.getPortSettings()
+            var p_portName : NSString = appDelegate.getPortName()
+            var p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let _ : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, PV: PV, parametro: self.reservas, HR: HR, HP: HP, tipoBarca: tipo)
+            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, PV: PV, parametro: self.reservas, HR: HR, HP: HP, tipoBarca: tipo)
         } else {
-            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
             
             let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
             
@@ -188,21 +169,21 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     override func   prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "segueReservaRio" {
-           let _ : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             
         } else if segue.identifier == "segueReservaElectrica" {
-            let _ : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
 
             
         } else if segue.identifier == "segueReservaBarca" {
-            let _ : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
  
 
         } else if segue.identifier == "segueReservaGold" {
-            let _ : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
      
         } else if segue.identifier == "segueReservaCancelar" {
-            let _ : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
             
         }
         
