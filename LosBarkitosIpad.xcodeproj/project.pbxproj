@@ -59,7 +59,7 @@
 		BB1FB6701A232FA50078B97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LosBarkitosIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB34ACE71A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB34ACE81A1615EE008E67ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BB34ACE81A1615EE008E67ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = LosBarkitosIpad/AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VentaViewController.swift; sourceTree = "<group>"; };
 		BB34ACEC1A1615EE008E67ED /* ControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
 		BB34ACEF1A1615EE008E67ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -137,6 +137,7 @@
 		BB34ACDA1A1615EE008E67ED = {
 			isa = PBXGroup;
 			children = (
+				BB34ACE81A1615EE008E67ED /* AppDelegate.swift */,
 				BB39033F1A77DF6C004572B2 /* StarIO.framework */,
 				BB34ACE51A1615EE008E67ED /* LosBarkitosIpad */,
 				BB34ACFD1A1615EE008E67ED /* LosBarkitosIpadTests */,
@@ -161,7 +162,6 @@
 				BB35F5421A1F7426004AFC7C /* Conexion.swift */,
 				BB020C461AA087F000B5E976 /* Modelo SQLITE */,
 				BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */,
-				BB34ACE81A1615EE008E67ED /* AppDelegate.swift */,
 				BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */,
 				F9AFCE121A169FB5007FF3A9 /* PlistData.swift */,
 				F9BCDB451A2D0DAE002C70D4 /* VentaViewController */,
