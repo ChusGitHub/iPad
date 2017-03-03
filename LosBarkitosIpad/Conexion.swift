@@ -104,9 +104,9 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error :     NSError?
         var puntoVenta : Int = 0*/
-        var url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/2"
-        if IPAD == "MARINAFERRY" {
-            url = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
+        var url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
+        if IPAD == "LOSBARKITOS" {
+            url = "http://losbarkitos.herokuapp.com/listado_viaje/1/2"
         }
 
         
