@@ -87,7 +87,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     
     @IBAction func listaTipoBarcaUIButton(sender: UIButton) {
         // Pongo los colores del fondo de los botones
-        if sender.tag == 1 { // btnRio
+        if sender.tag == 1  { // btnRio
             btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
             btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
             btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)

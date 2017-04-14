@@ -33,7 +33,7 @@ var drawerPortName : NSString = ""
 var DBLocal : String = ""
 var DBPath : String = ""
 
-let IPAD : String = "LOSBARKITOS"
+let IPAD : String = "MARINAFERRY"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -142,6 +142,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         DataManager().setValueForKey("total_barcas", value: 0, inFile: "appstate")
+        
+        //Este valor sirve para saber si hay barcas vendidas
+        // 1 -> hay barcas vendidas
+        // 0 -> No hay barcas vendidas
+        DataManager().setValueForKey("barcas_vendidas", value: 1, inFile: "appstate")
         
         return "si"
         

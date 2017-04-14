@@ -237,6 +237,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         self.tovueltaListadoVentas = true
         webService.delegate = self
     }
+    
     @IBAction func reservasUIButton(sender: UIButton) {
         webService.delegate = self
         self.tovueltaReservaViewController = false
@@ -322,10 +323,15 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
         
         
+        
+        
         // creo enlace a webService y digo que el protocolo soy yo mismo
         webService.delegate = self
         
         txtPasswordUITextField.delegate = self
+        
+        // Aqui calculamos si hay barcas que ya han salido
+        webService.hayBarcas()
         
         webService.barcasDia()
         //webService.obtenerNumero()
@@ -407,6 +413,16 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     //////////////////////////////////////////////////////////////////////////////////////////////
     // Respuesta del webService de las llamadas al sistema
     /////////////////////////////////////////////////////////////////////////////////////////////
+    
+    func didReceiveResponse_hayBarcas(respuesta: [String : String]) {
+        for (k,v) in respuesta {
+            if k == "hayBarcas" && v == "SI" {
+                webService.cierreDia()
+            } else {
+                print("ERROR")
+            }
+        }
+    }
     
     
     func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) {

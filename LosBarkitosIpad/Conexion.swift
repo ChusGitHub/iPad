@@ -19,6 +19,7 @@ import Foundation
     //func didReceiveResponse_reserva(respuesta : [String : AnyObject])
     func didReceiveResponse_barcasDia(respuesta : [String : AnyObject])
     func didReceiveResponse_cierreDia(respuesta : [String : String])
+    func didReceiveResponse_hayBarcas(respuesta : [String : String])
     
 }
 
@@ -246,6 +247,26 @@ class webServiceCallAPI : NSObject {
                         self.delegatePrecio?.didReceiveResponse_ajustar_numero_ticket_si_falla_impresion(diccionario)
             },
             failure: nil)
+    }
+    
+    
+    func hayBarcas() {
+        manager.GET("http://losbarkitos.herokuapp.com/hayBarcas", parameters: nil, success: {(operation : AFHTTPRequestOperation!, responseObject) in
+            var diccionario = [String : String]()
+            for (k,v) in responseObject as! [String : String] {
+                if k != "error" {
+                    diccionario[k] = v
+                } else {
+                    diccionario[k] = "error"
+                }
+            }
+            self.delegate?.didReceiveResponse_hayBarcas(diccionario as Dictionary)
+            
+            }, failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+                var diccionario = [String : String]()
+                diccionario["error"] = "si"
+                self.delegate?.didReceiveResponse_hayBarcas(diccionario as Dictionary)
+        })
     }
     
     func totalBarcas(PV : Int) {
