@@ -13,6 +13,8 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
     let RIO       = 1
     let BARCA     = 2
     let GOLD      = 3
+    
+    var btnPulsado : Int = 0
 
     var webServiceControl : webServiceCallAPI = webServiceCallAPI()
     var webService : webServiceCallAPI = webServiceCallAPI()
@@ -91,19 +93,27 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
             btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
             btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+            btnPulsado = RIO
         } else if sender.tag == 2 { // btnBarca
             btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
             btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
             btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
+            btnPulsado = BARCA
         } else if sender.tag == 3 { // btnGold
             btnRio.backgroundColor = UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
             btnGold.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.80)
             btnBarca.backgroundColor =  UIColor(red: 100, green: 0.0, blue: 0.0, alpha: 0.35)
+            btnPulsado = GOLD
         }
 
         webService.listaReservas(sender.tag)
     }
     
+    @IBAction func btnActualizar(sender: UIButton) {
+        
+        webService.listaReservas(btnPulsado)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
