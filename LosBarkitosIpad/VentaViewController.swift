@@ -8,6 +8,30 @@
 //import "VendedorUITableViewCell"
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 /*
 protocol PrinterConnectivityDelegate {
     func connectedPrinterDidChangeTo(printer : Printer)
@@ -25,7 +49,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     let VENTAS =    2
     
     // Acceso a la base de datos SQLITE
-    let db = SQLiteDB.sharedInstance()
+    let db = SQLiteDB.shared
 
     
     @IBOutlet weak var btnViewVendedoresUIButton: UIButton!
@@ -128,14 +152,14 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     
     // LLamo a obtenerVendedores cuando se pulsa el boton del uitableview
-    @IBAction func btnViewVendedoresIBAction(sender: AnyObject) {
-        if self.vendedorUITableView.hidden == true {
+    @IBAction func btnViewVendedoresIBAction(_ sender: AnyObject) {
+        if self.vendedorUITableView.isHidden == true {
             webService.obtenerVendedores()
-            self.vendedorUITableView.hidden = false
-            self.btnViewVendedoresUIButton.enabled = false
+            self.vendedorUITableView.isHidden = false
+            self.btnViewVendedoresUIButton.isEnabled = false
         } else {
-            self.vendedorUITableView.hidden = true
-            self.btnViewVendedoresUIButton.enabled = false
+            self.vendedorUITableView.isHidden = true
+            self.btnViewVendedoresUIButton.isEnabled = false
         }
      }
     
@@ -146,7 +170,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         webService.obtenerVentas()
     }*/
     
-    @IBAction func btnBarcasUIButtonTouch(sender: UIButton) {
+    @IBAction func btnBarcasUIButtonTouch(_ sender: UIButton) {
 
         switch sender.tag {
         case 0:
@@ -165,80 +189,80 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     
-    @IBAction func btnGestionUIbutton(sender: UIButton) {
+    @IBAction func btnGestionUIbutton(_ sender: UIButton) {
         self.txtPasswordUITextField.text = ""
-        if self.passwordUIView.hidden == true {
-            self.passwordUIView.hidden = false
+        if self.passwordUIView.isHidden == true {
+            self.passwordUIView.isHidden = false
         } else {
-            self.passwordUIView.hidden = true
+            self.passwordUIView.isHidden = true
         }
     }
     
     
-    @IBAction func btnAceptarGestionPushButton(sender: UIButton) {
+    @IBAction func btnAceptarGestionPushButton(_ sender: UIButton) {
         
         if self.txtPasswordUITextField.text == "Otisuhc0" {
             self.gestion = "administrador"
             self.infoAdministradoUILabel.text = "Administrador"
-            self.tipoListaUIView.hidden = false
-            self.passwordUIView.hidden = true
+            self.tipoListaUIView.isHidden = false
+            self.passwordUIView.isHidden = true
             txtPasswordUITextField.resignFirstResponder()
         } else {
             self.resignFirstResponder()
-            let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
-            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
+            let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.cancel, handler: {action in self.noAdministrador()} )
             alerta.addAction(aceptarAction)
-            self.presentViewController(alerta, animated: true, completion: nil)
+            self.present(alerta, animated: true, completion: nil)
         }
     }
     
-    @IBAction func lista1ButtonListaUIView(sender: AnyObject) {
-        DataManager().setValueForKey("lista_precio", value: String("1"), inFile: "appstate")
-        self.tipoListaUIView.hidden = true
+    @IBAction func lista1ButtonListaUIView(_ sender: AnyObject) {
+        DataManager().setValueForKey("lista_precio", value: "1" as NSString, inFile: "appstate")
+        self.tipoListaUIView.isHidden = true
     }
-    @IBAction func lista2ButtonListaUiView(sender: AnyObject) {
-        DataManager().setValueForKey("lista_precio", value: String("2"), inFile: "appstate")
-        self.tipoListaUIView.hidden = true
+    @IBAction func lista2ButtonListaUiView(_ sender: AnyObject) {
+        DataManager().setValueForKey("lista_precio", value: "2" as NSString, inFile: "appstate")
+        self.tipoListaUIView.isHidden = true
     }
-    @IBAction func lista3ButtonListaUIView(sender: AnyObject) {
-        DataManager().setValueForKey("lista_precio", value: String("3"), inFile: "appstate")
-        self.tipoListaUIView.hidden = true
+    @IBAction func lista3ButtonListaUIView(_ sender: AnyObject) {
+        DataManager().setValueForKey("lista_precio", value: "3" as NSString, inFile: "appstate")
+        self.tipoListaUIView.isHidden = true
     }
 
-    @IBAction func cerrarDia(sender: AnyObject) {
+    @IBAction func cerrarDia(_ sender: AnyObject) {
         // Hay que poner los contadores de las reservas a 0
-        DataManager().setValueForKey("total_barcas", value: 0, inFile: "appstate")
-        DataManager().setValueForKey("cargado", value: "no", inFile: "appstate")
+        DataManager().setValueForKey("total_barcas", value: 0 as NSNumber, inFile: "appstate")
+        DataManager().setValueForKey("cargado", value: "no" as NSString, inFile: "appstate")
         self.webService.cierreDia()
         
         
     }
     
-    @IBAction func imprimirTotalVentas(sender: UIButton) {
+    @IBAction func imprimirTotalVentas(_ sender: UIButton) {
         
         let totalImpreso : Bool = imprimirTotal()
         
         if !totalImpreso {
-            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.alert)
             
-            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
             
             alertaNoImpresora.addAction(OkAction)
 
         }
         
     }
-    @IBAction func habilitarReservaUIButton(sender: UIButton) {
+    @IBAction func habilitarReservaUIButton(_ sender: UIButton) {
         
         
     }
     
-    @IBAction func listadoVentasUIButton(sender: UIButton) {
+    @IBAction func listadoVentasUIButton(_ sender: UIButton) {
         self.tovueltaListadoVentas = true
         webService.delegate = self
     }
     
-    @IBAction func reservasUIButton(sender: UIButton) {
+    @IBAction func reservasUIButton(_ sender: UIButton) {
         webService.delegate = self
         self.tovueltaReservaViewController = false
         
@@ -259,7 +283,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     func noAdministrador () {
         self.gestion = "usuario"
-        self.passwordUIView.hidden = true
+        self.passwordUIView.isHidden = true
         self.infoAdministradoUILabel.text = "Usuario"
     }
     
@@ -297,8 +321,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         // MIRA LA CONECTIVIDAD 
         self.hayConexion = conec.estaConectado()
 
-        self.passwordUIView.hidden = true
-        self.tipoListaUIView.hidden = true
+        self.passwordUIView.isHidden = true
+        self.tipoListaUIView.isHidden = true
         
         
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: {action in accessoryConected}, name: EAAccessoryDidConnectNotification, object: nil)
@@ -311,7 +335,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         //cargarValoresCon_appstate(inFile: "appstate")
         
         // Registro el cell class vendedorViewController
-        self.vendedorUITableView.hidden = true
+        self.vendedorUITableView.isHidden = true
         
         // Si es posible pongo el nombre del vendedor
         self.vendedorUITextField.text = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as? String
@@ -338,7 +362,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         // Miro si hay impresora conectada
         let _ : Bool =  setupImpresora()
@@ -380,17 +404,17 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
         if setupImpresora() {
             
-            self.foundPrinters = SMPort.searchPrinter("BT:")
+            self.foundPrinters = SMPort.searchPrinter("BT:")! as NSArray
             
             
-            let portInfo : PortInfo = self.foundPrinters.objectAtIndex(0) as! PortInfo
-            self.lastSelectedPortName = portInfo.portName
+            let portInfo : PortInfo = self.foundPrinters.object(at: 0) as! PortInfo
+            self.lastSelectedPortName = portInfo.portName! as NSString
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.setPortName(portInfo.portName! as NSString)
+            appDelegate.setPortSettings(arrayPort.object(at: 0) as! NSString)
+            var _ : NSString = appDelegate.getPortName()
+            var _ : NSString = appDelegate.getPortSettings()
             
             // AQUI ESTAN LOS DATOS A IMPRIMIR
             
@@ -414,7 +438,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     // Respuesta del webService de las llamadas al sistema
     /////////////////////////////////////////////////////////////////////////////////////////////
     
-    func didReceiveResponse_hayBarcas(respuesta: [String : String]) {
+    func didReceiveResponse_hayBarcas(_ respuesta: [String : String]) {
         for (k,v) in respuesta {
             if k == "hayBarcas" && v == "SI" {
                 webService.cierreDia()
@@ -425,12 +449,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     }
     
     
-    func didReceiveResponse_listadoVendedores(respuesta: Dictionary<String, AnyObject >) {
+    func didReceiveResponse_listadoVendedores(_ respuesta: Dictionary<String, AnyObject >) {
        // print("Respuesta del servidor : \(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
                 print("ERROR EN EL DICCIONARIO DEVUELTO")
-                EXIT_FAILURE
+                fatalError()
             }
             // añado el vendedor al diccionario
             self.vendedor = [:]
@@ -482,13 +506,12 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         
        // let totalBarcas : Int = self.totalBarcas[0] + self.totalBarcas[1] + self.totalBarcas[2] + self.totalBarcas[3]
     }
-    func didReceiveResponse_totalBarcas(respuesta : [String : Int]) {
+    func didReceiveResponse_totalBarcas(_ respuesta : [String : Int]) {
         
         //print("respuesta del servidor : Total Barcas :\(respuesta)")
         for (k,v) in respuesta {
             if k as NSString == "error" && v as Int == 1 {
                 print("Error en el diccionario devuelto : \(v)")
-                EXIT_FAILURE
             } else {
                 self.totalBarcas = Array(respuesta.values)
             }
@@ -496,7 +519,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         webService.totalEuros(self.PUNTO_VENTA)
     }
     
-    func didReceiveResponse_totalEuros(respuesta : [String : Int]) {
+    func didReceiveResponse_totalEuros(_ respuesta : [String : Int]) {
         
         print("respuesta del servidor : Total Euros :\(respuesta)")
         for (k,v) in respuesta {
@@ -507,44 +530,44 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             }
         }
         
-        let formatoFecha = NSDateFormatter()
+        let formatoFecha = DateFormatter()
         formatoFecha.dateFormat = "dd-MM-yyyy"
-        let dia = formatoFecha.stringFromDate(NSDate())
+        let dia = formatoFecha.string(from: Date())
         
         let diccParam : [String : AnyObject] = [
-            "p_venta"   : self.PUNTO_VENTA_NOMBRE,
-            "rio"       : self.totalBarcas[0],
-            "electrica" : self.totalBarcas[1],
-            "barca"     : self.totalBarcas[2],
-            "gold"      : self.totalBarcas[3],
-            "dia"       : dia,
-            "euros"     : self.totalEuros,
-            "total"     : totalBarcas
+            "p_venta"   : self.PUNTO_VENTA_NOMBRE as AnyObject,
+            "rio"       : self.totalBarcas[0] as AnyObject,
+            "electrica" : self.totalBarcas[1] as AnyObject,
+            "barca"     : self.totalBarcas[2] as AnyObject,
+            "gold"      : self.totalBarcas[3] as AnyObject,
+            "dia"       : dia as AnyObject,
+            "euros"     : self.totalEuros as AnyObject,
+            "total"     : totalBarcas as AnyObject
         ]
         
         _  = PrintTotal3Inch(p_portName, p_portSettings: p_portSettings, diccParam: diccParam)
     }
     
     
-    func didReceiveResponse_cierreDia(respuesta : [String : String]) {
+    func didReceiveResponse_cierreDia(_ respuesta : [String : String]) {
         if respuesta["mensaje"] == "ok" {
-            let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Las reservas se han restablecido todas a 0", preferredStyle: UIAlertControllerStyle.Alert)
-            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil )
+            let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Las reservas se han restablecido todas a 0", preferredStyle: UIAlertControllerStyle.alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.cancel, handler: nil )
             alerta.addAction(aceptarAction)
-            self.presentViewController(alerta, animated: true, completion: nil)
+            self.present(alerta, animated: true, completion: nil)
         } else {
-            let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Error en el servidor", preferredStyle: UIAlertControllerStyle.Alert)
-            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: nil )
+            let alerta = UIAlertController(title: "INICIALIZANDO RESERVAS", message: "Error en el servidor", preferredStyle: UIAlertControllerStyle.alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.cancel, handler: nil )
             alerta.addAction(aceptarAction)
-            self.presentViewController(alerta, animated: true, completion: nil)
+            self.present(alerta, animated: true, completion: nil)
 
         }
         
-        self.tipoListaUIView.hidden = true
+        self.tipoListaUIView.isHidden = true
         
     }
     
-    func didReceiveResponse_barcasDia(respuesta: [String : AnyObject]) {
+    func didReceiveResponse_barcasDia(_ respuesta: [String : AnyObject]) {
         
         var salidas = [Int]()
         for (k,v) in respuesta {
@@ -575,7 +598,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     
     // IMPLEMENTO LOS METODOS DELEGADOS DE vendedorUITableView
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == VENDEDOR {
             return self.vendedores.count
         } else {
@@ -583,13 +606,13 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
        // if tableView.tag == VENDEDOR {
-            let cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCellWithIdentifier("cell") as! VendedorUITableViewCell
+            let cell: VendedorUITableViewCell = self.vendedorUITableView.dequeueReusableCell(withIdentifier: "cell") as! VendedorUITableViewCell
         
         
-            cell.nombreVendedorUILabelCell.textColor = UIColor.grayColor()
-            cell.codigoVendedorUILabelCell.textColor = UIColor.grayColor()
+            cell.nombreVendedorUILabelCell.textColor = UIColor.gray
+            cell.codigoVendedorUILabelCell.textColor = UIColor.gray
             if indexPath.row % 2 == 0 {
                 cell.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
             } else {
@@ -603,8 +626,8 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             cell.nombreVendedorUILabelCell.text = nombre[0]
         
             // añado el codigo del vendedor al plist
-            DataManager().setValueForKey("vendedor", value: codigo, inFile: "appstate")
-            DataManager().setValueForKey("nombre_vendedor", value: nombre, inFile: "appstate")
+            DataManager().setValueForKey("vendedor", value: codigo as AnyObject, inFile: "appstate")
+            DataManager().setValueForKey("nombre_vendedor", value: nombre as AnyObject, inFile: "appstate")
 
             return cell
             
@@ -626,7 +649,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }*/
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let altura = tableView.frame.height
         if tableView.tag == VENDEDOR {
             return altura/(CGFloat) (self.vendedores.count)
@@ -634,7 +657,7 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             return 50.0        }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView.tag == VENDEDOR {
             // recupero los valores de la celda
@@ -643,15 +666,15 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
             let nombre = Array(dictVendedor.values)
         
             // Guardo el vendedor en el plist
-            DataManager().setValueForKey("vendedor", value: codigo[0], inFile: "appstate")
-            DataManager().setValueForKey("nombre_vendedor", value: String(nombre[0]), inFile: "appstate")
+            DataManager().setValueForKey("vendedor", value: codigo[0] as AnyObject, inFile: "appstate")
+            DataManager().setValueForKey("nombre_vendedor", value: nombre[0] as NSString, inFile: "appstate")
         
             // Pongo el nombre del vendedor en el uitextview
             self.vendedorUITextField.text = nombre[0]
         
             // Quito el uitableview de los  vendedores
-            self.vendedorUITableView.hidden = true
-            self.btnViewVendedoresUIButton.enabled = true
+            self.vendedorUITableView.isHidden = true
+            self.btnViewVendedoresUIButton.isEnabled = true
             self.vendedores = []
             self.vendedorUITableView.clearsContextBeforeDrawing = true
             self.vendedorUITableView.reloadData()
@@ -660,15 +683,15 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "seguePrecios" {
-            let siguienteVC : PreciosViewController = segue.destinationViewController as! PreciosViewController
+            let siguienteVC : PreciosViewController = segue.destination as! PreciosViewController
             siguienteVC.toTipo = self.barcaActual
             siguienteVC.barcaActualString = self.barcaActualString
             
         }
         if segue.identifier == "segueTipoReserva" {
-            let siguienteVC : tipoReservaUIViewController = segue.destinationViewController as! tipoReservaUIViewController
+            let siguienteVC : tipoReservaUIViewController = segue.destination as! tipoReservaUIViewController
             siguienteVC.totipoReservaViewControllerPV = self.PUNTO_VENTA
             
         }
@@ -676,25 +699,25 @@ class VentaViewController: UIViewController, UITextFieldDelegate, UITableViewDel
     
     func ordenarVentas() {
        // println("SIN ORDENAR : \(self.ventas)")
-        self.ventas.sortInPlace({(primero : [String:String], segundo : [String:String]) -> Bool in
+        self.ventas.sort(by: {(primero : [String:String], segundo : [String:String]) -> Bool in
             return Int(primero["numero"]!) > Int(segundo["numero"]!)
         })
         //(println(" ORDENADO : \(self.ventas)")
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if self.txtPasswordUITextField.text == "Otisuhc0" {
             self.gestion = "administrador"
             self.infoAdministradoUILabel.text = "Administrador"
-            self.tipoListaUIView.hidden = false
-            self.passwordUIView.hidden = true
+            self.tipoListaUIView.isHidden = false
+            self.passwordUIView.isHidden = true
             txtPasswordUITextField.resignFirstResponder()
         } else {
             txtPasswordUITextField.resignFirstResponder()
-            let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.Alert)
-            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Cancel, handler: {action in self.noAdministrador()} )
+            let alerta = UIAlertController(title: "PASS INCORRECTO", message: "El password es incorrecto. No tiene privilegios de administrador", preferredStyle: UIAlertControllerStyle.alert)
+            let aceptarAction = UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.cancel, handler: {action in self.noAdministrador()} )
             alerta.addAction(aceptarAction)
-            self.presentViewController(alerta, animated: true, completion: nil)
+            self.present(alerta, animated: true, completion: nil)
         }
         return true
     } 

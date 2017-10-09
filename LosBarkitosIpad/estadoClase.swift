@@ -7,12 +7,36 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class estado: NSObject {
     
     var nombreEstado : String?
     
-    var horaLlegada : NSDate? // almacena la hora de la primera barca disponible
+    var horaLlegada : Date? // almacena la hora de la primera barca disponible
     
     var control : Int?
     
@@ -20,9 +44,9 @@ class estado: NSObject {
     //                INTERMEDIO - No hay reservas pero hay barcas fuera
     //                FINAL - Hay reservas
     
-    func transicion(nombreEstado : String, control : Int, tipoTransicion : String) -> estado {
+    func transicion(_ nombreEstado : String, control : Int, tipoTransicion : String) -> estado {
         
-        let dateFormater = NSDateFormatter()
+        let dateFormater = DateFormatter()
         dateFormater.dateFormat = "hh:mm:ss"
         self.control = control
         self.nombreEstado = nombreEstado
@@ -30,7 +54,7 @@ class estado: NSObject {
         if nombreEstado == "INICIAL" {
             if tipoTransicion == "SALIDA" {
                 
-                self.horaLlegada = NSDate().dateByAddingTimeInterval(3600) // se añade una hora a la hora de salida
+                self.horaLlegada = Date().addingTimeInterval(3600) // se añade una hora a la hora de salida
                 self.nombreEstado = "INTERMEDIO"
                 self.control = 0
             }
@@ -40,7 +64,7 @@ class estado: NSObject {
                 self.nombreEstado = "INICIAL"
                 self.control = 0
             } else if tipoTransicion == "RESERVA" {
-                self.horaLlegada = self.horaLlegada?.dateByAddingTimeInterval(3600) // se incrementa una hora
+                self.horaLlegada = self.horaLlegada?.addingTimeInterval(3600) // se incrementa una hora
                 self.nombreEstado = "FINAL"
                 self.control? += 1
             }
@@ -54,7 +78,7 @@ class estado: NSObject {
                 }
                 if tipoTransicion == "RESERVA" {
                     self.control? += 1
-                    self.horaLlegada = self.horaLlegada?.dateByAddingTimeInterval(3600) // se incrementa una hora
+                    self.horaLlegada = self.horaLlegada?.addingTimeInterval(3600) // se incrementa una hora
                 }
             }
         }

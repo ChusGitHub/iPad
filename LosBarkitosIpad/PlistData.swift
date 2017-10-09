@@ -18,10 +18,10 @@ class DataManager: NSObject {
     - parameter value: el valor a guardar
     - parameter file:  el fichero a generar
     */
-    func setValueForKey(key: String, value: AnyObject, inFile file:String) {
+    func setValueForKey(_ key: String, value: AnyObject, inFile file:String) {
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
-        path = (path as NSString).stringByAppendingPathComponent(file)
+        var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
+        path = (path as NSString).appendingPathComponent(file)
         let filename = path + ".plist"
         
         var dict = NSMutableDictionary(contentsOfFile: filename)
@@ -31,7 +31,7 @@ class DataManager: NSObject {
         }
         
         dict?.setValue(value, forKey: key)
-        dict?.writeToFile(filename, atomically: true)
+        dict?.write(toFile: filename, atomically: true)
         
     }
     
@@ -43,16 +43,16 @@ class DataManager: NSObject {
     
     - returns: el valor encontrado
     */
-    func getValueForKey(key: String, inFile file:String) -> AnyObject? {
+    func getValueForKey(_ key: String, inFile file:String) -> AnyObject? {
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
-        path = (path as NSString).stringByAppendingPathComponent(file)
+        var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
+        path = (path as NSString).appendingPathComponent(file)
         let filename = path + ".plist"
         
         let dict = NSMutableDictionary(contentsOfFile: filename)
         
         if dict != nil {
-            return dict?.valueForKey(key)
+            return dict?.value(forKey: key) as AnyObject
         }
         else {
             return nil

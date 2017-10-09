@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B340A161F8BA1A800C4BB32 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B340A141F8BA1A800C4BB32 /* SQLiteDB.swift */; };
+		4B340A171F8BA1A800C4BB32 /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B340A151F8BA1A800C4BB32 /* SQLTable.swift */; };
+		4B340A191F8BA30100C4BB32 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B340A181F8BA30100C4BB32 /* libsqlite3.0.tbd */; };
+		7B197530CFEE366A2B87079A /* Pods_LosBarkitosIpad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD13C01C2BB67CE5BA9E390 /* Pods_LosBarkitosIpad.framework */; };
 		BB020C451AA0856000B5E976 /* viaje.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C441AA0856000B5E976 /* viaje.swift */; };
 		BB020C481AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C471AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift */; };
 		BB020C4A1AA089DF00B5E976 /* barca.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C491AA089DF00B5E976 /* barca.swift */; };
@@ -27,25 +31,22 @@
 		BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5441A1F754A004AFC7C /* Conectividad.swift */; };
 		BB39033C1A77D5C0004572B2 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */; };
 		BB3903401A77DF6C004572B2 /* StarIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB39033F1A77DF6C004572B2 /* StarIO.framework */; };
-		BB6FB2E51B417F3200EDD903 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6FB2E31B417F3200EDD903 /* SQLiteDB.swift */; };
-		BB6FB2E61B417F3200EDD903 /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6FB2E41B417F3200EDD903 /* String-Extras.swift */; };
-		BB6FB2E81B41807100EDD903 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6FB2E71B41807100EDD903 /* libsqlite3.0.dylib */; };
-		BB6FB2EA1B429F3D00EDD903 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6FB2E91B429F3D00EDD903 /* libsqlite3.dylib */; };
 		BB93BCDF1B56B3B100A99954 /* listadoVentasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93BCDE1B56B3B100A99954 /* listadoVentasViewController.swift */; };
 		BB93BCE11B56B6BA00A99954 /* listadoVentasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93BCE01B56B6BA00A99954 /* listadoVentasTableViewCell.swift */; };
 		BBC33D7C1AD3E6C0009C1392 /* tipoReservaUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */; };
 		BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */; };
 		BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */; };
-		F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AC3D9FFBD34278773084E /* libPods.a */; };
 		F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AFCE121A169FB5007FF3A9 /* PlistData.swift */; };
 		F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */; };
 		F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		216AC3D9FFBD34278773084E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		4B340A141F8BA1A800C4BB32 /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteDB.swift; sourceTree = "<group>"; };
+		4B340A151F8BA1A800C4BB32 /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
+		4B340A181F8BA30100C4BB32 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		9A9256F1EC74A837B2B8104E /* Pods-LosBarkitosIpad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LosBarkitosIpad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LosBarkitosIpad/Pods-LosBarkitosIpad.debug.xcconfig"; sourceTree = "<group>"; };
+		A297F904B9B6D3A2496D5694 /* Pods-LosBarkitosIpad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LosBarkitosIpad.release.xcconfig"; path = "Pods/Target Support Files/Pods-LosBarkitosIpad/Pods-LosBarkitosIpad.release.xcconfig"; sourceTree = "<group>"; };
 		BB020C441AA0856000B5E976 /* viaje.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viaje.swift; sourceTree = "<group>"; };
 		BB020C471AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilidadesBDDSQLITE.swift; sourceTree = "<group>"; };
 		BB020C491AA089DF00B5E976 /* barca.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = barca.swift; sourceTree = "<group>"; };
@@ -72,9 +73,6 @@
 		BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		BB39033F1A77DF6C004572B2 /* StarIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarIO.framework; sourceTree = "<group>"; };
 		BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuenteAFNetworking.h; sourceTree = "<group>"; };
-		BB6FB2E21B417F3200EDD903 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "../Bridging-Header.h"; sourceTree = "<group>"; };
-		BB6FB2E31B417F3200EDD903 /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = ../SQLiteDB.swift; sourceTree = "<group>"; };
-		BB6FB2E41B417F3200EDD903 /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String-Extras.swift"; path = "../String-Extras.swift"; sourceTree = "<group>"; };
 		BB6FB2E71B41807100EDD903 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		BB6FB2E91B429F3D00EDD903 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		BB93BCDE1B56B3B100A99954 /* listadoVentasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = listadoVentasViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +80,7 @@
 		BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tipoReservaUIViewController.swift; sourceTree = "<group>"; };
 		BBD95A791A78EC1B00496991 /* PrinterFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrinterFunctions.swift; sourceTree = "<group>"; };
 		BBF88ECE1AACA68D009BC3AB /* ControlUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlUITableViewCell.swift; sourceTree = "<group>"; };
+		EBD13C01C2BB67CE5BA9E390 /* Pods_LosBarkitosIpad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LosBarkitosIpad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9AFCE121A169FB5007FF3A9 /* PlistData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistData.swift; sourceTree = "<group>"; };
 		F9BCDB431A2D0D83002C70D4 /* VendedorUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendedorUITableViewCell.swift; sourceTree = "<group>"; };
 		F9CBBC3D1A374CB3006E45CA /* PreciosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreciosViewController.swift; sourceTree = "<group>"; };
@@ -92,25 +91,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB6FB2EA1B429F3D00EDD903 /* libsqlite3.dylib in Frameworks */,
-				BB6FB2E81B41807100EDD903 /* libsqlite3.0.dylib in Frameworks */,
+				4B340A191F8BA30100C4BB32 /* libsqlite3.0.tbd in Frameworks */,
 				BB39033C1A77D5C0004572B2 /* ExternalAccessory.framework in Frameworks */,
 				BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */,
 				BB3903401A77DF6C004572B2 /* StarIO.framework in Frameworks */,
-				F887BA8EA52719FBA3DEACF1 /* libPods.a in Frameworks */,
+				7B197530CFEE366A2B87079A /* Pods_LosBarkitosIpad.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2671D0BF05BF72132AE93787 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A9256F1EC74A837B2B8104E /* Pods-LosBarkitosIpad.debug.xcconfig */,
+				A297F904B9B6D3A2496D5694 /* Pods-LosBarkitosIpad.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BB020C461AA087F000B5E976 /* Modelo SQLITE */ = {
 			isa = PBXGroup;
 			children = (
-				BB6FB2E21B417F3200EDD903 /* Bridging-Header.h */,
-				BB6FB2E31B417F3200EDD903 /* SQLiteDB.swift */,
-				BB6FB2E41B417F3200EDD903 /* String-Extras.swift */,
 				BB05EB0F1AA0827500C44674 /* LosBarkitosSQLITE.sqlite */,
+				4B340A141F8BA1A800C4BB32 /* SQLiteDB.swift */,
+				4B340A151F8BA1A800C4BB32 /* SQLTable.swift */,
 				BB020C441AA0856000B5E976 /* viaje.swift */,
 				BB020C491AA089DF00B5E976 /* barca.swift */,
 				BB020C4B1AA08A5C00B5E976 /* puntoVenta.swift */,
@@ -125,11 +131,12 @@
 		BB1FB6721A232FFF0078B97A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B340A181F8BA30100C4BB32 /* libsqlite3.0.tbd */,
 				BB6FB2E91B429F3D00EDD903 /* libsqlite3.dylib */,
 				BB6FB2E71B41807100EDD903 /* libsqlite3.0.dylib */,
 				BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */,
 				BB1FB6701A232FA50078B97A /* UIKit.framework */,
-				216AC3D9FFBD34278773084E /* libPods.a */,
+				EBD13C01C2BB67CE5BA9E390 /* Pods_LosBarkitosIpad.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,7 +150,7 @@
 				BB34ACFD1A1615EE008E67ED /* LosBarkitosIpadTests */,
 				BB34ACE41A1615EE008E67ED /* Products */,
 				BB1FB6721A232FFF0078B97A /* Frameworks */,
-				D1018F923A5D82FBBA599D8C /* Pods */,
+				2671D0BF05BF72132AE93787 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,15 +229,6 @@
 			name = ControlViewController;
 			sourceTree = "<group>";
 		};
-		D1018F923A5D82FBBA599D8C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */,
-				30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F9BCDB451A2D0DAE002C70D4 /* VentaViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,10 +245,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB34AD041A1615EE008E67ED /* Build configuration list for PBXNativeTarget "LosBarkitosIpad" */;
 			buildPhases = (
-				E150CF20FAED63B813A57190 /* Check Pods Manifest.lock */,
+				A3EA01E2D5058294FE862D54 /* [CP] Check Pods Manifest.lock */,
 				BB34ACDF1A1615EE008E67ED /* Sources */,
 				BB34ACE01A1615EE008E67ED /* Frameworks */,
 				BB34ACE11A1615EE008E67ED /* Resources */,
+				7DBA036060D39E2541ABD5F0 /* [CP] Embed Pods Frameworks */,
+				F00DE1D59F3DB5C226645A14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,7 +274,8 @@
 				TargetAttributes = {
 					BB34ACE21A1615EE008E67ED = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = P374Y44WR4;
+						DevelopmentTeam = 4DTS84E532;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -311,19 +312,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E150CF20FAED63B813A57190 /* Check Pods Manifest.lock */ = {
+		7DBA036060D39E2541ABD5F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LosBarkitosIpad/Pods-LosBarkitosIpad-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LosBarkitosIpad/Pods-LosBarkitosIpad-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3EA01E2D5058294FE862D54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LosBarkitosIpad-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F00DE1D59F3DB5C226645A14 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LosBarkitosIpad/Pods-LosBarkitosIpad-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -339,15 +380,16 @@
 				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,
 				F9CBBC3E1A374CB3006E45CA /* PreciosViewController.swift in Sources */,
 				BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */,
-				BB6FB2E51B417F3200EDD903 /* SQLiteDB.swift in Sources */,
 				BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */,
 				BB93BCDF1B56B3B100A99954 /* listadoVentasViewController.swift in Sources */,
 				BB020C501AA08AF900B5E976 /* vendedor.swift in Sources */,
+				4B340A161F8BA1A800C4BB32 /* SQLiteDB.swift in Sources */,
 				BBD95A7A1A78EC1B00496991 /* PrinterFunctions.swift in Sources */,
 				BB34ACED1A1615EE008E67ED /* ControlViewController.swift in Sources */,
 				BB93BCE11B56B6BA00A99954 /* listadoVentasTableViewCell.swift in Sources */,
 				BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */,
 				BB020C4A1AA089DF00B5E976 /* barca.swift in Sources */,
+				4B340A171F8BA1A800C4BB32 /* SQLTable.swift in Sources */,
 				BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */,
 				BB020C481AA0883F00B5E976 /* UtilidadesBDDSQLITE.swift in Sources */,
 				BB020C451AA0856000B5E976 /* viaje.swift in Sources */,
@@ -355,7 +397,6 @@
 				BBC33D7C1AD3E6C0009C1392 /* tipoReservaUIViewController.swift in Sources */,
 				F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */,
 				BB020C4C1AA08A5C00B5E976 /* puntoVenta.swift in Sources */,
-				BB6FB2E61B417F3200EDD903 /* String-Extras.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,77 +513,72 @@
 		};
 		BB34AD051A1615EE008E67ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F7FB254A418E17EF1B917E7 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 9A9256F1EC74A837B2B8104E /* Pods-LosBarkitosIpad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4DTS84E532;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"${PODS_ROOT}/Headers/Pulblic/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Pulblic\"",
 				);
 				INFOPLIST_FILE = LosBarkitosIpad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
-				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = "LosBarkitos.$(PRODUCT_NAME:rfc1034identifier)";
+				PODS_ROOT = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.barkitos.LosBarkitosIpad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = LosBarkitosIpad/PuenteAFNetworking.h;
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = LosBarkitosIpad/PuenteAFNetworking.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		BB34AD061A1615EE008E67ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30A895EF3C20805DA39FDC33 /* Pods.release.xcconfig */;
+			baseConfigurationReference = A297F904B9B6D3A2496D5694 /* Pods-LosBarkitosIpad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4DTS84E532;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"${PODS_ROOT}/Headers/Pulblic/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Pulblic\"",
 				);
 				INFOPLIST_FILE = LosBarkitosIpad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
-				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = "LosBarkitos.$(PRODUCT_NAME:rfc1034identifier)";
+				PODS_ROOT = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.barkitos.LosBarkitosIpad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = LosBarkitosIpad/PuenteAFNetworking.h;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

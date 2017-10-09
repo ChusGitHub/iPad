@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jesus Valladolid Rebollar. All rights reserved.
 //
 
-//import UIkit
+import FMDB
 let sharedInstance = ManejoSQLITE()
 
 class ManejoSQLITE : NSObject {
@@ -15,22 +15,22 @@ class ManejoSQLITE : NSObject {
     
     class var instance: ManejoSQLITE {
         sharedInstance.sqliteDatabase = FMDatabase(path: UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite"))
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
-        sharedInstance.sqliteDatabasePath = (documentsFolder as NSString).stringByAppendingPathComponent("LosBarkitosSQLITE.sqlite")
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
+        sharedInstance.sqliteDatabasePath = (documentsFolder as NSString).appendingPathComponent("LosBarkitosSQLITE.sqlite")
 
         //let path = UtilidadesBDDSQLITE.getPath("LosBarkitosSQLITE.sqlite")
-        print("path: \(sharedInstance.sqliteDatabasePath)")
+        print("path: \(sharedInstance.sqliteDatabasePath ?? "No hay")")
         return sharedInstance
     }
     
-    func insertaViajeSQLITE(viaje : Viaje) -> Bool {
+    func insertaViajeSQLITE(_ viaje : Viaje) -> Bool {
         //let consulta : String? = "INSERT INTO viaje VALUES (?, ?, ?, ?, ?, ?, ?)"
         
-        let filemgr = NSFileManager.defaultManager()
-        if filemgr.fileExistsAtPath(sharedInstance.sqliteDatabasePath!) {
+        let filemgr = FileManager.default
+        if filemgr.fileExists(atPath: sharedInstance.sqliteDatabasePath!) {
             if sharedInstance.sqliteDatabase!.open() {
                 let consulta : String? = "INSERT INTO viaje VALUES (?,?,?,?,?,?,?)"
-                if !sharedInstance.sqliteDatabase!.executeUpdate(consulta!, withArgumentsInArray: [viaje.numero, viaje.precio, viaje.fecha, viaje.punto_venta, viaje.barca, viaje.vendedor, viaje.blanco]) {
+                if !sharedInstance.sqliteDatabase!.executeUpdate(consulta!, withArgumentsIn: [viaje.numero, viaje.precio, viaje.fecha, viaje.punto_venta, viaje.barca, viaje.vendedor, viaje.blanco]) {
                     print("\(sqliteDatabase!.lastError()) - \(sqliteDatabase!.lastErrorMessage())")
                 }
                 sharedInstance.sqliteDatabase!.close()
@@ -51,13 +51,13 @@ class ManejoSQLITE : NSObject {
     
     func numeroBarcas() -> Int32 {
         var numBarcas : Int32 = 0
-        let filemgr = NSFileManager.defaultManager()
-        if filemgr.fileExistsAtPath(sharedInstance.sqliteDatabasePath!) {
+        let filemgr = FileManager.default
+        if filemgr.fileExists(atPath: sharedInstance.sqliteDatabasePath!) {
             if sharedInstance.sqliteDatabase!.open() {
-                let consulta : String? = "SELECT count(*) from viaje"
-                let resultado : FMResultSet? = sharedInstance.sqliteDatabase!.executeQuery(consulta!, withArgumentsInArray: nil)
-                if let resultado = resultado where resultado.next() {
-                     numBarcas = resultado.intForColumnIndex(0) as Int32
+                let consulta = "SELECT count(*) from viaje"
+                let resultado : FMResultSet? = try? sharedInstance.sqliteDatabase!.executeQuery(consulta, values: nil)
+                if let resultado = resultado, resultado.next() {
+                     numBarcas = resultado.int(forColumnIndex: 0) as Int32
                 } else {
                     numBarcas = 0
                 }

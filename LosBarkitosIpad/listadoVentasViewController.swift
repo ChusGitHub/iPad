@@ -19,8 +19,8 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
     
     @IBOutlet weak var totalBarcasUILabel: UILabel!
     
-    @IBAction func anteriorPushButton(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func anteriorPushButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -40,7 +40,7 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
     
 
     
-    func didReceiveResponse_listadoVentas(diccionario : [String : AnyObject]) {
+    func didReceiveResponse_listadoVentas(_ diccionario : [String : AnyObject]) {
         
         // println("diccionario : \(diccionario)")
         self.listadoBarcas = []
@@ -52,17 +52,17 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
             } else if (k == "error" && v as! String == "si") {
                 //print("FALLO", terminator: "")
             } else {
-                registro["numero"] = v["numero"] as! Int
-                registro["punto_venta"] = v["punto_venta"] as! String
-                registro["hora"] = v["fecha"] as! String
-                registro["precio"] = v["precio"] as! Int
-                registro["tipo"] = v["tipo"]
+                registro["numero"] = v["numero"] as! Int as AnyObject
+                registro["punto_venta"] = v["punto_venta"] as! String as AnyObject
+                registro["hora"] = v["fecha"] as! String as AnyObject
+                registro["precio"] = v["precio"] as! Int as AnyObject
+                registro["tipo"] = v["tipo"] as! String as AnyObject
                 self.listadoBarcas.append(registro)
             }
         }
         // ordenacion de las reservas por el numero
         
-        self.listadoBarcas.sortInPlace({(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
+        self.listadoBarcas.sort(by: {(primero : [String:AnyObject], segundo : [String:AnyObject]) -> Bool in
             return   segundo["hora"] as! String > primero["hora"] as! String
         })
         
@@ -73,13 +73,13 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
     }
     
     // IMPLEMENTO LOS METODOS DELEGADOS DE listaUITableView
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.numeroBarcas
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        let cell : listadoVentasTableViewCell = self.listadoVentasTableView.dequeueReusableCellWithIdentifier("CellListadoVentas") as! listadoVentasTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell : listadoVentasTableViewCell = self.listadoVentasTableView.dequeueReusableCell(withIdentifier: "CellListadoVentas") as! listadoVentasTableViewCell
         
         let numero : Int = self.listadoBarcas[indexPath.row]["numero"] as! Int
         cell.numeroUILabel.text = String(numero)
@@ -93,9 +93,9 @@ class listadoVentasViewController: UIViewController, WebServiceListado, UITableV
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueListadoVentas" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
             siguienteVC.tovueltaListadoVentas = true
             siguienteVC.toPreciosViewController = 0
         }

@@ -31,14 +31,14 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     @IBOutlet weak var btnGoldReservaUIButton: UIButton!
     
     
-    @IBAction func btnReservaPushButton(sender : UIButton) {
+    @IBAction func btnReservaPushButton(_ sender : UIButton) {
         self.webService.obtenerNumeroReserva(sender.tag, pv: self.totipoReservaViewControllerPV)
         self.tovueltaReservaViewController = false
     }
     
-    @IBAction func cancelarReservaUIButton(sender: UIButton) {
+    @IBAction func cancelarReservaUIButton(_ sender: UIButton) {
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -51,16 +51,16 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         // Do any additional setup after loading the view.
     }
     
-    func didReceiveResponse_reservaPosible(respuesta : [Bool]) {
+    func didReceiveResponse_reservaPosible(_ respuesta : [Bool]) {
         
-        self.btnRioReservaUIButton.enabled = respuesta[0]
+        self.btnRioReservaUIButton.isEnabled = respuesta[0]
         //self.btnElectricaReservaUIButton.enabled = respuesta[1]
-        self.btnBarcaReservaUIButton.enabled = respuesta[1]
-        self.btnGoldReservaUIButton.enabled = respuesta[2]
+        self.btnBarcaReservaUIButton.isEnabled = respuesta[1]
+        self.btnGoldReservaUIButton.isEnabled = respuesta[2]
         
     }
     
-    func didReceiveResponse_reserva(respuesta : [String : AnyObject]) {
+    func didReceiveResponse_reserva(_ respuesta : [String : AnyObject]) {
         //print("respuesta del servidor : \(respuesta)")
         //var dicc : [String : AnyObject]
         var PV : String = ""
@@ -89,7 +89,7 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     }
 
     
-    func didReceiveResponse_incrementada(respuesta : [String : AnyObject]) {
+    func didReceiveResponse_incrementada(_ respuesta : [String : AnyObject]) {
         
     }
     
@@ -99,62 +99,62 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
     // False -> no hay impresora
     func setupImpresora() -> Bool {
         
-        foundPrinters = SMPort.searchPrinter("BT:")
+        foundPrinters = SMPort.searchPrinter("BT:")! as NSArray
         
         if foundPrinters.count > 0 {// Hay impresora conectada
             
             //print(foundPrinters.count)
-            let portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
+            let portInfo : PortInfo = foundPrinters.object(at: 0) as! PortInfo
             
-            lastSelectedPortName = portInfo.portName
+            lastSelectedPortName = portInfo.portName! as NSString
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.setPortName(portInfo.portName! as NSString)
+            appDelegate.setPortSettings(arrayPort.object(at: 0) as! NSString)
+            var _ : NSString = appDelegate.getPortName()
+            var _ : NSString = appDelegate.getPortSettings()
             //infoImpresoraUILabel.text = portInfo.portName
             
            // print("Impresoras: \(foundPrinters.objectAtIndex(0))" )
             return true
         }
         else { // No hay ninguna impresora conectada
-            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.alert)
             
-            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
             
             alertaNoImpresora.addAction(OkAction)
             
-            self.presentViewController(alertaNoImpresora, animated: true, completion: nil)
+            self.present(alertaNoImpresora, animated: true, completion: nil)
             return false
             
         }
         
     }
     
-    func imprimirReserva(PV : String, HR : String, HP : String, tipo: String) {
+    func imprimirReserva(_ PV : String, HR : String, HP : String, tipo: String) {
         if setupImpresora() {
-            foundPrinters = SMPort.searchPrinter("BT:")
+            foundPrinters = SMPort.searchPrinter("BT:")! as NSArray
             
             
-            var portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
-            lastSelectedPortName = portInfo.portName
+            let portInfo : PortInfo = foundPrinters.object(at: 0) as! PortInfo
+            lastSelectedPortName = portInfo.portName! as NSString
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
-            var p_portName : NSString = appDelegate.getPortName()
-            var p_portSettings : NSString = appDelegate.getPortSettings()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.setPortName(portInfo.portName! as NSString)
+            appDelegate.setPortSettings(arrayPort.object(at: 0) as! NSString)
+            let p_portName : NSString = appDelegate.getPortName()
+            let p_portSettings : NSString = appDelegate.getPortSettings()
             
-            let reservaImpresa : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, PV: PV, parametro: self.reservas, HR: HR, HP: HP, tipoBarca: tipo)
+            let _ : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, PV: PV, parametro: self.reservas, HR: HR, HP: HP, tipoBarca: tipo)
         } else {
-            var alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertaNoImpresora = UIAlertController(title: "SIN IMPRESORA", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP)", preferredStyle: UIAlertControllerStyle.alert)
             
-            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+            let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
             
             alertaNoImpresora.addAction(OkAction)
             
-            self.presentViewController(alertaNoImpresora, animated: true, completion: nil)
+            self.present(alertaNoImpresora, animated: true, completion: nil)
 
         }
         
@@ -165,32 +165,30 @@ class tipoReservaUIViewController: UIViewController, WebServiceReserva {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func   prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+    /* COMENTADO PORQUE NO SE USA EL VALOR
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "segueReservaRio" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
             
         } else if segue.identifier == "segueReservaElectrica" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
 
             
         } else if segue.identifier == "segueReservaBarca" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
  
 
         } else if segue.identifier == "segueReservaGold" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
      
         } else if segue.identifier == "segueReservaCancelar" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
             
         }
-        
     }
    
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

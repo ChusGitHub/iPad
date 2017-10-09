@@ -48,7 +48,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     @IBOutlet var preciosUIButton : [UIButton] = []
     
     @IBOutlet var coleccionBotonesPrecios: [UIButton]!
-    @IBAction func btnPreciosUIButton(sender : UIButton) {
+    @IBAction func btnPreciosUIButton(_ sender : UIButton) {
         self.precioUILabel.text = ""
         switch listaPrecio {
         case "1":
@@ -64,11 +64,11 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         default:
             self.precioUILabel.text = "\(sender.tag)"
         }
-        self.aceptarUIButton.enabled = true
+        self.aceptarUIButton.isEnabled = true
     }
     
     
-    @IBAction func bntAceptarPushButton(sender: UIButton) {
+    @IBAction func bntAceptarPushButton(_ sender: UIButton) {
         // Se tiene que mirar antes si la impresora esta conectada
         webService.obtenerNumero(Int(self.precioUILabel.text!)!)
     }
@@ -80,7 +80,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         
        // AQUI HAY QUE RECORRER LOS BOTONES DE LOS PRECIOS PARA PONERLES EL LABEL ADECUADO.
         self.ponerPrecios()
-        self.aceptarUIButton.enabled = false
+        self.aceptarUIButton.isEnabled = false
 
         if IPAD == "MARINAFERRY" {
             self.PUNTO_VENTA = 5
@@ -92,7 +92,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
     //    self.internetReachability = Reachability.reachabilityForInternetConnection()
      //   self.internetReachability?.startNotifier()
       //  self.verificarEstado(self.internetReachability!)
@@ -104,7 +104,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         // Dispose of any resources that can be recreated.
     }
     
-    func didReveiveResponse_numeroTicket(respuesta: [String : AnyObject]) {
+    func didReveiveResponse_numeroTicket(_ respuesta: [String : AnyObject]) {
         print("RESPUESTA : \(respuesta)")
         var error : Bool = false
         for (k,v) in respuesta {
@@ -112,15 +112,15 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             print("v - \(v)")
             if k as NSString == "error" && v as! NSString == "si" {
                 error = true
-                self.dismissViewControllerAnimated(true, completion: {
+                self.dismiss(animated: true, completion: {
                 
-                    let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.alert)
                 
-                    let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                    let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
                 
                     alertaNOInternet.addAction(OkAction)
                     
-                    self.presentViewController(alertaNOInternet, animated: true, completion: nil)
+                    self.present(alertaNOInternet, animated: true, completion: nil)
                 
                 })
             } else {
@@ -146,11 +146,10 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         self.procesarTicket()
     }
     
-    func didReceiveResponse_entradaBDD_ventaBarca(respuesta: [String : AnyObject]) {
+    func didReceiveResponse_entradaBDD_ventaBarca(_ respuesta: [String : AnyObject]) {
         for (k,v) in respuesta {
             if k as NSString == "error" && v as! NSString == "si" {
                 //print("ERROR EN EL DICCIONARIO DEVUELTO")
-                EXIT_FAILURE
                 if k as NSString == "Tipo Barca" {
                     if v as! NSString == "Barkito" {
                         
@@ -160,7 +159,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         }
     }
 
-    func didReceiveResponse_reserva(responseObject : [String : AnyObject]) {
+    func didReceiveResponse_reserva(_ responseObject : [String : AnyObject]) {
         
     }
 
@@ -188,7 +187,7 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             
             var total : Int = (DataManager().getValueForKey("total_barcas", inFile: "appstate")) as! Int
             total += 1
-            DataManager().setValueForKey("total_barcas", value: total, inFile: "appstate")
+            DataManager().setValueForKey("total_barcas", value: total as NSNumber, inFile: "appstate")
             // Se inserta la venta de la barca en SQLITE
             _ = insertaViajeSQLite() // let insertado =
             //if insertado {
@@ -196,30 +195,30 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             //}
             
         } else {
-            self.dismissViewControllerAnimated(true, completion: {
-                let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.Alert)
+            self.dismiss(animated: true, completion: {
+                let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.alert)
                 
-                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
                 
                 alertaNOInsercionBDD.addAction(OkAction)
                 
-                self.presentViewController(alertaNOInsercionBDD, animated: true, completion: nil)
+                self.present(alertaNOInsercionBDD, animated: true, completion: nil)
                 
             })
             
         }
     }
     
-    func didReceiveResponse_ajustar_numero_ticket_si_falla_impresion(respuesta: [String : AnyObject]) {
-        self.dismissViewControllerAnimated(true, completion: {
+    func didReceiveResponse_ajustar_numero_ticket_si_falla_impresion(_ respuesta: [String : AnyObject]) {
+        self.dismiss(animated: true, completion: {
 
             let alertaAjustado = UIAlertController(title: "AJUSTADO EL NUMERO DE TIOKET",
                                                    message: "Se ha corregido el numero de ticket",
-                                                   preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil)
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default,handler: nil)
             alertaAjustado.addAction(okAction)
             
-            self.presentViewController(alertaAjustado, animated: true, completion: nil)
+            self.present(alertaAjustado, animated: true, completion: nil)
         })
     }
 
@@ -227,15 +226,15 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         
         if setupImpresora() {
             
-            foundPrinters = SMPort.searchPrinter("BT:")
+            foundPrinters = SMPort.searchPrinter("BT:")! as NSArray
             
             
-            let portInfo : PortInfo = foundPrinters.objectAtIndex(0) as! PortInfo
-            lastSelectedPortName = portInfo.portName
+            let portInfo : PortInfo = foundPrinters.object(at: 0) as! PortInfo
+            lastSelectedPortName = portInfo.portName! as NSString
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.setPortName(portInfo.portName)
-            appDelegate.setPortSettings(arrayPort.objectAtIndex(0) as! NSString)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.setPortName(portInfo.portName! as NSString)
+            appDelegate.setPortSettings(arrayPort.object(at: 0) as! NSString)
             let p_portName : NSString = appDelegate.getPortName()
             let p_portSettings : NSString = appDelegate.getPortSettings()
             
@@ -246,12 +245,12 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
             let reserva : Int = self.numeroReserva
             let barca   : String = self.barcaActualString!
             let diccParam : [String : AnyObject] = [
-                "numero"      : numero,
-                "reserva"     : reserva,
-                "punto_venta" : punto,
-                "precio"      : precio,
-                "barca"       : barca,
-                "vendedor"    : vend
+                "numero"      : numero as AnyObject,
+                "reserva"     : reserva as AnyObject,
+                "punto_venta" : punto as AnyObject,
+                "precio"      : precio as AnyObject,
+                "barca"       : barca as AnyObject,
+                "vendedor"    : vend as AnyObject
             ]
             
             let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, parametro: diccParam)
@@ -266,10 +265,10 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     }
 
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         if segue.identifier == "seguePreciosVentaCancelar" {
-            let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
+            let siguienteVC : VentaViewController = segue.destination as! VentaViewController
             siguienteVC.toPreciosViewController = 0
         }// else if segue.identifier == "seguePreciosVentaAceptar" {
           //  let siguienteVC : VentaViewController = segue.destinationViewController as! VentaViewController
@@ -289,15 +288,15 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         for boton in self.preciosUIButton {
             switch listaPrecio {
             case "1":
-                boton.setTitle("\(boton.tag)", forState: UIControlState.Normal)
+                boton.setTitle("\(boton.tag)", for: UIControlState())
             case "2":
-                boton.setTitle("\(boton.tag + 5)", forState: UIControlState.Normal)
+                boton.setTitle("\(boton.tag + 5)", for: UIControlState())
             case "3":
-                boton.setTitle("\(boton.tag + 10)", forState: UIControlState.Normal)
+                boton.setTitle("\(boton.tag + 10)", for: UIControlState())
             case "4":
-                boton.setTitle("\(boton.tag + 15)", forState: UIControlState.Normal)
+                boton.setTitle("\(boton.tag + 15)", for: UIControlState())
             case "5":
-                boton.setTitle("\(boton.tag + 20)", forState: UIControlState.Normal)
+                boton.setTitle("\(boton.tag + 20)", for: UIControlState())
             default:
                 continue
             }
@@ -315,9 +314,9 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
         //let result = db.execute("INSERT i", parameters: <#[AnyObject]?#>)
         
         let viaje : Viaje = Viaje()
-        let formatoFecha = NSDateFormatter()
+        let formatoFecha = DateFormatter()
         formatoFecha.dateFormat = "dd-MM-yyyy hh:mm:ss"
-        let fecha = formatoFecha.stringFromDate(NSDate())
+        let fecha = formatoFecha.string(from: Date())
         
         viaje.numero = self.numeroTicket
         viaje.fecha = fecha

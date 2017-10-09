@@ -11,23 +11,23 @@ import UIKit
 
 class UtilidadesBDDSQLITE : NSObject {
     
-    class func getPath(fileName : String) -> String {
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)[0] 
-        let path = (documentsFolder as NSString).stringByAppendingPathComponent(fileName)
+    class func getPath(_ fileName : String) -> String {
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] 
+        let path = (documentsFolder as NSString).appendingPathComponent(fileName)
         print(path)
         
         return path
     }
     
-    class func copyFile(fileName : NSString) {
+    class func copyFile(_ fileName : NSString) {
         let dbPath : String = getPath(fileName as String)
 
-        let fileManager = NSFileManager.defaultManager()
-        if !fileManager.fileExistsAtPath(dbPath) {
-            let fromPath : String = (NSBundle.mainBundle().resourcePath as NSString!).stringByAppendingPathComponent(fileName as String)
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: dbPath) {
+            let fromPath : String = (Bundle.main.resourcePath as NSString!).appendingPathComponent(fileName as String)
             
             do {
-                try fileManager.copyItemAtPath(fromPath, toPath: dbPath)
+                try fileManager.copyItem(atPath: fromPath, toPath: dbPath)
             } catch _ {
             }
         }
