@@ -199,14 +199,14 @@ class webServiceCallAPI : NSObject {
                 // print("diccionario : \(diccionario)")
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
+    
     func obtenerNumero2(_ precio : Int) {
         /*var jsonDict : NSDictionary!
         var jsonArray : NSArray!
@@ -229,13 +229,12 @@ class webServiceCallAPI : NSObject {
                                     
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
     
     func ajustarNumeroFalloImpresion(_ tipo : Int) {
@@ -288,12 +287,12 @@ class webServiceCallAPI : NSObject {
                 //print("diccionario : \(diccionario)")
                 self.delegate?.didReceiveResponse_totalBarcas(diccionario as Dictionary)
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : Int]()
                 diccionario["error"] = 1
                 self.delegate?.didReceiveResponse_totalBarcas(diccionario as Dictionary)
-        } as! (AFHTTPRequestOperation?, Error?) -> Void)
+        }) //as! (AFHTTPRequestOperation?, Error?) -> Void)
     }
     
     func totalEuros(_ PV : Int)  {
@@ -314,12 +313,12 @@ class webServiceCallAPI : NSObject {
                 //print("diccionario : \(diccionario)")
                 self.delegate?.didReceiveResponse_totalEuros(diccionario as Dictionary)
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : Int]()
                 diccionario["error"] = 1
                 self.delegate?.didReceiveResponse_totalEuros(diccionario as Dictionary)
-        } as! (AFHTTPRequestOperation?, Error?) -> Void)        
+        }) // as! (AFHTTPRequestOperation?, Error?) -> Void)
     }
     
     func obtenerPrimerLibre() {
@@ -332,13 +331,12 @@ class webServiceCallAPI : NSObject {
                 //print("responseObject : \(responseObject)")
                 self.delegateControl?.didReceiveResponse_primeraLibre(responseObject as! [String : [String : String]])
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegatePrecio?.didReveiveResponse_numeroTicket(diccionario as Dictionary)
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
     
     func listaLlegadas(_ tipo : Int) {
@@ -377,14 +375,12 @@ class webServiceCallAPI : NSObject {
                 self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as Dictionary)
 
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegateControl?.didReceiveResponse_listaLlegadas(diccionario as! [String : [String : String]] as [String : AnyObject])
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
-        
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
     
     
@@ -425,14 +421,12 @@ class webServiceCallAPI : NSObject {
                 self.delegateControl?.didReceiveResponse_listaReservas(diccionario as [String : AnyObject])
                 
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegateControl?.didReceiveResponse_listaReservas(diccionario as! [String : [String : String]] as [String : AnyObject])
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
- 
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
     
     func incrementarNumeroReserva(_ tipo : Int) {
@@ -450,14 +444,12 @@ class webServiceCallAPI : NSObject {
                         self.delegateReserva?.didReceiveResponse_incrementada(diccionario)
                     
                     
-            }, failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            }, failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegateControl?.didReceiveResponse_listaReservas(diccionario as! [String : [String : String]] as [String : AnyObject])
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-)
-    
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
     
     func obtenerNumeroReserva(_ tipo : Int, pv : Int) {
@@ -483,13 +475,12 @@ class webServiceCallAPI : NSObject {
 
                 self.delegateReserva?.didReceiveResponse_reserva(responseObject as! [String : AnyObject])
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegateReserva?.didReceiveResponse_reserva(diccionario as [String : AnyObject])
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
+            }) // as! (AFHTTPRequestOperation?, Error?) -> Void
     }
     
     // Devuelve una lista de bools que controla que barca se puede reservar
@@ -582,7 +573,7 @@ class webServiceCallAPI : NSObject {
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_salidaReserva("OK", tipo: tipo)
             },
-            failure: {(operation : AFHTTPRequestOperation!, responseObject) in
+            failure: {(operation, responseObject) in
                 self.delegateControl?.didReceiveResponse_salidaReserva("KO", tipo: tipo)
         })
     }
@@ -594,7 +585,7 @@ class webServiceCallAPI : NSObject {
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_reservasPorDar(responseObject as! [String : AnyObject])
             },
-            failure: {(operation : AFHTTPRequestOperation!, error) in
+            failure: {(operation, error) in
                 self.delegateControl?.didReceiveResponse_reservasPorDar(self.responseObject as! [String : AnyObject])
             }
         )

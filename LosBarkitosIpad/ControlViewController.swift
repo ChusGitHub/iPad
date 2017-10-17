@@ -181,7 +181,7 @@ class ControlViewController: UIViewController, WebServiceProtocoloControl, UITab
             registro["hora_prevista"] = v["hora_prevista"] as! String as AnyObject
             registro["hora_reserva"] = v["hora_reserva"] as! String as AnyObject
             registro["fuera"] = v["fuera"] as! Bool as AnyObject
-            registro["tipo"] = v["tipo"] as! String as AnyObject
+            registro["tipo"] = v["tipo"] as! Int as AnyObject
             self.lista.append(registro)
         }
     
