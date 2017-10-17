@@ -274,7 +274,7 @@
 				TargetAttributes = {
 					BB34ACE21A1615EE008E67ED = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 4DTS84E532;
+						DevelopmentTeam = 576T2M2BDH;
 						LastSwiftMigration = 0900;
 					};
 				};
@@ -532,7 +532,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4DTS84E532;
+				DEVELOPMENT_TEAM = 576T2M2BDH;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -570,7 +570,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4DTS84E532;
+				DEVELOPMENT_TEAM = 576T2M2BDH;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
