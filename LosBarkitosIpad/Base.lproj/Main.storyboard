@@ -1329,6 +1329,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Particulares"/>
+                                <connections>
+                                    <action selector="partPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="Ab2-wy-RFh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q57-H5-rvB">
                                 <rect key="frame" x="596" y="35" width="266" height="99"/>
@@ -1336,13 +1339,33 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Grupo"/>
+                                <connections>
+                                    <action selector="gruposPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="1j9-Tc-qdI"/>
+                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-VN-YKc">
+                                <rect key="frame" x="101" y="177" width="822" height="497"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94596780803159675" green="1" blue="0.18270071163780677" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="giv-pp-76D">
+                                <rect key="frame" x="101" y="135" width="822" height="497"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99834650110000001" green="0.83140515550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="NTL-AP-1Jc"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="MarinaFerry" id="ljz-wU-bAm"/>
                     <navigationItem key="navigationItem" id="Nk0-Tl-zmK"/>
+                    <connections>
+                        <outlet property="gruposButton" destination="Q57-H5-rvB" id="3q6-jG-QNL"/>
+                        <outlet property="partButton" destination="cPT-sP-AaA" id="Y2j-Dn-GhH"/>
+                        <outlet property="partGrupView" destination="pt8-G3-rQx" id="2CH-7F-VZI"/>
+                        <outlet property="precioGruposView" destination="BPY-VN-YKc" id="BLE-0h-EKT"/>
+                        <outlet property="precioPartView" destination="giv-pp-76D" id="zQR-mT-eec"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oDZ-BK-1dt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
