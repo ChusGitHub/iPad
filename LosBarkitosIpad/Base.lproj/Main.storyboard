@@ -1314,7 +1314,7 @@
         <!--MarinaFerry-->
         <scene sceneID="Dnr-zI-Kvu">
             <objects>
-                <viewController id="fF3-e5-XFJ" customClass="marinaferryViewController" sceneMemberID="viewController">
+                <viewController id="fF3-e5-XFJ" customClass="marinaferryViewController" customModule="LosBarkitosIpad" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DLk-AS-ySD">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1378,8 +1378,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="HFo-gb-gaj"/>
-        <segue reference="e9F-yZ-Wa3"/>
-        <segue reference="pSb-b9-IQJ"/>
+        <segue reference="lzU-1b-eKA"/>
+        <segue reference="u7Y-xg-7CH"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

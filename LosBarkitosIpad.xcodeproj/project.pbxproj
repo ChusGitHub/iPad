@@ -20,6 +20,7 @@
 		BB020C521AA08C1900B5E976 /* ManejoSQLITE.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB020C511AA08C1900B5E976 /* ManejoSQLITE.swift */; };
 		BB080E721A728A2100D4117F /* ticket.xml in Resources */ = {isa = PBXBuildFile; fileRef = BB080E711A728A2100D4117F /* ticket.xml */; };
 		BB0FFE7C1A9B2F06002133C3 /* estadoClase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */; };
+		BB151CD21FDECFCF003B1DD8 /* marinaFerryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB151CD11FDECFCF003B1DD8 /* marinaFerryViewController.swift */; };
 		BB1FB6711A232FA50078B97A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1FB6701A232FA50078B97A /* UIKit.framework */; };
 		BB34ACE91A1615EE008E67ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACE81A1615EE008E67ED /* AppDelegate.swift */; };
 		BB34ACEB1A1615EE008E67ED /* VentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34ACEA1A1615EE008E67ED /* VentaViewController.swift */; };
@@ -31,7 +32,6 @@
 		BB35F5451A1F754A004AFC7C /* Conectividad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB35F5441A1F754A004AFC7C /* Conectividad.swift */; };
 		BB39033C1A77D5C0004572B2 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */; };
 		BB3903401A77DF6C004572B2 /* StarIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB39033F1A77DF6C004572B2 /* StarIO.framework */; };
-		BB46F5421FDEA38B001B89ED /* marinaferryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB46F5411FDEA38A001B89ED /* marinaferryViewController.swift */; };
 		BB93BCDF1B56B3B100A99954 /* listadoVentasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93BCDE1B56B3B100A99954 /* listadoVentasViewController.swift */; };
 		BB93BCE11B56B6BA00A99954 /* listadoVentasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93BCE01B56B6BA00A99954 /* listadoVentasTableViewCell.swift */; };
 		BBC33D7C1AD3E6C0009C1392 /* tipoReservaUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC33D7B1AD3E6C0009C1392 /* tipoReservaUIViewController.swift */; };
@@ -58,6 +58,7 @@
 		BB05EB0F1AA0827500C44674 /* LosBarkitosSQLITE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = LosBarkitosSQLITE.sqlite; sourceTree = "<group>"; };
 		BB080E711A728A2100D4117F /* ticket.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ticket.xml; sourceTree = "<group>"; };
 		BB0FFE7B1A9B2F06002133C3 /* estadoClase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = estadoClase.swift; sourceTree = "<group>"; };
+		BB151CD11FDECFCF003B1DD8 /* marinaFerryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = marinaFerryViewController.swift; path = LosBarkitosIpad/marinaFerryViewController.swift; sourceTree = "<group>"; };
 		BB1FB6701A232FA50078B97A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BB34ACE31A1615EE008E67ED /* LosBarkitosIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LosBarkitosIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB34ACE71A1615EE008E67ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		BB35F5441A1F754A004AFC7C /* Conectividad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conectividad.swift; sourceTree = "<group>"; };
 		BB39033B1A77D5C0004572B2 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		BB39033F1A77DF6C004572B2 /* StarIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StarIO.framework; sourceTree = "<group>"; };
-		BB46F5411FDEA38A001B89ED /* marinaferryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = marinaferryViewController.swift; path = LosBarkitosIpad/marinaferryViewController.swift; sourceTree = "<group>"; };
 		BB58D7391A24976100ADE2D3 /* PuenteAFNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuenteAFNetworking.h; sourceTree = "<group>"; };
 		BB6FB2E71B41807100EDD903 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		BB6FB2E91B429F3D00EDD903 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -217,7 +217,7 @@
 		BB5D6ADB1FDAA8F50075E42C /* MarinaFerry */ = {
 			isa = PBXGroup;
 			children = (
-				BB46F5411FDEA38A001B89ED /* marinaferryViewController.swift */,
+				BB151CD11FDECFCF003B1DD8 /* marinaFerryViewController.swift */,
 			);
 			name = MarinaFerry;
 			sourceTree = "<group>";
@@ -386,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB020C521AA08C1900B5E976 /* ManejoSQLITE.swift in Sources */,
+				BB151CD21FDECFCF003B1DD8 /* marinaFerryViewController.swift in Sources */,
 				BBF88ECF1AACA68D009BC3AB /* ControlUITableViewCell.swift in Sources */,
 				BB35F5431A1F7426004AFC7C /* Conexion.swift in Sources */,
 				F9AFCE131A169FB5007FF3A9 /* PlistData.swift in Sources */,
@@ -406,7 +407,6 @@
 				BB020C451AA0856000B5E976 /* viaje.swift in Sources */,
 				BB020C4E1AA08A9800B5E976 /* tipoBarca.swift in Sources */,
 				BBC33D7C1AD3E6C0009C1392 /* tipoReservaUIViewController.swift in Sources */,
-				BB46F5421FDEA38B001B89ED /* marinaferryViewController.swift in Sources */,
 				F9BCDB441A2D0D83002C70D4 /* VendedorUITableViewCell.swift in Sources */,
 				BB020C4C1AA08A5C00B5E976 /* puntoVenta.swift in Sources */,
 			);
