@@ -1343,57 +1343,8 @@
                                     <action selector="gruposPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="1j9-Tc-qdI"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="giv-pp-76D">
-                                <rect key="frame" x="101" y="135" width="822" height="497"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2W-Qb-n9B">
-                                        <rect key="frame" x="117" y="105" width="150" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94791607362569308" green="1" blue="0.96502679625976917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                        <state key="normal" title="8"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbl-gK-ZDY">
-                                        <rect key="frame" x="343" y="105" width="150" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                        <state key="normal" title="9"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POa-NP-LGr">
-                                        <rect key="frame" x="557" y="105" width="150" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                        <state key="normal" title="10"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jB-GM-PH0">
-                                        <rect key="frame" x="117" y="278" width="150" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                        <state key="normal" title="11"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDT-jg-dmj">
-                                        <rect key="frame" x="343" y="278" width="150" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                        <state key="normal" title="12"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khu-QH-sju">
-                                        <rect key="frame" x="557" y="278" width="150" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                        <state key="normal" title="15"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.99834650110000001" green="0.83140515550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-VN-YKc">
-                                <rect key="frame" x="101" y="177" width="822" height="497"/>
+                                <rect key="frame" x="100" y="175" width="822" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-L7-5c8">
@@ -1402,6 +1353,9 @@
                                         <color key="backgroundColor" red="0.94469054809999997" green="0.9771899288" blue="0.93872457819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <state key="normal" title="8"/>
+                                        <connections>
+                                            <action selector="precioGrupoPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="YTx-py-cQD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vU1-fC-iMS">
                                         <rect key="frame" x="557" y="276" width="150" height="120"/>
@@ -1409,6 +1363,9 @@
                                         <color key="backgroundColor" red="0.94469054809999997" green="0.9771899288" blue="0.93872457819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <state key="normal" title="10"/>
+                                        <connections>
+                                            <action selector="precioGrupoPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="5bA-6o-AGY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YkF-M4-QAr">
                                         <rect key="frame" x="344" y="276" width="150" height="120"/>
@@ -1416,6 +1373,9 @@
                                         <color key="backgroundColor" red="0.94469054809999997" green="0.9771899288" blue="0.93872457819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <state key="normal" title="9"/>
+                                        <connections>
+                                            <action selector="precioGrupoPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="bPO-z4-YIV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjl-35-fKB">
                                         <rect key="frame" x="115" y="101" width="150" height="120"/>
@@ -1423,6 +1383,9 @@
                                         <color key="backgroundColor" red="0.94469054809999997" green="0.9771899288" blue="0.93872457819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <state key="normal" title="5"/>
+                                        <connections>
+                                            <action selector="precioGrupoPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="7Xo-xa-tGK"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayz-lg-RU8">
                                         <rect key="frame" x="556" y="101" width="150" height="120"/>
@@ -1430,6 +1393,9 @@
                                         <color key="backgroundColor" red="0.94469054809999997" green="0.9771899288" blue="0.93872457819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <state key="normal" title="7.5"/>
+                                        <connections>
+                                            <action selector="precioGrupoPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="mA5-BO-zNe"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l03-kY-LXc">
                                         <rect key="frame" x="343" y="101" width="150" height="120"/>
@@ -1437,9 +1403,79 @@
                                         <color key="backgroundColor" red="0.94469054809999997" green="0.9771899288" blue="0.93872457819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="55"/>
                                         <state key="normal" title="6"/>
+                                        <connections>
+                                            <action selector="precioGrupoPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="Fun-KZ-AV5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94596780803159675" green="1" blue="0.18270071163780677" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="giv-pp-76D">
+                                <rect key="frame" x="100" y="175" width="822" height="497"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbl-gK-ZDY">
+                                        <rect key="frame" x="343" y="105" width="150" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <state key="normal" title="9"/>
+                                        <connections>
+                                            <action selector="precioPartPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="Xkt-Tn-5af"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POa-NP-LGr">
+                                        <rect key="frame" x="557" y="105" width="150" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <state key="normal" title="10"/>
+                                        <connections>
+                                            <action selector="precioPartPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="zoB-0D-1s9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jB-GM-PH0">
+                                        <rect key="frame" x="117" y="278" width="150" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <state key="normal" title="11"/>
+                                        <connections>
+                                            <action selector="precioPartPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="4s2-xd-uZ4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDT-jg-dmj">
+                                        <rect key="frame" x="343" y="278" width="150" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <state key="normal" title="12"/>
+                                        <connections>
+                                            <action selector="precioPartPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="Ynv-mX-QIi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khu-QH-sju">
+                                        <rect key="frame" x="557" y="278" width="150" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94791607359999996" green="1" blue="0.96502679629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <state key="normal" title="15"/>
+                                        <connections>
+                                            <action selector="precioPartPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="ht1-H5-B92"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2W-Qb-n9B">
+                                        <rect key="frame" x="117" y="105" width="150" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94791607362569308" green="1" blue="0.96502679625976917" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <state key="normal" title="8"/>
+                                        <connections>
+                                            <action selector="precioPartPush:" destination="fF3-e5-XFJ" eventType="touchUpInside" id="JGB-6u-RZ7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99834650110000001" green="0.83140515550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

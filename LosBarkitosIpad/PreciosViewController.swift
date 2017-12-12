@@ -47,7 +47,6 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
     @IBOutlet weak var precioUILabel: UILabel!
     @IBOutlet var preciosUIButton : [UIButton] = []
     
-    @IBOutlet var coleccionBotonesPrecios: [UIButton]!
     @IBAction func btnPreciosUIButton(_ sender : UIButton) {
         self.precioUILabel.text = ""
         switch listaPrecio {

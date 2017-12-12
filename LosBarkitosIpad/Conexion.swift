@@ -53,6 +53,11 @@ protocol WebServiceListado {
     func didReceiveResponse_listadoVentas(_: [String : AnyObject])
 }
 
+protocol WebServiceVentasMF {
+    func didReceiveResponse_ventaParticular(_ respuesta : [String : AnyObject])
+    func didReceiveResponse_ventaGrupo(_ respuesta : [String : AnyObject])
+}
+
 // PRUEBA DE CONEXIÓN CON WEBSERVICE A TRAVES DE AFNETWORKING
 class webServiceCallAPI : NSObject {
     
@@ -61,6 +66,7 @@ class webServiceCallAPI : NSObject {
     var delegateReserva : WebServiceReserva?
     var delegateListado : WebServiceListado?
     var delegatePrecio : WebServiceProtocoloPrecio?
+    var delegateMF : WebServiceVentasMF?
     
     let manager : AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 
@@ -72,7 +78,7 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error : NSError?*/
         manager.get(
-            "http://losbarkitos.herokuapp.com/vendedores/",
+            "https://www.marinaferry.info/vendedores/",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 //print("responseObject: \(responseObject.description)")
@@ -106,9 +112,9 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error :     NSError?
         var puntoVenta : Int = 0*/
-        var url : String = "http://losbarkitos.herokuapp.com/listado_viaje/1/5"
+        var url : String = "https://www.marinaferry.info/listado_viaje/1/5"
         if IPAD == "LOSBARKITOS" {
-            url = "http://losbarkitos.herokuapp.com/listado_viaje/1/2"
+            url = "https://www.marinaferry.info/listado_viaje/1/2"
         }
 
         
@@ -154,7 +160,7 @@ class webServiceCallAPI : NSObject {
         }
         
         manager.get(
-            "http://losbarkitos.herokuapp.com/registro_barca/\(ticket)/\(tipo)/\(precio)/\(puntoVenta)/\(vendedor)/\(ticketBlanco)/", parameters: nil,
+            "https://www.marinaferry.info/registro_barca/\(ticket)/\(tipo)/\(precio)/\(puntoVenta)/\(vendedor)/\(ticketBlanco)/", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
                 for (k,v) in responseObject as! [String : AnyObject] {
@@ -183,7 +189,7 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error : NSError?*/
         manager.get(
-            "http://losbarkitos.herokuapp.com/ultimo_numero/\(precio)",
+            "https://www.marinaferry.info/ultimo_numero/\(precio)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
@@ -212,7 +218,7 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error : NSError?*/
         manager.get(
-            " http://losbarkitos.herokuapp.com/ultimo_numero/\(precio)",
+            " https://www.marinaferry.info/ultimo_numero/\(precio)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
@@ -238,7 +244,7 @@ class webServiceCallAPI : NSObject {
     }
     
     func ajustarNumeroFalloImpresion(_ tipo : Int) {
-        manager.get("http://losbarkitos.herokuapp.com/ajustar_numero_fallo_impresion/\(tipo)", parameters: nil,
+        manager.get("https://www.marinaferry.info/ajustar_numero_fallo_impresion/\(tipo)", parameters: nil,
                     success: {(operation: AFHTTPRequestOperation!, responseObject) in
                         var diccionario = [String : String]()
                         for (k,v) in responseObject as! [String : String] {
@@ -251,7 +257,7 @@ class webServiceCallAPI : NSObject {
     
     
     func hayBarcas() {
-        manager.get("http://losbarkitos.herokuapp.com/hayBarcas", parameters: nil, success: {(operation : AFHTTPRequestOperation!, responseObject) in
+        manager.get("https://www.marinaferry.info/hayBarcas", parameters: nil, success: {(operation : AFHTTPRequestOperation!, responseObject) in
             var diccionario = [String : String]()
             for (k,v) in responseObject as! [String : String] {
                 if k != "error" {
@@ -273,7 +279,7 @@ class webServiceCallAPI : NSObject {
        /* var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?*/
-        manager.get("http://losbarkitos.herokuapp.com/total_barcas/\(PV)", parameters: nil,
+        manager.get("https://www.marinaferry.info/total_barcas/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()
                 for (k,v) in responseObject as! [String : Int] {
@@ -299,7 +305,7 @@ class webServiceCallAPI : NSObject {
         /*var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?*/
-        manager.get("http://losbarkitos.herokuapp.com/total_euros/\(PV)", parameters: nil,
+        manager.get("https://www.marinaferry.info/total_euros/\(PV)", parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : Int]()
                 for (k,v) in responseObject as! [String : Int] {
@@ -325,7 +331,7 @@ class webServiceCallAPI : NSObject {
         /*var jsonDict : NSDictionary!
         var jsonArray : NSArray!
         var error : NSError?*/
-        manager.get("http://losbarkitos.herokuapp.com/primera_libre",
+        manager.get("https://www.marinaferry.info/primera_libre",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 //print("responseObject : \(responseObject)")
@@ -357,7 +363,7 @@ class webServiceCallAPI : NSObject {
             parametro = "Rio"
         }
         
-        manager.get("http://losbarkitos.herokuapp.com/orden_llegada/\(parametro)",
+        manager.get("https://www.marinaferry.info/orden_llegada/\(parametro)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
@@ -403,7 +409,7 @@ class webServiceCallAPI : NSObject {
             parametro = "Rio"
         }
         
-        manager.get("http://losbarkitos.herokuapp.com/listado_reservas/\(parametro)/",
+        manager.get("https://www.marinaferry.info/listado_reservas/\(parametro)/",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 var diccionario = [String : AnyObject]()
@@ -430,7 +436,7 @@ class webServiceCallAPI : NSObject {
     }
     
     func incrementarNumeroReserva(_ tipo : Int) {
-        manager.get("http://losbarkitos.herokuapp.com/incrementar_reserva/\(tipo)",
+        manager.get("https://www.marinaferry.info/incrementar_reserva/\(tipo)",
                     parameters: nil,
                     success: {(operation: AFHTTPRequestOperation!, responseObject) in
                         var diccionario = [String : AnyObject]()
@@ -457,7 +463,7 @@ class webServiceCallAPI : NSObject {
         var jsonArray : NSArray!
         var error : NSError?*/
         
-        manager.get("http://losbarkitos.herokuapp.com/reserva/\(tipo)/\(pv)",
+        manager.get("https://www.marinaferry.info/reserva/\(tipo)/\(pv)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 //print("responseObject : \(responseObject)")
@@ -487,7 +493,7 @@ class webServiceCallAPI : NSObject {
     func mirarPosibleReserva(_ tipo : Int) {
         //var error : NSError?
         
-        manager.get("http://losbarkitos.herokuapp.com/posible_reserva/\(tipo)",
+        manager.get("https://www.marinaferry.info/posible_reserva/\(tipo)",
             parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, responseObject) in
                 
@@ -500,7 +506,7 @@ class webServiceCallAPI : NSObject {
     func salidaBarca(_ tipo : Int) {
         //var error : NSError?
         
-        manager.get("http://losbarkitos.herokuapp.com/salida/\(tipo)",
+        manager.get("https://www.marinaferry.info/salida/\(tipo)",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 
@@ -512,7 +518,7 @@ class webServiceCallAPI : NSObject {
     
     func llegadaBarca(_ tipo : Int) {
         
-        manager.get("http://losbarkitos.herokuapp.com/llegada/\(tipo)",
+        manager.get("https://www.marinaferry.info/llegada/\(tipo)",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 
@@ -523,7 +529,7 @@ class webServiceCallAPI : NSObject {
     }
     
     func barcasFuera() {
-        manager.get("http://losbarkitos.herokuapp.com/fuera",
+        manager.get("https://www.marinaferry.info/fuera",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 //print(responseObject)
@@ -535,7 +541,7 @@ class webServiceCallAPI : NSObject {
     func siguienteBarcaLlegar() {
         //var error : NSError?
         
-        manager.get("http://losbarkitos.herokuapp.com/primera_en_llegar",
+        manager.get("https://www.marinaferry.info/primera_en_llegar",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_siguienteBarcaLlegar(responseObject as! [String : String])
@@ -547,7 +553,7 @@ class webServiceCallAPI : NSObject {
     
     func cierreDia() {
         
-        manager.get("http://losbarkitos.herokuapp.com/cierre_dia",
+        manager.get("https://www.marinaferry.info/cierre_dia",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                         //print(responseObject)
@@ -559,7 +565,7 @@ class webServiceCallAPI : NSObject {
     }
     
     func barcasDia() {
-        manager.get("http://losbarkitos.herokuapp.com/barcas_dia", parameters: nil, success: {(operation : AFHTTPRequestOperation!, responseObject) in
+        manager.get("https://www.marinaferry.info/barcas_dia", parameters: nil, success: {(operation : AFHTTPRequestOperation!, responseObject) in
             self.delegate?.didReceiveResponse_barcasDia(responseObject as! [String : AnyObject])
 
             },
@@ -568,7 +574,7 @@ class webServiceCallAPI : NSObject {
     
     func salidaReserva(_ tipo : Int, numero : Int) {
          
-        manager.get("http://losbarkitos.herokuapp.com/reserva_fuera/\(tipo)/\(numero)",
+        manager.get("https://www.marinaferry.info/reserva_fuera/\(tipo)/\(numero)",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_salidaReserva("OK", tipo: tipo)
@@ -580,7 +586,7 @@ class webServiceCallAPI : NSObject {
     
     func numeroReservasPorDar() {
         
-        manager.get("http://losbarkitos.herokuapp.com/total_reservas",
+        manager.get("https://www.marinaferry.info/total_reservas",
             parameters: nil,
             success: {(operation : AFHTTPRequestOperation!, responseObject) in
                 self.delegateControl?.didReceiveResponse_reservasPorDar(responseObject as! [String : AnyObject])
@@ -590,6 +596,20 @@ class webServiceCallAPI : NSObject {
                     self.delegateControl?.didReceiveResponse_reservasPorDar(self.responseObject as! [String : AnyObject])
                 }
             }
+        )
+    }
+    
+    func MFinsertar_ticket(_ precio : Float, part : Int) {
+        
+        manager.get("https://www.marinaferry.es/MFinsertar_ticket/" + String(Int(precio * 100)) + "/" + String(part),
+                    parameters: nil,
+                    success: {(operation : AFHTTPRequestOperation!, responseObject) in
+                        if part == 1 {
+                            self.delegateMF?.didReceiveResponse_ventaParticular(self.responseObject as! [String : AnyObject])
+                        } else {
+                            self.delegateMF?.didReceiveResponse_ventaGrupo(self.responseObject as! [String : AnyObject])
+                        }
+                    }
         )
     }
 }
