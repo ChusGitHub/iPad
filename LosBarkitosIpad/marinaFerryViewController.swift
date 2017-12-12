@@ -17,25 +17,37 @@ class marinaferryViewController: UIViewController {
     @IBOutlet weak var precioGruposView: UIView!
     
     @IBAction func partPush(_ sender: UIButton) {
-        self.precioGruposView.alpha = 1
-        self.precioPartView.alpha = 0
+        fadeOut(view: self.precioGruposView)
+        fadeIn(view: self.precioPartView)
     }
     @IBAction func gruposPush(_ sender: UIButton) {
-        self.precioGruposView.alpha = 0
-        self.precioPartView.alpha = 1
+        fadeIn(view: self.precioGruposView)
+        fadeOut(view: self.precioPartView)
     }
     
+    ////////////////////////////////////////////////////////////////////////
+    
+    /// Fade in a view with a duration
+    ///
+    /// Parameter duration: custom animation duration
+    func fadeIn(withDuration duration: TimeInterval = 1.0, view : UIView) {
+        UIView.animate(withDuration: duration, animations: {
+            view.alpha = 1.0
+        })
+    }
+    /// Fade out a view with a duration
+    ///
+    /// - Parameter duration: custom animation duration
+    func fadeOut(withDuration duration: TimeInterval = 1.0, view: UIView) {
+        UIView.animate(withDuration: duration, animations: {
+            view.alpha = 0.0
+        })
+    }
+    /////////////////////////////////////////////////////////////////////////
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let alertaNOInternet = UIAlertController(title: "SIN CONEXIÓN!!!", message: "No hay conexión y no se ha incluido el ticket en el listado. Llama al Chus lo antes posible!!!", preferredStyle: UIAlertControllerStyle.alert)
-        
-        let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-        
-        alertaNOInternet.addAction(OkAction)
-        
-        self.present(alertaNOInternet, animated: true, completion: nil)
-        
+       
         // Do any additional setup after loading the view.
         self.precioPartView.alpha = 0
         self.precioGruposView.alpha = 0
