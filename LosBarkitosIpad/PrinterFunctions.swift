@@ -55,7 +55,7 @@ func setupImpresora() -> Bool {
 }
 
 
-// IMPRESION DE TICKET
+// IMPRESION DE TICKET BARKITO
 func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
     let formatoFecha = DateFormatter()
@@ -214,7 +214,7 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     return (sendCommand(commands as Data,portName: portName, portSettings: portSettings,timeoutMillis: 10000))
 }
 
-// IMPRESION DE RESERVA
+// IMPRESION DE RESERVA BARKITO
 func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, PV : String,  parametro : [Int], HR : String, HP : String, tipoBarca: String) -> Bool {
     
     //let horaActual : NSDate = NSDate()

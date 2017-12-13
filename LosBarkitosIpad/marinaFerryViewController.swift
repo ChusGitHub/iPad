@@ -10,6 +10,7 @@ import UIKit
 
 class Ticket: NSObject {
     
+
     var numero : Int = 0
     var fecha : String = ""
     var precio : Float = 0.0
@@ -21,7 +22,8 @@ class Ticket: NSObject {
 }
 
 class marinaferryViewController: UIViewController, WebServiceVentasMF {
-    
+    let PUNTO_VENTA = 1
+
     var webService : webServiceCallAPI = webServiceCallAPI()
     var tic = Ticket()
     
@@ -46,15 +48,14 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
     @IBAction func precioGrupoPush(_ sender: UIButton) {
         
         if let precio : Float = Float(sender.titleLabel!.text!) {
-            webService.MFinsertar_ticket(precio, part: 1) // Si parametro = 1 es particular
+            webService.MFinsertar_ticket(precio, part: 0) // Si parametro = 1 es particular
         }
     }
     @IBAction func precioPartPush(_ sender: UIButton) {
         
-        /*if let precio : Float = Float(sender.title) {
+        if let precio : Float = Float(sender.titleLabel!.text!) {
             webService.MFinsertar_ticket(precio, part: 1) // Si parametro = 1 es particular
-            self.contadorParticular += 1
-        }*/
+        }
     }
     
     ////////////////////////////////////////////////////////////////////////
@@ -84,6 +85,8 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
         self.precioPartView.alpha = 0
         self.precioGruposView.alpha = 0
         
+        webService.delegateMF = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,12 +94,7 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func didReceiveResponse_ventaParticular(_ respuesta: [String : AnyObject]) {
-        
-    }
-    
-    func didReceiveResponse_ventaGrupo(_ respuesta: [String : AnyObject]) {
+    func didReceiveResponse_ventaMF(_ respuesta: [String : AnyObject]) {
             
             for (k,v) in respuesta {
                 if k as String == "error" && v as! Int == 1 {
@@ -104,7 +102,7 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
                 } else if k as String == "error" && v as! Int == 0 {
                     
                     self.rellenarTicket(respuesta)
-                    self.imprimirTicket()
+                    self.procesarTicket()
                 }
             }
         
@@ -127,6 +125,29 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
         
     }
     
+    func procesarTicket() {
+        // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
+        let ticketImpreso = self.imprimirTicket()
+        if (ticketImpreso == true) {
+            
+            // Introducir el ticket vendido en la BDD correspondiente
+            
+        } else {
+            self.dismiss(animated: true, completion: {
+                let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.alert)
+                
+                let OkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+                
+                alertaNOInsercionBDD.addAction(OkAction)
+                
+                self.present(alertaNOInsercionBDD, animated: true, completion: nil)
+                
+            })
+            
+        }
+    }
+
+    
     func imprimirTicket() -> Bool? {
         
         if setupImpresora() {
@@ -146,15 +167,11 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
             let vend    : String = DataManager().getValueForKey("nombre_vendedor", inFile: "appstate") as! String
             let punto   : String = DataManager().getValueForKey("punto_venta", inFile: "appstate") as! String
             let precio  : Int = Int(self.tic.precio)
-            let numero  : Int = self.numeroTicket
-            let reserva : Int = self.numeroReserva
-            let barca   : String = self.barcaActualString!
+            let numero  : Int = self.tic.numero
             let diccParam : [String : AnyObject] = [
                 "numero"      : numero as AnyObject,
-                "reserva"     : reserva as AnyObject,
                 "punto_venta" : punto as AnyObject,
                 "precio"      : precio as AnyObject,
-                "barca"       : barca as AnyObject,
                 "vendedor"    : vend as AnyObject
             ]
             
@@ -164,10 +181,11 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
             
             return ticketImpreso
         } else {
-            webService.ajustarNumeroFalloImpresion(self.toTipo!)
             return false
         }
     }
+    
+    
     
 }
 
