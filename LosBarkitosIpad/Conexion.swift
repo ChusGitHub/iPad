@@ -174,13 +174,13 @@ class webServiceCallAPI : NSObject {
                 //print("diccionario : \(diccionario)")
                 self.delegatePrecio?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
             },
-            failure: {(operation: AFHTTPRequestOperation!, error : NSError!) in
+            failure: {(operation, error) in
                 //print("Error \(error.localizedDescription)")
                 var diccionario = [String : AnyObject]()
                 diccionario["error"] = "si" as AnyObject
                 self.delegatePrecio?.didReceiveResponse_entradaBDD_ventaBarca(diccionario as Dictionary)
-            } as! (AFHTTPRequestOperation?, Error?) -> Void
-        )
+            }) //as! (AFHTTPRequestOperation?, Error?) -> Void
+        
     }
     
     func obtenerNumero(_ precio : Int) {

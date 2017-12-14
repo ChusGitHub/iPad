@@ -55,7 +55,7 @@ func setupImpresora() -> Bool {
 }
 
 
-// IMPRESION DE TICKET BARKITO
+// IMPRESION DE TICKET BARKITO / FERRY
 func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, parametro : [String : AnyObject]) -> Bool {
     
     let formatoFecha = DateFormatter()
@@ -68,6 +68,14 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     var datos : Data?
     
     var cmd : [UInt8]
+    var ticketMF : Bool?
+    
+    
+    if let MF = parametro["barco"] {
+            ticketMF = false
+    } else {
+        ticketMF =  true
+    }
     
      //Juego de caracteres en español
     cmd = [ 0x1b, 0x1d, 0x74, 0x01]
@@ -89,18 +97,20 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     // Inversion color
     cmd = [ 0x1b, 0x34 ]
     commands.append(cmd, length: 2)
-    str = "LosBarkitos\r\n"
+    str = ticketMF == false ?  "LosBarkitos\r\n" : "MarinaFerry\r\n"
+    //str = "LosBarkitos\r\n"
     datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
     commands.append(datos!)
     
-    // Formato Texto : normal
-    cmd = [0x1b, 0x57, 0x2]
-    commands.append(cmd, length: 3)
+    if !ticketMF! {
+        // Formato Texto : normal
+        cmd = [0x1b, 0x57, 0x2]
+        commands.append(cmd, length: 3)
 
-    str = "d'Empúriabrava\r\n\r\n"
-    datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
-    commands.append(datos!)
-    
+        str = "d'Empúriabrava\r\n\r\n"
+        datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        commands.append(datos!)
+    }
     // Inversion = no
     cmd = [ 0x1b, 0x35 ]
     commands.append(cmd, length: 2)
@@ -108,8 +118,10 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     // Formato pequeño para datos empresa
     cmd = [0x1b, 0x57, 0x00]
     commands.append(cmd, length: 3)
-   
-    str = "Canal Vahimar S.L.\r\n N.I.F. B17825134\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n"
+    
+    str = ticketMF == false ? "Canal Vahimar S.L.\r\n N.I.F. B17825134\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n" :
+    "Navegació i Turisme d'Empuriabrava S.L. \r\n N.I.F. B19496761\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n"
+    //str = "Canal Vahimar S.L.\r\n N.I.F. B17825134\r\nc/ Juan Carlos I, 1\r\n17487 Empuriabrava\r\n"
     str += "Tel: 972.45.25.79\r\n"
     str += "www.marinaferry.es\r\n"
     str += "\(fechaConFormato)\r\n"
@@ -127,18 +139,20 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     cmd = [0x1b, 0x57, 0x01]
     commands.append(cmd, length: 3)
     
-    str = "Alquiler 1 hora\r\n "
+    str = ticketMF == false ? "Alquiler 1 hora\r\n " : "1 Paseo Barco Canales"
+    //str = "Alquiler 1 hora\r\n "
     datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
     commands.append(datos!)
    
-    cmd = [0x1b, 0x57, 0x02]
-    commands.append(cmd, length: 3)
-    let b : String = parametro["barca"] as! String
-    print("barca \(b)")
-    str = b + "\r\n\r\n"
-    datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
-    commands.append(datos!)
-    
+    if !ticketMF! {
+        cmd = [0x1b, 0x57, 0x02]
+        commands.append(cmd, length: 3)
+        let b : String = parametro["barca"] as! String
+        //print("barca \(b)")
+        str = b + "\r\n\r\n"
+        datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        commands.append(datos!)
+    }
     
     // tamaño pequeño
     cmd = [0x1b, 0x57, 0x00]
@@ -150,8 +164,10 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     let p : String = String(parametro["precio"] as! Int)
     let iva : Double =  round(100*(parametro["precio"] as! Double - (parametro["precio"] as! Double / 1.21)))/100
     let pdouble : Double =  round(100*(parametro["precio"] as! Double / 1.21))/100
-    let r : String! = String(parametro["reserva"] as! Int)
-    
+    var r : String! = ""
+    if !ticketMF! {
+        r  = String(parametro["reserva"] as! Int)
+    }
     
     str = "Precio : \t \(pdouble) eur.-\r\n"
     datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
@@ -182,30 +198,32 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
     datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
     commands.append(datos!)
 
-    // Esta es la reserva del ticket
-    // tamaño pequeño
-    cmd = [0x1b, 0x57, 0x01]
-    commands.append(cmd, length: 3)
+    if !ticketMF! {
+        // Esta es la reserva del ticket
+        // tamaño pequeño
+        cmd = [0x1b, 0x57, 0x01]
+        commands.append(cmd, length: 3)
     
-    str = "Reserva : \(r)\r\n\r\n"
-    datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
-    commands.append(datos!)
+        str = "Reserva : \(r)\r\n\r\n"
+        datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        commands.append(datos!)
 
-    str = "----------------------------------------\r\n\r\n\r\n"
-    datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
-    commands.append(datos!)
+        str = "----------------------------------------\r\n\r\n\r\n"
+        datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        commands.append(datos!)
     
-    //cmd = [ 0x1b, 0x64, 0x00 ] // Corta el papel
-    //commands.appendBytes(cmd, length: 3)
+        //cmd = [ 0x1b, 0x64, 0x00 ] // Corta el papel
+        //commands.appendBytes(cmd, length: 3)
     
-    let v : String = parametro["vendedor"] as! String
-    str = "\n\r\n\rVendedor : \(v)\n\r\n\r"
-    datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
-    commands.append(datos!)
+        let v : String = parametro["vendedor"] as! String
+        str = "\n\r\n\rVendedor : \(v)\n\r\n\r"
+        datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
+        commands.append(datos!)
 
+        
+    }
     cmd = [ 0x1b, 0x64, 0x02 ] // Corta el papel
     commands.append(cmd, length: 3)
-    
     str = "\n\r\n\r\n\r\n\r"
     datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
     commands.append(datos!)

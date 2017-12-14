@@ -1284,7 +1284,6 @@
                         <outletCollection property="preciosUIButton" destination="Ao7-QL-CKx" collectionClass="NSMutableArray" id="o31-7N-cNo"/>
                         <outletCollection property="preciosUIButton" destination="ya7-UL-4sA" collectionClass="NSMutableArray" id="6Mg-7f-Jbe"/>
                         <outletCollection property="preciosUIButton" destination="G98-bm-Itm" collectionClass="NSMutableArray" id="7fQ-1P-RDN"/>
-                        <outletCollection property="coleccionBotonesPrecios" destination="ya7-UL-4sA" collectionClass="NSMutableArray" id="yGR-Jp-hEa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1501,9 +1500,9 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HFo-gb-gaj"/>
+        <segue reference="kEb-sE-XTx"/>
         <segue reference="lzU-1b-eKA"/>
-        <segue reference="u7Y-xg-7CH"/>
+        <segue reference="Gc7-UL-tGg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.59215686274509804" green="0.17647058823529413" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
