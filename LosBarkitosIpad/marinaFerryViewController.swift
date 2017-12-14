@@ -32,16 +32,23 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
     @IBOutlet weak var gruposButton: UIButton!
     @IBOutlet weak var precioPartView: UIView!
     @IBOutlet weak var precioGruposView: UIView!
+    @IBOutlet weak var contGrupoUILabel: UILabel!
+    @IBOutlet weak var contPartUILabel: UILabel!
+    @IBOutlet weak var borrarContadorUIButton: UIButton!
     
     @IBAction func partPush(_ sender: UIButton) {
         fadeOut(view: self.precioGruposView)
         fadeIn(view: self.precioPartView)
+        fadeOut(view: self.contGrupoUILabel)
+        fadeIn(view: self.contPartUILabel)
         partButton.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
         gruposButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     }
     @IBAction func gruposPush(_ sender: UIButton) {
         fadeIn(view: self.precioGruposView)
         fadeOut(view: self.precioPartView)
+        fadeIn(view: self.contGrupoUILabel)
+        fadeOut(view: self.contPartUILabel)
         gruposButton.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
         partButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     }
@@ -56,6 +63,10 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
         if let precio : Float = Float(sender.titleLabel!.text!) {
             webService.MFinsertar_ticket(precio, part: 1) // Si parametro = 1 es particular
         }
+    }
+    @IBAction func borrarContadorPush(_ sender: UIButton) {
+        self.contPartUILabel.text = "0"
+        self.contGrupoUILabel.text = "0"
     }
     
     ////////////////////////////////////////////////////////////////////////
@@ -84,6 +95,11 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
         // Do any additional setup after loading the view.
         self.precioPartView.alpha = 0
         self.precioGruposView.alpha = 0
+        self.contPartUILabel.alpha = 0
+        self.contGrupoUILabel.alpha = 0
+        
+        self.contPartUILabel.text = "0"
+        self.contGrupoUILabel.text = "0"
         
         webService.delegateMF = self
         
@@ -129,9 +145,11 @@ class marinaferryViewController: UIViewController, WebServiceVentasMF {
         // Si se consigue imprimir el ticket se introduce en la BDD, sino da una alerta
         let ticketImpreso = self.imprimirTicket()
         if (ticketImpreso == true) {
-            
-            // Introducir el ticket vendido en la BDD correspondiente
-            
+            if self.contPartUILabel.alpha != 0 {
+                self.contPartUILabel.text = String(Int(self.contPartUILabel.text!)! + 1)
+            } else {
+                self.contGrupoUILabel.text = String(Int(self.contGrupoUILabel.text!)! + 1)
+            }
         } else {
             self.dismiss(animated: true, completion: {
                 let alertaNOInsercionBDD = UIAlertController(title: "SIN IMPRESORA-NO HAY TICKET", message: "No hay una impresora conectada. Intenta establecer nuevamente la conexión (Ajustes -> Bluetooth->Seleccionar Impresora TSP) - No se ha insertado en la BDD", preferredStyle: UIAlertControllerStyle.alert)
