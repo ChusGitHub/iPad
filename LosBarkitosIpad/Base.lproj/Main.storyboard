@@ -1215,7 +1215,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="seguePreciosVentaCancelar" id="Gc7-UL-tGg"/>
+                                    <segue destination="49e-Tb-3d3" kind="modal" identifier="seguePreciosVentaCancelar" id="FdD-OU-BoZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="120" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G98-bm-Itm">
@@ -1253,7 +1253,7 @@
                                 </state>
                                 <connections>
                                     <action selector="bntAceptarPushButton:" destination="07f-0O-81W" eventType="touchUpInside" id="daG-7F-DkO"/>
-                                    <segue destination="9pv-A4-QxB" kind="modal" identifier="seguePreciosVentaAceptar" id="E4P-Gv-3m4"/>
+                                    <segue destination="49e-Tb-3d3" kind="modal" identifier="seguePreciosVentaAceptar" id="hgB-JN-DzH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1288,7 +1288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6y4-hv-MKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2465" y="-531"/>
+            <point key="canvasLocation" x="2540" y="754"/>
         </scene>
         <!--Venta-->
         <scene sceneID="yl2-sM-qoP">
@@ -1532,6 +1532,7 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="hgB-JN-DzH"/>
         <segue reference="kEb-sE-XTx"/>
         <segue reference="lzU-1b-eKA"/>
         <segue reference="u7Y-xg-7CH"/>
