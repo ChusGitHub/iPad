@@ -204,7 +204,7 @@ func PrintSampleReceipt3Inch(_ portName : NSString, portSettings : NSString, par
         cmd = [0x1b, 0x57, 0x01]
         commands.append(cmd, length: 3)
     
-        str = "Reserva : \(r)\r\n\r\n"
+        str = "Reserva : \(r!)\r\n\r\n"
         datos = str.data(using: String.Encoding.ascii, allowLossyConversion: true)
         commands.append(datos!)
 

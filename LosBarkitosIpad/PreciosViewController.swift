@@ -249,7 +249,8 @@ class PreciosViewController: UIViewController, WebServiceProtocoloPrecio {
                 "punto_venta" : punto as AnyObject,
                 "precio"      : precio as AnyObject,
                 "barca"       : barca as AnyObject,
-                "vendedor"    : vend as AnyObject
+                "vendedor"    : vend as AnyObject,
+                "barco"       : true as AnyObject
             ]
             
             let ticketImpreso : Bool = PrintSampleReceipt3Inch(p_portName, portSettings: p_portSettings, parametro: diccParam)
